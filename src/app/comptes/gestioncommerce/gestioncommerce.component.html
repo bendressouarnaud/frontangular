@@ -1,0 +1,197 @@
+<div class="main-content" style=" margin-top: 0px;">
+    <div class="container-fluid" style=" margin-top: 0px; padding-top: 0px;">
+
+
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">S&eacute;lectionner un commercial</h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="get" action="/" class="form-horizontal">
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">Choix</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Commercial" [(value)]="identifiant"
+                                                    name="identifiant">
+                                                    <mat-option *ngFor="let user of listeAllCommerciaux"
+                                                        [value]="user.identifiant">
+                                                        {{ user.nom }}&nbsp;{{ user.prenom }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button mat-raised-button type="button" (click)="enregistrerUser()" class="btn btn-success"
+                            data-dismiss="modal">Enregistrer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="modal fade" id="modaldelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Confirmer la suppression</h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                        <p>Souhaitez-vous supprimer le compte de <span style="font-weight: bold;">{{ emailCollab }}</span> ? </p>
+                        <p>&nbsp;</p>
+                        <p>{{ information }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button mat-raised-button type="button" (click)="supprimerUser()" class="btn btn-warning"
+                            >Supprimer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="row" style=" margin-top: 0px;">
+            <div class="col-md-12 ml-auto mr-auto">
+                <div class="page-categories">
+                    <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/accueilsup" role="tablist">
+                                <i class="material-icons">
+
+                                    <img src="assets/img/icone_accueil.png" width="85" height="70" />
+
+                                </i> Accueil
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/rdv" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/rdvweb.jpg" width="85" height="70" />
+                                </i> Gest. RDV
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active icone" data-toggle="tab" (click)="ouvrirzoneparam()" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/usernew.png" width="85" height="70" />
+                                </i> Utilisateur
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/rapportcom" role="tablist">
+                                <i class="material-icons"><img src="assets/img/rapportpng.png" width="85"
+                                        height="70" /></i> Rapports
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/agenda" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/agenda.jpg" width="85" height="70" />
+                                </i> Agenda
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/reunion" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/reunion.jpg" width="85" height="70" />
+                                </i> R&eacute;union
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/performance" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/performances.jpg" width="85" height="70" />
+                                </i> Performances
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#link10" role="tablist">
+                                <i class="material-icons"><img src="assets/img/parametrespng.png" width="85"
+                                        height="70" /></i> Param&egrave;tres
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!--  Add -->
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="toolbar">
+                            <!--        Here you can write extra buttons/actions for the toolbar              -->
+                        </div>
+                        <div class="material-datatables">
+                            <table id="datatables" class="table table-striped table-no-bordered table-hover"
+                                cellspacing="0" width="100%" style="width:100%" *ngIf="this.getListeCom">
+                                <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Email</th>
+                                        <th>Contact</th>
+                                        <th class="disabled-sorting text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let commerciaux of listeCommerciaux">
+                                        <td>{{ commerciaux.nom }}</td>
+                                        <td>{{ commerciaux.email }}</td>
+                                        <td>{{ commerciaux.contact }}</td>
+                                        <td class="text-center">
+                                            <a title="Supprimer ce collaborateur" (click)="afficherinvit( commerciaux.nom, commerciaux.email )"
+                                                    class="btn btn-link btn-warning btn-just-icon edit"><i
+                                                        class="material-icons">dvr</i></a>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end content-->
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+</div>

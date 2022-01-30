@@ -1,0 +1,177 @@
+<div class="main-content" style=" margin-top: 0px;">
+    <div class="container-fluid" style=" margin-top: 0px; padding-top: 0px;">        
+
+        <div class="row" style=" margin-top: 0px;">
+            <div class="col-md-12 ml-auto mr-auto">
+                <div class="page-categories">
+                    <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#/gestion/accueilsup" role="tablist">
+                                <i class="material-icons">
+
+                                    <img src="assets/img/icone_accueil.png" width="85" height="70" />
+
+                                </i> Accueil
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/rdv" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/rdvweb.jpg" width="85" height="70" />
+                                </i> Gest. RDV
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link icone" href="#/gestion/portefeuille" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/commercial.png" width="85" height="70" />
+                                </i> Commercial
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/rapportcom" role="tablist">
+                                <i class="material-icons"><img src="assets/img/rapportpng.png" width="85"
+                                        height="70" /></i> Rapports
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/agenda" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/agenda.jpg" width="85" height="70" />
+                                </i> Agenda
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/reunion" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/reunion.jpg" width="85" height="70" />
+                                </i> R&eacute;union
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/performance" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/performances.jpg" width="85" height="70" />
+                                </i> Performances
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#link10" role="tablist">
+                                <i class="material-icons"><img src="assets/img/parametrespng.png" width="85"
+                                        height="70" /></i> Param&egrave;tres
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <!--<div class="card-icon">
+                            <i class="material-icons">weekend</i>
+                        </div>-->
+                        <p class="card-category">Commerciaux</p>
+                        <h3 class="card-title">{{ reponseReport.commerciaux }}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons text-info">account_circle</i>&Eacute;quipe de commerciaux
+                            <!--<a href="#pablo">Get More Space...</a>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-rose card-header-icon">
+                        <!--<div class="card-icon">
+                            <i class="material-icons">equalizer</i>
+                        </div>-->
+                        <p class="card-category" style="color: black; font-weight: bold;" >RDV</p>
+                        <h3 class="card-title">{{ reponseReport.rdv }}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons text-success">date_range</i> RDVs programm&eacute;s
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-success card-header-icon">
+                        <!--<div class="card-icon">
+                            <i class="material-icons">store</i>
+                        </div>-->
+                        <p class="card-category">Rapports</p>
+                        <h3 class="card-title">{{ reponseReport.rapports }}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">article</i> Rapports saisis
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-info card-header-icon">
+                        <!--<div class="card-icon">
+                            <i class="fa fa-twitter"></i>
+                        </div>-->
+                        <p class="card-category">Rapports comment&eacute;s</p>
+                        <h3 class="card-title">{{ reponseReport.commentaires }}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons text-warning">fact_check</i> Rapports valid&eacute;s
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-12">
+              <div class="card card-chart">
+                <div class="card-header card-header-icon card-header-info">
+                  <div class="card-icon">
+                  <i class="material-icons">bar_chart</i>
+                  </div>
+                  <h4 class="card-title" style="font-size:18px">Nbre de RDV cumul&eacute;s de l'&eacute;quipe par mois</h4>
+                </div>
+                <div class="card-body">
+                  <canvas id="chartRDV" height="70"></canvas>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-md-12">
+                <div class="card card-chart">
+                    <div class="card-header card-header-icon card-header-info">
+                        <div class="card-icon">
+                            <i class="material-icons">timeline</i>
+                        </div>
+                        <h4 class="card-title" style="font-size:18px">R&eacute;partition des RDV par membre d'&eacute;quipe</h4>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="chartequipe" height="70"></canvas>
+                    </div>
+                </div>
+            </div>
+
+                
+        </div>
+    </div>
+</div>

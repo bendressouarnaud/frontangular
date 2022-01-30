@@ -1,0 +1,227 @@
+<div class="main-content" style=" margin-top: 0px;">
+    <div class="container-fluid" style=" margin-top: 0px; padding-top: 0px;">
+
+
+
+        <div class="modal fade" id="modalInvitation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Confirmer l'invitation</h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div style="text-align: center; width: 100%; color:black; font-weight: bold;" id="infosrequest">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button mat-raised-button type="button" (click)="repondreUser('1')"
+                            class="btn btn-success">Confirmer</button>
+                        &nbsp;&nbsp;
+                        <button mat-raised-button type="button" (click)="repondreUser('0')"
+                            class="btn btn-danger">D&eacute;cliner</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row" style=" margin-top: 0px;">
+            <div class="col-md-12 ml-auto mr-auto">
+                <div class="page-categories">
+                    <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/directeur/accueil" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/icone_accueil.png" width="85" height="70" />
+                                </i> Accueil
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#/directeur/rdv" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/rdvweb.jpg" width="85" height="70" />
+                                </i> Invitation. RDV
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/directeur/rapport" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/rapportpng.png" width="85" height="70" />
+                                </i> RAPPORT
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/directeur/agenda" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/agenda.jpg" width="85" height="70" />
+                                </i> Agenda
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/directeur/reunion" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/reunion.jpg" width="85" height="70" />
+                                </i> R&eacute;union
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/directeur/performance" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/performances.jpg" width="85" height="70" />
+                                </i> Performance
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#" role="tablist">
+                                <i class="material-icons"><img src="assets/img/parametrespng.png" width="85"
+                                        height="70" /></i> Param&egrave;tres
+                            </a>
+                        </li>     
+                        
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="tab-content tab-space tab-subcategories">
+            <div class="tab-pane active" id="link7">
+
+                <div class="col-md-12">
+                    <div class="card ">
+                        <div class="card-body ">
+                            <ul class="nav nav-pills nav-pills-warning" role="tablist">
+
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#link1" role="tablist">
+                                        Demande d'invitation
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#link2" role="tablist">
+                                        Historique des invitations
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content tab-space">
+                                <div class="tab-pane active" id="link1">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="material-datatables">
+                                                <table id="datatableRequest"
+                                                    class="table table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%"
+                                                    *ngIf="this.getInvitationReq">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Commercial</th>
+                                                            <th>Client</th>
+                                                            <th>Date</th>
+                                                            <th>Heure</th>
+                                                            <th>Secteur</th>
+                                                            <th>Motif</th>
+                                                            <th class="disabled-sorting text-center">Accepter / Refuser
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let donnee of listeInvitationReq">
+                                                            <td>{{ donnee.commercial }} </td>
+                                                            <td>{{ donnee.client }}</td>
+                                                            <td>{{ donnee.dates }}</td>
+                                                            <td>{{ donnee.heure }}</td>
+                                                            <td>{{ donnee.secteur }}</td>
+                                                            <td>{{ donnee.motif }}</td>
+                                                            <td class="text-center">
+
+                                                                <a title="R&eacute;pondre &agrave; l'invitation"
+                                                                    (click)="displayInvitWindow( donnee.idrdv )"
+                                                                    class="btn btn-link btn-success btn-just-icon edit"><i
+                                                                        class="material-icons">edit_note</i></a>
+
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <div class="tab-pane" id="link2">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="material-datatables">
+                                                <table id="datatableInvHis"
+                                                    class="table table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%"
+                                                    *ngIf="this.getInvitationHis">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Commercial</th>
+                                                            <th>Client</th>
+                                                            <th>Date</th>
+                                                            <th>Heure</th>
+                                                            <th>Secteur</th>
+                                                            <th>Motif</th>
+                                                            <th class="text-center">R&eacute;ponse</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let donnee of listeInvitationHis">
+                                                            <td>{{ donnee.commercial }} </td>
+                                                            <td>{{ donnee.client }}</td>
+                                                            <td>{{ donnee.dates }}</td>
+                                                            <td>{{ donnee.heure }}</td>
+                                                            <td>{{ donnee.secteur }}</td>
+                                                            <td>{{ donnee.motif }}</td>
+                                                            <td class="text-center" style="font-weight: bold;">{{ donnee.choix }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+</div>

@@ -1,0 +1,261 @@
+<div class="main-content" style=" margin-top: 0px;">
+    <div class="container-fluid" style=" margin-top: 0px; padding-top: 0px;">
+
+
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Zone de commentaire</h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <div class="form-group">
+                                <textarea placeholder="Renseigner un commentaire" [(ngModel)]="saisiecommentaire"
+                                    class="form-control" rows="5"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button mat-raised-button type="button" (click)="validercoment()" class="btn btn-success"
+                            data-dismiss="modal">Enregistrer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row" style=" margin-top: 0px;">
+            <div class="col-md-12 ml-auto mr-auto">
+                <div class="page-categories">
+                    <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/comptes" role="tablist">
+                                <i class="material-icons">
+
+                                    <img src="assets/img/icone_accueil.png" width="85" height="70" />
+
+                                </i> Accueil
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#/gestion/historique" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/historique.jpg" width="85" height="70" />
+                                </i> Historique
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/addressmac" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/macaddress.jpg" width="85" height="70" />
+                                </i> Adresses MAC
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/activite" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/activite.jpg" width="85" height="70" />
+                                </i> Activit&eacute;s
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/detailequipe" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/equipe.jpg" width="85" height="70"/>
+                                </i> D&eacute;tail &Eacute;quipe
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/motif" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/motifs.jpg" width="85" height="70"/>
+                                </i> Motifs
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="tab-content tab-space tab-subcategories">
+            <div class="tab-pane active" id="link7">
+
+                <div class="col-md-12">
+                    <div class="card ">
+                        <div class="card-body ">
+                            <ul class="nav nav-pills nav-pills-warning" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#link1" role="tablist">
+                                        Aujourd'hui
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#link2" role="tablist">
+                                        Mois actuel
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#link3" role="tablist">
+                                        RDV cr&eacute;&eacute;s ce mois
+                                    </a>
+                                </li>
+
+                            </ul>
+                            <div class="tab-content tab-space">
+                                <div class="tab-pane active" id="link1">
+
+                                    <div class="card">
+                                        <div class="card-body">
+
+                                            <div class="material-datatables">
+                                                <table id="datatables"
+                                                    class="table table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%"
+                                                    *ngIf="this.setHistoToday">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Utilisateur</th>
+                                                            <th>Profil</th>
+                                                            <th>Date</th>
+                                                            <th>Heure</th>
+                                                            <th>T&acirc;che</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let rapport of listeHitoToday">
+                                                            <td>{{ rapport.nom }}</td>
+                                                            <td>{{ rapport.profil }}</td>
+                                                            <td>{{ rapport.dates }}</td>
+                                                            <td>{{ rapport.heure }}</td>
+                                                            <td>{{ rapport.tache }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                        <!-- end content-->
+                                    </div>
+                                </div>
+
+
+                                <div class="tab-pane" id="link2">
+                                    <div class="card">
+                                        <div class="card-body">
+
+                                            
+                                            <div class="material-datatables">
+                                                <table id="datatablesPerso"
+                                                    class="table table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%"
+                                                    *ngIf="this.setHistoMois">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Utilisateur</th>
+                                                            <th>Profil</th>
+                                                            <th>Date</th>
+                                                            <th>Heure</th>
+                                                            <th>T&acirc;che</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let rapport of listeHistoMois">
+                                                            <td>{{ rapport.nom }}</td>
+                                                            <td>{{ rapport.profil }}</td>
+                                                            <td>{{ rapport.dates }}</td>
+                                                            <td>{{ rapport.heure }}</td>
+                                                            <td>{{ rapport.tache }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        
+
+                                        </div>
+                                        <!-- end content-->
+                                    </div>
+                                </div>
+
+
+
+                                <div class="tab-pane" id="link3">
+                                    <div class="card">
+                                        <div class="card-body">
+
+                                            
+                                            <div class="material-datatables">
+                                                <table id="datatablesPerso"
+                                                    class="table table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%"
+                                                    *ngIf="this.setRdvCurrentMois">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Utilisateur</th>
+                                                            <th>Client</th>
+                                                            <th>Date</th>
+                                                            <th>Heure</th>
+                                                            <th>Objet</th>
+                                                            <th>T&eacute;l&eacute;charger</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let rapport of listeRdvDuMois">
+                                                            <td>{{ rapport.commercial }}</td>
+                                                            <td>{{ rapport.client }}</td>
+                                                            <td>{{ rapport.dates }}</td>
+                                                            <td>{{ rapport.heure }}</td>
+                                                            <td>{{ rapport.objet }}</td>
+
+                                                            <td class="text-center">                    
+                                                                <a target="_blank" title="T&eacute;l&eacute;charger la fiche de visite" (click)="downloadfiche( rapport.idrdv )"
+                                                                    class="btn btn-link btn-info btn-just-icon edit"><i
+                                                                        class="material-icons">article</i></a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        
+
+                                        </div>
+                                        <!-- end content-->
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+    </div>
+</div>

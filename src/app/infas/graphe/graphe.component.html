@@ -1,0 +1,125 @@
+<div class="main-content" style=" margin-top: 0px;">
+    <div class="container-fluid" style=" margin-top: 0px; padding-top: 0px;">        
+
+        <div class="row" style=" margin-top: 0px;">
+            <div class="col-md-12 ml-auto mr-auto">
+                <div class="page-categories">
+                    <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/infas/professeur" role="tablist">
+                            <i class="material-icons">
+                                
+                                <img src="assets/img/professeur.jpeg" width="85" height="70"/>
+            
+                            </i> Professeur
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link icone" (click)="ouvrirzonegestion()" role="tablist">
+                            <i class="material-icons">
+                                <img src="assets/img/ajout.png" width="85" height="70"/>
+                            </i> Ajouter
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/infas/responsable" role="tablist">
+                            <i class="material-icons">
+                                <img src="assets/img/responsable.jpeg" width="85" height="70"/>
+                            </i> Responsable
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/infas/classe" role="tablist">
+                            <i class="material-icons">
+                                <img src="assets/img/classe.jpeg" width="85" height="70"/>
+                            </i> Classe
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/infas/uniteeneigne" role="tablist">
+                            <i class="material-icons">
+                                <img src="assets/img/ue.jpeg" width="85" height="70"/>
+                            </i> Unit&eacute; enseign&eacute;e
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/infas/ecue" role="tablist">
+                            <i class="material-icons">
+                                <img src="assets/img/ecue.jpeg" width="85" height="70"/>
+                            </i> Ecue
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/infas/lienrespue" role="tablist">
+                            <i class="material-icons">
+                                <img src="assets/img/lien.jpeg" width="85" height="70"/>
+                            </i> Responsable UE
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/infas/cours" role="tablist">
+                            <i class="material-icons">
+                                <img src="assets/img/cours.jpeg" width="85" height="70"/>
+                            </i> Cours
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#/infas/graphe" role="tablist">
+                            <i class="material-icons">
+                                <img src="assets/img/graphes.png" width="85" height="70"/>
+                            </i> Graphes
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <div class="row">
+
+            <div class="col-md-12">
+              <div class="card card-chart">
+                <div class="card-header card-header-icon card-header-info">
+                  <div class="card-icon">
+                  <i class="material-icons">pie_chart</i>
+                  </div>
+                  <h4 class="card-title" style="font-size:18px">Volume horaire global / mois</h4>
+                </div>
+                <div class="card-body">
+                  <canvas id="chartRDV" height="100"></canvas>
+                </div>
+              </div>
+            </div>
+                
+        </div>
+
+
+        <div class="row">
+							
+            <div class="col-md-12">
+                <div class="card card-chart">
+                    <div class="card-header card-header-icon card-header-info">
+                        <div class="card-icon">
+                        <i class="material-icons">equalizer</i>
+                        </div>
+                        <h4 class="card-title" style="font-size:18px">R&eacute;partition du volume horaire des cours par mois</h4>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="volumehoraire" height="100"></canvas>
+                    </div>
+                </div>
+            </div>	
+        </div>
+
+    </div>
+</div>

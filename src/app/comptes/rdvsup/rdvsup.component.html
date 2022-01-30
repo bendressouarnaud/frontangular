@@ -1,0 +1,761 @@
+<div class="main-content" style=" margin-top: 0px;">
+    <div class="container-fluid" style=" margin-top: 0px; padding-top: 0px;">
+
+
+        <div class="modal fade" id="myModalRap" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Renseigner les donn&eacute;es</h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="get" action="/" class="form-horizontal">
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-7 col-md-8 col-sm-4">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <textarea
+                                                        placeholder="Renseigner le(s) nom(s) des Interlocuteurs rencontr&eacute;s. s&eacute;par&eacute;(s) par un POINT-VIRGULE"
+                                                        [(ngModel)]="rapport.interlocuteurs" name="interlocuteurs"
+                                                        class="form-control" rows="2" maxlength="100"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">Donn&eacute;es</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-7 col-md-8 col-sm-4">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <textarea placeholder="Renseigner le rapport"
+                                                        [(ngModel)]="rapport.contenu" name="contenu"
+                                                        class="form-control" rows="3" maxlength="500"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-7 col-md-8 col-sm-4">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <textarea placeholder="Actions &agrave; suivre"
+                                                        [(ngModel)]="rapport.actions" name="actions"
+                                                        class="form-control" rows="3" maxlength="500"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button mat-raised-button type="button" (click)="enregistrerRapport()" class="btn btn-info"
+                            data-dismiss="modal">Valider</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="modal fade" id="modalInvitation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Confirmer l'invitation</h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div style="text-align: center; width: 100%; color:black; font-weight: bold;"
+                                id="infosrequest">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button mat-raised-button type="button" (click)="repondreUser('1')"
+                            class="btn btn-success">Confirmer</button>
+                        &nbsp;&nbsp;
+                        <button mat-raised-button type="button" (click)="repondreUser('0')"
+                            class="btn btn-danger">D&eacute;cliner</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Renseigner les donn&eacute;es du RDV</h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="get" action="/" class="form-horizontal">
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">Donn&eacute;es</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="rdv.nom" name='nom' type="text"
+                                                    placeholder="Nom" maxlength="40">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="rdv.contact" name='contact' type="text"
+                                                    placeholder="Contact" maxlength="20">
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="rdv.email" name='email' type="text"
+                                                    placeholder="Email" maxlength="40">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-5 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Activit&eacute;" [(value)]="rdv.activite"
+                                                    name="activite">
+                                                    <mat-option *ngFor="let donnee of listeActivite"
+                                                        [value]="donnee.idact">
+                                                        {{ donnee.libelle }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <mat-form-field>
+                                                <!--    <input matInput [matDatepicker]="rdv.dates" placeholder="Choose a date"
+                                                    (click)="picker.open()">
+                                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker></mat-datepicker>
+                                            -->
+                                                <input matInput [matDatepicker]="basicDatepicker" [(ngModel)]="getDate"
+                                                    name="dates">
+                                                <mat-datepicker-toggle matSuffix [for]="basicDatepicker">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #basicDatepicker></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="rdv.heure" name='heure' type="text"
+                                                    (keyup)="onKeyUp($event)"
+                                                    placeholder="Exemple : {{getHeure | date:'hh:mm'}}">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-10">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="rdv.lieu" name='lieu' type="text"
+                                                    placeholder="Lieu de rdv" maxlength="35">
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-10 col-md-8 col-sm-4" id="blocmotif">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Motif" [(value)]="rdv.motif" name="motif">
+                                                    <mat-option *ngFor="let donnee of listeMotifs"
+                                                        [value]="donnee.idmot">
+                                                        {{ donnee.libelle }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-4 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Composition de l’&eacute;quipe"
+                                                    [(value)]="rdv.qualite" name="qualite"
+                                                    (selectionChange)="onQualiteChange()">
+                                                    <mat-option [value]="1">Avec une &eacute;quipe</mat-option>
+                                                    <mat-option [value]="0">Le commercial uniquement</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+
+                                        <div class="col-lg-6 col-md-8 col-sm-4" id="blocategorie">
+
+                                            <mat-form-field>
+                                                <mat-select placeholder="Plus de d&eacute;tail sur l’ &eacute;quipe"
+                                                    [(value)]="rdv.categorie" (selectionChange)="checkEquipe()"
+                                                    name="categorie">
+
+                                                    <mat-option *ngFor="let donnee of listeDetails"
+                                                        [value]="donnee.iddet">
+                                                        {{ donnee.libelle }}
+                                                    </mat-option>
+
+                                                    <!--
+                                                    <mat-option [value]="1">Mon chef d'&eacute;quipe</mat-option>
+                                                    <mat-option [value]="2">Mon inspecteur</mat-option>
+                                                    <mat-option [value]="3">Le Responsable de mon point de vente
+                                                    </mat-option>
+                                                    <mat-option [value]="4">Le Responsable de mon r&eacute;seau de vente
+                                                    </mat-option>
+                                                    <mat-option [value]="5">Le DCA</mat-option>
+                                                    <mat-option [value]="6">Le DC</mat-option>
+                                                    <mat-option [value]="7">Mon &eacute;quipe</mat-option>
+                                                    <mat-option [value]="8">Certains membre de mon &eacute;quipe
+                                                    </mat-option>
+                                                    <mat-option [value]="9">Autre</mat-option>
+                                                -->
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                            <div class="row" id="lesprofils">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-lg-10 col-md-8 col-sm-4">
+                                            <ng-multiselect-dropdown [placeholder]="'Choisissez des membres'"
+                                                name="blocategorie" [settings]="dropdownSettings" [data]="dropdownList"
+                                                [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
+                                                (onDeSelect)="onItemDeSelect($event)"
+                                                (onSelectAll)="onSelectAll($event)">
+                                            </ng-multiselect-dropdown>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row" id="autres">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="rdv.nomfonction" name='nomfonction'
+                                                    type="text" placeholder="Nom ou fonction" maxlength="60">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="rdv.mailautre" name='mailautre' type="text"
+                                                    placeholder="Adresse Email" maxlength="60">
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-10 col-md-8 col-sm-4">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <textarea placeholder="Objectif du RDV"
+                                                        [(ngModel)]="rdv.resume" name="resume" class="form-control"
+                                                        rows="3" maxlength="600"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div style="text-align: center; width: 100%; color:red; font-weight: bold;" id="infos">
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button mat-raised-button type="button" (click)="enregistrerRdv()"
+                            class="btn btn-info">Enregistrer</button> <!-- data-dismiss="modal"  -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <!-- data-backdrop="static" data-keyboard="false" -->
+        <div class="modal fade" id="modalwaiting" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">T&eacute;l&eacute;chargement du fichier</h4>
+                        <!--<button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>-->
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                        <p style="color: crimson; font-weight: bold;">Veuillez patienter ...</p>
+                        <p>&nbsp;</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--  Supprimer ce RDV  -->
+        <div class="modal fade" id="modaldelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Confirmer la suppression</h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                        <p>Souhaitez-vous supprimer ce RDV ? </p>
+                        <p style="color: crimson; font-weight: bold;">{{ information }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button mat-raised-button type="button" (click)="supprimerRdv()" class="btn btn-warning"
+                            >Supprimer</button>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+
+        <div class="row" style=" margin-top: 0px;">
+            <div class="col-md-12 ml-auto mr-auto">
+                <div class="page-categories">
+                    <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/accueilsup" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/icone_accueil.png" width="85" height="70" />
+                                </i> Accueil
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active icone" (click)="ouvrirzonegestion()" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/ajout.png" width="85" height="70" />
+                                </i> Nouveau
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link icone" href="#/gestion/portefeuille" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/commercial.png" width="85" height="70" />
+                                </i> Commercial
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/rapportcom" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/rapportpng.png" width="85" height="70" />
+                                </i> Gest. RAPPORT
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/agenda" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/agenda.jpg" width="85" height="70" />
+                                </i> Agenda
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/reunion" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/reunion.jpg" width="85" height="70" />
+                                </i> R&eacute;union
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/performance" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/performances.jpg" width="85" height="70" />
+                                </i> Performances
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#" role="tablist">
+                                <i class="material-icons"><img src="assets/img/parametrespng.png" width="85"
+                                        height="70" /></i> Param&egrave;tres
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="tab-content tab-space tab-subcategories">
+            <div class="tab-pane active" id="link7">
+
+                <div class="col-md-12">
+                    <div class="card ">
+                        <div class="card-body ">
+                            <ul class="nav nav-pills nav-pills-warning" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#link1" role="tablist">
+                                        Commerciaux
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#link2" role="tablist">
+                                        Mon compte
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#link3" role="tablist">
+                                        Demande d'invitation
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#link4" role="tablist">
+                                        Historique des invitations
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content tab-space">
+
+                                <div class="tab-pane active" id="link1">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="material-datatables">
+                                                <table id="datatablecom"
+                                                    class="table table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%"
+                                                    *ngIf="this.getRdvCom">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Commercial</th>
+                                                            <th>Entreprise / Client</th>
+                                                            <th>Date</th>
+                                                            <th>Heure</th>
+                                                            <th>Objet</th>
+                                                            <th class="disabled-sorting text-center">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let donnee of listeRdvCom">
+                                                            <td>{{ donnee.superviseur }}</td>
+                                                            <td>{{ donnee.client }}</td>
+                                                            <td>{{ donnee.dates }}</td>
+                                                            <td>{{ donnee.heure }}</td>
+                                                            <td>{{ donnee.objet }}</td>
+                                                            <td class="text-center">
+                                                                <a title="T&eacute;l&eacute;charger la fiche de visite"
+                                                                    (click)="downloadfiche( donnee.idrdv )"
+                                                                    class="btn btn-link btn-info btn-just-icon edit"><i
+                                                                        class="material-icons">article</i></a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane" id="link2">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="material-datatables">
+                                                <table id="datatables"
+                                                    class="table table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%"
+                                                    *ngIf="this.getMesRdv">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Nom</th>
+                                                            <th>Contact</th>
+                                                            <th>Email</th>
+                                                            <th>Activit&eacute;</th>
+                                                            <th>Date</th>
+                                                            <th>Heure</th>
+                                                            <th class="disabled-sorting text-center">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let donnee of malistedeRdv">
+                                                            <td>{{ donnee.nom }} </td>
+                                                            <td>{{ donnee.contact }}</td>
+                                                            <td>{{ donnee.email }}</td>
+                                                            <td>{{ donnee.libelle }}</td>
+                                                            <td>{{ donnee.dte }}</td>
+                                                            <td>{{ donnee.heure }}</td>
+                                                            <td class="text-center">
+                                                                <a title="Consulter les donn&eacute;es du RDV"
+                                                                    (click)="afficherrdv( donnee.idrdv )"
+                                                                    class="btn btn-link btn-warning btn-just-icon edit"><i
+                                                                        class="material-icons">dvr</i></a>
+
+                                                                &nbsp;
+
+                                                                <a title="G&eacute;rer le rapport"
+                                                                    (click)="saisierapport( donnee.idrdv )"
+                                                                    class="btn btn-link btn-success btn-just-icon edit"><i
+                                                                        class="material-icons">edit_note</i></a>
+
+                                                                <a target="_blank"
+                                                                    title="T&eacute;l&eacute;charger la fiche de visite"
+                                                                    (click)="downloadfiche( donnee.idrdv )"
+                                                                    class="btn btn-link btn-info btn-just-icon edit"><i
+                                                                        class="material-icons">article</i></a>
+
+                                                                <a title="Supprimer ce RDV"
+                                                                    (click)="afficherdvtodel( donnee.idrdv )"
+                                                                    class="btn btn-link btn-danger btn-just-icon edit"><i
+                                                                        class="material-icons">delete</i></a>
+
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="tab-pane" id="link3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="material-datatables">
+                                                <table id="datatableRequest"
+                                                    class="table table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%"
+                                                    *ngIf="this.getInvitationReq">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Commercial</th>
+                                                            <th>Client</th>
+                                                            <th>Date</th>
+                                                            <th>Heure</th>
+                                                            <th>Secteur</th>
+                                                            <th>Motif</th>
+                                                            <th class="disabled-sorting text-center">Accepter / Refuser
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let donnee of listeInvitationReq">
+                                                            <td>{{ donnee.commercial }} </td>
+                                                            <td>{{ donnee.client }}</td>
+                                                            <td>{{ donnee.dates }}</td>
+                                                            <td>{{ donnee.heure }}</td>
+                                                            <td>{{ donnee.secteur }}</td>
+                                                            <td>{{ donnee.motif }}</td>
+                                                            <td class="text-center">
+
+                                                                <a title="R&eacute;pondre &agrave; l'invitation"
+                                                                    (click)="displayInvitWindow( donnee.idrdv )"
+                                                                    class="btn btn-link btn-success btn-just-icon edit"><i
+                                                                        class="material-icons">edit_note</i></a>
+
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <div class="tab-pane" id="link4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="material-datatables">
+                                                <table id="datatableInvHis"
+                                                    class="table table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%"
+                                                    *ngIf="this.getInvitationHis">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Commercial</th>
+                                                            <th>Client</th>
+                                                            <th>Date</th>
+                                                            <th>Heure</th>
+                                                            <th>Secteur</th>
+                                                            <th>Motif</th>
+                                                            <th class="text-center">R&eacute;ponse</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let donnee of listeInvitationHis">
+                                                            <td>{{ donnee.commercial }} </td>
+                                                            <td>{{ donnee.client }}</td>
+                                                            <td>{{ donnee.dates }}</td>
+                                                            <td>{{ donnee.heure }}</td>
+                                                            <td>{{ donnee.secteur }}</td>
+                                                            <td>{{ donnee.motif }}</td>
+                                                            <td class="text-center" style="font-weight: bold;">{{
+                                                                donnee.choix }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+</div>

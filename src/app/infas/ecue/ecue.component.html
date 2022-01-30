@@ -1,0 +1,194 @@
+<div class="main-content" style=" margin-top: 0px;">
+    <div class="container-fluid" style=" margin-top: 0px; padding-top: 0px;">
+
+
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Renseigner les informations</h4>
+                  <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons">clear</i>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form method="get" action="/" class="form-horizontal">
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label">Donn&eacute;es</label>
+                            <div class="col-sm-10">
+                                <div class="row">
+                                    
+                                    <div class="col-md-3">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput [(ngModel)]="ecue.idecu" name='idecu' type="text" placeholder="id">
+                                        </mat-form-field>
+                                    </div>
+                                    
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput [(ngModel)]="ecue.libelle" name='libelle' type="text" placeholder="Libell&eacute;">
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-lg-5 col-md-8 col-sm-4">
+                                        <mat-form-field>
+                                            <mat-select placeholder="UE" [(value)]="ecue.idue" name="ue">
+                                                <mat-option *ngFor="let ue of listeUe"
+                                                    [value]="ue.idue">
+                                                    {{ ue.libelle }}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                        
+                                </div>
+                            </div>
+                        </div> 
+                    </form>
+                </div>
+                <div class="modal-footer">
+                  <button mat-raised-button type="button" (click)="enregistrerAct()" 
+                    class="btn btn-success" data-dismiss="modal">Enregistrer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        <div class="row" style=" margin-top: 0px;">
+            <div class="col-md-12 ml-auto mr-auto">
+                <div class="page-categories">
+                    <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
+                        <!--<li class="nav-item">
+                            <a class="nav-link" href="#/gestion/comptes" role="tablist">
+                            <i class="material-icons">
+                                
+                                <img src="assets/img/icone_accueil.png" width="85" height="70"/>
+            
+                            </i> Accueil
+                            </a>
+                        </li>-->
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/infas/professeur" role="tablist">
+                            <i class="material-icons">
+                                
+                                <img src="assets/img/professeur.jpeg" width="85" height="70"/>
+            
+                            </i> Professeur
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link icone" (click)="ouvrirzonegestion()" role="tablist">
+                            <i class="material-icons">
+                                <img src="assets/img/ajout.png" width="85" height="70"/>
+                            </i> Ajouter
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/infas/responsable" role="tablist">
+                            <i class="material-icons">
+                                <img src="assets/img/responsable.jpeg" width="85" height="70"/>
+                            </i> Responsable
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/infas/classe" role="tablist">
+                            <i class="material-icons">
+                                <img src="assets/img/classe.jpeg" width="85" height="70"/>
+                            </i> Classe
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/infas/uniteeneigne" role="tablist">
+                            <i class="material-icons">
+                                <img src="assets/img/ue.jpeg" width="85" height="70"/>
+                            </i> Unit&eacute; enseign&eacute;e
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#/infas/ecue" role="tablist">
+                            <i class="material-icons">
+                                <img src="assets/img/ecue.jpeg" width="85" height="70"/>
+                            </i> Ecue
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/infas/lienrespue" role="tablist">
+                            <i class="material-icons">
+                                <img src="assets/img/lien.jpeg" width="85" height="70"/>
+                            </i> Responsable UE
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/infas/cours" role="tablist">
+                            <i class="material-icons">
+                                <img src="assets/img/cours.jpeg" width="85" height="70"/>
+                            </i> Cours
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/infas/graphe" role="tablist">
+                            <i class="material-icons">
+                                <img src="assets/img/graphes.png" width="85" height="70"/>
+                            </i> Graphes
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+
+            <!--  Add -->
+            <div class="col-md-12">
+
+                <div class="card">
+                      <div class="card-body">
+                          <div class="toolbar">
+                              <!--        Here you can write extra buttons/actions for the toolbar              -->
+                          </div>
+                          <div class="material-datatables">
+                            <table id="datatables" class="table  table-no-bordered table-hover" 
+                              cellspacing="0" width="100%" style="width:100%" *ngIf="this.getListe">
+                                  <thead>
+                                      <tr>
+                                        <th>Id.</th>
+                                        <th>Libell&eacute;</th>
+                                        <th>Ue</th>
+                                        <th class="disabled-sorting text-right">Actions</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr *ngFor="let donnee of liste">
+                                        <td>{{ donnee.element }}</td>
+                                        <td>{{ donnee.identifiant }}</td>
+                                        <td>{{ donnee.profil }}</td>
+                                        <!--<td>{{ donnee.actif == 1 ? 'Activ&eacute;' : 'D&eacute;sactiv&eacute;' }}</td>-->
+                                        <td class="text-right">
+                                          <a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">dvr</i></a>
+                                        </td>
+                                    </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                      <!-- end content-->
+                  </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+</div>

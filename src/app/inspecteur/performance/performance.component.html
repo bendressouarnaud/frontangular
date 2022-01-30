@@ -1,0 +1,305 @@
+<div class="main-content" style=" margin-top: 0px;">
+    <div class="container-fluid" style=" margin-top: 0px; padding-top: 0px;">
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Renseigner les donn&eacute;es des performances</h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="get" action="/" class="form-horizontal">
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">Donn&eacute;es</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-10 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Collaborateur"
+                                                    [(value)]="userId" name="collaborateur">
+                                                    <mat-option *ngFor="let donnee of listeCommerciaux"
+                                                        [value]="donnee.iduser">
+                                                        {{ donnee.nom }}&nbsp;{{ donnee.prenom }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-5 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Choix" [(value)]="performance.choix"
+                                                    name="choix">
+                                                    <mat-option [value]="1">Performance annuelle</mat-option>
+                                                    <mat-option [value]="0">Performance mensuelle</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-5 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Ann&eacute;e" [(value)]="performance.annee"
+                                                    name="annee">
+                                                    <mat-option *ngFor="let donnee of listeAnne" [value]="donnee.idan">
+                                                        {{ donnee.valeur }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-5 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Mois" [(value)]="performance.mois" name="mois">
+                                                    <mat-option *ngFor="let donnee of listeMois" [value]="donnee.idm">
+                                                        {{ donnee.libelle }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="performance.valeur" name='valeur'
+                                                    type="text" placeholder="Valeur : 15">
+                                            </mat-form-field>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div style="text-align: center; width: 100%; color:red; font-weight: bold;" id="infos">
+                                </div>
+                            </div>
+
+
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button mat-raised-button type="button" (click)="enregistrerPerf()" id="butenreg"
+                            class="btn btn-info">Enregistrer</button> <!-- data-dismiss="modal"  -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row" style=" margin-top: 0px;">
+            <div class="col-md-12 ml-auto mr-auto">
+                <div class="page-categories">
+                    <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/inspecteur/accueil" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/icone_accueil.png" width="85" height="70" />
+                                </i> Accueil
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active icone" (click)="ouvrirzonegestion()" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/ajout.png" width="85" height="70" />
+                                </i> Nouveau
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link icone" href="#/inspecteur/superviseur" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/utilisateur.png" width="85" height="70" />
+                                </i> Superviseur
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/inspecteur/rapport" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/rapportpng.png" width="85" height="70" />
+                                </i> Gest. RAPPORT
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/inspecteur/agenda" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/agenda.jpg" width="85" height="70" />
+                                </i> Agenda
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/inspecteur/reunion" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/reunion.jpg" width="85" height="70" />
+                                </i> R&eacute;union
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/inspecteur/performance" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/performances.jpg" width="85" height="70" />
+                                </i> Performance
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#" role="tablist">
+                                <i class="material-icons"><img src="assets/img/parametrespng.png" width="85"
+                                        height="70" /></i> Param&egrave;tres
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div>
+            <div class="tab-content tab-space tab-subcategories">
+                <div class="tab-pane active" id="link7">
+
+                    <div class="col-md-12">
+                        <div class="card ">
+
+                            <div class="card-body ">
+                                <ul class="nav nav-pills nav-pills-warning" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#link1" role="tablist">
+                                            Superviseur
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#link2" role="tablist">
+                                            Mon compte
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content tab-space">
+                                    <div class="tab-pane active" id="link1">
+
+                                        <div class="card">
+                                            <div class="card-body">
+
+                                                <div class="material-datatables">
+                                                    <table id="datatables"
+                                                        class="table table-striped table-no-bordered table-hover"
+                                                        cellspacing="0" width="100%" style="width:100%"
+                                                        *ngIf="this.getListeteam">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Nom</th>
+                                                                <th>Type</th>
+                                                                <th>Ann&eacute;e</th>
+                                                                <th>Mois</th>
+                                                                <th>Objectif</th>
+                                                                <th>R&eacute;alis&eacute;</th>
+                                                                <th class="disabled-sorting text-right">Actions</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let donnee of listePerformTeam">
+                                                                <td>{{ donnee.employe }}</td>
+                                                                <td>{{ donnee.libperf }}</td>
+                                                                <td>{{ donnee.an }}</td>
+                                                                <td>{{ donnee.libmois }}</td>
+                                                                <td>{{ donnee.valeur }}</td>
+                                                                <td>{{ donnee.realise }}</td>
+                                                                <td class="text-right">
+                                                                    <a title="Consulter les donn&eacute;es de R&eacute;union"
+                                                                        (click)="affichePerformance( donnee.idper )"
+                                                                        class="btn btn-link btn-warning btn-just-icon edit"><i
+                                                                            class="material-icons">dvr</i></a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+                                            <!-- end content-->
+                                        </div>
+                                    </div>
+
+
+                                    <div class="tab-pane" id="link2">
+                                        <div class="card">
+                                            <div class="card-body">
+
+                                                <div class="material-datatables">
+                                                    <table id="datatableMy"
+                                                        class="table table-striped table-no-bordered table-hover"
+                                                        cellspacing="0" width="100%" style="width:100%"
+                                                        *ngIf="this.getMyPerform">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Type</th>
+                                                                <th>Ann&eacute;e</th>
+                                                                <th>Mois</th>
+                                                                <th>Objectif</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let donnee of listeMyPerformTeam">
+                                                                <td>{{ donnee.libperf }}</td>
+                                                                <td>{{ donnee.an }}</td>
+                                                                <td>{{ donnee.libmois }}</td>
+                                                                <td>{{ donnee.valeur }}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+                                            <!-- end content-->
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+</div>

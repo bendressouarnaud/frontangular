@@ -1,0 +1,931 @@
+<div class="main-content" style=" margin-top: 0px;">
+    <div class="container-fluid" style=" margin-top: 0px; padding-top: 0px;">
+
+
+
+        <div class="modal fade" id="modalAutomobile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content" style="background-image: linear-gradient(#F4F0F0, 95%, #C2A323);">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Renseigner les donn&eacute;es du <span style="font-weight: bold;">DEVIS
+                                - AUTOMOBILE</span></h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="get" action="/" class="form-horizontal">
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label"><span
+                                        style="color: black;">Souscripteur</span></label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-6 col-md-8 col-sm-4">
+                                            <ng-multiselect-dropdown [placeholder]="'Choisissez le client'"
+                                                name="client" [settings]="dropdownSettings" [data]="dropdownList"
+                                                [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
+                                                (onDeSelect)="onItemDeSelect($event)"
+                                                (onSelectAll)="onSelectAll($event)">
+                                            </ng-multiselect-dropdown>
+                                        </div>
+
+
+                                        <div class="col-md-4">
+
+                                            <button mat-raised-button class="btn btn-success" (click)="getlespolicesbyclient()">
+                                                <span class="btn-label">
+                                                    <i class="material-icons">search</i>
+                                                </span>
+                                                Polices
+                                            </button>
+
+                                            <!--
+                                            <button mat-raised-button type="button" 
+                                            class="btn btn-info">Afficher les polices</button>  data-dismiss="modal"  -->
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row" *ngIf="this.getPolice">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-6 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Police(s)" [(value)]="setPolice" name="police">
+                                                    <mat-option *ngFor="let donnee of listePolices"
+                                                        [value]="donnee.Police">
+                                                        {{ donnee.Police }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+
+                                        <div class="col-md-4">
+
+                                            <button mat-raised-button class="btn btn-info" (click)="getlespolicesbyclient()">
+                                                <span class="btn-label">
+                                                    <i class="material-icons">shopping_cart</i>
+                                                </span>
+                                                Afficher
+                                            </button>
+
+                                            <!--
+                                            <button mat-raised-button type="button" (click)="enregistrerRdv()"
+                                                class="btn btn-info">Enregistrer</button>  data-dismiss="modal"  -->
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="clientRest.nom" name='nom' type="text"
+                                                    placeholder="Nom" maxlength="30">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="clientRest.prenom" name='prenom'
+                                                    type="text" placeholder="Pr&eacute;nom" maxlength="50">
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="clientRest.contact" name='contact'
+                                                    type="text" placeholder="Contact" maxlength="20">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="clientRest.email" name='email' type="text"
+                                                    placeholder="Email" maxlength="50">
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <mat-form-field>
+                                                <input matInput [matDatepicker]="basicDatepickerAuto"
+                                                    [(ngModel)]="getDate" name="dates" placeholder="Date de naissance">
+                                                <mat-datepicker-toggle matSuffix [for]="basicDatepickerAuto">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #basicDatepickerAuto></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-5 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Civilit&eacute;"
+                                                    [(value)]="clientRest.civilite" name="activite">
+                                                    <mat-option *ngFor="let donnee of listeCivilite"
+                                                        [value]="donnee.idnmd">
+                                                        {{ donnee.libelle }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-10 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Activit&eacute;"
+                                                    [(value)]="clientRest.activite" name="activite">
+                                                    <mat-option *ngFor="let donnee of listeActivite"
+                                                        [value]="donnee.idact">
+                                                        {{ donnee.libelle }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label"><span style="color: black;">CNI</span></label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <input placeholder="CNI" type="file" id="cni" name="cni"
+                                                (change)="onCniSelected($event)" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label"><span style="color: black;">PHOTO</span></label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-5 col-md-8 col-sm-4">
+                                            <input type="file" id="photo" name="photo"
+                                                (change)="onPhotoSelected($event)" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label"><span
+                                        style="color: black;">Contenu</span></label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-5 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <mat-select placeholder="&Eacute;nergie du v&eacute;hicule"
+                                                    [(value)]="energievehicule" name="energievehicule">
+                                                    <mat-option *ngFor="let donnee of listeEnergieVehicule"
+                                                        [value]="donnee.idnmd">
+                                                        {{ donnee.libelle }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-5 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Nombre de places"
+                                                    [(value)]="nombreplacevehicule" name="nombreplacevehicule">
+                                                    <mat-option *ngFor="let donnee of listePlaceVehicule"
+                                                        [value]="donnee.idnmd">
+                                                        {{ donnee.libelle }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="puissancevehicule" name='puissancevehicule'
+                                                    type="text"
+                                                    placeholder="Puissance du v&eacute;hicule (En CV ou cm3)"
+                                                    maxlength="15">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="chargeutile" name='chargeutile' type="text"
+                                                    placeholder="Charge Utile du v&eacute;hicule*(CU en Kg)"
+                                                    maxlength="15">
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-5 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Dur&eacute;e du contrat"
+                                                    [(value)]="dureecontrat" name="dureecontrat">
+                                                    <mat-option *ngFor="let donnee of listeDureeContrat"
+                                                        [value]="donnee.idnmd">
+                                                        {{ donnee.libelle }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-5 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Offre commerciale" [(value)]="offrecommerciale"
+                                                    name="offrecommerciale" (selectionChange)="displayOffre()">
+                                                    <mat-option *ngFor="let donnee of listeOffreCommerciale"
+                                                        [value]="donnee.idnmd">
+                                                        {{ donnee.libelle }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-10">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="plafondindemnisation"
+                                                    name='plafondindemnisation' type="text"
+                                                    placeholder="Plafond d'indemnisation" maxlength="15">
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <!--  G A R A N T I E :   -->
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label"><span style="color: black;">&nbsp;</span></label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-10 col-md-8 col-sm-4">
+                                            <ng-multiselect-dropdown [placeholder]="'Choisissez les garanties'"
+                                                name="client" [settings]="dropdownSettingsGarantie"
+                                                [data]="dropdownListGarantie" [(ngModel)]="selectedItemsGarantie"
+                                                (onSelect)="onItemSelectGarantie($event)"
+                                                (onDeSelect)="onItemDeSelectGarantie($event)"
+                                                (onSelectAll)="onSelectAllGarantie($event)">
+                                            </ng-multiselect-dropdown>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="row">
+                                <div style="text-align: center; width: 100%; color:red; font-weight: bold;" id="infos">
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button mat-raised-button type="button" (click)="enregistrerRdv()"
+                            class="btn btn-info">Enregistrer</button> <!-- data-dismiss="modal"  -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="modal fade" id="modalAccident" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content" style="background-image: linear-gradient(#F4F0F0, 95%, #C2A323);">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Renseigner les donn&eacute;es du <span style="font-weight: bold;">DEVIS
+                                - ACCIDENT</span></h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="get" action="/" class="form-horizontal">
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label"><span
+                                        style="color: black;">Souscripteur</span></label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-10 col-md-8 col-sm-4">
+                                            <ng-multiselect-dropdown [placeholder]="'Choisissez le client'"
+                                                name="client" [settings]="dropdownSettings" [data]="dropdownList"
+                                                [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
+                                                (onDeSelect)="onItemDeSelect($event)"
+                                                (onSelectAll)="onSelectAll($event)">
+                                            </ng-multiselect-dropdown>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="clientRest.nom" name='nom' type="text"
+                                                    placeholder="Nom" maxlength="30">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="clientRest.prenom" name='prenom'
+                                                    type="text" placeholder="Pr&eacute;nom" maxlength="50">
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="clientRest.contact" name='contact'
+                                                    type="text" placeholder="Contact" maxlength="20">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="clientRest.email" name='email' type="text"
+                                                    placeholder="Email" maxlength="50">
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <mat-form-field>
+                                                <input matInput [matDatepicker]="basicDatepicker" [(ngModel)]="getDate"
+                                                    name="dates" placeholder="Date de naissance">
+                                                <mat-datepicker-toggle matSuffix [for]="basicDatepicker">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #basicDatepicker></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-5 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Civilit&eacute;"
+                                                    [(value)]="clientRest.civilite" name="activite">
+                                                    <mat-option *ngFor="let donnee of listeCivilite"
+                                                        [value]="donnee.idnmd">
+                                                        {{ donnee.libelle }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-10 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Activit&eacute;"
+                                                    [(value)]="clientRest.activite" name="activite">
+                                                    <mat-option *ngFor="let donnee of listeActivite"
+                                                        [value]="donnee.idact">
+                                                        {{ donnee.libelle }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label"><span style="color: black;">CNI</span></label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <input placeholder="CNI" type="file" id="cni" name="cni"
+                                                (change)="onCniSelected($event)" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label"><span style="color: black;">PHOTO</span></label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-5 col-md-8 col-sm-4">
+                                            <input type="file" id="photo" name="photo"
+                                                (change)="onPhotoSelected($event)" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label"><span
+                                        style="color: black;">Contenu</span></label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="capitaldeces" name='capitaldeces'
+                                                    type="text" placeholder="Capital - D&eacute;c&egrave;s"
+                                                    maxlength="20">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="capitalinfirmite" name='capitalinfirmite'
+                                                    type="text" placeholder="Capital – Infirmit&eacute; Permanente"
+                                                    maxlength="50">
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-5 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Frais de traitement"
+                                                    [(value)]="fraisdetraitement" name="fraisdetraitement">
+                                                    <mat-option *ngFor="let donnee of listeFraisTraitement"
+                                                        [value]="donnee.idnmd">
+                                                        {{ donnee.libelle }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <!--
+                                        <div class="col-md-5">
+                                            <mat-form-field>
+                                                <input matInput [matDatepicker]="basicDatepicker" [(ngModel)]="getDate"
+                                                    name="dates" placeholder="Date de naissance">
+                                                <mat-datepicker-toggle matSuffix [for]="basicDatepicker">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #basicDatepicker></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+                                    -->
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+                            <div class="row">
+                                <div style="text-align: center; width: 100%; color:red; font-weight: bold;" id="infos">
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button mat-raised-button type="button" (click)="enregistrerRdv()"
+                            class="btn btn-info">Enregistrer</button> <!-- data-dismiss="modal"  -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- data-backdrop="static" data-keyboard="false" -->
+        <div class="modal fade" id="modalwaiting" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">T&eacute;l&eacute;chargement du fichier</h4>
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                        <p style="color: crimson; font-weight: bold;">Veuillez patienter ...</p>
+                        <p>&nbsp;</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--  Supprimer ce RDV  -->
+        <div class="modal fade" id="modaldelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Confirmer la suppression</h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                        <p>Souhaitez-vous supprimer ce RDV ? </p>
+                        <p style="color: crimson; font-weight: bold;">{{ information }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button mat-raised-button type="button" (click)="supprimerRdv()"
+                            class="btn btn-warning">Supprimer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row" style=" margin-top: 0px;">
+            <div class="col-md-12 ml-auto mr-auto">
+                <div class="page-categories">
+                    <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gcommercial/accueilcom" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/icone_accueil.png" width="85" height="70" />
+                                </i> Accueil
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gcommercial/comrdv" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/rdvweb.jpg" width="85" height="70" />
+                                </i> Gest. RDV
+                            </a>
+                        </li>
+
+                        <!--
+                        <li class="nav-item">
+                            <a class="nav-link active icone" (click)="ouvrirzonegestion()" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/ajout.png" width="85" height="70" />
+                                </i> Nouveau
+                            </a>
+                        </li>
+                    -->
+
+
+                        <li class="nav-item">
+                            <a class="nav-link active icone" href="#/gcommercial/devis" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/devis.jpg" width="85" height="70" />
+                                </i> Devis
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gcommercial/actcommerciale" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/commercial.jpg" width="85" height="70" />
+                                </i> Act. commerciale
+                            </a>
+                        </li>
+
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gcommercial/comrap" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/rapportpng.png" width="85" height="70" />
+                                </i> Gest. RAPPORT
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gcommercial/comagenda" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/agenda.jpg" width="85" height="70" />
+                                </i> Agenda
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gcommercial/performance" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/performances.jpg" width="85" height="70" />
+                                </i> Performance
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#" role="tablist">
+                                <i class="material-icons"><img src="assets/img/parametrespng.png" width="85"
+                                        height="70" /></i> Param&egrave;tres
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-12" style="margin-top:70px;">
+
+            <div style='text-align:center; margin-top:20px'>
+
+                <button class="btn btn-warning" (click)="afficherAccident()">
+                    <i class="material-icons">error</i> Accident
+                </button>
+
+                <button class="btn btn-info" (click)="afficherAuto()">
+                    <i class="material-icons">time_to_leave</i> Devis Automobile
+                </button>
+
+                <button class="btn btn-success" (click)="afficherupload()">
+                    <i class="material-icons">airplanemode_active</i> Voyage
+                </button>
+
+            </div>
+        </div>
+
+
+
+        <div class="tab-content tab-space tab-subcategories">
+            <div class="tab-pane active" id="link7">
+
+                <div class="col-md-12">
+                    <div class="card ">
+                        <div class="card-body ">
+                            <ul class="nav nav-pills nav-pills-warning" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#link1" role="tablist">
+                                        Accident
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#link2" role="tablist">
+                                        Automobile
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content tab-space">
+                                <div class="tab-pane active" id="link1">
+
+                                    <div class="card">
+                                        <div class="card-body">
+
+                                            <div class="material-datatables">
+                                                <table id="datatables"
+                                                    class="table table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%"
+                                                    *ngIf="this.getMesRdv">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Nom</th>
+                                                            <th>Contact</th>
+                                                            <th>Email</th>
+                                                            <th>Activit&eacute;</th>
+                                                            <th>Date</th>
+                                                            <th>Heure</th>
+                                                            <th>Superviseur</th>
+                                                            <th class="disabled-sorting text-center">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let donnee of malistedeRdv">
+                                                            <td>{{ donnee.nom }} </td>
+                                                            <td>{{ donnee.contact }}</td>
+                                                            <td>{{ donnee.email }}</td>
+                                                            <td>{{ donnee.libelle }}</td>
+                                                            <td>{{ donnee.dte }}</td>
+                                                            <td>{{ donnee.heure }}</td>
+                                                            <td>{{ donnee.presence }}</td>
+                                                            <td class="text-center">
+                                                                <a title="Consulter les donn&eacute;es du RDV"
+                                                                    (click)="afficherrdv( donnee.idrdv )"
+                                                                    class="btn btn-link btn-warning btn-just-icon edit"><i
+                                                                        class="material-icons">dvr</i></a>
+
+                                                                &nbsp;
+
+                                                                <a title="G&eacute;rer le rapport"
+                                                                    (click)="saisierapport( donnee.idrdv )"
+                                                                    class="btn btn-link btn-success btn-just-icon edit"><i
+                                                                        class="material-icons">edit_note</i></a>
+
+                                                                <a target="_blank"
+                                                                    title="T&eacute;l&eacute;charger la fiche de visite"
+                                                                    (click)="downloadfiche( donnee.idrdv )"
+                                                                    class="btn btn-link btn-info btn-just-icon edit"><i
+                                                                        class="material-icons">article</i></a>
+
+                                                                <a title="Supprimer ce RDV"
+                                                                    (click)="afficherdvtodel( donnee.idrdv )"
+                                                                    class="btn btn-link btn-danger btn-just-icon edit"><i
+                                                                        class="material-icons">delete</i></a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                        <!-- end content-->
+                                    </div>
+                                </div>
+
+
+                                <div class="tab-pane" id="link2">
+                                    <div class="card">
+                                        <div class="card-body">
+
+                                            <div class="material-datatables">
+                                                <table id="datatablesInvit"
+                                                    class="table table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%"
+                                                    *ngIf="this.getMesInvitations">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Commercial</th>
+                                                            <th>Client</th>
+                                                            <th>Date</th>
+                                                            <th>Heure</th>
+                                                            <th>Secteur</th>
+                                                            <th>Motif</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let donnee of mesinvitations">
+                                                            <td>{{ donnee.commercial }} </td>
+                                                            <td>{{ donnee.client }} </td>
+                                                            <td>{{ donnee.dates }} </td>
+                                                            <td>{{ donnee.heure }}</td>
+                                                            <td>{{ donnee.secteur }}</td>
+                                                            <td>{{ donnee.motif }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                        <!-- end content-->
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+</div>
