@@ -19,6 +19,7 @@ import { PerformanceComponent } from './performance/performance.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ActiviteComponent } from './activite/activite.component';
 import { DevisComponent } from './devis/devis.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import { DevisComponent } from './devis/devis.component';
   imports: [
     CommonModule,
     CommercialRoutingModule,
-
+    MatRadioModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,

@@ -4,9 +4,9 @@
 
 
         <div class="modal fade" id="modalAutomobile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content" style="background-image: linear-gradient(#F4F0F0, 95%, #C2A323);">
+            aria-hidden="true" > <!--  modal-lg  -->
+            <div class="modal-dialog modal-xl" >
+                <div class="modal-content" style="background-image: linear-gradient(#F4F0F0, 97%, #C2A323); ">
                     <div class="modal-header">
                         <h4 class="modal-title">Renseigner les donn&eacute;es du <span style="font-weight: bold;">DEVIS
                                 - AUTOMOBILE</span></h4>
@@ -14,363 +14,416 @@
                             <i class="material-icons">clear</i>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <form method="get" action="/" class="form-horizontal">
+                    <div class="modal-body" style="padding: 0px; ">
 
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label"><span
-                                        style="color: black;">Souscripteur</span></label>
-                                <div class="col-sm-10">
-                                    <div class="row">
+                        <div class="tab-content tab-space tab-subcategories" style="padding: 0px; ">
+                            <div class="tab-pane active" id="link7" style="margin-top: 0px; ">
+                
+                                <div class="col-md-12" style="margin-top: 0px; ">
+                                    <div class="card " style="margin-top: 0px; ">
+                                        <div class="card-body ">
+                                            <ul class="nav nav-pills nav-pills-warning" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" data-toggle="tab" href="#link1" role="tablist">
+                                                        Information g&eacute;n&eacute;rale
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#link2" id="garantieslink" role="tablist">
+                                                        Garanties
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content tab-space">
+                                                <div class="tab-pane active" id="link1">
+                                                    <form method="get" action="/" class="form-horizontal">
 
-                                        <div class="col-lg-6 col-md-8 col-sm-4">
-                                            <ng-multiselect-dropdown [placeholder]="'Choisissez le client'"
-                                                name="client" [settings]="dropdownSettings" [data]="dropdownList"
-                                                [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
-                                                (onDeSelect)="onItemDeSelect($event)"
-                                                (onSelectAll)="onSelectAll($event)">
-                                            </ng-multiselect-dropdown>
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label"><span
+                                                                    style="color: black;">Souscripteur</span></label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+                            
+                                                                    <div class="col-lg-6 col-md-8 col-sm-4">
+                                                                        <ng-multiselect-dropdown [placeholder]="'Choisissez le client'"
+                                                                            name="client" [settings]="dropdownSettings" [data]="dropdownList"
+                                                                            [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
+                                                                            (onDeSelect)="onItemDeSelect($event)"
+                                                                            (onSelectAll)="onSelectAll($event)">
+                                                                        </ng-multiselect-dropdown>
+                                                                    </div>
+                            
+                            
+                                                                    <div class="col-md-4">
+                            
+                                                                        <button mat-raised-button class="btn btn-success" (click)="getlespolicesbyclient()">
+                                                                            <span class="btn-label">
+                                                                                <i class="material-icons">search</i>
+                                                                            </span>
+                                                                            Polices
+                                                                        </button>
+                            
+                                                                        <!--
+                                                                        <button mat-raised-button type="button" 
+                                                                        class="btn btn-info">Afficher les polices</button>  data-dismiss="modal"  -->
+                                                                    </div>
+                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                            
+                            
+                                                        <div class="row" *ngIf="this.getPolice">
+                                                            <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+                            
+                                                                    <div class="col-lg-6 col-md-8 col-sm-4">
+                                                                        <mat-form-field>
+                                                                            <mat-select placeholder="Police(s)" [(value)]="setPolice" name="police">
+                                                                                <mat-option *ngFor="let donnee of listePolices"
+                                                                                    [value]="donnee.Police">
+                                                                                    {{ donnee.Police }}
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+                            
+                            
+                                                                    <div class="col-md-4">
+                            
+                                                                        <button mat-raised-button class="btn btn-info" (click)="getlespolicesbyclient()">
+                                                                            <span class="btn-label">
+                                                                                <i class="material-icons">shopping_cart</i>
+                                                                            </span>
+                                                                            Afficher
+                                                                        </button>
+                            
+                                                                        <!--
+                                                                        <button mat-raised-button type="button" (click)="enregistrerRdv()"
+                                                                            class="btn btn-info">Enregistrer</button>  data-dismiss="modal"  -->
+                                                                    </div>
+                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                            
+                            
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+                            
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field class="example-full-width">
+                                                                            <input matInput [(ngModel)]="clientRest.nom" name='nom' type="text"
+                                                                                placeholder="Nom" maxlength="30">
+                                                                        </mat-form-field>
+                                                                    </div>
+                            
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field class="example-full-width">
+                                                                            <input matInput [(ngModel)]="clientRest.prenom" name='prenom'
+                                                                                type="text" placeholder="Pr&eacute;nom" maxlength="50">
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field class="example-full-width">
+                                                                            <input matInput [(ngModel)]="clientRest.contact" name='contact'
+                                                                                type="text" placeholder="Contact" maxlength="20">
+                                                                        </mat-form-field>
+                                                                    </div>
+                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                            
+                            
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+                            
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field class="example-full-width">
+                                                                            <input matInput [(ngModel)]="clientRest.email" name='email' type="text"
+                                                                                placeholder="Email" maxlength="50">
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field>
+                                                                            <input matInput [matDatepicker]="basicDatepickerAuto"
+                                                                                [(ngModel)]="getDate" name="dates" placeholder="Date de naissance">
+                                                                            <mat-datepicker-toggle matSuffix [for]="basicDatepickerAuto">
+                                                                            </mat-datepicker-toggle>
+                                                                            <mat-datepicker #basicDatepickerAuto></mat-datepicker>
+                                                                        </mat-form-field>
+                                                                    </div>
+                            
+                                                                    <div class="col-lg-3 col-md-8 col-sm-4">
+                                                                        <mat-form-field>
+                                                                            <mat-select placeholder="Civilit&eacute;"
+                                                                                [(value)]="clientRest.civilite" name="civilite">
+                                                                                <mat-option *ngFor="let donnee of lesCivilite"
+                                                                                    [value]="donnee.idciv">
+                                                                                    {{ donnee.libelle }}
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                            
+                            
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+                            
+                                                                    <div class="col-lg-9 col-md-8 col-sm-4">
+                                                                        <mat-form-field>
+                                                                            <mat-select placeholder="Activit&eacute;"
+                                                                                [(value)]="clientRest.activite" name="activite">
+                                                                                <mat-option *ngFor="let donnee of listeActivite"
+                                                                                    [value]="donnee.idact">
+                                                                                    {{ donnee.libelle }}
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                            
+                            
+                            
+                            
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label"><span style="color: black;">CNI</span></label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+                            
+                                                                    <div class="col-md-5">
+                                                                        <input placeholder="CNI" type="file" id="cni" name="cni"
+                                                                            (change)="onCniSelected($event)" />
+                                                                    </div>
+                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                            
+                            
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label"><span style="color: black;">PHOTO</span></label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+                            
+                                                                    <div class="col-lg-5 col-md-8 col-sm-4">
+                                                                        <input type="file" id="photo" name="photo"
+                                                                            (change)="onPhotoSelected($event)" />
+                                                                    </div>
+                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                            
+                            
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label"><span
+                                                                    style="color: black;">Contenu</span></label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+                            
+                                                                    <div class="col-lg-3 col-md-8 col-sm-4">
+                                                                        <mat-form-field>
+                                                                            <mat-select placeholder="&Eacute;nergie du v&eacute;hicule"
+                                                                                [(value)]="energievehicule" name="energievehicule">
+                                                                                <mat-option *ngFor="let donnee of listeEnergieVehicule"
+                                                                                    [value]="donnee.idnmd">
+                                                                                    {{ donnee.libelle }}
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+                            
+                                                                    <div class="col-lg-3 col-md-8 col-sm-4">
+                                                                        <mat-form-field>
+                                                                            <mat-select placeholder="Nombre de places"
+                                                                                [(value)]="nombreplacevehicule" name="nombreplacevehicule">
+                                                                                <mat-option *ngFor="let donnee of listePlaceVehicule"
+                                                                                    [value]="donnee.idnmd">
+                                                                                    {{ donnee.libelle }}
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field class="example-full-width">
+                                                                            <input matInput [(ngModel)]="puissancevehicule" name='puissancevehicule'
+                                                                                type="text"
+                                                                                placeholder="Puissance du v&eacute;hicule (En CV ou cm3)"
+                                                                                maxlength="15">
+                                                                        </mat-form-field>
+                                                                    </div>
+                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                            
+                            
+                            
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field class="example-full-width">
+                                                                            <input matInput [(ngModel)]="chargeutile" name='chargeutile' type="text"
+                                                                                placeholder="Charge Utile du v&eacute;hicule*(CU en Kg)"
+                                                                                maxlength="15">
+                                                                        </mat-form-field>
+                                                                    </div>
+                            
+                                                                    <div class="col-lg-3 col-md-8 col-sm-4">
+                                                                        <mat-form-field>
+                                                                            <mat-select placeholder="Dur&eacute;e du contrat"
+                                                                                [(value)]="dureecontrat" name="dureecontrat" 
+                                                                                (selectionChange)="computePrice()">
+                                                                                <mat-option *ngFor="let donnee of listeDureeContrat"
+                                                                                    [value]="donnee.idnmd">
+                                                                                    {{ donnee.libelle }}
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+                            
+                                                                    <div class="col-lg-3 col-md-8 col-sm-4">
+                                                                        <mat-form-field>
+                                                                            <mat-select placeholder="Offre commerciale" [(value)]="offrecommerciale"
+                                                                                name="offrecommerciale" (selectionChange)="displayOffre()">
+                                                                                <mat-option *ngFor="let donnee of listeOffreCommerciale"
+                                                                                    [value]="donnee.idnmd">
+                                                                                    {{ donnee.libelle }}
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                            
+                            
+                            
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+                            
+                                                                    <div class="col-md-5">
+                                                                        <mat-form-field class="example-full-width">
+                                                                            <input matInput [(ngModel)]="plafondindemnisation"
+                                                                                name='plafondindemnisation' type="text"
+                                                                                placeholder="Plafond d'indemnisation" maxlength="15">
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <div class="col-md-4" >
+                                                                        <mat-form-field class="example-full-width text-center">
+                                                                            <input style="color: red; font-size: 18px;" disabled matInput [(ngModel)]="coutproduit"
+                                                                                name='coutproduit' type="text"
+                                                                                placeholder="Co&ucirc;t du produit" maxlength="15">
+                                                                        </mat-form-field>
+                                                                    </div>
+                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                            
+                            
+                            
+                                                        <!--  G A R A N T I E :   
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label"><span style="color: black;">&nbsp;</span></label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+                            
+                                                                    <div class="col-lg-10 col-md-8 col-sm-4">
+                                                                        <ng-multiselect-dropdown [placeholder]="'Choisissez les garanties'"
+                                                                            name="client" [settings]="dropdownSettingsGarantie"
+                                                                            [data]="dropdownListGarantie" [(ngModel)]="selectedItemsGarantie"
+                                                                            (onSelect)="onItemSelectGarantie($event)"
+                                                                            (onDeSelect)="onItemDeSelectGarantie($event)"
+                                                                            (onSelectAll)="onSelectAllGarantie($event)">
+                                                                        </ng-multiselect-dropdown>
+                                                                    </div>
+                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        -->
+                            
+                            
+                            
+                            
+                                                        <div class="row">
+                                                            <div style="text-align: center; width: 100%; color:red; font-weight: bold;" id="infos">
+                                                            </div>
+                                                        </div>
+                            
+                            
+                                                    </form>
+                                                </div>
+
+                                                <div class="tab-pane" id="link2">
+                                                    <table style="width: 100%;" border="1">
+                                                        <tr>
+                                                            <td style="width: 25%;"><img src="assets/img/offreEco.PNG" width="254" height="457" /></td>
+                                                            <td style="width: 25%;"><img src="assets/img/offreStandard.PNG" width="254" height="457" /></td>
+                                                            <td style="width: 25%;"><img src="assets/img/offreConfort.PNG" width="254" height="457" /></td>
+                                                            <td style="width: 25%;"><img src="assets/img/offrePrestige.PNG" width="254" height="457" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="4" style="text-align: center; background-color: #EFEBE6;" >
+                                                                <br>
+                                                                <mat-radio-group [(ngModel)] = "choixGarantie">
+                                                                    <mat-radio-button value="1" id="eco" (click)="setRadioBut(1)" name="exampleRadios">ECO</mat-radio-button>
+                                                                    &nbsp;&nbsp;
+                                                                    <mat-radio-button value="2" id="standard" (click)="setRadioBut(2)" name="exampleRadios">STANDARD</mat-radio-button>
+                                                                    &nbsp;&nbsp;
+                                                                    <mat-radio-button value="3" id="confort" (click)="setRadioBut(3)" name="exampleRadios">CONFORT</mat-radio-button>
+                                                                    &nbsp;&nbsp;
+                                                                    <mat-radio-button value="4" id="prestige" (click)="setRadioBut(4)" name="exampleRadios">PRESTIGE</mat-radio-button>
+                                                                </mat-radio-group>
+                                                            </td>
+                                                            
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
-
-
-                                        <div class="col-md-4">
-
-                                            <button mat-raised-button class="btn btn-success" (click)="getlespolicesbyclient()">
-                                                <span class="btn-label">
-                                                    <i class="material-icons">search</i>
-                                                </span>
-                                                Polices
-                                            </button>
-
-                                            <!--
-                                            <button mat-raised-button type="button" 
-                                            class="btn btn-info">Afficher les polices</button>  data-dismiss="modal"  -->
-                                        </div>
-
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
 
-                            <div class="row" *ngIf="this.getPolice">
-                                <label class="col-sm-2 col-form-label">&nbsp;</label>
-                                <div class="col-sm-10">
-                                    <div class="row">
 
-                                        <div class="col-lg-6 col-md-8 col-sm-4">
-                                            <mat-form-field>
-                                                <mat-select placeholder="Police(s)" [(value)]="setPolice" name="police">
-                                                    <mat-option *ngFor="let donnee of listePolices"
-                                                        [value]="donnee.Police">
-                                                        {{ donnee.Police }}
-                                                    </mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
 
 
-                                        <div class="col-md-4">
 
-                                            <button mat-raised-button class="btn btn-info" (click)="getlespolicesbyclient()">
-                                                <span class="btn-label">
-                                                    <i class="material-icons">shopping_cart</i>
-                                                </span>
-                                                Afficher
-                                            </button>
 
-                                            <!--
-                                            <button mat-raised-button type="button" (click)="enregistrerRdv()"
-                                                class="btn btn-info">Enregistrer</button>  data-dismiss="modal"  -->
-                                        </div>
 
-                                    </div>
-                                </div>
-                            </div>
 
 
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label">&nbsp;</label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-md-5">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput [(ngModel)]="clientRest.nom" name='nom' type="text"
-                                                    placeholder="Nom" maxlength="30">
-                                            </mat-form-field>
-                                        </div>
-
-                                        <div class="col-md-5">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput [(ngModel)]="clientRest.prenom" name='prenom'
-                                                    type="text" placeholder="Pr&eacute;nom" maxlength="50">
-                                            </mat-form-field>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label">&nbsp;</label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-md-5">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput [(ngModel)]="clientRest.contact" name='contact'
-                                                    type="text" placeholder="Contact" maxlength="20">
-                                            </mat-form-field>
-                                        </div>
-
-                                        <div class="col-md-5">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput [(ngModel)]="clientRest.email" name='email' type="text"
-                                                    placeholder="Email" maxlength="50">
-                                            </mat-form-field>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label">&nbsp;</label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-md-5">
-                                            <mat-form-field>
-                                                <input matInput [matDatepicker]="basicDatepickerAuto"
-                                                    [(ngModel)]="getDate" name="dates" placeholder="Date de naissance">
-                                                <mat-datepicker-toggle matSuffix [for]="basicDatepickerAuto">
-                                                </mat-datepicker-toggle>
-                                                <mat-datepicker #basicDatepickerAuto></mat-datepicker>
-                                            </mat-form-field>
-                                        </div>
-
-                                        <div class="col-lg-5 col-md-8 col-sm-4">
-                                            <mat-form-field>
-                                                <mat-select placeholder="Civilit&eacute;"
-                                                    [(value)]="clientRest.civilite" name="activite">
-                                                    <mat-option *ngFor="let donnee of listeCivilite"
-                                                        [value]="donnee.idnmd">
-                                                        {{ donnee.libelle }}
-                                                    </mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label">&nbsp;</label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-lg-10 col-md-8 col-sm-4">
-                                            <mat-form-field>
-                                                <mat-select placeholder="Activit&eacute;"
-                                                    [(value)]="clientRest.activite" name="activite">
-                                                    <mat-option *ngFor="let donnee of listeActivite"
-                                                        [value]="donnee.idact">
-                                                        {{ donnee.libelle }}
-                                                    </mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label"><span style="color: black;">CNI</span></label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-md-5">
-                                            <input placeholder="CNI" type="file" id="cni" name="cni"
-                                                (change)="onCniSelected($event)" />
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label"><span style="color: black;">PHOTO</span></label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-lg-5 col-md-8 col-sm-4">
-                                            <input type="file" id="photo" name="photo"
-                                                (change)="onPhotoSelected($event)" />
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label"><span
-                                        style="color: black;">Contenu</span></label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-lg-5 col-md-8 col-sm-4">
-                                            <mat-form-field>
-                                                <mat-select placeholder="&Eacute;nergie du v&eacute;hicule"
-                                                    [(value)]="energievehicule" name="energievehicule">
-                                                    <mat-option *ngFor="let donnee of listeEnergieVehicule"
-                                                        [value]="donnee.idnmd">
-                                                        {{ donnee.libelle }}
-                                                    </mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-
-                                        <div class="col-lg-5 col-md-8 col-sm-4">
-                                            <mat-form-field>
-                                                <mat-select placeholder="Nombre de places"
-                                                    [(value)]="nombreplacevehicule" name="nombreplacevehicule">
-                                                    <mat-option *ngFor="let donnee of listePlaceVehicule"
-                                                        [value]="donnee.idnmd">
-                                                        {{ donnee.libelle }}
-                                                    </mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label">&nbsp;</label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-md-5">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput [(ngModel)]="puissancevehicule" name='puissancevehicule'
-                                                    type="text"
-                                                    placeholder="Puissance du v&eacute;hicule (En CV ou cm3)"
-                                                    maxlength="15">
-                                            </mat-form-field>
-                                        </div>
-
-                                        <div class="col-md-5">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput [(ngModel)]="chargeutile" name='chargeutile' type="text"
-                                                    placeholder="Charge Utile du v&eacute;hicule*(CU en Kg)"
-                                                    maxlength="15">
-                                            </mat-form-field>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label">&nbsp;</label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-lg-5 col-md-8 col-sm-4">
-                                            <mat-form-field>
-                                                <mat-select placeholder="Dur&eacute;e du contrat"
-                                                    [(value)]="dureecontrat" name="dureecontrat">
-                                                    <mat-option *ngFor="let donnee of listeDureeContrat"
-                                                        [value]="donnee.idnmd">
-                                                        {{ donnee.libelle }}
-                                                    </mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-
-                                        <div class="col-lg-5 col-md-8 col-sm-4">
-                                            <mat-form-field>
-                                                <mat-select placeholder="Offre commerciale" [(value)]="offrecommerciale"
-                                                    name="offrecommerciale" (selectionChange)="displayOffre()">
-                                                    <mat-option *ngFor="let donnee of listeOffreCommerciale"
-                                                        [value]="donnee.idnmd">
-                                                        {{ donnee.libelle }}
-                                                    </mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label">&nbsp;</label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-md-10">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput [(ngModel)]="plafondindemnisation"
-                                                    name='plafondindemnisation' type="text"
-                                                    placeholder="Plafond d'indemnisation" maxlength="15">
-                                            </mat-form-field>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <!--  G A R A N T I E :   -->
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label"><span style="color: black;">&nbsp;</span></label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-lg-10 col-md-8 col-sm-4">
-                                            <ng-multiselect-dropdown [placeholder]="'Choisissez les garanties'"
-                                                name="client" [settings]="dropdownSettingsGarantie"
-                                                [data]="dropdownListGarantie" [(ngModel)]="selectedItemsGarantie"
-                                                (onSelect)="onItemSelectGarantie($event)"
-                                                (onDeSelect)="onItemDeSelectGarantie($event)"
-                                                (onSelectAll)="onSelectAllGarantie($event)">
-                                            </ng-multiselect-dropdown>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-                            <div class="row">
-                                <div style="text-align: center; width: 100%; color:red; font-weight: bold;" id="infos">
-                                </div>
-                            </div>
-
-
-                        </form>
+                        
                     </div>
                     <div class="modal-footer">
                         <button mat-raised-button type="button" (click)="enregistrerRdv()"

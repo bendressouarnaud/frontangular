@@ -59,6 +59,7 @@ import { ParamWeb } from "../mesbeans/paramweb";
 import { RestClient } from "../mesbeans/restclientcom";
 import { RestPolice } from "../mesbeans/restpolice";
 import { ReponseUserFulNew } from "../mesbeans/reponseuserfulnew";
+import { Civilite } from "../mesbeans/civilite";
 
 @Injectable({
     providedIn: 'root'
@@ -68,9 +69,9 @@ import { ReponseUserFulNew } from "../mesbeans/reponseuserfulnew";
 export class MeswebservService {
 
     /* Attributes */
-    private webserviceUri: String = "http://localhost:8090/backend";
+    //private webserviceUri: String = "http://localhost:8090/backend";
     //private webserviceUri : String = "https://217.160.247.10/backend";
-    //private webserviceUri : String = "http://oceaneinter.com/backend";
+    private webserviceUri : String = "http://oceaneinter.com/backend";
     private mtoken = "";
 
     constructor(private httpclient: HttpClient) { }
@@ -1480,6 +1481,13 @@ export class MeswebservService {
                 params: mesParams
             });
 
+    }
+
+
+    // Liste  des CIVILITE:
+    getallcivilite(): Observable<Civilite[]> {
+        // 
+        return this.httpclient.get<Civilite[]>(this.webserviceUri.concat("/getallcivilite"), {});
     }
 
 }

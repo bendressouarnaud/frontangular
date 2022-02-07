@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Activite } from 'src/app/mesbeans/activite';
+import { Civilite } from 'src/app/mesbeans/civilite';
 import { ClientRest } from 'src/app/mesbeans/clientrest';
 import { Detailequipe } from 'src/app/mesbeans/detailequipe';
 import { Detailtable } from 'src/app/mesbeans/detailnomenclature';
@@ -77,13 +78,20 @@ export class DevisComponent implements OnInit {
   formData = new FormData();
   presenceCni = true;
   presencePhoto = true;
+  lesCivilite : Civilite[];
+  //
+  choixGarantie = "3";
+  coutproduit = 0;
 
 
+
+  // M e t h o d :
   constructor(private meswebservices: MeswebservService) { }
 
   ngOnInit(): void {
     this.getclientforoperations();
-    this.getCivilite();
+    this.getLesCivilite();
+    //this.getCivilite();
     this.getFraisTraitemente();
     this.getAllActivities();
 
@@ -91,7 +99,8 @@ export class DevisComponent implements OnInit {
     this.getDureeContrat();
     this.getEnergieVehicule();
     this.getNombrePlace();
-    this.getOffreCommerciale();
+    
+
   }
 
 
@@ -303,6 +312,9 @@ export class DevisComponent implements OnInit {
           this.listeDureeContrat = resultat;
           // Init 
           this.dureecontrat = resultat[0].idnmd;
+
+          // Call this :
+          this.getOffreCommerciale();
         }
       )
   }
@@ -316,11 +328,60 @@ export class DevisComponent implements OnInit {
           // Init 
           this.offrecommerciale = resultat[0].idnmd;
 
-          // Display the default 'GARANTIE' :
-          this.displayOffre();
+          // Display the Price fom there :
+          this.computePrice();
         }
       )
   }
+
+
+  // Compute the price :
+  computePrice(){
+    switch(this.offrecommerciale){
+      case 23:
+        // ECO : 
+        switch(this.dureecontrat){
+          case 19:
+            // 3 mois :
+            this.coutproduit = 57040;
+            break;
+
+          case 20:
+            // 6 mois :
+            this.coutproduit = 88338;
+            break;
+
+          case 21:
+            // 9 mois :
+            this.coutproduit = 119635;
+            break;
+
+          case 22:
+            // 12 mois :
+            this.coutproduit = 119635;
+            break;            
+        }
+        break;
+
+
+      default:
+        this.coutproduit = 0;
+        break;
+    }
+  }
+
+
+  // Get CIVILITE :
+  getLesCivilite(): void {
+    this.meswebservices.getallcivilite().toPromise()
+      .then(
+        resultat => {
+          this.lesCivilite = resultat;
+          this.clientRest.civilite = resultat[0].idciv;
+        }
+      )
+  }
+
 
   afficherAccident() {
     // Reset :
@@ -393,16 +454,69 @@ export class DevisComponent implements OnInit {
   }
 
 
+  // Work :
+  setRadioBut(id: number){
+    //alert("choixGarantie : "+ id);
+    switch(id){
+      case 1:
+        // ECO : 
+        this.offrecommerciale = 23;
+        break;
+
+      case 2:
+        // STANDARD : 
+        this.offrecommerciale = 24;
+        break;
+
+      case 3:
+          // CONFORT : 
+          this.offrecommerciale = 25;
+          break;  
+          
+      case 4:
+        // PRESTIGE : 
+        this.offrecommerciale = 26;
+        break;           
+    }
+  }
+
+
   //
   displayOffre(): void {
     //alert("Id offre : "+this.offrecommerciale);
 
+    // Based on the value, TICK the RIGHT RADIO BUTTON :
+    switch(this.offrecommerciale){
+      case 23:
+        // ECO : 
+        this.choixGarantie = "1";
+        break;
+
+      case 24:
+        // STANDARD : 
+        this.choixGarantie = "2";
+        break;
+
+      case 25:
+        // CONFORT : 
+        this.choixGarantie = "3";
+        break;
+
+      case 26:
+        // PRESTIGE : 
+        this.choixGarantie = "4";
+        break;
+    }
+    // Compute price :
+    this.computePrice();
+    // Make a WAIT :
+    $('#garantieslink').click();
+
+    /*
     this.meswebservices.getgarantieformule(this.offrecommerciale.toString()).toPromise()
       .then(
         resultat => {
           this.listeGaranties = resultat;
-
-          //alert("Taille GARANTIE : "+ resultat.length);
 
           // Browse :
           if (this.tempUsersGarantie.length > 0) this.tempUsersGarantie = [];
@@ -434,6 +548,7 @@ export class DevisComponent implements OnInit {
 
         }
       )
+      */
   }
 
 
