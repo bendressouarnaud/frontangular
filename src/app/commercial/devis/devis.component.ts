@@ -11,6 +11,24 @@ import { MeswebservService } from 'src/app/messervices/meswebserv.service';
 
 declare const $: any;
 
+export interface IndemniteItems {
+  amount: number;
+  libelle: string;
+}
+
+export const lesIndemnites: IndemniteItems[] = [
+  { amount:2500000, libelle:'2 500 000' },
+  { amount:5000000, libelle:'5 000 000' },
+  { amount:7500000, libelle:'7 500 000' },
+  { amount:10000000, libelle:'10 000 000' },
+  { amount:15000000, libelle:'15 000 000' },
+  { amount:20000000, libelle:'20 000 000' },
+  { amount:30000000, libelle:'30 000 000' },
+  { amount:50000000, libelle:'50 000 000' },
+  { amount:60000000, libelle:'60 000 000' },
+  { amount:70000000, libelle:'70 000 000' },
+];
+
 @Component({
   selector: 'app-devis',
   templateUrl: './devis.component.html',
@@ -82,6 +100,9 @@ export class DevisComponent implements OnInit {
   //
   choixGarantie = "3";
   coutproduit = 0;
+  //
+  indemnitemax = 2500000;
+  menuIndemniteItems: any[];
 
 
 
@@ -89,6 +110,9 @@ export class DevisComponent implements OnInit {
   constructor(private meswebservices: MeswebservService) { }
 
   ngOnInit(): void {
+
+    this.menuIndemniteItems = lesIndemnites.filter(menuItem => menuItem);
+
     this.getclientforoperations();
     this.getLesCivilite();
     //this.getCivilite();
@@ -337,6 +361,10 @@ export class DevisComponent implements OnInit {
 
   // Compute the price :
   computePrice(){
+
+    // Call This :
+    this.disableIndemnite();
+
     switch(this.offrecommerciale){
       case 23:
         // ECO : 
@@ -362,6 +390,24 @@ export class DevisComponent implements OnInit {
             break;            
         }
         break;
+
+
+      case 24:
+        // STANDARD :
+        switch(this.indemnitemax){
+          case 2500000:
+            break;
+        }
+        break;  
+
+      case 25:
+          // CONFORT : 
+          break;  
+          
+      case 26:
+        // PRESTIGE : 
+        break;                   
+
 
 
       default:
@@ -578,6 +624,14 @@ export class DevisComponent implements OnInit {
         this.garantiesId.push(items[i].item_id);
       }
     }
+  }
+
+
+  // Disable 'INDEMNITE MAX' if OFFRE COMMERCIALE is equal to 'ECO'
+  disableIndemnite(){
+    // $( "#x" ).prop( "disabled", true );
+    if(this.offrecommerciale == 23) $( "#selectIdemn" ).prop( "disabled", true ); // DISABLE
+    else $( "#selectIdemn" ).prop( "disabled", false ); // ENABLE
   }
 
 

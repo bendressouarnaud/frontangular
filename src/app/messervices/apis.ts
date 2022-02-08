@@ -42,9 +42,9 @@ import { RdvFullRest } from "../mesbeans/rdvfullrest";
 
 export class ApisCalls {
 
-    //private webserviceUri: String = "http://localhost:8090/backend";
+    private webserviceUri: String = "http://localhost:8090/backend";
     //private webserviceUri : String = "http://217.160.247.10/backend";
-    private webserviceUri : String = "http://oceaneinter.com/backend";
+    //private webserviceUri : String = "http://oceaneinter.com/backend";
 
     constructor(private httpclient: HttpClient) { }
 

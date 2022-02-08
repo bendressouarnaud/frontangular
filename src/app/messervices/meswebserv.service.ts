@@ -69,9 +69,9 @@ import { Civilite } from "../mesbeans/civilite";
 export class MeswebservService {
 
     /* Attributes */
-    //private webserviceUri: String = "http://localhost:8090/backend";
+    private webserviceUri: String = "http://localhost:8090/backend";
     //private webserviceUri : String = "https://217.160.247.10/backend";
-    private webserviceUri : String = "http://oceaneinter.com/backend";
+    //private webserviceUri : String = "http://oceaneinter.com/backend";
     private mtoken = "";
 
     constructor(private httpclient: HttpClient) { }
