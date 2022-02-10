@@ -8,6 +8,7 @@ import { RestClient } from 'src/app/mesbeans/restclientcom';
 import { RestPolice } from 'src/app/mesbeans/restpolice';
 import { UtilisateurInfo } from 'src/app/mesbeans/utilisateurinfo';
 import { MeswebservService } from 'src/app/messervices/meswebserv.service';
+import { Traitements } from 'src/app/messervices/traitements';
 
 declare const $: any;
 
@@ -17,16 +18,16 @@ export interface IndemniteItems {
 }
 
 export const lesIndemnites: IndemniteItems[] = [
-  { amount:2500000, libelle:'2 500 000' },
-  { amount:5000000, libelle:'5 000 000' },
-  { amount:7500000, libelle:'7 500 000' },
-  { amount:10000000, libelle:'10 000 000' },
-  { amount:15000000, libelle:'15 000 000' },
-  { amount:20000000, libelle:'20 000 000' },
-  { amount:30000000, libelle:'30 000 000' },
-  { amount:50000000, libelle:'50 000 000' },
-  { amount:60000000, libelle:'60 000 000' },
-  { amount:70000000, libelle:'70 000 000' },
+  { amount: 2500000, libelle: '2 500 000' },
+  { amount: 5000000, libelle: '5 000 000' },
+  { amount: 7500000, libelle: '7 500 000' },
+  { amount: 10000000, libelle: '10 000 000' },
+  { amount: 15000000, libelle: '15 000 000' },
+  { amount: 20000000, libelle: '20 000 000' },
+  { amount: 30000000, libelle: '30 000 000' },
+  { amount: 50000000, libelle: '50 000 000' },
+  { amount: 60000000, libelle: '60 000 000' },
+  { amount: 70000000, libelle: '70 000 000' },
 ];
 
 @Component({
@@ -96,10 +97,11 @@ export class DevisComponent implements OnInit {
   formData = new FormData();
   presenceCni = true;
   presencePhoto = true;
-  lesCivilite : Civilite[];
+  lesCivilite: Civilite[];
   //
   choixGarantie = "3";
   coutproduit = 0;
+  displayCout ="0";
   //
   indemnitemax = 2500000;
   menuIndemniteItems: any[];
@@ -107,7 +109,7 @@ export class DevisComponent implements OnInit {
 
 
   // M e t h o d :
-  constructor(private meswebservices: MeswebservService) { }
+  constructor(private meswebservices: MeswebservService, private traitements: Traitements) { }
 
   ngOnInit(): void {
 
@@ -123,7 +125,6 @@ export class DevisComponent implements OnInit {
     this.getDureeContrat();
     this.getEnergieVehicule();
     this.getNombrePlace();
-    
 
   }
 
@@ -360,55 +361,51 @@ export class DevisComponent implements OnInit {
 
 
   // Compute the price :
-  computePrice(){
+  computePrice() {
 
     // Call This :
-    this.disableIndemnite();
+    //this.disableIndemnite();
 
-    switch(this.offrecommerciale){
+    switch (this.offrecommerciale) {
       case 23:
         // ECO : 
-        switch(this.dureecontrat){
+        switch (this.dureecontrat) {
           case 19:
             // 3 mois :
             this.coutproduit = 57040;
+            this.displayCout = this.coutproduit.toLocaleString()
             break;
 
           case 20:
             // 6 mois :
             this.coutproduit = 88338;
+            this.displayCout = this.coutproduit.toLocaleString()
             break;
 
           case 21:
             // 9 mois :
             this.coutproduit = 119635;
+            this.displayCout = this.coutproduit.toLocaleString()
             break;
 
           case 22:
             // 12 mois :
-            this.coutproduit = 119635;
-            break;            
+            this.coutproduit = 139196;
+            this.displayCout = this.coutproduit.toLocaleString()
+            break;
         }
         break;
 
 
       case 24:
-        // STANDARD :
-        switch(this.indemnitemax){
-          case 2500000:
-            break;
-        }
-        break;  
-
       case 25:
-          // CONFORT : 
-          break;  
-          
       case 26:
+        // STANDARD :
+        // CONFORT : 
         // PRESTIGE : 
-        break;                   
-
-
+        this.coutproduit = this.traitements.calculerCout(this.indemnitemax, this.offrecommerciale, this.dureecontrat);
+        this.displayCout = this.coutproduit.toLocaleString()
+        break;
 
       default:
         this.coutproduit = 0;
@@ -501,9 +498,9 @@ export class DevisComponent implements OnInit {
 
 
   // Work :
-  setRadioBut(id: number){
+  setRadioBut(id: number) {
     //alert("choixGarantie : "+ id);
-    switch(id){
+    switch (id) {
       case 1:
         // ECO : 
         this.offrecommerciale = 23;
@@ -515,14 +512,14 @@ export class DevisComponent implements OnInit {
         break;
 
       case 3:
-          // CONFORT : 
-          this.offrecommerciale = 25;
-          break;  
-          
+        // CONFORT : 
+        this.offrecommerciale = 25;
+        break;
+
       case 4:
         // PRESTIGE : 
         this.offrecommerciale = 26;
-        break;           
+        break;
     }
   }
 
@@ -532,7 +529,7 @@ export class DevisComponent implements OnInit {
     //alert("Id offre : "+this.offrecommerciale);
 
     // Based on the value, TICK the RIGHT RADIO BUTTON :
-    switch(this.offrecommerciale){
+    switch (this.offrecommerciale) {
       case 23:
         // ECO : 
         this.choixGarantie = "1";
@@ -556,7 +553,7 @@ export class DevisComponent implements OnInit {
     // Compute price :
     this.computePrice();
     // Make a WAIT :
-    $('#garantieslink').click();
+    //$('#garantieslink').click();
 
     /*
     this.meswebservices.getgarantieformule(this.offrecommerciale.toString()).toPromise()
@@ -628,10 +625,10 @@ export class DevisComponent implements OnInit {
 
 
   // Disable 'INDEMNITE MAX' if OFFRE COMMERCIALE is equal to 'ECO'
-  disableIndemnite(){
+  disableIndemnite() {
     // $( "#x" ).prop( "disabled", true );
-    if(this.offrecommerciale == 23) $( "#selectIdemn" ).prop( "disabled", true ); // DISABLE
-    else $( "#selectIdemn" ).prop( "disabled", false ); // ENABLE
+    if (this.offrecommerciale == 23) $("#selectIdemn").prop("disabled", true); // DISABLE
+    else $("#selectIdemn").prop("disabled", false); // ENABLE
   }
 
 

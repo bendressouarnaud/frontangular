@@ -340,7 +340,7 @@
 
                                                                             <mat-select id="selectIdemn" placeholder="Indemnit&eacute; maximum garantie" 
                                                                                 [(value)]="indemnitemax"
-                                                                                name="idemnitemax" (selectionChange)="displayOffre()">
+                                                                                name="idemnitemax" (selectionChange)="computePrice()">
                                                                                 <mat-option *ngFor="let donnee of menuIndemniteItems"
                                                                                     [value]="donnee.amount">
                                                                                     {{ donnee.libelle }}
@@ -352,8 +352,8 @@
 
                                                                     <div class="col-md-3" >
                                                                         <mat-form-field class="example-full-width text-center">
-                                                                            <input style="color: red; font-size: 18px;" disabled matInput [(ngModel)]="coutproduit"
-                                                                                name='coutproduit' type="text"
+                                                                            <input style="color: red; font-size: 18px;" disabled matInput [(ngModel)]="displayCout"
+                                                                                name='displayCout' type="text"
                                                                                 placeholder="Co&ucirc;t du produit" maxlength="15">
                                                                         </mat-form-field>
                                                                     </div>
@@ -409,13 +409,17 @@
                                                             <td colspan="4" style="text-align: center; background-color: #EFEBE6;" >
                                                                 <br>
                                                                 <mat-radio-group [(ngModel)] = "choixGarantie">
-                                                                    <mat-radio-button value="1" id="eco" (click)="setRadioBut(1)" name="exampleRadios">ECO</mat-radio-button>
+                                                                    <mat-radio-button value="1" id="eco" (click)="setRadioBut(1)" name="exampleRadios" 
+                                                                    ><span style="color:black; font-weight: bold;">ECO</span></mat-radio-button>
                                                                     &nbsp;&nbsp;
-                                                                    <mat-radio-button value="2" id="standard" (click)="setRadioBut(2)" name="exampleRadios">STANDARD</mat-radio-button>
+                                                                    <mat-radio-button value="2" id="standard" (click)="setRadioBut(2)" name="exampleRadios">
+                                                                        <span style="color:black; font-weight: bold;">STANDARD</span></mat-radio-button>
                                                                     &nbsp;&nbsp;
-                                                                    <mat-radio-button value="3" id="confort" (click)="setRadioBut(3)" name="exampleRadios">CONFORT</mat-radio-button>
+                                                                    <mat-radio-button value="3" id="confort" (click)="setRadioBut(3)" name="exampleRadios">
+                                                                        <span style="color:black; font-weight: bold;">CONFORT</span></mat-radio-button>
                                                                     &nbsp;&nbsp;
-                                                                    <mat-radio-button value="4" id="prestige" (click)="setRadioBut(4)" name="exampleRadios">PRESTIGE</mat-radio-button>
+                                                                    <mat-radio-button value="4" id="prestige" (click)="setRadioBut(4)" name="exampleRadios">
+                                                                        <span style="color:black; font-weight: bold;">PRESTIGE</span></mat-radio-button>
                                                                 </mat-radio-group>
                                                             </td>
                                                             
