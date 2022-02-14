@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 import { Activite } from 'src/app/mesbeans/activite';
 import { Civilite } from 'src/app/mesbeans/civilite';
 import { ClientRest } from 'src/app/mesbeans/clientrest';
@@ -52,7 +53,7 @@ export class DevisComponent implements OnInit {
   listePolices: RestPolice[];
   getPolice = false;
   setPolice = "";
-  getClientId = "";
+  getClientId = "0";
 
   listeFraisTraitement: Detailtable[];
   // Energie vehicule : 
@@ -72,9 +73,9 @@ export class DevisComponent implements OnInit {
   nombreplacevehicule = 1;
   dureecontrat = 18;
   offrecommerciale = 23;
-  chargeutile = "";
-  puissancevehicule = "";
-  plafondindemnisation = "";
+  chargeutile = "0";
+  puissancevehicule = "0";
+  plafondindemnisation = "0";
 
   // Fields for GARANTIES :
   dropdownListGarantie = [];
@@ -105,6 +106,15 @@ export class DevisComponent implements OnInit {
   //
   indemnitemax = 2500000;
   menuIndemniteItems: any[];
+  //
+  typeclient = 1;
+  // 
+  getCurrentDate = new Date();
+  customerBirthDate = new Date();
+  id_devisauto = 0;
+
+
+
 
 
 
@@ -632,4 +642,67 @@ export class DevisComponent implements OnInit {
   }
 
 
+  // Save the DEVIS AUTO :
+  enregDevisAuto(){
+
+    // set the date :
+    let momentVariable = moment(this.customerBirthDate, 'MM-DD-YYYY');
+    let dates = momentVariable.format('YYYY-MM-DD');
+
+    var diffYear =(this.getCurrentDate.getTime() - this.customerBirthDate.getTime()) / 1000;
+    diffYear /= (60 * 60 * 24);
+    let difference = Math.abs(Math.round(diffYear/365.25));
+
+    // Now prepare the data :
+    if(difference >= 18){
+      this.formData.append("nom", this.clientRest.nom.toString());
+      this.formData.append("prenom", this.clientRest.prenom.toString());
+      this.formData.append("contact", this.clientRest.contact.toString());
+      this.formData.append("email", this.clientRest.email.toString());
+      this.formData.append("datenaissance", dates);
+      this.formData.append("civilite", this.clientRest.civilite.toString());
+      this.formData.append("activite", this.clientRest.activite.toString());
+      this.formData.append("typeduclient", this.typeclient.toString());
+      this.formData.append("energievehicule", this.energievehicule.toString());
+      this.formData.append("nombredeplace", this.nombreplacevehicule.toString());
+      this.formData.append("puissancevehicule", this.puissancevehicule);
+      this.formData.append("chargeutile", this.chargeutile);
+      this.formData.append("dureecontrat", this.dureecontrat.toString());
+      this.formData.append("offrecommerciale", this.offrecommerciale.toString());
+      this.formData.append("plafondindemnisation", this.plafondindemnisation);
+      this.formData.append("indemnitemax", this.indemnitemax.toString());
+      this.formData.append("coutproduit", this.coutproduit.toString());
+      this.formData.append("iddevisauto", this.id_devisauto.toString());
+      this.formData.append("idclient", this.getClientId);
+    }
+    else{
+      this.warnmessage("Le client est mineur pour souscrire à ce produit d'assurance !");
+    }
+  }
+
+
+
+  warnmessage(information: string) {
+    $.notify({
+      icon: 'notifications',
+      message: information
+    }, {
+      type: 'success',
+      timer: 3000,
+      placement: {
+        from: 'bottom',
+        align: 'center'
+      },
+      template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0} alert-with-icon" role="alert">' +
+        '<button mat-raised-button type="button" aria-hidden="true" class="close" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
+        '<i class="material-icons" data-notify="icon">notifications</i> ' +
+        '<span data-notify="title">{1}</span> ' +
+        '<span data-notify="message">{2}</span>' +
+        '<div class="progress" data-notify="progressbar">' +
+        '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+        '</div>' +
+        '<a href="{3}" target="{4}" data-notify="url"></a>' +
+        '</div>'
+    });
+  }
 }

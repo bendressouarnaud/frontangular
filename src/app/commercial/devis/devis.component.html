@@ -35,7 +35,7 @@
                                                 </li>
                                             </ul>
                                             <div class="tab-content tab-space">
-                                                <div class="tab-pane active" id="link1">
+                                                <div class="tab-pane active" id="link1" style="background-image: linear-gradient(#F4F0F0, 70%, #E1EAF7);">
                                                     <form method="get" action="/" class="form-horizontal">
 
                                                         <div class="row">
@@ -155,7 +155,8 @@
                                                                     <div class="col-md-3">
                                                                         <mat-form-field>
                                                                             <input matInput [matDatepicker]="basicDatepickerAuto"
-                                                                                [(ngModel)]="getDate" name="dates" placeholder="Date de naissance">
+                                                                                [(ngModel)]="customerBirthDate" name="dates" 
+                                                                                placeholder="Date de naissance">
                                                                             <mat-datepicker-toggle matSuffix [for]="basicDatepickerAuto">
                                                                             </mat-datepicker-toggle>
                                                                             <mat-datepicker #basicDatepickerAuto></mat-datepicker>
@@ -184,7 +185,7 @@
                                                             <div class="col-sm-10">
                                                                 <div class="row">
                             
-                                                                    <div class="col-lg-9 col-md-8 col-sm-4">
+                                                                    <div class="col-lg-6 col-md-8 col-sm-4">
                                                                         <mat-form-field>
                                                                             <mat-select placeholder="Activit&eacute;"
                                                                                 [(value)]="clientRest.activite" name="activite">
@@ -192,6 +193,16 @@
                                                                                     [value]="donnee.idact">
                                                                                     {{ donnee.libelle }}
                                                                                 </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <div class="col-lg-3 col-md-8 col-sm-4">
+                                                                        <mat-form-field>
+                                                                            <mat-select placeholder="Type du client"
+                                                                                [(value)]="typeclient" name="typeclient">
+                                                                                <mat-option [value]="1">Client</mat-option>
+                                                                                <mat-option [value]="0">Prospect</mat-option>
                                                                             </mat-select>
                                                                         </mat-form-field>
                                                                     </div>
@@ -352,7 +363,8 @@
 
                                                                     <div class="col-md-3" >
                                                                         <mat-form-field class="example-full-width text-center">
-                                                                            <input style="color: red; font-size: 18px;" disabled matInput [(ngModel)]="displayCout"
+                                                                            <input style="color: red; font-size: 18px;" disabled matInput 
+                                                                                [(ngModel)]="displayCout"
                                                                                 name='displayCout' type="text"
                                                                                 placeholder="Co&ucirc;t du produit" maxlength="15">
                                                                         </mat-form-field>
@@ -445,7 +457,7 @@
                         
                     </div>
                     <div class="modal-footer">
-                        <button mat-raised-button type="button" (click)="enregistrerRdv()"
+                        <button mat-raised-button type="button" (click)="enregDevisAuto()"
                             class="btn btn-info">Enregistrer</button> <!-- data-dismiss="modal"  -->
                     </div>
                 </div>
