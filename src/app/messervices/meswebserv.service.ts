@@ -1490,4 +1490,12 @@ export class MeswebservService {
         return this.httpclient.get<Civilite[]>(this.webserviceUri.concat("/getallcivilite"), {});
     }
 
+
+
+    // SEND DATA for DEVIS AUTO :
+    sendDevisAuto(donnees : FormData): Observable<Reponse> {
+        // 
+        return this.httpclient.post<Reponse>(this.webserviceUri.concat("/sendDevisAuto"), donnees, {});
+    }
+
 }
