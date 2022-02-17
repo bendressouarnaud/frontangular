@@ -1,5 +1,6 @@
 export class Clientbeanauto{
 
+    idcli : number;
     nom: String;
     prenom: String;
     contact: String;

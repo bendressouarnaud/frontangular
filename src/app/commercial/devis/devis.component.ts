@@ -143,6 +143,9 @@ export class DevisComponent implements OnInit {
     // Display DATA :
     this.getDevisAutoByTrader();
 
+    //
+    this.separateurMillierOnFields();
+
   }
 
 
@@ -733,17 +736,21 @@ export class DevisComponent implements OnInit {
           this.typeclient = resultat.typeclient;
           this.energievehicule = resultat.energie;
           this.nombreplacevehicule = resultat.place;
-          this.formData.append("puissancevehicule", this.puissancevehicule);
-          this.formData.append("chargeutile", this.chargeutile);
-          this.formData.append("dureecontrat", this.dureecontrat.toString());
-          this.formData.append("offrecommerciale", this.offrecommerciale.toString());
-          this.formData.append("plafondindemnisation", this.plafondindemnisation);
-          this.formData.append("indemnitemax", this.indemnitemax.toString());
-          this.formData.append("coutproduit", this.coutproduit.toString());
-          this.formData.append("iddevisauto", this.id_devisauto.toString());
-          this.formData.append("idclient", this.getClientId);
+          this.puissancevehicule = resultat.puissance.toString();
+          this.chargeutile = resultat.chargeutile.toString();
+          this.dureecontrat = resultat.dureecontrat;
+          this.offrecommerciale = resultat.offrecommerciale;
+          this.plafondindemnisation = resultat.plafond.toString();
+          this.indemnitemax = resultat.indemnitemax;
+          this.coutproduit = resultat.cout;
+          this.id_devisauto = parseInt(idauto);
+          this.getClientId = resultat.idcli.toString();
 
-          this.formData.append("datenaissance", dates);
+          //
+          let tDate = resultat.dates.toString().split("T");
+          this.getDate = new Date(tDate[0] + 'T' + resultat.heure);
+
+          alert("OK");
         },
         (error) => {
           
@@ -795,4 +802,54 @@ export class DevisComponent implements OnInit {
         '</div>'
     });
   }
+
+
+
+
+  separateurMillierOnFields() {
+    $('.keymontant').each(function () {
+      if (/^[0-9]+$/.test($(this).val())) {
+        var tampon = parseInt($(this).val());
+        $(this).val(tampon.toLocaleString());
+      }
+    }).focus(function () {
+      var mtamp = $(this).val();
+      if (!/^([0-9]*\.[0-9]+|[0-9]+)$/.test(mtamp) ) {
+        $(this).val(mtamp.replace(/[^-0-9]/g, ''));
+      }
+    }).blur(function () {
+      if (/^\-?[0-9]+$/.test($(this).val())) {
+        var tampon = parseInt($(this).val());
+        $(this).val(tampon.toLocaleString());
+      }
+    });
+  }
+
+
+
+  separateurMillierOnTable() {
+    setTimeout(function () {
+      $('.keymontant').each(function () {
+        if (/^[0-9]+$/.test($(this).val())) {
+          var tampon = parseInt($(this).val());
+          $(this).val(tampon.toLocaleString());
+        }
+      }).focus(function () {
+        var mtamp = $(this).val();
+
+        if (!/^([0-9]*\.[0-9]+|[0-9]+)$/.test(mtamp) ) {
+          $(this).val(mtamp.replace(/[^-0-9]/g, ''));
+        }
+		
+      }).blur(function () {
+        if (/^\-?[0-9]+$/.test($(this).val())) {
+          var tampon = parseInt($(this).val());
+          $(this).val(tampon.toLocaleString());
+        }
+      });
+
+    }, 2000);
+  }
+
+
 }

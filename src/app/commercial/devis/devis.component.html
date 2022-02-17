@@ -115,21 +115,21 @@
                                                                 <div class="row">
                             
                                                                     <div class="col-md-3">
-                                                                        <mat-form-field class="example-full-width">
+                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
                                                                             <input matInput [(ngModel)]="clientRest.nom" name='nom' type="text"
                                                                                 placeholder="Nom" maxlength="30">
                                                                         </mat-form-field>
                                                                     </div>
                             
                                                                     <div class="col-md-3">
-                                                                        <mat-form-field class="example-full-width">
+                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
                                                                             <input matInput [(ngModel)]="clientRest.prenom" name='prenom'
                                                                                 type="text" placeholder="Pr&eacute;nom" maxlength="50">
                                                                         </mat-form-field>
                                                                     </div>
 
                                                                     <div class="col-md-3">
-                                                                        <mat-form-field class="example-full-width">
+                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
                                                                             <input matInput [(ngModel)]="clientRest.contact" name='contact'
                                                                                 type="text" placeholder="Contact" maxlength="20">
                                                                         </mat-form-field>
@@ -146,14 +146,14 @@
                                                                 <div class="row">
                             
                                                                     <div class="col-md-3">
-                                                                        <mat-form-field class="example-full-width">
+                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
                                                                             <input matInput [(ngModel)]="clientRest.email" name='email' type="text"
                                                                                 placeholder="Email" maxlength="50">
                                                                         </mat-form-field>
                                                                     </div>
 
                                                                     <div class="col-md-3">
-                                                                        <mat-form-field>
+                                                                        <mat-form-field style="font-size: 16px;">
                                                                             <input matInput [matDatepicker]="basicDatepickerAuto"
                                                                                 [(ngModel)]="customerBirthDate" name="dates" 
                                                                                 placeholder="Date de naissance">
@@ -164,7 +164,7 @@
                                                                     </div>
                             
                                                                     <div class="col-lg-3 col-md-8 col-sm-4">
-                                                                        <mat-form-field>
+                                                                        <mat-form-field style="font-size: 16px;">
                                                                             <mat-select placeholder="Civilit&eacute;"
                                                                                 [(value)]="clientRest.civilite" name="civilite">
                                                                                 <mat-option *ngFor="let donnee of lesCivilite"
@@ -251,7 +251,7 @@
                                                                 <div class="row">
                             
                                                                     <div class="col-lg-3 col-md-8 col-sm-4">
-                                                                        <mat-form-field>
+                                                                        <mat-form-field style="font-size: 16px;">
                                                                             <mat-select placeholder="&Eacute;nergie du v&eacute;hicule"
                                                                                 [(value)]="energievehicule" name="energievehicule">
                                                                                 <mat-option *ngFor="let donnee of listeEnergieVehicule"
@@ -263,7 +263,7 @@
                                                                     </div>
                             
                                                                     <div class="col-lg-3 col-md-8 col-sm-4">
-                                                                        <mat-form-field>
+                                                                        <mat-form-field style="font-size: 16px;">
                                                                             <mat-select placeholder="Nombre de places"
                                                                                 [(value)]="nombreplacevehicule" name="nombreplacevehicule">
                                                                                 <mat-option *ngFor="let donnee of listePlaceVehicule"
@@ -275,7 +275,7 @@
                                                                     </div>
 
                                                                     <div class="col-md-3">
-                                                                        <mat-form-field class="example-full-width">
+                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
                                                                             <input matInput [(ngModel)]="puissancevehicule" name='puissancevehicule'
                                                                                 type="text"
                                                                                 placeholder="Puissance du v&eacute;hicule (En CV ou cm3)"
@@ -295,18 +295,19 @@
                                                                 <div class="row">
 
                                                                     <div class="col-md-3">
-                                                                        <mat-form-field class="example-full-width">
+                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
                                                                             <input matInput [(ngModel)]="chargeutile" name='chargeutile' type="text"
                                                                                 placeholder="Charge Utile du v&eacute;hicule*(CU en Kg)"
+                                                                                class="keymontant"
                                                                                 maxlength="15">
                                                                         </mat-form-field>
                                                                     </div>
                             
                                                                     <div class="col-lg-3 col-md-8 col-sm-4">
-                                                                        <mat-form-field>
+                                                                        <mat-form-field style="font-size: 16px; font-weight: bold;">
                                                                             <mat-select placeholder="Dur&eacute;e du contrat"
                                                                                 [(value)]="dureecontrat" name="dureecontrat" 
-                                                                                (selectionChange)="computePrice()">
+                                                                                (selectionChange)="computePrice()" style="background-color: #92ABE0;">
                                                                                 <mat-option *ngFor="let donnee of listeDureeContrat"
                                                                                     [value]="donnee.idnmd">
                                                                                     {{ donnee.libelle }}
@@ -316,9 +317,9 @@
                                                                     </div>
                             
                                                                     <div class="col-lg-3 col-md-8 col-sm-4">
-                                                                        <mat-form-field>
+                                                                        <mat-form-field style="font-size: 16px; font-weight: bold;">
                                                                             <mat-select placeholder="Offre commerciale" [(value)]="offrecommerciale"
-                                                                                name="offrecommerciale" (selectionChange)="displayOffre()">
+                                                                                name="offrecommerciale" (selectionChange)="displayOffre()" style="background-color: #E0CA92;">
                                                                                 <mat-option *ngFor="let donnee of listeOffreCommerciale"
                                                                                     [value]="donnee.idnmd">
                                                                                     {{ donnee.libelle }}
@@ -339,7 +340,7 @@
                                                                 <div class="row">
                             
                                                                     <div class="col-md-3">
-                                                                        <mat-form-field class="example-full-width">
+                                                                        <mat-form-field class="example-full-width" style="font-size: 16px; ">
                                                                             <input matInput [(ngModel)]="plafondindemnisation"
                                                                                 name='plafondindemnisation' type="text"
                                                                                 placeholder="Plafond d'indemnisation" maxlength="15">
@@ -347,11 +348,11 @@
                                                                     </div>
 
                                                                     <div class="col-md-3">
-                                                                        <mat-form-field>
+                                                                        <mat-form-field style="font-size: 16px; font-weight: bold;">
 
                                                                             <mat-select id="selectIdemn" placeholder="Indemnit&eacute; maximum garantie" 
                                                                                 [(value)]="indemnitemax"
-                                                                                name="idemnitemax" (selectionChange)="computePrice()">
+                                                                                name="idemnitemax" (selectionChange)="computePrice()" style="background-color: #ACE092;">
                                                                                 <mat-option *ngFor="let donnee of menuIndemniteItems"
                                                                                     [value]="donnee.amount">
                                                                                     {{ donnee.libelle }}
@@ -362,8 +363,8 @@
                                                                     </div>
 
                                                                     <div class="col-md-3" >
-                                                                        <mat-form-field class="example-full-width text-center">
-                                                                            <input style="color: red; font-size: 18px;" disabled matInput 
+                                                                        <mat-form-field class="example-full-width text-center" style="font-size: 16px; font-weight: bold;">
+                                                                            <input style="color: red; font-size: 18px; background-color: white;" disabled matInput 
                                                                                 [(ngModel)]="displayCout"
                                                                                 name='displayCout' type="text"
                                                                                 placeholder="Co&ucirc;t du produit" maxlength="15">
