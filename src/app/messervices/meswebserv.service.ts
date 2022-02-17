@@ -60,6 +60,8 @@ import { RestClient } from "../mesbeans/restclientcom";
 import { RestPolice } from "../mesbeans/restpolice";
 import { ReponseUserFulNew } from "../mesbeans/reponseuserfulnew";
 import { Civilite } from "../mesbeans/civilite";
+import { BeanDonneDevis } from "../mesbeans/beandonneedevis";
+import { Clientbeanauto } from "../mesbeans/clientbeanauto";
 
 @Injectable({
     providedIn: 'root'
@@ -1493,9 +1495,29 @@ export class MeswebservService {
 
 
     // SEND DATA for DEVIS AUTO :
-    sendDevisAuto(donnees : FormData): Observable<Reponse> {
+    sendDevisAuto(donnees : FormData): Observable<Quete> {
         // 
-        return this.httpclient.post<Reponse>(this.webserviceUri.concat("/sendDevisAuto"), donnees, {});
+        return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendDevisAuto"), donnees, {});
+    }
+
+
+    // Pull back data for DEVIS AUTO  :
+    getDevisAutoByTrader(): Observable<BeanDonneDevis[]> {
+        // -> DevisController
+        return this.httpclient.get<BeanDonneDevis[]>(this.webserviceUri.concat("/getDevisAutoByTrader"), {});
+    }
+
+
+    // Pull back data for DEVIS AUTO  :
+    getDevisAutoByIdauto(idauto: string): Observable<Clientbeanauto> {
+        // -> DevisController
+        // Now, set the parameters :
+        let mesParams = new HttpParams();
+        mesParams = mesParams.append('idauto', idauto); // 
+        return this.httpclient.get<Clientbeanauto>(this.webserviceUri.concat("/getDevisAutoByIdauto"),
+            {
+                params: mesParams
+            });
     }
 
 }

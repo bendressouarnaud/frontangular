@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { Activite } from 'src/app/mesbeans/activite';
+import { BeanDonneDevis } from 'src/app/mesbeans/beandonneedevis';
 import { Civilite } from 'src/app/mesbeans/civilite';
 import { ClientRest } from 'src/app/mesbeans/clientrest';
 import { Detailequipe } from 'src/app/mesbeans/detailequipe';
@@ -113,6 +114,9 @@ export class DevisComponent implements OnInit {
   customerBirthDate = new Date();
   id_devisauto = 0;
 
+  //
+  listeDevisAuto: BeanDonneDevis[];
+  getDevisAuto = false;
 
 
 
@@ -135,6 +139,9 @@ export class DevisComponent implements OnInit {
     this.getDureeContrat();
     this.getEnergieVehicule();
     this.getNombrePlace();
+
+    // Display DATA :
+    this.getDevisAutoByTrader();
 
   }
 
@@ -674,10 +681,93 @@ export class DevisComponent implements OnInit {
       this.formData.append("coutproduit", this.coutproduit.toString());
       this.formData.append("iddevisauto", this.id_devisauto.toString());
       this.formData.append("idclient", this.getClientId);
+      // Call :
+      this.meswebservices.sendDevisAuto(this.formData).toPromise()
+      .then(
+        resultat => {
+          if(resultat.code == "ok"){
+            alert("OK");
+          }
+        },
+        (error) => {
+          this.warnmessage("Impossible de d'enregistrer le RAPPORT !");
+        }
+      );
     }
     else{
       this.warnmessage("Le client est mineur pour souscrire à ce produit d'assurance !");
     }
+  }
+
+
+  // Get DATA from AUTO devis :
+  getDevisAutoByTrader(){
+    this.meswebservices.getDevisAutoByTrader().toPromise()
+      .then(
+        resultat => {
+          this.listeDevisAuto = resultat;
+          this.getDevisAuto = true;
+          this.initTableAuto();
+        },
+        (error) => {
+          this.getDevisAuto = true;
+          this.initTableAuto();
+        }
+      );
+  }
+
+
+  // Get DATA from AUTO devis :
+  getDevisAutoByIdauto(idauto: string){
+    this.meswebservices.getDevisAutoByIdauto(idauto).toPromise()
+      .then(
+        resultat => {
+          // Process :
+          this.clientRest.nom = resultat.nom;
+          this.clientRest.prenom = resultat.prenom;
+          this.clientRest.contact = resultat.contact;
+          this.clientRest.email = resultat.email;
+          
+          this.clientRest.civilite = resultat.civilite;
+          this.clientRest.activite = resultat.activite;
+          this.typeclient = resultat.typeclient;
+          this.energievehicule = resultat.energie;
+          this.nombreplacevehicule = resultat.place;
+          this.formData.append("puissancevehicule", this.puissancevehicule);
+          this.formData.append("chargeutile", this.chargeutile);
+          this.formData.append("dureecontrat", this.dureecontrat.toString());
+          this.formData.append("offrecommerciale", this.offrecommerciale.toString());
+          this.formData.append("plafondindemnisation", this.plafondindemnisation);
+          this.formData.append("indemnitemax", this.indemnitemax.toString());
+          this.formData.append("coutproduit", this.coutproduit.toString());
+          this.formData.append("iddevisauto", this.id_devisauto.toString());
+          this.formData.append("idclient", this.getClientId);
+
+          this.formData.append("datenaissance", dates);
+        },
+        (error) => {
+          
+        }
+      );
+  }
+
+
+  initTableAuto(){
+    setTimeout(function () {
+      $('#datatableAuto').DataTable({
+        "pagingType": "full_numbers",
+        "lengthMenu": [
+          [10, 25, 50, -1],
+          [10, 25, 50, "All"]
+        ],
+        responsive: true,
+        language: {
+          search: "_INPUT_",
+          searchPlaceholder: "Search records",
+        },
+        "order": [[4, "desc"]]
+      });
+    }, 500);
   }
 
 
