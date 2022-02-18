@@ -62,6 +62,7 @@ import { ReponseUserFulNew } from "../mesbeans/reponseuserfulnew";
 import { Civilite } from "../mesbeans/civilite";
 import { BeanDonneDevis } from "../mesbeans/beandonneedevis";
 import { Clientbeanauto } from "../mesbeans/clientbeanauto";
+import { StatsDevisUser } from "../mesbeans/statsdevisuser";
 
 @Injectable({
     providedIn: 'root'
@@ -1518,6 +1519,13 @@ export class MeswebservService {
             {
                 params: mesParams
             });
+    }
+
+
+    // Pull back data DEVIS stats  :
+    getStatsDevisForUser(): Observable<StatsDevisUser> {
+        // -> DevisController
+        return this.httpclient.get<StatsDevisUser>(this.webserviceUri.concat("/getStatsDevisForUser"), {});
     }
 
 }

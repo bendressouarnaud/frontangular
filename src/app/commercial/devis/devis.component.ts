@@ -8,6 +8,7 @@ import { Detailequipe } from 'src/app/mesbeans/detailequipe';
 import { Detailtable } from 'src/app/mesbeans/detailnomenclature';
 import { RestClient } from 'src/app/mesbeans/restclientcom';
 import { RestPolice } from 'src/app/mesbeans/restpolice';
+import { StatsDevisUser } from 'src/app/mesbeans/statsdevisuser';
 import { UtilisateurInfo } from 'src/app/mesbeans/utilisateurinfo';
 import { MeswebservService } from 'src/app/messervices/meswebserv.service';
 import { Traitements } from 'src/app/messervices/traitements';
@@ -54,7 +55,8 @@ export class DevisComponent implements OnInit {
   listePolices: RestPolice[];
   getPolice = false;
   setPolice = "";
-  getClientId = "0";
+  idCliendDone = "0";
+  idClient = "0";
 
   listeFraisTraitement: Detailtable[];
   // Energie vehicule : 
@@ -117,6 +119,7 @@ export class DevisComponent implements OnInit {
   //
   listeDevisAuto: BeanDonneDevis[];
   getDevisAuto = false;
+  statsdevisuser = new StatsDevisUser();
 
 
 
@@ -126,6 +129,12 @@ export class DevisComponent implements OnInit {
   constructor(private meswebservices: MeswebservService, private traitements: Traitements) { }
 
   ngOnInit(): void {
+
+    // Set DATA :
+    this.statsdevisuser.auto = "0";
+    this.statsdevisuser.accident = "0";
+    this.statsdevisuser.voyage = "0";
+    this.statsdevisuser.mrh = "0";
 
     this.menuIndemniteItems = lesIndemnites.filter(menuItem => menuItem);
 
@@ -145,6 +154,9 @@ export class DevisComponent implements OnInit {
 
     //
     this.separateurMillierOnFields();
+
+    //
+    this.getStatsDevisForUser();
 
   }
 
@@ -208,7 +220,7 @@ export class DevisComponent implements OnInit {
   // Display Customer name :
   displayCustomerName() {
     for (var customer of this.listeDesClients) {
-      if (parseInt(this.getClientId) == customer.IdClient) {
+      if (parseInt(this.idCliendDone) == customer.IdClient) {
 
         // set TELEPHONE Id :
         this.clientRest.contact = customer.TELEP1;
@@ -252,7 +264,7 @@ export class DevisComponent implements OnInit {
     if (parseInt(item.item_id) > 0) {
       // Add user'id
       this.membresId.push(item.item_id);
-      this.getClientId = item.item_id;
+      this.idCliendDone = item.item_id;
 
       // Display User DATA :
       this.displayCustomerName();
@@ -302,7 +314,7 @@ export class DevisComponent implements OnInit {
 
   // Afficher les POLICES :
   getlespolicesbyclient(): void {
-    this.meswebservices.getlespolicesbyclient(this.getClientId).toPromise()
+    this.meswebservices.getlespolicesbyclient(this.idCliendDone).toPromise()
       .then(
         resultat => {
           this.listePolices = resultat;
@@ -456,6 +468,19 @@ export class DevisComponent implements OnInit {
 
   // Auto :
   afficherAuto() {
+
+    // clear :
+    this.clientRest.nom = "";
+    this.clientRest.prenom = "";
+    this.clientRest.contact = "";
+    this.clientRest.email = "";
+          
+    this.puissancevehicule = "0";
+    this.chargeutile = "0";
+    this.id_devisauto = 0;
+    this.idCliendDone = "0";
+    this.idClient = "0";
+
     // Reset :
     this.membresId = [];
     this.selectedItems = [];
@@ -663,6 +688,41 @@ export class DevisComponent implements OnInit {
     diffYear /= (60 * 60 * 24);
     let difference = Math.abs(Math.round(diffYear/365.25));
 
+    if(this.clientRest.nom.toString().length == 0){
+      this.warnmessage("Le nom du client n'est pas renseigné !");
+      return;
+    }
+
+    if(this.clientRest.prenom.toString().length == 0){
+      this.warnmessage("Le prénom du client n'est pas renseigné !");
+      return;
+    }
+
+    if(this.clientRest.contact.toString().length == 0){
+      this.warnmessage("Le contact du client n'est pas renseigné !");
+      return;
+    }
+
+    if(this.clientRest.email.toString().length == 0){
+      this.warnmessage("L'adresse mail du client n'est pas renseignée !");
+      return;
+    }
+
+    // Vérification sur la charge utile :
+    let tpCharge = this.chargeutile.replace(/[^0-9]/g, '');
+    if (!/^[0-9]+$/.test(tpCharge)) {
+      this.warnmessage("La charge utile du véhicule renseignée n'est pas correcte !");
+      return;
+    }
+
+    // Vérification sur la puissance du vehicule
+    let tpPuissance = this.puissancevehicule.replace(/[^0-9]/g, '');
+    if (!/^[0-9]+$/.test(tpPuissance)) {
+      this.warnmessage("La puissance du véhicule renseignée n'est pas correcte !");
+      return;
+    }
+
+
     // Now prepare the data :
     if(difference >= 18){
       this.formData.append("nom", this.clientRest.nom.toString());
@@ -675,21 +735,23 @@ export class DevisComponent implements OnInit {
       this.formData.append("typeduclient", this.typeclient.toString());
       this.formData.append("energievehicule", this.energievehicule.toString());
       this.formData.append("nombredeplace", this.nombreplacevehicule.toString());
-      this.formData.append("puissancevehicule", this.puissancevehicule);
-      this.formData.append("chargeutile", this.chargeutile);
+      this.formData.append("puissancevehicule", tpPuissance.trim());
+      this.formData.append("chargeutile", tpCharge.trim());
       this.formData.append("dureecontrat", this.dureecontrat.toString());
       this.formData.append("offrecommerciale", this.offrecommerciale.toString());
       this.formData.append("plafondindemnisation", this.plafondindemnisation);
       this.formData.append("indemnitemax", this.indemnitemax.toString());
       this.formData.append("coutproduit", this.coutproduit.toString());
       this.formData.append("iddevisauto", this.id_devisauto.toString());
-      this.formData.append("idclient", this.getClientId);
+      this.formData.append("idCliendDone", this.idCliendDone);
+      this.formData.append("idclient", this.idClient);
+
       // Call :
       this.meswebservices.sendDevisAuto(this.formData).toPromise()
       .then(
         resultat => {
           if(resultat.code == "ok"){
-            alert("OK");
+            location.reload();
           }
         },
         (error) => {
@@ -711,10 +773,24 @@ export class DevisComponent implements OnInit {
           this.listeDevisAuto = resultat;
           this.getDevisAuto = true;
           this.initTableAuto();
+          //this.separateurMillierOnTable();
         },
         (error) => {
           this.getDevisAuto = true;
           this.initTableAuto();
+        }
+      );
+  }
+
+
+  // Get DATA from AUTO devis :
+  getStatsDevisForUser(){
+    this.meswebservices.getStatsDevisForUser().toPromise()
+      .then(
+        resultat => {
+          this.statsdevisuser = resultat;
+        },
+        (error) => {
         }
       );
   }
@@ -744,13 +820,18 @@ export class DevisComponent implements OnInit {
           this.indemnitemax = resultat.indemnitemax;
           this.coutproduit = resultat.cout;
           this.id_devisauto = parseInt(idauto);
-          this.getClientId = resultat.idcli.toString();
+          this.idCliendDone = resultat.idCliendDone.toString();
+          this.idClient = resultat.idClient.toString();
 
           //
           let tDate = resultat.dates.toString().split("T");
           this.getDate = new Date(tDate[0] + 'T' + resultat.heure);
 
-          alert("OK");
+          this.membresId = [];
+          this.selectedItems = [];
+          $('#modalAutomobile').modal();
+          this.computePrice();
+          //alert("OK");
         },
         (error) => {
           
@@ -784,10 +865,10 @@ export class DevisComponent implements OnInit {
       icon: 'notifications',
       message: information
     }, {
-      type: 'success',
+      type: 'danger',
       timer: 3000,
       placement: {
-        from: 'bottom',
+        from: 'top',
         align: 'center'
       },
       template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0} alert-with-icon" role="alert">' +
@@ -822,6 +903,7 @@ export class DevisComponent implements OnInit {
         var tampon = parseInt($(this).val());
         $(this).val(tampon.toLocaleString());
       }
+      else $(this).val("0");
     });
   }
 
@@ -829,12 +911,12 @@ export class DevisComponent implements OnInit {
 
   separateurMillierOnTable() {
     setTimeout(function () {
-      $('.keymontant').each(function () {
+      $('.displaycout').each(function () {
         if (/^[0-9]+$/.test($(this).val())) {
           var tampon = parseInt($(this).val());
           $(this).val(tampon.toLocaleString());
         }
-      }).focus(function () {
+      });/*.focus(function () {
         var mtamp = $(this).val();
 
         if (!/^([0-9]*\.[0-9]+|[0-9]+)$/.test(mtamp) ) {
@@ -846,9 +928,9 @@ export class DevisComponent implements OnInit {
           var tampon = parseInt($(this).val());
           $(this).val(tampon.toLocaleString());
         }
-      });
+      });*/
 
-    }, 2000);
+    }, 500);
   }
 
 

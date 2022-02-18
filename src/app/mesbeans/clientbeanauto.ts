@@ -1,6 +1,7 @@
 export class Clientbeanauto{
 
-    idcli : number;
+    idCliendDone : number;
+    idClient : number;
     nom: String;
     prenom: String;
     contact: String;
