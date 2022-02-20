@@ -69,10 +69,13 @@ export class DevisComponent implements OnInit {
   listeOffreCommerciale: Detailtable[];
   // Liste des GARANTIES :
   listeGaranties: Detailtable[];
+  // Puissance du VEHICULE :
+  listePuissanceVehicule: Detailtable[];
 
   // Field for DROP DOWN List :
   fraisdetraitement = 10;
   energievehicule = 1;
+  puissanceVehicule = 1;
   nombreplacevehicule = 1;
   dureecontrat = 18;
   offrecommerciale = 23;
@@ -120,6 +123,11 @@ export class DevisComponent implements OnInit {
   listeDevisAuto: BeanDonneDevis[];
   getDevisAuto = false;
   statsdevisuser = new StatsDevisUser();
+  //
+  cotationECO = "0";
+  cotationSTANDARD = "0";
+  cotationCONFORT = "0";
+  cotationPRESTIGE = "0";Ì
 
 
 
@@ -147,6 +155,7 @@ export class DevisComponent implements OnInit {
     // For ASSURANCE AUTO
     this.getDureeContrat();
     this.getEnergieVehicule();
+    this.getPuissanceVehicule();
     this.getNombrePlace();
 
     // Display DATA :
@@ -349,6 +358,18 @@ export class DevisComponent implements OnInit {
       )
   }
 
+  // Go to pull PUISSANCE VEHICULE data , id : 12 :
+  getPuissanceVehicule(): void {
+    this.meswebservices.getdonneeparametree("12").toPromise()
+      .then(
+        resultat => {
+          this.listePuissanceVehicule = resultat;
+          // Init 
+          this.puissanceVehicule = resultat[0].idnmd;
+        }
+      )
+  }
+
   // Go to pull NOMBRE DE PLACE data , id : 2 :
   getNombrePlace(): void {
     this.meswebservices.getdonneeparametree("2").toPromise()
@@ -392,11 +413,71 @@ export class DevisComponent implements OnInit {
   }
 
 
+  
+  displayAllPropositions(setOffre: number){
+    let coutCotation = 0;
+    switch (setOffre) {
+      case 23:
+        // ECO : 
+        switch (this.dureecontrat) {
+          case 19:
+            // 3 mois :
+            coutCotation = 57040;
+            this.cotationECO = coutCotation.toLocaleString();
+            break;
+
+          case 20:
+            // 6 mois :
+            coutCotation = 88338;
+            this.cotationECO = coutCotation.toLocaleString();
+            break;
+
+          case 21:
+            // 9 mois :
+            coutCotation = 119635;
+            this.cotationECO = coutCotation.toLocaleString();
+            break;
+
+          case 22:
+            // 12 mois :
+            coutCotation = 139196;
+            this.cotationECO = coutCotation.toLocaleString();
+            break;
+        }
+        break;
+
+
+      case 24:
+        // STANDARD :
+        coutCotation = this.traitements.calculerCout(this.indemnitemax, setOffre, this.dureecontrat);
+        this.cotationSTANDARD = coutCotation.toLocaleString();
+        break;
+
+      case 25:
+        // CONFORT :
+        coutCotation = this.traitements.calculerCout(this.indemnitemax, setOffre, this.dureecontrat);
+        this.cotationCONFORT = coutCotation.toLocaleString();
+        break;
+
+      case 26:
+        // PRESTIGE : 
+        coutCotation = this.traitements.calculerCout(this.indemnitemax, setOffre, this.dureecontrat);
+        this.cotationPRESTIGE = coutCotation.toLocaleString();
+        break;
+    }
+  }
+
+
   // Compute the price :
   computePrice() {
 
     // Call This :
     //this.disableIndemnite();
+
+    this.displayAllPropositions(23);
+    this.displayAllPropositions(24);
+    this.displayAllPropositions(25);
+    this.displayAllPropositions(26);
 
     switch (this.offrecommerciale) {
       case 23:
@@ -405,44 +486,54 @@ export class DevisComponent implements OnInit {
           case 19:
             // 3 mois :
             this.coutproduit = 57040;
-            this.displayCout = this.coutproduit.toLocaleString()
+            this.displayCout = this.coutproduit.toLocaleString();
             break;
 
           case 20:
             // 6 mois :
             this.coutproduit = 88338;
-            this.displayCout = this.coutproduit.toLocaleString()
+            this.displayCout = this.coutproduit.toLocaleString();
             break;
 
           case 21:
             // 9 mois :
             this.coutproduit = 119635;
-            this.displayCout = this.coutproduit.toLocaleString()
+            this.displayCout = this.coutproduit.toLocaleString();
             break;
 
           case 22:
             // 12 mois :
             this.coutproduit = 139196;
-            this.displayCout = this.coutproduit.toLocaleString()
+            this.displayCout = this.coutproduit.toLocaleString();
             break;
         }
         break;
 
 
       case 24:
-      case 25:
-      case 26:
         // STANDARD :
-        // CONFORT : 
+        this.coutproduit = this.traitements.calculerCout(this.indemnitemax, this.offrecommerciale, this.dureecontrat);
+        this.displayCout = this.coutproduit.toLocaleString();
+        break;
+
+      case 25:
+        // CONFORT :
+        this.coutproduit = this.traitements.calculerCout(this.indemnitemax, this.offrecommerciale, this.dureecontrat);
+        this.displayCout = this.coutproduit.toLocaleString();
+        break;
+
+      case 26:
         // PRESTIGE : 
         this.coutproduit = this.traitements.calculerCout(this.indemnitemax, this.offrecommerciale, this.dureecontrat);
-        this.displayCout = this.coutproduit.toLocaleString()
+        this.displayCout = this.coutproduit.toLocaleString();
         break;
 
       default:
         this.coutproduit = 0;
         break;
     }
+
+    
   }
 
 
@@ -735,7 +826,7 @@ export class DevisComponent implements OnInit {
       this.formData.append("typeduclient", this.typeclient.toString());
       this.formData.append("energievehicule", this.energievehicule.toString());
       this.formData.append("nombredeplace", this.nombreplacevehicule.toString());
-      this.formData.append("puissancevehicule", tpPuissance.trim());
+      this.formData.append("puissancevehicule", this.puissanceVehicule.toString() );
       this.formData.append("chargeutile", tpCharge.trim());
       this.formData.append("dureecontrat", this.dureecontrat.toString());
       this.formData.append("offrecommerciale", this.offrecommerciale.toString());
@@ -812,7 +903,11 @@ export class DevisComponent implements OnInit {
           this.typeclient = resultat.typeclient;
           this.energievehicule = resultat.energie;
           this.nombreplacevehicule = resultat.place;
-          this.puissancevehicule = resultat.puissance.toString();
+
+          // Puissance vehicule :
+          this.puissanceVehicule = parseInt(resultat.puissance.toString());
+          //this.puissancevehicule = resultat.puissance.toString();
+
           this.chargeutile = resultat.chargeutile.toString();
           this.dureecontrat = resultat.dureecontrat;
           this.offrecommerciale = resultat.offrecommerciale;
@@ -824,8 +919,10 @@ export class DevisComponent implements OnInit {
           this.idClient = resultat.idClient.toString();
 
           //
-          let tDate = resultat.dates.toString().split("T");
-          this.getDate = new Date(tDate[0] + 'T' + resultat.heure);
+          //let tDate = resultat.dates.toString().split("T");
+          //this.getDate = new Date(tDate[0] + 'T' + resultat.heure);
+          this.customerBirthDate = new Date(resultat.dates.toString());
+          //alert("Dates : "+this.getDate);
 
           this.membresId = [];
           this.selectedItems = [];

@@ -274,14 +274,26 @@
                                                                         </mat-form-field>
                                                                     </div>
 
-                                                                    <div class="col-md-3">
+                                                                    <div class="col-lg-3 col-md-8 col-sm-4">
+                                                                        <mat-form-field style="font-size: 16px;">
+                                                                            <mat-select placeholder="Puissance (CV)"
+                                                                                [(value)]="puissanceVehicule" name="puissanceVehicule">
+                                                                                <mat-option *ngFor="let donnee of listePuissanceVehicule"
+                                                                                    [value]="donnee.idnmd">
+                                                                                    {{ donnee.libelle }}
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <!--<div class="col-md-3">
                                                                         <mat-form-field class="example-full-width" style="font-size: 16px;">
                                                                             <input matInput [(ngModel)]="puissancevehicule" name='puissancevehicule'
                                                                                 type="text" class="keymontant"
-                                                                                placeholder="Puissance du v&eacute;hicule (En CV ou cm3)"
+                                                                                placeholder="Puissance (CV)"
                                                                                 maxlength="15">
                                                                         </mat-form-field>
-                                                                    </div>
+                                                                    </div>-->
                             
                                                                 </div>
                                                             </div>
@@ -297,7 +309,7 @@
                                                                     <div class="col-md-3">
                                                                         <mat-form-field class="example-full-width" style="font-size: 16px;">
                                                                             <input matInput [(ngModel)]="chargeutile" name='chargeutile' type="text"
-                                                                                placeholder="Charge Utile du v&eacute;hicule*(CU en Kg)"
+                                                                                placeholder="Charge Utile (Kg)"
                                                                                 class="keymontant"
                                                                                 maxlength="15">
                                                                         </mat-form-field>
@@ -338,16 +350,6 @@
                                                             <label class="col-sm-2 col-form-label">&nbsp;</label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
-                            
-                                                                    <!--
-                                                                    <div class="col-md-3">
-                                                                        <mat-form-field class="example-full-width" style="font-size: 16px; ">
-                                                                            <input matInput [(ngModel)]="plafondindemnisation"
-                                                                                name='plafondindemnisation' type="text"
-                                                                                placeholder="Plafond d'indemnisation" maxlength="15">
-                                                                        </mat-form-field>
-                                                                    </div>
-                                                                -->
 
                                                                     <div class="col-md-5">
                                                                         <mat-form-field style="font-size: 16px; font-weight: bold;">
@@ -369,7 +371,68 @@
                                                                             <input style="color: red; font-size: 18px; background-color: white;" disabled matInput 
                                                                                 [(ngModel)]="displayCout"
                                                                                 name='displayCout' type="text"
-                                                                                placeholder="Co&ucirc;t du produit" maxlength="15">
+                                                                                placeholder="Cotation retenue" maxlength="15">
+                                                                        </mat-form-field>
+                                                                    </div>
+                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label">Propositions</label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+
+                                                                    <div class="col-md-2" >
+                                                                        <mat-form-field class="example-full-width text-center" 
+                                                                        style="font-size: 16px; font-weight: bold;">
+                                                                            <input style="color: #0A4CAC; font-size: 18px; background-color: white;" 
+                                                                                disabled matInput 
+                                                                                [(ngModel)]="cotationECO"
+                                                                                name='cotationECO' type="text"
+                                                                                placeholder="Cotation ECO" maxlength="15">
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                                                    <div class="col-md-2" >
+                                                                        <mat-form-field class="example-full-width text-center" 
+                                                                        style="font-size: 16px; font-weight: bold;">
+                                                                            <input style="color: #0A4CAC; font-size: 18px; background-color: white;" 
+                                                                                disabled matInput 
+                                                                                [(ngModel)]="cotationSTANDARD"
+                                                                                name='cotationSTANDARD' type="text"
+                                                                                placeholder="Cotation STANDARD" maxlength="15">
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                                                    <div class="col-md-2" >
+                                                                        <mat-form-field class="example-full-width text-center" 
+                                                                        style="font-size: 16px; font-weight: bold;">
+                                                                            <input style="color: #0A4CAC; font-size: 18px; background-color: white;" 
+                                                                                disabled matInput 
+                                                                                [(ngModel)]="cotationCONFORT"
+                                                                                name='cotationCONFORT' type="text"
+                                                                                placeholder="Cotation CONFORT" maxlength="15">
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                                                    <div class="col-md-2" >
+                                                                        <mat-form-field class="example-full-width text-center" 
+                                                                        style="font-size: 16px; font-weight: bold;">
+                                                                            <input style="color: #0A4CAC; font-size: 18px; background-color: white;" 
+                                                                                disabled matInput 
+                                                                                [(ngModel)]="cotationPRESTIGE"
+                                                                                name='cotationprestige' type="text"
+                                                                                placeholder="Cotation PRESTIGE" maxlength="15">
                                                                         </mat-form-field>
                                                                     </div>
                             
