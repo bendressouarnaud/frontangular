@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ActiviteComponent } from './activite/activite.component';
 import { AgendaComponent } from './agenda/agenda.component';
 import { DevisComponent } from './devis/devis.component';
+import { ExamenComponent } from './examen/examen.component';
 import { PerformanceComponent } from './performance/performance.component';
 import { RapportComponent } from './rapport/rapport.component';
 import { RdvComponent } from './rdv/rdv.component';
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'devis',
     component: DevisComponent
+  },
+  {
+    path: 'examen',
+    component: ExamenComponent
   }
 ];
 

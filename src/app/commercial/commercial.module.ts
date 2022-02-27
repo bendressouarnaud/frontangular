@@ -20,10 +20,11 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ActiviteComponent } from './activite/activite.component';
 import { DevisComponent } from './devis/devis.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { ExamenComponent } from './examen/examen.component';
 
 
 @NgModule({
-  declarations: [TraderComponent, RdvComponent, RapportComponent, AgendaComponent, PerformanceComponent, ActiviteComponent, DevisComponent],
+  declarations: [TraderComponent, RdvComponent, RapportComponent, AgendaComponent, PerformanceComponent, ActiviteComponent, DevisComponent, ExamenComponent],
   imports: [
     CommonModule,
     CommercialRoutingModule,

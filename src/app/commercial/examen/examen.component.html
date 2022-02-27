@@ -1,0 +1,195 @@
+
+
+<div class="main-content" style=" margin-top: 0px;">
+    <div class="container-fluid" style=" margin-top: 0px; padding-top: 0px;">
+
+
+        <div class="modal fade" id="modalExamen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content" style="background-image: linear-gradient(#F1F9FA, 97%, #7EB3F2); ">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Renseigner les donn&eacute;es du RDV</h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="get" action="/" class="form-horizontal">
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">Donn&eacute;es</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <input placeholder="CNI" type="file" id="cni" name="cni"
+                                            (change)="onForetSelected($event)" />
+                                        </div>
+                                        <div class="col-md-5">
+                                            <button mat-raised-button class="btn btn-info" (click)="transmettre()">
+                                                <span class="btn-label">
+                                                    <i class="material-icons">search</i>
+                                                </span>
+                                                Transmettre
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-3">
+                                            <mat-form-field class="example-full-width" style="font-size: 16px;">
+                                                <input matInput [(ngModel)]="coordonnee" name='coordonnee' type="text"
+                                                    placeholder="Entrez la position" maxlength="30">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <mat-form-field class="example-full-width" style="font-size: 16px;">
+                                                <input matInput [(ngModel)]="mouvement" name='mouvement' type="text"
+                                                    placeholder="Code mouvement" maxlength="30">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-3 col-md-8 col-sm-4">
+                                            <button mat-raised-button class="btn btn-success" (click)="soumettre()">
+                                                <span class="btn-label">
+                                                    <i class="material-icons">search</i>
+                                                </span>
+                                                Soumettre
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-10">
+                                            <mat-form-field class="example-full-width" style="font-size: 16px;">
+                                                <input matInput [(ngModel)]="affichage" name='affichage' type="text"
+                                                    disabled maxlength="30" style="color: #d83b3b;">
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        
+        <!--
+        <div class="row" style=" margin-top: 0px;">
+            <div class="col-md-12 ml-auto mr-auto">
+                <div class="page-categories">
+                    <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gcommercial/accueilcom" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/icone_accueil.png" width="85" height="70" />
+                                </i> Accueil
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gcommercial/comrdv" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/rdvweb.jpg" width="85" height="70" />
+                                </i> Gest. RDV
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link active icone" href="#/gcommercial/devis" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/devis.jpg" width="85" height="70" />
+                                </i> Devis
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gcommercial/actcommerciale" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/commercial.jpg" width="85" height="70" />
+                                </i> Act. commerciale
+                            </a>
+                        </li>
+
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gcommercial/comrap" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/rapportpng.png" width="85" height="70" />
+                                </i> Gest. RAPPORT
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gcommercial/comagenda" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/agenda.jpg" width="85" height="70" />
+                                </i> Agenda
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gcommercial/performance" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/performances.jpg" width="85" height="70" />
+                                </i> Performance
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#" role="tablist">
+                                <i class="material-icons"><img src="assets/img/parametrespng.png" width="85"
+                                        height="70" /></i> Param&egrave;tres
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    -->
+
+
+
+        <div class="col-md-12" style="margin-top:70px;">
+
+            <div style='text-align:center; margin-top:20px'>
+
+                <button class="btn btn-info" (click)="afficherExamen()">
+                    <i class="material-icons">time_to_leave</i> Ouvrir Wimdow
+                </button>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>

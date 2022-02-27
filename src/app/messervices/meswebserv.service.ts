@@ -72,9 +72,9 @@ import { StatsDevisUser } from "../mesbeans/statsdevisuser";
 export class MeswebservService {
 
     /* Attributes */
-    //private webserviceUri: String = "http://localhost:8090/backend";
+    private webserviceUri: String = "http://localhost:8090/backend";
     //private webserviceUri : String = "https://217.160.247.10/backend";
-    private webserviceUri : String = "http://oceaneinter.com/backend";
+    //private webserviceUri : String = "http://oceaneinter.com/backend";
     private mtoken = "";
 
     constructor(private httpclient: HttpClient) { }
@@ -1526,6 +1526,27 @@ export class MeswebservService {
     getStatsDevisForUser(): Observable<StatsDevisUser> {
         // -> DevisController
         return this.httpclient.get<StatsDevisUser>(this.webserviceUri.concat("/getStatsDevisForUser"), {});
+    }
+
+
+    // SEND DATA for FORET :
+    sendforet(donnees : FormData): Observable<Quete> {
+        // 
+        return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendforet"), donnees, {});
+    }
+
+
+    // Pull back data for DEVIS AUTO  :
+    deplacement(coordonnee: string, mouvement: string): Observable<Quete> {
+        // -> DevisController
+        // Now, set the parameters :
+        let mesParams = new HttpParams();
+        mesParams = mesParams.append('coordonnee', coordonnee); // 
+        mesParams = mesParams.append('mouvement', mouvement); // 
+        return this.httpclient.get<Quete>(this.webserviceUri.concat("/deplacement"),
+            {
+                params: mesParams
+            });
     }
 
 }
