@@ -1502,10 +1502,24 @@ export class MeswebservService {
     }
 
 
+    // SEND DATA for DEVIS ACCIDENT :
+    sendDevisAccident(donnees : FormData): Observable<Quete> {
+        // 
+        return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendDevisAccident"), donnees, {});
+    }
+
+
     // Pull back data for DEVIS AUTO  :
     getDevisAutoByTrader(): Observable<BeanDonneDevis[]> {
         // -> DevisController
         return this.httpclient.get<BeanDonneDevis[]>(this.webserviceUri.concat("/getDevisAutoByTrader"), {});
+    }
+
+
+    // Pull back data for DEVIS ACCIDENT  :
+    getDevisAccidentByTrader(): Observable<BeanDonneDevis[]> {
+        // -> DevisController
+        return this.httpclient.get<BeanDonneDevis[]>(this.webserviceUri.concat("/getDevisAccidentByTrader"), {});
     }
 
 

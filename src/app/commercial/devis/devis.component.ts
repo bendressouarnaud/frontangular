@@ -20,6 +20,11 @@ export interface IndemniteItems {
   libelle: string;
 }
 
+export interface Destinations {
+  id: number;
+  libelle: string;
+}
+
 export const lesIndemnites: IndemniteItems[] = [
   { amount: 2500000, libelle: '2 500 000' },
   { amount: 5000000, libelle: '5 000 000' },
@@ -32,6 +37,28 @@ export const lesIndemnites: IndemniteItems[] = [
   { amount: 60000000, libelle: '60 000 000' },
   { amount: 70000000, libelle: '70 000 000' },
 ];
+
+
+export const lesZonesDestinations: Destinations[] = [
+  { id: 1, libelle: 'AFRIQUE' },
+  { id: 2, libelle: 'EUROPE' },
+  { id: 3, libelle: 'AMERIQUE' },
+  { id: 3, libelle: 'ASIE' },
+  { id: 3, libelle: 'OCEANIE' }
+];
+
+export const lesPaysDestinations: Destinations[] = [
+  { id: 1, libelle: 'FRANCE' },
+  { id: 2, libelle: 'ALLEMAGNE' },
+  { id: 3, libelle: 'ETATS-UNIS' },
+  { id: 3, libelle: 'BURKINA-FASO' },
+  { id: 3, libelle: 'AFRIQUE DU SUD' },
+  { id: 3, libelle: 'MAROC' },
+  { id: 3, libelle: 'BELGIQUE' },
+  { id: 3, libelle: 'SUISSE' },
+  { id: 3, libelle: 'MALI' }
+];
+
 
 @Component({
   selector: 'app-devis',
@@ -54,6 +81,8 @@ export class DevisComponent implements OnInit {
   listeCivilite: Detailtable[];
   listePolices: RestPolice[];
   getPolice = false;
+  getPoliceAccident = false;
+  getPoliceVoyage = false;
   setPolice = "";
   idCliendDone = "0";
   idClient = "0";
@@ -112,6 +141,8 @@ export class DevisComponent implements OnInit {
   //
   indemnitemax = 2500000;
   menuIndemniteItems: any[];
+  menuZoneItems: any[];
+  menuPaysItems: any[];
   //
   typeclient = 1;
   // 
@@ -121,13 +152,30 @@ export class DevisComponent implements OnInit {
 
   //
   listeDevisAuto: BeanDonneDevis[];
+  listeDevisAccident: BeanDonneDevis[];
   getDevisAuto = false;
+  getDevisAccident = false;
   statsdevisuser = new StatsDevisUser();
   //
   cotationECO = "0";
   cotationSTANDARD = "0";
   cotationCONFORT = "0";
-  cotationPRESTIGE = "0";Ì
+  cotationPRESTIGE = "0";
+
+  // Accident 
+  capitaldeces = "0";
+  capitalinfirmite = "0";
+  id_accident = 0;
+
+  // Voyage :
+  zonedestination = 1;
+  paysdestination = 1;
+  getJourDepart = new Date();
+  getJourRetour = new Date();
+  getNaissVoyage = new Date();
+  basicjourdepart = "";
+  basicjourretour = "";
+  basicnaissvoyage = "";
 
 
 
@@ -145,6 +193,8 @@ export class DevisComponent implements OnInit {
     this.statsdevisuser.mrh = "0";
 
     this.menuIndemniteItems = lesIndemnites.filter(menuItem => menuItem);
+    this.menuZoneItems = lesZonesDestinations.filter(menuItem => menuItem);
+    this.menuPaysItems = lesPaysDestinations.filter(menuItem => menuItem);
 
     this.getclientforoperations();
     this.getLesCivilite();
@@ -160,6 +210,7 @@ export class DevisComponent implements OnInit {
 
     // Display DATA :
     this.getDevisAutoByTrader();
+    this.getDevisAccidentByTrader();
 
     //
     this.separateurMillierOnFields();
@@ -549,7 +600,30 @@ export class DevisComponent implements OnInit {
   }
 
 
+  // Voyage
+  afficherVoyage() {
+    // Clear :
+    if (this.formData.has("photo")) this.formData.delete("photo");
+    if (this.formData.has("cni")) this.formData.delete("cni");
+    this.presencePhoto = false;
+    this.presenceCni = false;
+
+    // Reset :
+    this.membresId = [];
+    this.selectedItems = [];
+    this.clientRest.activite = 1;
+    $('#modalVoyage').modal();
+  }
+
+
+  // Accident
   afficherAccident() {
+    // Clear :
+    if (this.formData.has("photo")) this.formData.delete("photo");
+    if (this.formData.has("cni")) this.formData.delete("cni");
+    this.presencePhoto = false;
+    this.presenceCni = false;
+
     // Reset :
     this.membresId = [];
     this.selectedItems = [];
@@ -561,6 +635,12 @@ export class DevisComponent implements OnInit {
   afficherAuto() {
 
     // clear :
+    if (this.formData.has("photo")) this.formData.delete("photo");
+    if (this.formData.has("cni")) this.formData.delete("cni");
+    this.presencePhoto = false;
+    this.presenceCni = false;
+
+
     this.clientRest.nom = "";
     this.clientRest.prenom = "";
     this.clientRest.contact = "";
@@ -807,11 +887,12 @@ export class DevisComponent implements OnInit {
     }
 
     // Vérification sur la puissance du vehicule
-    let tpPuissance = this.puissancevehicule.replace(/[^0-9]/g, '');
+    /*let tpPuissance = this.puissancevehicule.replace(/[^0-9]/g, '');
     if (!/^[0-9]+$/.test(tpPuissance)) {
       this.warnmessage("La puissance du véhicule renseignée n'est pas correcte !");
       return;
     }
+    */
 
 
     // Now prepare the data :
@@ -856,6 +937,92 @@ export class DevisComponent implements OnInit {
   }
 
 
+
+  // Enregistrer 'DEVIS - ACCIDENT'
+  // Save the DEVIS AUTO :
+  enregDevisAccident(){
+
+    // set the date :
+    let momentVariable = moment(this.getDate, 'MM-DD-YYYY');
+    let dates = momentVariable.format('YYYY-MM-DD');
+
+    var diffYear =(this.getCurrentDate.getTime() - this.getDate.getTime()) / 1000;
+    diffYear /= (60 * 60 * 24);
+    let difference = Math.abs(Math.round(diffYear/365.25));
+
+    if(this.clientRest.nom.toString().length == 0){
+      this.warnmessage("Le nom du client n'est pas renseigné !");
+      return;
+    }
+
+    if(this.clientRest.prenom.toString().length == 0){
+      this.warnmessage("Le prénom du client n'est pas renseigné !");
+      return;
+    }
+
+    if(this.clientRest.contact.toString().length == 0){
+      this.warnmessage("Le contact du client n'est pas renseigné !");
+      return;
+    }
+
+    if(this.clientRest.email.toString().length == 0){
+      this.warnmessage("L'adresse mail du client n'est pas renseignée !");
+      return;
+    }
+
+    // Vérification sur le CAPITAL DECES :
+    let tpCapitaldeces = this.capitaldeces.replace(/[^0-9]/g, '');
+    if (!/^[0-9]+$/.test(tpCapitaldeces)) {
+      this.warnmessage("Le Capital Décès renseigné est incorrect !");
+      return;
+    }
+
+    // Vérification sur le CAPITAL - INFIRMITE
+    let tpCapitalinfirmite = this.capitalinfirmite.replace(/[^0-9]/g, '');
+    if (!/^[0-9]+$/.test(tpCapitalinfirmite)) {
+      this.warnmessage("Ld Capital Infirmité est pas incorrect !");
+      return;
+    }
+
+
+    // Now prepare the data :
+    if(difference >= 18){
+      this.formData.append("nom", this.clientRest.nom.toString());
+      this.formData.append("prenom", this.clientRest.prenom.toString());
+      this.formData.append("contact", this.clientRest.contact.toString());
+      this.formData.append("email", this.clientRest.email.toString());
+      this.formData.append("datenaissance", dates);
+      this.formData.append("civilite", this.clientRest.civilite.toString());
+      this.formData.append("activite", this.clientRest.activite.toString());
+      this.formData.append("typeduclient", this.typeclient.toString());
+      this.formData.append("capitaldeces", tpCapitaldeces);
+      this.formData.append("capitalinfirmite", tpCapitalinfirmite);
+      this.formData.append("fraisdetraitement", this.fraisdetraitement.toString() );
+      this.formData.append("idaccident", this.id_accident.toString());
+      this.formData.append("idCliendDone", this.idCliendDone);
+      this.formData.append("idclient", this.idClient);
+
+      // Call :
+      this.meswebservices.sendDevisAccident(this.formData).toPromise()
+      .then(
+        resultat => {
+          if(resultat.code == "ok"){
+            location.reload();
+          }
+        },
+        (error) => {
+          this.warnmessage("Impossible de d'enregistrer le RAPPORT !");
+        }
+      );
+    }
+    else{
+      this.warnmessage("Le client est mineur pour souscrire à ce produit d'assurance !");
+    }
+  }
+
+
+
+
   // Get DATA from AUTO devis :
   getDevisAutoByTrader(){
     this.meswebservices.getDevisAutoByTrader().toPromise()
@@ -869,6 +1036,25 @@ export class DevisComponent implements OnInit {
         (error) => {
           this.getDevisAuto = true;
           this.initTableAuto();
+        }
+      );
+  }
+
+
+
+  // Get DATA from AUTO devis :
+  getDevisAccidentByTrader(){
+    this.meswebservices.getDevisAccidentByTrader().toPromise()
+      .then(
+        resultat => {
+          this.listeDevisAccident = resultat;
+          this.getDevisAccident = true;
+          this.initTableAccident();
+          //this.separateurMillierOnTable();
+        },
+        (error) => {
+          this.getDevisAccident = true;
+          this.initTableAccident();
         }
       );
   }
@@ -940,6 +1126,26 @@ export class DevisComponent implements OnInit {
   initTableAuto(){
     setTimeout(function () {
       $('#datatableAuto').DataTable({
+        "pagingType": "full_numbers",
+        "lengthMenu": [
+          [10, 25, 50, -1],
+          [10, 25, 50, "All"]
+        ],
+        responsive: true,
+        language: {
+          search: "_INPUT_",
+          searchPlaceholder: "Search records",
+        },
+        "order": [[4, "desc"]]
+      });
+    }, 500);
+  }
+
+
+  // initTableAccident
+  initTableAccident(){
+    setTimeout(function () {
+      $('#datatableAccident').DataTable({
         "pagingType": "full_numbers",
         "lengthMenu": [
           [10, 25, 50, -1],
