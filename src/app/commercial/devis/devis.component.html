@@ -828,7 +828,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button mat-raised-button type="button" (click)="enregDevisAccident()"
+                        <button mat-raised-button type="button" (click)="enregDevisVoyage()"
                             class="btn btn-info">Enregistrer</button> <!-- data-dismiss="modal"  -->
                     </div>
                 </div>
@@ -1281,13 +1281,21 @@
                 <button class="btn btn-warning" (click)="afficherAccident()">
                     <i class="material-icons">error</i> Accident
                 </button>
-
+                &nbsp;
                 <button class="btn btn-info" (click)="afficherAuto()">
                     <i class="material-icons">time_to_leave</i> Devis Automobile
                 </button>
-
+                &nbsp;
                 <button class="btn btn-success" (click)="afficherVoyage()">
                     <i class="material-icons">airplanemode_active</i> Voyage
+                </button>
+                &nbsp; <!-- (click)="afficherVoyage()"  -->
+                <button class="btn btn" >
+                    <i class="material-icons">home</i> MRH
+                </button>
+                &nbsp;
+                <button class="btn btn-primary" >
+                    <i class="material-icons">airplanemode_active</i> MRH 
                 </button>
 
             </div>
@@ -1396,10 +1404,10 @@
                             <div class="tab-content tab-space">
                                 <div class="tab-pane active" id="link3">
 
-                                    <div class="card">
-                                        <div class="card-body">
+                                    <div class="card" style="border: 1px solid black;">
+                                        <div class="card-body" >
 
-                                            <div class="material-datatables">
+                                            <div class="material-datatables" >
                                                 <table id="datatableAuto"
                                                     class="table table-striped table-no-bordered table-hover"
                                                     cellspacing="0" width="100%" style="width:100%"
@@ -1447,11 +1455,42 @@
 
 
                                 <div class="tab-pane" id="link4">
-                                    <div class="card">
+                                    <div class="card" style="border: 1px solid black;">
                                         <div class="card-body">
 
                                             <div class="material-datatables">
-                                                
+                                                <table id="datatableVoyage"
+                                                    class="table table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%"
+                                                    >
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Client</th>
+                                                            <th>Contact</th>
+                                                            <th>Secteur</th>
+                                                            <th>Date de cr&eacute;ation</th>
+                                                            <th>Jour d&eacute;part</th>
+                                                            <th>Jour retour</th>
+                                                            <th class="disabled-sorting text-center">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody *ngIf="this.getDevisVoyage">
+                                                        <tr *ngFor="let donnee of listeDevisVoyage">
+                                                            <td style="font-weight: bold;">{{ donnee.client }} </td>
+                                                            <td>{{ donnee.contact }}</td>
+                                                            <td>{{ donnee.secteur }}</td>
+                                                            <td>{{ donnee.dates }}</td>
+                                                            <td>{{ donnee.dureecontrat }}</td>
+                                                            <td>{{ donnee.offre }}</td>
+                                                            <td class="text-center">
+                                                                <a title="Afficher les donn&eacute;es de la cotation"
+                                                                    (click)="getDevisAutoByIdauto( donnee.idauto )"
+                                                                    class="btn btn-link btn-warning btn-just-icon edit"><i
+                                                                        class="material-icons">save_as</i></a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
 
                                         </div>
@@ -1461,7 +1500,7 @@
 
                                 <div class="tab-pane" id="link5">
                                     <div class="card">
-                                        <div class="card-body">
+                                        <div class="card-body" style="border: 1px solid black;">
 
                                             <div class="material-datatables">
                                                 <table id="datatableAccident"

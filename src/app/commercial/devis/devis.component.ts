@@ -153,8 +153,10 @@ export class DevisComponent implements OnInit {
   //
   listeDevisAuto: BeanDonneDevis[];
   listeDevisAccident: BeanDonneDevis[];
+  listeDevisVoyage: BeanDonneDevis[];
   getDevisAuto = false;
   getDevisAccident = false;
+  getDevisVoyage = false;
   statsdevisuser = new StatsDevisUser();
   //
   cotationECO = "0";
@@ -176,6 +178,7 @@ export class DevisComponent implements OnInit {
   basicjourdepart = "";
   basicjourretour = "";
   basicnaissvoyage = "";
+  id_voyage = 0;
 
 
 
@@ -211,6 +214,7 @@ export class DevisComponent implements OnInit {
     // Display DATA :
     this.getDevisAutoByTrader();
     this.getDevisAccidentByTrader();
+    this.getDevisVoyageByTrader();
 
     //
     this.separateurMillierOnFields();
@@ -1023,6 +1027,102 @@ export class DevisComponent implements OnInit {
 
 
 
+
+
+  // Save the DEVIS AUTO :
+  enregDevisVoyage(){
+
+    // set the date :
+    let momentVariable = moment(this.getNaissVoyage, 'MM-DD-YYYY');
+    let dates = momentVariable.format('YYYY-MM-DD');
+    // : 
+    let momentVariableDepart = moment(this.getJourDepart, 'MM-DD-YYYY');
+    let dateDepart = momentVariableDepart.format('YYYY-MM-DD');
+    // : 
+    let momentVariableRetour = moment(this.getJourRetour, 'MM-DD-YYYY');
+    let dateRetour = momentVariableRetour.format('YYYY-MM-DD');
+
+    var diffYear =(this.getCurrentDate.getTime() - this.getNaissVoyage.getTime()) / 1000;
+    diffYear /= (60 * 60 * 24);
+    let difference = Math.abs(Math.round(diffYear/365.25));
+
+    if(this.clientRest.nom.toString().length == 0){
+      this.warnmessage("Le nom du client n'est pas renseigné !");
+      return;
+    }
+
+    if(this.clientRest.prenom.toString().length == 0){
+      this.warnmessage("Le prénom du client n'est pas renseigné !");
+      return;
+    }
+
+    if(this.clientRest.contact.toString().length == 0){
+      this.warnmessage("Le contact du client n'est pas renseigné !");
+      return;
+    }
+
+    if(this.clientRest.email.toString().length == 0){
+      this.warnmessage("L'adresse mail du client n'est pas renseignée !");
+      return;
+    }
+
+    // Now prepare the data :
+    if(difference >= 18){
+      this.formData.append("nom", this.clientRest.nom.toString());
+      this.formData.append("prenom", this.clientRest.prenom.toString());
+      this.formData.append("contact", this.clientRest.contact.toString());
+      this.formData.append("email", this.clientRest.email.toString());
+      this.formData.append("datenaissance", dates);
+      this.formData.append("civilite", this.clientRest.civilite.toString());
+      this.formData.append("activite", this.clientRest.activite.toString());
+      this.formData.append("typeduclient", this.typeclient.toString());
+
+      this.formData.append("zone", this.zonedestination.toString());
+      this.formData.append("pays", this.paysdestination.toString());
+      this.formData.append("jourdepart", dateDepart );
+      this.formData.append("jourretour", dateRetour );
+      this.formData.append("idvoyage", this.id_voyage.toString() );
+      this.formData.append("idCliendDone", this.idCliendDone);
+      this.formData.append("idclient", this.idClient);
+
+      // Call :
+      this.meswebservices.sendDevisVoyage(this.formData).toPromise()
+      .then(
+        resultat => {
+          if(resultat.code == "ok"){
+            location.reload();
+          }
+        },
+        (error) => {
+          this.warnmessage("Impossible de d'enregistrer le RAPPORT !");
+        }
+      );
+    }
+    else{
+      this.warnmessage("Le client est mineur pour souscrire à ce produit d'assurance !");
+    }
+  }
+
+
+
+  // Get DATA from VOYAGE devis :
+  getDevisVoyageByTrader(){
+    this.meswebservices.getDevisVoyageByTrader().toPromise()
+      .then(
+        resultat => {
+          this.listeDevisVoyage = resultat;
+          this.getDevisVoyage = true;
+          this.initTableVoyage();
+        },
+        (error) => {
+          this.getDevisVoyage = true;
+          this.initTableVoyage();
+        }
+      );
+  }
+
+
+
   // Get DATA from AUTO devis :
   getDevisAutoByTrader(){
     this.meswebservices.getDevisAutoByTrader().toPromise()
@@ -1160,6 +1260,27 @@ export class DevisComponent implements OnInit {
       });
     }, 500);
   }
+
+
+
+    // initTableVoyage
+    initTableVoyage(){
+      setTimeout(function () {
+        $('#datatableVoyage').DataTable({
+          "pagingType": "full_numbers",
+          "lengthMenu": [
+            [10, 25, 50, -1],
+            [10, 25, 50, "All"]
+          ],
+          responsive: true,
+          language: {
+            search: "_INPUT_",
+            searchPlaceholder: "Search records",
+          },
+          "order": [[3, "desc"]]
+        });
+      }, 500);
+    }
 
 
 

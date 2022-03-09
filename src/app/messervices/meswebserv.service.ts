@@ -72,7 +72,7 @@ import { StatsDevisUser } from "../mesbeans/statsdevisuser";
 export class MeswebservService {
 
     /* Attributes */
-    private webserviceUri: String = "http://localhost:8090/backend";
+    private webserviceUri: String = "http://localhost:8081/backend";
     //private webserviceUri : String = "https://217.160.247.10/backend";
     //private webserviceUri : String = "http://oceaneinter.com/backend";
     private mtoken = "";
@@ -1508,6 +1508,14 @@ export class MeswebservService {
         return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendDevisAccident"), donnees, {});
     }
 
+    // SEND DATA for DEVIS VOYAGE :
+    sendDevisVoyage(donnees : FormData): Observable<Quete> {
+        // 
+        return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendDevisVoyage"), donnees, {});
+    }
+
+
+
 
     // Pull back data for DEVIS AUTO  :
     getDevisAutoByTrader(): Observable<BeanDonneDevis[]> {
@@ -1520,6 +1528,12 @@ export class MeswebservService {
     getDevisAccidentByTrader(): Observable<BeanDonneDevis[]> {
         // -> DevisController
         return this.httpclient.get<BeanDonneDevis[]>(this.webserviceUri.concat("/getDevisAccidentByTrader"), {});
+    }
+
+    // Pull back data for DEVIS VOYAGE  :
+    getDevisVoyageByTrader(): Observable<BeanDonneDevis[]> {
+        // -> DevisController
+        return this.httpclient.get<BeanDonneDevis[]>(this.webserviceUri.concat("/getDevisVoyageByTrader"), {});
     }
 
 

@@ -423,7 +423,7 @@ export class SidebarComponent implements OnInit {
             /*localStorage.removeItem("userid");
             localStorage.removeItem("profil");*/
             //window.location.href="#/pages/login";
-            window.location.href="/";
+            window.location.href="/jcom";
         }
     }
 }
