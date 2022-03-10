@@ -6,6 +6,7 @@ import { Civilite } from 'src/app/mesbeans/civilite';
 import { ClientRest } from 'src/app/mesbeans/clientrest';
 import { Detailequipe } from 'src/app/mesbeans/detailequipe';
 import { Detailtable } from 'src/app/mesbeans/detailnomenclature';
+import { Indemnitemax } from 'src/app/mesbeans/indemnitemax';
 import { RestClient } from 'src/app/mesbeans/restclientcom';
 import { RestPolice } from 'src/app/mesbeans/restpolice';
 import { StatsDevisUser } from 'src/app/mesbeans/statsdevisuser';
@@ -180,6 +181,9 @@ export class DevisComponent implements OnInit {
   basicnaissvoyage = "";
   id_voyage = 0;
 
+  // AUTO 
+  listeIdemniteAuto : Indemnitemax[];
+
 
 
 
@@ -195,7 +199,7 @@ export class DevisComponent implements OnInit {
     this.statsdevisuser.voyage = "0";
     this.statsdevisuser.mrh = "0";
 
-    this.menuIndemniteItems = lesIndemnites.filter(menuItem => menuItem);
+    //this.menuIndemniteItems = lesIndemnites.filter(menuItem => menuItem);
     this.menuZoneItems = lesZonesDestinations.filter(menuItem => menuItem);
     this.menuPaysItems = lesPaysDestinations.filter(menuItem => menuItem);
 
@@ -210,6 +214,7 @@ export class DevisComponent implements OnInit {
     this.getEnergieVehicule();
     this.getPuissanceVehicule();
     this.getNombrePlace();
+    this.getlesindemnitesauto();
 
     // Display DATA :
     this.getDevisAutoByTrader();
@@ -451,6 +456,20 @@ export class DevisComponent implements OnInit {
         }
       )
   }
+
+
+
+  // Go to IDEMNITE for 'DEVIS AUTO'
+  getlesindemnitesauto(): void {
+    this.meswebservices.getlesindemnitesauto().toPromise()
+      .then(
+        resultat => {
+          this.listeIdemniteAuto = resultat;
+        }
+      )
+  }
+
+
 
   // Go to pull OFFRE COMMERCIALE data , id : 8 :
   getOffreCommerciale(): void {

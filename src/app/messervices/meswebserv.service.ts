@@ -63,6 +63,7 @@ import { Civilite } from "../mesbeans/civilite";
 import { BeanDonneDevis } from "../mesbeans/beandonneedevis";
 import { Clientbeanauto } from "../mesbeans/clientbeanauto";
 import { StatsDevisUser } from "../mesbeans/statsdevisuser";
+import { Indemnitemax } from "../mesbeans/indemnitemax";
 
 @Injectable({
     providedIn: 'root'
@@ -1446,6 +1447,13 @@ export class MeswebservService {
         queteObjet.code = id;
         // 
         return this.httpclient.post<Detailtable[]>(this.webserviceUri.concat("/getdonneeparametree"), queteObjet, {});
+    }
+
+
+    // Get INDEMNITE MAX (Devis AUTO)  :
+    getlesindemnitesauto(): Observable<Indemnitemax[]> {
+        // 
+        return this.httpclient.get<Indemnitemax[]>(this.webserviceUri.concat("/getlesindemnitesauto"), {});
     }
 
 

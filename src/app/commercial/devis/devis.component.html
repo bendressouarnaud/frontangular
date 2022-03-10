@@ -357,8 +357,8 @@
                                                                             <mat-select id="selectIdemn" placeholder="Indemnit&eacute; maximum garantie" 
                                                                                 [(value)]="indemnitemax"
                                                                                 name="idemnitemax" (selectionChange)="computePrice()" style="background-color: #ACE092;">
-                                                                                <mat-option *ngFor="let donnee of menuIndemniteItems"
-                                                                                    [value]="donnee.amount">
+                                                                                <mat-option *ngFor="let donnee of listeIdemniteAuto"
+                                                                                    [value]="donnee.code">
                                                                                     {{ donnee.libelle }}
                                                                                 </mat-option>
                                                                             </mat-select>
