@@ -184,6 +184,10 @@ export class DevisComponent implements OnInit {
   // AUTO 
   listeIdemniteAuto : Indemnitemax[];
 
+  // MRH 
+  getNaissanceMrh = new Date();
+  basicDatepickerMrh = "";
+
 
 
 
@@ -388,6 +392,20 @@ export class DevisComponent implements OnInit {
         resultat => {
           this.listePolices = resultat;
           this.getPolice = true;
+        }
+      )
+  }
+
+
+
+  // Go to pull FORMULE MRH , id : 4 :
+  getFraisTraitemente(): void {
+    this.meswebservices.getdonneeparametree("4").toPromise()
+      .then(
+        resultat => {
+          this.listeFraisTraitement = resultat;
+          // Init 
+          this.fraisdetraitement = resultat[0].idnmd;
         }
       )
   }
