@@ -185,8 +185,18 @@ export class DevisComponent implements OnInit {
   listeIdemniteAuto : Indemnitemax[];
 
   // MRH 
+  listeFormuleMrh: Detailtable[];
   getNaissanceMrh = new Date();
+  getDateEffet = new Date();
+  getDateExpiration = new Date();
   basicDatepickerMrh = "";
+  basicDateEffet = "";
+  basicDateExpiration = "";
+  formulemrh = 1;
+  choixformule = 0;
+  coutreelmrh = "0";
+  qualiteproposant = 1;
+  
 
 
 
@@ -211,6 +221,7 @@ export class DevisComponent implements OnInit {
     this.getLesCivilite();
     //this.getCivilite();
     this.getFraisTraitemente();
+    this.getFormuleMrh();
     this.getAllActivities();
 
     // For ASSURANCE AUTO
@@ -398,14 +409,17 @@ export class DevisComponent implements OnInit {
 
 
 
-  // Go to pull FORMULE MRH , id : 4 :
-  getFraisTraitemente(): void {
-    this.meswebservices.getdonneeparametree("4").toPromise()
+  // Go to pull FORMULE MRH , id : 13 :
+  getFormuleMrh(): void {
+    this.meswebservices.getdonneeparametree("13").toPromise()
       .then(
         resultat => {
-          this.listeFraisTraitement = resultat;
+          this.listeFormuleMrh = resultat;
           // Init 
-          this.fraisdetraitement = resultat[0].idnmd;
+          this.choixformule = resultat[0].idnmd;
+
+          // :
+          this.selectformule();
         }
       )
   }
@@ -560,6 +574,47 @@ export class DevisComponent implements OnInit {
   }
 
 
+  // Select Formule :
+  selectformule(){
+    switch(this.choixformule){
+      case 1039:
+        $('#form1').css('background-color', '#697FD0'); // Formule 1
+        $('#form2').css('background-color', '#d1caca');
+        $('#form3').css('background-color', '#d1caca');
+        $('#form4').css('background-color', '#d1caca');
+        break;
+
+      case 1040:
+        $('#form1').css('background-color', '#d1caca');
+        $('#form2').css('background-color', '#697FD0'); // Formule 1
+        $('#form3').css('background-color', '#d1caca');
+        $('#form4').css('background-color', '#d1caca');
+        break;
+
+      case 1041:
+        $('#form1').css('background-color', '#d1caca');
+        $('#form2').css('background-color', '#d1caca'); 
+        $('#form3').css('background-color', '#697FD0'); // Formule 3
+        $('#form4').css('background-color', '#d1caca');
+        break;
+
+      case 1042:
+        $('#form1').css('background-color', '#d1caca');
+        $('#form2').css('background-color', '#d1caca'); 
+        $('#form3').css('background-color', '#d1caca'); 
+        $('#form4').css('background-color', '#697FD0'); // Formule 4
+        break;
+
+      default:
+        $('#form1').css('background-color', '#697FD0'); // Formule 1
+        $('#form2').css('background-color', '#d1caca');
+        $('#form3').css('background-color', '#d1caca');
+        $('#form4').css('background-color', '#d1caca');
+        break;
+    }
+  }
+
+
   // Compute the price :
   computePrice() {
 
@@ -638,6 +693,22 @@ export class DevisComponent implements OnInit {
           this.clientRest.civilite = resultat[0].idciv;
         }
       )
+  }
+
+
+  // Mrh
+  afficherMrh() {
+    // Clear :
+    if (this.formData.has("photo")) this.formData.delete("photo");
+    if (this.formData.has("cni")) this.formData.delete("cni");
+    this.presencePhoto = false;
+    this.presenceCni = false;
+
+    // Reset :
+    this.membresId = [];
+    this.selectedItems = [];
+    this.clientRest.activite = 1;
+    $('#modalMrh').modal();
   }
 
 

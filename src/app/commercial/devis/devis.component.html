@@ -3,6 +3,527 @@
 
 
 
+
+
+
+        <div class="modal fade" id="modalMrh" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true" > <!--  modal-lg  -->
+            <div class="modal-dialog modal-xl" >
+                <div class="modal-content" style="background-image: linear-gradient(#F4F0F0, 97%, #B0B6AE); ">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Renseigner les donn&eacute;es du <span style="font-weight: bold;">DEVIS
+                                - MRH</span></h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="padding: 0px; ">
+
+                        <div class="tab-content tab-space tab-subcategories" style="padding: 0px; ">
+                            <div class="tab-pane active" id="link7" style="margin-top: 0px; ">
+                
+                                <div class="col-md-12" style="margin-top: 0px; ">
+                                    <div class="card " style="margin-top: 0px; ">
+                                        <div class="card-body ">
+                                            <ul class="nav nav-pills nav-pills-warning" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" data-toggle="tab" href="#link20" role="tablist">
+                                                        Information g&eacute;n&eacute;rale
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#link21" id="garantieslink" role="tablist">
+                                                        Rubriques
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content tab-space">
+                                                <div class="tab-pane active" id="link20" style="background-image: linear-gradient(#F4F0F0, 70%, #E1EAF7);">
+                                                    <form method="get" action="/" class="form-horizontal">
+
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label"><span
+                                                                    style="color: black;">Souscripteur</span></label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+                            
+                                                                    <div class="col-lg-6 col-md-8 col-sm-4">
+                                                                        <ng-multiselect-dropdown [placeholder]="'Choisissez le client'"
+                                                                            name="client" [settings]="dropdownSettings" [data]="dropdownList"
+                                                                            [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
+                                                                            (onDeSelect)="onItemDeSelect($event)"
+                                                                            (onSelectAll)="onSelectAll($event)">
+                                                                        </ng-multiselect-dropdown>
+                                                                    </div>
+                            
+                            
+                                                                    <div class="col-md-4">
+                            
+                                                                        <button mat-raised-button class="btn btn-success" (click)="getlespolicesbyclient()">
+                                                                            <span class="btn-label">
+                                                                                <i class="material-icons">search</i>
+                                                                            </span>
+                                                                            Polices
+                                                                        </button>
+                            
+                                                                        <!--
+                                                                        <button mat-raised-button type="button" 
+                                                                        class="btn btn-info">Afficher les polices</button>  data-dismiss="modal"  -->
+                                                                    </div>
+                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                            
+                            
+                                                        <div class="row" *ngIf="this.getPolice">
+                                                            <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+                            
+                                                                    <div class="col-lg-6 col-md-8 col-sm-4">
+                                                                        <mat-form-field>
+                                                                            <mat-select placeholder="Police(s)" [(value)]="setPolice" name="police">
+                                                                                <mat-option *ngFor="let donnee of listePolices"
+                                                                                    [value]="donnee.Police">
+                                                                                    {{ donnee.Police }}
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+                            
+                            
+                                                                    <div class="col-md-4">
+                            
+                                                                        <button mat-raised-button class="btn btn-info" (click)="getlespolicesbyclient()">
+                                                                            <span class="btn-label">
+                                                                                <i class="material-icons">shopping_cart</i>
+                                                                            </span>
+                                                                            Afficher
+                                                                        </button>
+                            
+                                                                        <!--
+                                                                        <button mat-raised-button type="button" (click)="enregistrerRdv()"
+                                                                            class="btn btn-info">Enregistrer</button>  data-dismiss="modal"  -->
+                                                                    </div>
+                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                            
+                            
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+                            
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
+                                                                            <input matInput [(ngModel)]="clientRest.nom" name='nom' type="text"
+                                                                                placeholder="Nom" maxlength="30">
+                                                                        </mat-form-field>
+                                                                    </div>
+                            
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
+                                                                            <input matInput [(ngModel)]="clientRest.prenom" name='prenom'
+                                                                                type="text" placeholder="Pr&eacute;nom" maxlength="50">
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
+                                                                            <input matInput [(ngModel)]="clientRest.contact" name='contact'
+                                                                                type="text" placeholder="Contact" maxlength="20">
+                                                                        </mat-form-field>
+                                                                    </div>
+                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                            
+                            
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+                            
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
+                                                                            <input matInput [(ngModel)]="clientRest.email" name='email' type="text"
+                                                                                placeholder="Email" maxlength="50">
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field style="font-size: 16px;">
+                                                                            <input matInput [matDatepicker]="basicDatepickerMrh"
+                                                                                [(ngModel)]="getNaissanceMrh" name="dates" 
+                                                                                placeholder="Date de naissance">
+                                                                            <mat-datepicker-toggle matSuffix [for]="basicDatepickerMrh">
+                                                                            </mat-datepicker-toggle>
+                                                                            <mat-datepicker #basicDatepickerMrh></mat-datepicker>
+                                                                        </mat-form-field>
+                                                                    </div>
+                            
+                                                                    <div class="col-lg-3 col-md-8 col-sm-4">
+                                                                        <mat-form-field style="font-size: 16px;">
+                                                                            <mat-select placeholder="Civilit&eacute;"
+                                                                                [(value)]="clientRest.civilite" name="civilite">
+                                                                                <mat-option *ngFor="let donnee of lesCivilite"
+                                                                                    [value]="donnee.idciv">
+                                                                                    {{ donnee.libelle }}
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                            
+                            
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+                            
+                                                                    <div class="col-lg-6 col-md-8 col-sm-4">
+                                                                        <mat-form-field>
+                                                                            <mat-select placeholder="Activit&eacute;"
+                                                                                [(value)]="clientRest.activite" name="activite">
+                                                                                <mat-option *ngFor="let donnee of listeActivite"
+                                                                                    [value]="donnee.idact">
+                                                                                    {{ donnee.libelle }}
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <div class="col-lg-3 col-md-8 col-sm-4">
+                                                                        <mat-form-field>
+                                                                            <mat-select placeholder="Type du client"
+                                                                                [(value)]="typeclient" name="typeclient">
+                                                                                <mat-option [value]="1">Client</mat-option>
+                                                                                <mat-option [value]="0">Prospect</mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                            
+                            
+                            
+                            
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label"><span style="color: black;">CNI</span></label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+                            
+                                                                    <div class="col-md-5">
+                                                                        <input placeholder="CNI" type="file" id="cni" name="cni"
+                                                                            (change)="onCniSelected($event)" />
+                                                                    </div>
+                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                            
+                            
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label"><span style="color: black;">PHOTO</span></label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+                            
+                                                                    <div class="col-lg-5 col-md-8 col-sm-4">
+                                                                        <input type="file" id="photo" name="photo"
+                                                                            (change)="onPhotoSelected($event)" />
+                                                                    </div>
+                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                            
+                            
+                                                        <div class="row" style="margin-top: 10px;">
+                                                            <label class="col-sm-2 col-form-label"><span
+                                                                    style="color: black;">Contenu</span></label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
+                                                                            <input matInput [(ngModel)]="adressegeographique" 
+                                                                                name='adressegeographique' type="text"
+                                                                                placeholder="Adresse g&eacute;ographique"
+                                                                                maxlength="35">
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
+                                                                            <input matInput [(ngModel)]="situationgeographique" 
+                                                                                name='situationgeographique' type="text"
+                                                                                placeholder="Situation g&eacute;ographique"
+                                                                                maxlength="35">
+                                                                        </mat-form-field>
+                                                                    </div>
+                            
+                                                                    <div class="col-lg-3 col-md-8 col-sm-4">
+                                                                        <mat-form-field>
+                                                                            <mat-select placeholder="Qualit&eacute; proposant"
+                                                                                [(value)]="qualiteproposant" name="qualiteproposant">
+                                                                                <mat-option [value]="1">Locataire</mat-option>
+                                                                                <mat-option [value]="0">Propri&eacute;taire occupant</mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                            
+                            
+                            
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+                            
+                                                                    <!--    (selectionChange)="computePrice()"     -->
+                                                                    <div class="col-lg-5 col-md-8 col-sm-4">
+                                                                        <mat-form-field style="font-size: 16px; font-weight: bold;">
+                                                                            <mat-select placeholder="Choix de formules"
+                                                                                [(value)]="choixformule" name="choixformule" 
+                                                                                style="background-color: #92ABE0;" 
+                                                                                (selectionChange)="selectformule()">
+                                                                                <mat-option *ngFor="let donnee of listeFormuleMrh"
+                                                                                    [value]="donnee.idnmd">
+                                                                                    {{ donnee.libelle }}
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <div class="col-md-4">
+                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
+                                                                            <input matInput [(ngModel)]="coutreelmrh" 
+                                                                                name='coutreelmrh' type="text"
+                                                                                placeholder="Co&ucirc;t r&eacute;el du bien" 
+                                                                                class="keymontant"
+                                                                                maxlength="30">
+                                                                        </mat-form-field>
+                                                                    </div>
+                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                            
+                            
+                            
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label">Dur&eacute;e du contrat</label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+
+                                                                    <div class="col-md-5">
+                                                                        <mat-form-field style="font-size: 16px;">
+                                                                            <input matInput [matDatepicker]="basicDateEffet"
+                                                                                [(ngModel)]="getDateEffet" name="dates" 
+                                                                                placeholder="Date effet">
+                                                                            <mat-datepicker-toggle matSuffix [for]="basicDateEffet">
+                                                                            </mat-datepicker-toggle>
+                                                                            <mat-datepicker #basicDateEffet></mat-datepicker>
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <div class="col-md-4" >
+                                                                        <mat-form-field style="font-size: 16px;">
+                                                                            <input matInput [matDatepicker]="basicDateExpiration"
+                                                                                [(ngModel)]="getDateExpiration" name="dates" 
+                                                                                placeholder="Date de naissance">
+                                                                            <mat-datepicker-toggle matSuffix [for]="basicDateExpiration">
+                                                                            </mat-datepicker-toggle>
+                                                                            <mat-datepicker #basicDateExpiration></mat-datepicker>
+                                                                        </mat-form-field>
+                                                                    </div>
+                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                            
+                            
+                            
+                                                        <div class="row">
+                                                            <div style="text-align: center; width: 100%; color:red; font-weight: bold;" id="infos">
+                                                            </div>
+                                                        </div>
+                            
+                            
+                                                    </form>
+                                                </div>
+
+                                                <div class="tab-pane" id="link21">
+                                                    <table style="width: 100%;" border="1">
+                                                        <tr style="background-color: #d1caca;">
+                                                            <th style="width: 40%;">DESIGANTION DES RISQUES GARANTIS</th>
+                                                            <th style="width: 15%;" class="datarubrique" id="form1">Formule 1</th>
+                                                            <th style="width: 15%;" class="datarubrique" id="form2">Formule 2</th>
+                                                            <th style="width: 15%;" class="datarubrique" id="form3">Formule 3</th>
+                                                            <th style="width: 15%;" class="datarubrique" id="form4">Formule 4</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td rowspan="5">
+                                                                <table border="1" width="100%">
+                                                                    <tr>
+                                                                        <td rowspan="5" class="datarubrique bold"
+                                                                        style="width: 20%;">Incendie</td>
+                                                                        <td style="width: 80%;">B&acirc;timent / Risque locatif</td>
+                                                                    </tr>
+                                                                    <tr><td>Frais suppl&eacute;mentaires</td></tr>
+                                                                    <tr><td>Dommages &eacute;lectriques</td></tr>
+                                                                    <tr><td>Recours des voisins et tiers</td></tr>
+                                                                    <tr><td>Mat&eacute;riels, Mobiliers, Effets personnels</td></tr>
+                                                                </table>
+                                                            </td>
+                                                            <td class="datarubrique">15.000.000</td>
+                                                            <td class="datarubrique">20.000.000</td>
+                                                            <td class="datarubrique">30.000.000</td>
+                                                            <td class="datarubrique">40.000.000</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="datarubrique">1.500.000</td>
+                                                            <td class="datarubrique">2.000.000</td>
+                                                            <td class="datarubrique">3.000.000</td>
+                                                            <td class="datarubrique">4.000.000</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="datarubrique">1.500.000</td>
+                                                            <td class="datarubrique">2.000.000</td>
+                                                            <td class="datarubrique">3.000.000</td>
+                                                            <td class="datarubrique">4.000.000</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="datarubrique">1.500.000</td>
+                                                            <td class="datarubrique">2.000.000</td>
+                                                            <td class="datarubrique">3.000.000</td>
+                                                            <td class="datarubrique">4.000.000</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="datarubrique">3.000.000</td>
+                                                            <td class="datarubrique">4.000.000</td>
+                                                            <td class="datarubrique">6.000.000</td>
+                                                            <td class="datarubrique">8.000.000</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <table border="1" width="100%">
+                                                                <tr>
+                                                                    <td class="datarubrique bold" style="width: 20%;">Vol</td>
+                                                                    <td style="width: 80%;">Mat&eacute;riels, Mobiliers, Effets personnels</td>
+                                                                </tr>
+                                                            </table>
+                                                            <td class="datarubrique">750.000</td>
+                                                            <td class="datarubrique">1.000.000</td>
+                                                            <td class="datarubrique">1.500.000</td>
+                                                            <td class="datarubrique">2.000.000</td>
+                                                        </tr>
+
+                                                        <!--  DEGATS DES EAUX  -->
+                                                        <tr>
+                                                            <td rowspan="3">
+                                                                <table border="1" width="100%">
+                                                                    <tr>
+                                                                        <td rowspan="5" class="datarubrique bold"
+                                                                        style="width: 20%;">D&eacute;g&acirc;ts des eaux</td>
+                                                                        <td style="width: 80%;">Dommages directs</td>
+                                                                    </tr>
+                                                                    <tr><td>Recherche de fuite</td></tr>
+                                                                    <tr><td>Recours des voisins et tiers</td></tr>
+                                                                </table>
+                                                            </td>
+                                                            <td class="datarubrique">3.250.000</td>
+                                                            <td class="datarubrique">5.000.000</td>
+                                                            <td class="datarubrique">9.500.000</td>
+                                                            <td class="datarubrique">16.000.000</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="datarubrique">325.000</td>
+                                                            <td class="datarubrique">500.000</td>
+                                                            <td class="datarubrique">950.000</td>
+                                                            <td class="datarubrique">1.600.000</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="datarubrique">325.000</td>
+                                                            <td class="datarubrique">500.000</td>
+                                                            <td class="datarubrique">950.000</td>
+                                                            <td class="datarubrique">1.600.000</td>
+                                                        </tr>
+
+
+                                                        <!--   RC   -->
+                                                        <tr>
+                                                            <td>
+                                                                <table border="1" width="100%">
+                                                                    <tr>
+                                                                        <td class="datarubrique bold" style="width: 20%;">RC</td>
+                                                                        <td style="width: 80%;">Tous dommages confondus</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td class="datarubrique">25.000.000</td>
+                                                            <td class="datarubrique">25.000.000</td>
+                                                            <td class="datarubrique">25.000.000</td>
+                                                            <td class="datarubrique">25.000.000</td>
+                                                        </tr>
+
+                                                        <!--   PRIME   -->
+                                                        <tr style="background-color: #d1caca;"><td colspan="5" class="datarubrique bold">PRIME</td></tr>
+                                                        <tr>
+                                                            <td class="bold">Prime nette annuelle</td>
+                                                            <td class="datarubrique">25 110</td>
+                                                            <td class="datarubrique">50 220</td>
+                                                            <td class="datarubrique">83 700</td>
+                                                            <td class="datarubrique">117 180</td>
+                                                        </tr>
+                                                        <tr style="background-color: #d1caca;">
+                                                            <td class="bold">Prime annuelle TTC</td>
+                                                            <td class="datarubrique bold">30 780</td>
+                                                            <td class="datarubrique bold">61 560</td>
+                                                            <td class="datarubrique bold">102 600</td>
+                                                            <td class="datarubrique bold">143 640</td>
+                                                        </tr>
+
+                                                        <!--   FRANCHISE   -->
+                                                        <tr style="background-color: #d1caca;"><td colspan="5" class="datarubrique bold">
+                                                            FRANCHISE (F CFA) : 10%. min 50 000</td></tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button mat-raised-button type="button" (click)="enregDevisAuto()"
+                            class="btn btn-info">Enregistrer</button> <!-- data-dismiss="modal"  -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
         <div class="modal fade" id="modalAutomobile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
             aria-hidden="true" > <!--  modal-lg  -->
             <div class="modal-dialog modal-xl" >
@@ -834,313 +1355,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-        <!--   DEVIS MRH   -->
-        <div class="modal fade" id="modalMrh" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content" style="background-image: linear-gradient(#F4F0F0, 95%, #B0B6AE);">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Renseigner les donn&eacute;es du <span style="font-weight: bold;">DEVIS
-                                - MRH</span></h4>
-                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            <i class="material-icons">clear</i>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form method="get" action="/" class="form-horizontal">
-
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label"><span
-                                        style="color: black;">Souscripteur</span></label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-lg-6 col-md-8 col-sm-4">
-                                            <ng-multiselect-dropdown [placeholder]="'Choisissez le client'"
-                                                name="client" [settings]="dropdownSettings" [data]="dropdownList"
-                                                [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
-                                                (onDeSelect)="onItemDeSelect($event)"
-                                                (onSelectAll)="onSelectAll($event)">
-                                            </ng-multiselect-dropdown>
-                                        </div>
-
-                                        <div class="col-md-4">
-                            
-                                            <!--  (click)="getlespolicesbyclient()"  -->
-                                            <button mat-raised-button class="btn btn-success" >
-                                                <span class="btn-label">
-                                                    <i class="material-icons">search</i>
-                                                </span>
-                                                Polices
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row" *ngIf="this.getPoliceAccident">
-                                <label class="col-sm-2 col-form-label">&nbsp;</label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-lg-6 col-md-8 col-sm-4">
-                                            <mat-form-field>
-                                                <mat-select placeholder="Police(s)" [(value)]="setPolice" name="police">
-                                                    <mat-option *ngFor="let donnee of listePolices"
-                                                        [value]="donnee.Police">
-                                                        {{ donnee.Police }}
-                                                    </mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-
-
-                                        <div class="col-md-4">
-
-                                            <button mat-raised-button class="btn btn-info" (click)="getlespolicesbyclient()">
-                                                <span class="btn-label">
-                                                    <i class="material-icons">shopping_cart</i>
-                                                </span>
-                                                Afficher
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label">&nbsp;</label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-md-5">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput [(ngModel)]="clientRest.nom" name='nom' type="text"
-                                                    placeholder="Nom" maxlength="30">
-                                            </mat-form-field>
-                                        </div>
-
-                                        <div class="col-md-5">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput [(ngModel)]="clientRest.prenom" name='prenom'
-                                                    type="text" placeholder="Pr&eacute;nom" maxlength="50">
-                                            </mat-form-field>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label">&nbsp;</label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-md-5">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput [(ngModel)]="clientRest.contact" name='contact'
-                                                    type="text" placeholder="Contact" maxlength="20">
-                                            </mat-form-field>
-                                        </div>
-
-                                        <div class="col-md-5">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput [(ngModel)]="clientRest.email" name='email' type="text"
-                                                    placeholder="Email" maxlength="50">
-                                            </mat-form-field>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label">&nbsp;</label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-md-5">
-                                            <mat-form-field>
-                                                <input matInput [matDatepicker]="basicDatepickerMrh" 
-                                                    [(ngModel)]="getNaissanceMrh"
-                                                    name="dates" placeholder="Date de naissance">
-                                                <mat-datepicker-toggle matSuffix [for]="basicDatepickerMrh">
-                                                </mat-datepicker-toggle>
-                                                <mat-datepicker #basicDatepickerMrh></mat-datepicker>
-                                            </mat-form-field>
-                                        </div>
-
-                                        <div class="col-lg-5 col-md-8 col-sm-4">
-                                            <mat-form-field>
-                                                <mat-select placeholder="Civilit&eacute;"
-                                                    [(value)]="clientRest.civilite" name="activite">
-                                                    <mat-option *ngFor="let donnee of lesCivilite"
-                                                        [value]="donnee.idciv">
-                                                        {{ donnee.libelle }}
-                                                    </mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label">&nbsp;</label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-lg-6 col-md-8 col-sm-4">
-                                            <mat-form-field>
-                                                <mat-select placeholder="Activit&eacute;"
-                                                    [(value)]="clientRest.activite" name="activite">
-                                                    <mat-option *ngFor="let donnee of listeActivite"
-                                                        [value]="donnee.idact">
-                                                        {{ donnee.libelle }}
-                                                    </mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-8 col-sm-4">
-                                            <mat-form-field>
-                                                <mat-select placeholder="Type du client"
-                                                    [(value)]="typeclient" name="typeclient">
-                                                    <mat-option [value]="1">Client</mat-option>
-                                                    <mat-option [value]="0">Prospect</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label"><span style="color: black;">CNI</span></label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-md-5">
-                                            <input placeholder="CNI" type="file" id="cni" name="cni"
-                                                (change)="onCniSelected($event)" />
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label"><span style="color: black;">PHOTO</span></label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-lg-5 col-md-8 col-sm-4">
-                                            <input type="file" id="photo" name="photo"
-                                                (change)="onPhotoSelected($event)" />
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label"><span
-                                        style="color: black;">Contenu</span></label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-md-5">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput [(ngModel)]="adressegeographique" name='adressegeographique'
-                                                    type="text" placeholder="Adresse g&eacute;ographique"
-                                                    maxlength="40" >
-                                            </mat-form-field>
-                                        </div>
-
-                                        <div class="col-md-5">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput [(ngModel)]="situationgeographique" name='situationgeographique'
-                                                    type="text" placeholder="Situation g&eacute;ographique du risque"
-                                                    maxlength="40" >
-                                            </mat-form-field>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label">&nbsp;</label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-lg-5 col-md-8 col-sm-4">
-                                            <mat-form-field>
-                                                <mat-select placeholder="Choix de formules"
-                                                    [(value)]="fraisdetraitement" name="fraisdetraitement">
-                                                    <mat-option *ngFor="let donnee of listeFraisTraitement"
-                                                        [value]="donnee.idnmd">
-                                                        {{ donnee.libelle }}
-                                                    </mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-
-                                        <!-- Qualité proposant  -->
-                                        <mat-form-field>
-                                            <mat-select placeholder="Qualit&eacute; proposant"
-                                                [(value)]="qualiteproposant" name="qualiteproposant">
-                                                <mat-option [value]="1">Propri&eacute;taire occupant</mat-option>
-                                                <mat-option [value]="0">Locataire</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-                            <div class="row">
-                                <div style="text-align: center; width: 100%; color:red; font-weight: bold;" id="infos">
-                                </div>
-                            </div>
-
-
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button mat-raised-button type="button" (click)="enregDevisAccident()"
-                            class="btn btn-info">Enregistrer</button> <!-- data-dismiss="modal"  -->
-                    </div>
-                </div>
-            </div>
-        </div>
-
 
 
 
