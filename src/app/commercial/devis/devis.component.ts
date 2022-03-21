@@ -7,10 +7,12 @@ import { ClientRest } from 'src/app/mesbeans/clientrest';
 import { Detailequipe } from 'src/app/mesbeans/detailequipe';
 import { Detailtable } from 'src/app/mesbeans/detailnomenclature';
 import { Indemnitemax } from 'src/app/mesbeans/indemnitemax';
+import { Paysdestination } from 'src/app/mesbeans/paysdestination';
 import { RestClient } from 'src/app/mesbeans/restclientcom';
 import { RestPolice } from 'src/app/mesbeans/restpolice';
 import { StatsDevisUser } from 'src/app/mesbeans/statsdevisuser';
 import { UtilisateurInfo } from 'src/app/mesbeans/utilisateurinfo';
+import { Zonedestination } from 'src/app/mesbeans/zonedestination';
 import { MeswebservService } from 'src/app/messervices/meswebserv.service';
 import { Traitements } from 'src/app/messervices/traitements';
 
@@ -138,7 +140,7 @@ export class DevisComponent implements OnInit {
   //
   choixGarantie = "3";
   coutproduit = 0;
-  displayCout ="0";
+  displayCout = "0";
   //
   indemnitemax = 2500000;
   menuIndemniteItems: any[];
@@ -155,9 +157,11 @@ export class DevisComponent implements OnInit {
   listeDevisAuto: BeanDonneDevis[];
   listeDevisAccident: BeanDonneDevis[];
   listeDevisVoyage: BeanDonneDevis[];
+  listeDevisMrh: BeanDonneDevis[];
   getDevisAuto = false;
   getDevisAccident = false;
   getDevisVoyage = false;
+  getDevisMrh = false;
   statsdevisuser = new StatsDevisUser();
   //
   cotationECO = "0";
@@ -171,6 +175,8 @@ export class DevisComponent implements OnInit {
   id_accident = 0;
 
   // Voyage :
+  listeZoneDestination: Zonedestination[];
+  listePaysDestination: Paysdestination[];
   zonedestination = 1;
   paysdestination = 1;
   getJourDepart = new Date();
@@ -180,9 +186,11 @@ export class DevisComponent implements OnInit {
   basicjourretour = "";
   basicnaissvoyage = "";
   id_voyage = 0;
+  updateDevVoyage = false;
+  updatePaysDevVoyage = 0;
 
   // AUTO 
-  listeIdemniteAuto : Indemnitemax[];
+  listeIdemniteAuto: Indemnitemax[];
 
   // MRH 
   listeFormuleMrh: Detailtable[];
@@ -196,7 +204,10 @@ export class DevisComponent implements OnInit {
   choixformule = 0;
   coutreelmrh = "0";
   qualiteproposant = 1;
-  
+  adressegeographique = "";
+  situationgeographique = "";
+  id_mrh = 0;
+
 
 
 
@@ -223,6 +234,7 @@ export class DevisComponent implements OnInit {
     this.getFraisTraitemente();
     this.getFormuleMrh();
     this.getAllActivities();
+    this.getzonedestination();
 
     // For ASSURANCE AUTO
     this.getDureeContrat();
@@ -235,6 +247,7 @@ export class DevisComponent implements OnInit {
     this.getDevisAutoByTrader();
     this.getDevisAccidentByTrader();
     this.getDevisVoyageByTrader();
+    this.getDevisMrhByTrader();
 
     //
     this.separateurMillierOnFields();
@@ -425,6 +438,33 @@ export class DevisComponent implements OnInit {
   }
 
 
+  // Get ZONE DESTINATION :
+  getzonedestination() {
+    this.meswebservices.getzonedestination().toPromise()
+      .then(
+        resultat => {
+          this.listeZoneDestination = resultat;
+          this.zonedestination = resultat[0].idzon;
+          // Refresh :
+          this.getpaysdestination();
+        }
+      )
+  }
+
+  // PAYS de destination :
+  getpaysdestination(): void {
+    this.meswebservices.getpaysdestination(this.zonedestination.toString()).toPromise()
+      .then(
+        resultat => {
+          this.listePaysDestination = resultat;
+          if (!this.updateDevVoyage) this.paysdestination = resultat[0].iddes;
+          else {
+            this.updateDevVoyage = false;
+            this.paysdestination = this.updatePaysDevVoyage;
+          }
+        }
+      )
+  }
 
   // Go to pull FRAIS TRAITEMENT data , id : 4 :
   getFraisTraitemente(): void {
@@ -519,8 +559,8 @@ export class DevisComponent implements OnInit {
   }
 
 
-  
-  displayAllPropositions(setOffre: number){
+
+  displayAllPropositions(setOffre: number) {
     let coutCotation = 0;
     switch (setOffre) {
       case 23:
@@ -575,8 +615,8 @@ export class DevisComponent implements OnInit {
 
 
   // Select Formule :
-  selectformule(){
-    switch(this.choixformule){
+  selectformule() {
+    switch (this.choixformule) {
       case 1039:
         $('#form1').css('background-color', '#697FD0'); // Formule 1
         $('#form2').css('background-color', '#d1caca');
@@ -593,15 +633,15 @@ export class DevisComponent implements OnInit {
 
       case 1041:
         $('#form1').css('background-color', '#d1caca');
-        $('#form2').css('background-color', '#d1caca'); 
+        $('#form2').css('background-color', '#d1caca');
         $('#form3').css('background-color', '#697FD0'); // Formule 3
         $('#form4').css('background-color', '#d1caca');
         break;
 
       case 1042:
         $('#form1').css('background-color', '#d1caca');
-        $('#form2').css('background-color', '#d1caca'); 
-        $('#form3').css('background-color', '#d1caca'); 
+        $('#form2').css('background-color', '#d1caca');
+        $('#form3').css('background-color', '#d1caca');
         $('#form4').css('background-color', '#697FD0'); // Formule 4
         break;
 
@@ -680,7 +720,7 @@ export class DevisComponent implements OnInit {
         break;
     }
 
-    
+
   }
 
 
@@ -757,7 +797,7 @@ export class DevisComponent implements OnInit {
     this.clientRest.prenom = "";
     this.clientRest.contact = "";
     this.clientRest.email = "";
-          
+
     this.puissancevehicule = "0";
     this.chargeutile = "0";
     this.id_devisauto = 0;
@@ -960,33 +1000,135 @@ export class DevisComponent implements OnInit {
   }
 
 
+
+
+  // Save the DEVIS MRH :
+  enregDevisMrh() {
+
+    // set the date :
+    let momentVariable = moment(this.getNaissanceMrh, 'MM-DD-YYYY');
+    let dates = momentVariable.format('YYYY-MM-DD');
+    // Date effet :
+    let momentEffet = moment(this.getDateEffet, 'MM-DD-YYYY');
+    let dateEffet = momentEffet.format('YYYY-MM-DD');
+    // Date expiration :
+    let momentExpiration = moment(this.getDateExpiration, 'MM-DD-YYYY');
+    let dateExpiration = momentExpiration.format('YYYY-MM-DD');
+
+
+    var diffYear = (this.getCurrentDate.getTime() - this.getNaissanceMrh.getTime()) / 1000;
+    diffYear /= (60 * 60 * 24);
+    let difference = Math.abs(Math.round(diffYear / 365.25));
+
+    if (this.clientRest.nom.trim().toString().length == 0) {
+      this.warnmessage("Le nom du client n'est pas renseigné !");
+      return;
+    }
+
+    if (this.clientRest.prenom.trim().toString().length == 0) {
+      this.warnmessage("Le prénom du client n'est pas renseigné !");
+      return;
+    }
+
+    if (this.clientRest.contact.trim().toString().length == 0) {
+      this.warnmessage("Le contact du client n'est pas renseigné !");
+      return;
+    }
+
+    if (this.clientRest.email.trim().toString().length == 0) {
+      this.warnmessage("L'adresse mail du client n'est pas renseignée !");
+      return;
+    }
+
+    // adresse geographique :
+    if (this.adressegeographique.trim().toString().length == 0) {
+      this.warnmessage("L'adresse géographique n'est pas renseignée !");
+      return;
+    }
+
+    // situationgeographique
+    if (this.situationgeographique.trim().toString().length == 0) {
+      this.warnmessage("La situation géographique n'est pas renseignée !");
+      return;
+    }
+
+    // Vérification sur le cout reel du bien :
+    let tpCharge = this.coutreelmrh.replace(/[^0-9]/g, '');
+    if (!/^[0-9]+$/.test(tpCharge)) {
+      this.warnmessage("Le cout réel du bien renseigné n'est pas correct !");
+      return;
+    }
+
+
+    // Now prepare the data :
+    if (difference >= 18) {
+      this.formData.append("nom", this.clientRest.nom.toString());
+      this.formData.append("prenom", this.clientRest.prenom.toString());
+      this.formData.append("contact", this.clientRest.contact.toString());
+      this.formData.append("email", this.clientRest.email.toString());
+      this.formData.append("datenaissance", dates);
+      this.formData.append("civilite", this.clientRest.civilite.toString());
+      this.formData.append("activite", this.clientRest.activite.toString());
+      this.formData.append("typeduclient", this.typeclient.toString());
+      this.formData.append("adressegeographique", this.adressegeographique.trim());
+      this.formData.append("situationgeographique", this.situationgeographique.trim());
+      this.formData.append("qualiteproposant", this.qualiteproposant.toString());
+      this.formData.append("choixformule", this.choixformule.toString());
+      this.formData.append("coutreelbien", tpCharge);
+      this.formData.append("dateeffet", dateEffet);
+      this.formData.append("dateexpiration", dateExpiration);
+      this.formData.append("iddevismrh", this.id_mrh.toString());
+      this.formData.append("idCliendDone", this.idCliendDone);
+      this.formData.append("idclient", this.idClient);
+
+      // Call :
+      this.meswebservices.sendDevisMrh(this.formData).toPromise()
+        .then(
+          resultat => {
+            if (resultat.code == "ok") {
+              location.reload();
+            }
+          },
+          (error) => {
+            this.warnmessage("Impossible de d'enregistrer le RAPPORT !");
+          }
+        );
+    }
+    else {
+      this.warnmessage("Le client est mineur pour souscrire à ce produit d'assurance !");
+    }
+  }
+
+
+
+
   // Save the DEVIS AUTO :
-  enregDevisAuto(){
+  enregDevisAuto() {
 
     // set the date :
     let momentVariable = moment(this.customerBirthDate, 'MM-DD-YYYY');
     let dates = momentVariable.format('YYYY-MM-DD');
 
-    var diffYear =(this.getCurrentDate.getTime() - this.customerBirthDate.getTime()) / 1000;
+    var diffYear = (this.getCurrentDate.getTime() - this.customerBirthDate.getTime()) / 1000;
     diffYear /= (60 * 60 * 24);
-    let difference = Math.abs(Math.round(diffYear/365.25));
+    let difference = Math.abs(Math.round(diffYear / 365.25));
 
-    if(this.clientRest.nom.toString().length == 0){
+    if (this.clientRest.nom.toString().length == 0) {
       this.warnmessage("Le nom du client n'est pas renseigné !");
       return;
     }
 
-    if(this.clientRest.prenom.toString().length == 0){
+    if (this.clientRest.prenom.toString().length == 0) {
       this.warnmessage("Le prénom du client n'est pas renseigné !");
       return;
     }
 
-    if(this.clientRest.contact.toString().length == 0){
+    if (this.clientRest.contact.toString().length == 0) {
       this.warnmessage("Le contact du client n'est pas renseigné !");
       return;
     }
 
-    if(this.clientRest.email.toString().length == 0){
+    if (this.clientRest.email.toString().length == 0) {
       this.warnmessage("L'adresse mail du client n'est pas renseignée !");
       return;
     }
@@ -1008,7 +1150,7 @@ export class DevisComponent implements OnInit {
 
 
     // Now prepare the data :
-    if(difference >= 18){
+    if (difference >= 18) {
       this.formData.append("nom", this.clientRest.nom.toString());
       this.formData.append("prenom", this.clientRest.prenom.toString());
       this.formData.append("contact", this.clientRest.contact.toString());
@@ -1019,7 +1161,7 @@ export class DevisComponent implements OnInit {
       this.formData.append("typeduclient", this.typeclient.toString());
       this.formData.append("energievehicule", this.energievehicule.toString());
       this.formData.append("nombredeplace", this.nombreplacevehicule.toString());
-      this.formData.append("puissancevehicule", this.puissanceVehicule.toString() );
+      this.formData.append("puissancevehicule", this.puissanceVehicule.toString());
       this.formData.append("chargeutile", tpCharge.trim());
       this.formData.append("dureecontrat", this.dureecontrat.toString());
       this.formData.append("offrecommerciale", this.offrecommerciale.toString());
@@ -1032,18 +1174,18 @@ export class DevisComponent implements OnInit {
 
       // Call :
       this.meswebservices.sendDevisAuto(this.formData).toPromise()
-      .then(
-        resultat => {
-          if(resultat.code == "ok"){
-            location.reload();
+        .then(
+          resultat => {
+            if (resultat.code == "ok") {
+              location.reload();
+            }
+          },
+          (error) => {
+            this.warnmessage("Impossible de d'enregistrer le RAPPORT !");
           }
-        },
-        (error) => {
-          this.warnmessage("Impossible de d'enregistrer le RAPPORT !");
-        }
-      );
+        );
     }
-    else{
+    else {
       this.warnmessage("Le client est mineur pour souscrire à ce produit d'assurance !");
     }
   }
@@ -1052,32 +1194,32 @@ export class DevisComponent implements OnInit {
 
   // Enregistrer 'DEVIS - ACCIDENT'
   // Save the DEVIS AUTO :
-  enregDevisAccident(){
+  enregDevisAccident() {
 
     // set the date :
     let momentVariable = moment(this.getDate, 'MM-DD-YYYY');
     let dates = momentVariable.format('YYYY-MM-DD');
 
-    var diffYear =(this.getCurrentDate.getTime() - this.getDate.getTime()) / 1000;
+    var diffYear = (this.getCurrentDate.getTime() - this.getDate.getTime()) / 1000;
     diffYear /= (60 * 60 * 24);
-    let difference = Math.abs(Math.round(diffYear/365.25));
+    let difference = Math.abs(Math.round(diffYear / 365.25));
 
-    if(this.clientRest.nom.toString().length == 0){
+    if (this.clientRest.nom.toString().length == 0) {
       this.warnmessage("Le nom du client n'est pas renseigné !");
       return;
     }
 
-    if(this.clientRest.prenom.toString().length == 0){
+    if (this.clientRest.prenom.toString().length == 0) {
       this.warnmessage("Le prénom du client n'est pas renseigné !");
       return;
     }
 
-    if(this.clientRest.contact.toString().length == 0){
+    if (this.clientRest.contact.toString().length == 0) {
       this.warnmessage("Le contact du client n'est pas renseigné !");
       return;
     }
 
-    if(this.clientRest.email.toString().length == 0){
+    if (this.clientRest.email.toString().length == 0) {
       this.warnmessage("L'adresse mail du client n'est pas renseignée !");
       return;
     }
@@ -1098,7 +1240,7 @@ export class DevisComponent implements OnInit {
 
 
     // Now prepare the data :
-    if(difference >= 18){
+    if (difference >= 18) {
       this.formData.append("nom", this.clientRest.nom.toString());
       this.formData.append("prenom", this.clientRest.prenom.toString());
       this.formData.append("contact", this.clientRest.contact.toString());
@@ -1109,25 +1251,25 @@ export class DevisComponent implements OnInit {
       this.formData.append("typeduclient", this.typeclient.toString());
       this.formData.append("capitaldeces", tpCapitaldeces);
       this.formData.append("capitalinfirmite", tpCapitalinfirmite);
-      this.formData.append("fraisdetraitement", this.fraisdetraitement.toString() );
+      this.formData.append("fraisdetraitement", this.fraisdetraitement.toString());
       this.formData.append("idaccident", this.id_accident.toString());
       this.formData.append("idCliendDone", this.idCliendDone);
       this.formData.append("idclient", this.idClient);
 
       // Call :
       this.meswebservices.sendDevisAccident(this.formData).toPromise()
-      .then(
-        resultat => {
-          if(resultat.code == "ok"){
-            location.reload();
+        .then(
+          resultat => {
+            if (resultat.code == "ok") {
+              location.reload();
+            }
+          },
+          (error) => {
+            this.warnmessage("Impossible de d'enregistrer le RAPPORT !");
           }
-        },
-        (error) => {
-          this.warnmessage("Impossible de d'enregistrer le RAPPORT !");
-        }
-      );
+        );
     }
-    else{
+    else {
       this.warnmessage("Le client est mineur pour souscrire à ce produit d'assurance !");
     }
   }
@@ -1138,7 +1280,7 @@ export class DevisComponent implements OnInit {
 
 
   // Save the DEVIS AUTO :
-  enregDevisVoyage(){
+  enregDevisVoyage() {
 
     // set the date :
     let momentVariable = moment(this.getNaissVoyage, 'MM-DD-YYYY');
@@ -1150,32 +1292,32 @@ export class DevisComponent implements OnInit {
     let momentVariableRetour = moment(this.getJourRetour, 'MM-DD-YYYY');
     let dateRetour = momentVariableRetour.format('YYYY-MM-DD');
 
-    var diffYear =(this.getCurrentDate.getTime() - this.getNaissVoyage.getTime()) / 1000;
+    var diffYear = (this.getCurrentDate.getTime() - this.getNaissVoyage.getTime()) / 1000;
     diffYear /= (60 * 60 * 24);
-    let difference = Math.abs(Math.round(diffYear/365.25));
+    let difference = Math.abs(Math.round(diffYear / 365.25));
 
-    if(this.clientRest.nom.toString().length == 0){
+    if (this.clientRest.nom.toString().length == 0) {
       this.warnmessage("Le nom du client n'est pas renseigné !");
       return;
     }
 
-    if(this.clientRest.prenom.toString().length == 0){
+    if (this.clientRest.prenom.toString().length == 0) {
       this.warnmessage("Le prénom du client n'est pas renseigné !");
       return;
     }
 
-    if(this.clientRest.contact.toString().length == 0){
+    if (this.clientRest.contact.toString().length == 0) {
       this.warnmessage("Le contact du client n'est pas renseigné !");
       return;
     }
 
-    if(this.clientRest.email.toString().length == 0){
+    if (this.clientRest.email.toString().length == 0) {
       this.warnmessage("L'adresse mail du client n'est pas renseignée !");
       return;
     }
 
     // Now prepare the data :
-    if(difference >= 18){
+    if (difference >= 18) {
       this.formData.append("nom", this.clientRest.nom.toString());
       this.formData.append("prenom", this.clientRest.prenom.toString());
       this.formData.append("contact", this.clientRest.contact.toString());
@@ -1187,34 +1329,51 @@ export class DevisComponent implements OnInit {
 
       this.formData.append("zone", this.zonedestination.toString());
       this.formData.append("pays", this.paysdestination.toString());
-      this.formData.append("jourdepart", dateDepart );
-      this.formData.append("jourretour", dateRetour );
-      this.formData.append("idvoyage", this.id_voyage.toString() );
+      this.formData.append("jourdepart", dateDepart);
+      this.formData.append("jourretour", dateRetour);
+      this.formData.append("idvoyage", this.id_voyage.toString());
       this.formData.append("idCliendDone", this.idCliendDone);
       this.formData.append("idclient", this.idClient);
 
       // Call :
       this.meswebservices.sendDevisVoyage(this.formData).toPromise()
-      .then(
-        resultat => {
-          if(resultat.code == "ok"){
-            location.reload();
+        .then(
+          resultat => {
+            if (resultat.code == "ok") {
+              location.reload();
+            }
+          },
+          (error) => {
+            this.warnmessage("Impossible de d'enregistrer le RAPPORT !");
           }
-        },
-        (error) => {
-          this.warnmessage("Impossible de d'enregistrer le RAPPORT !");
-        }
-      );
+        );
     }
-    else{
+    else {
       this.warnmessage("Le client est mineur pour souscrire à ce produit d'assurance !");
     }
   }
 
 
+  // Get DATA from MRH devis :
+  getDevisMrhByTrader() {
+    this.meswebservices.getDevisMrhByTrader().toPromise()
+      .then(
+        resultat => {
+          this.listeDevisMrh = resultat;
+          this.getDevisMrh = true;
+          this.initTableMrh();
+        },
+        (error) => {
+          this.getDevisMrh = true;
+          this.initTableMrh();
+        }
+      );
+  }
+
+
 
   // Get DATA from VOYAGE devis :
-  getDevisVoyageByTrader(){
+  getDevisVoyageByTrader() {
     this.meswebservices.getDevisVoyageByTrader().toPromise()
       .then(
         resultat => {
@@ -1232,7 +1391,7 @@ export class DevisComponent implements OnInit {
 
 
   // Get DATA from AUTO devis :
-  getDevisAutoByTrader(){
+  getDevisAutoByTrader() {
     this.meswebservices.getDevisAutoByTrader().toPromise()
       .then(
         resultat => {
@@ -1251,7 +1410,7 @@ export class DevisComponent implements OnInit {
 
 
   // Get DATA from AUTO devis :
-  getDevisAccidentByTrader(){
+  getDevisAccidentByTrader() {
     this.meswebservices.getDevisAccidentByTrader().toPromise()
       .then(
         resultat => {
@@ -1269,7 +1428,7 @@ export class DevisComponent implements OnInit {
 
 
   // Get DATA from AUTO devis :
-  getStatsDevisForUser(){
+  getStatsDevisForUser() {
     this.meswebservices.getStatsDevisForUser().toPromise()
       .then(
         resultat => {
@@ -1281,8 +1440,15 @@ export class DevisComponent implements OnInit {
   }
 
 
+  // Display PAYMENT METHOD :
+  choixpaiement( idDevis : string, devisType : number){
+    // 1 : AUTO
+    $('#modalpayment').modal();
+  }
+
+
   // Get DATA from AUTO devis :
-  getDevisAutoByIdauto(idauto: string){
+  getDevisAutoByIdauto(idauto: string) {
     this.meswebservices.getDevisAutoByIdauto(idauto).toPromise()
       .then(
         resultat => {
@@ -1291,7 +1457,7 @@ export class DevisComponent implements OnInit {
           this.clientRest.prenom = resultat.prenom;
           this.clientRest.contact = resultat.contact;
           this.clientRest.email = resultat.email;
-          
+
           this.clientRest.civilite = resultat.civilite;
           this.clientRest.activite = resultat.activite;
           this.typeclient = resultat.typeclient;
@@ -1325,13 +1491,156 @@ export class DevisComponent implements OnInit {
           //alert("OK");
         },
         (error) => {
-          
+
         }
       );
   }
 
 
-  initTableAuto(){
+
+
+
+  // Get DATA from ACCIDENT devis :
+  getDevisAccidentByIdacc(idacc: string) {
+
+    this.meswebservices.getDevisAccidentByIdacc(idacc).toPromise()
+      .then(
+        resultat => {
+          // Process :
+          this.clientRest.nom = resultat.nom;
+          this.clientRest.prenom = resultat.prenom;
+          this.clientRest.contact = resultat.contact;
+          this.clientRest.email = resultat.email;
+
+          this.clientRest.civilite = resultat.civilite;
+          this.clientRest.activite = resultat.activite;
+          this.typeclient = resultat.typeclient;
+
+          // ACCIDENT data :
+          this.capitaldeces = resultat.capitaldeces.toString();
+          this.capitalinfirmite = resultat.capitalinfirmite.toString();
+          this.fraisdetraitement = resultat.fraisdetraitement;
+
+          this.id_accident = resultat.idacc;
+          this.idCliendDone = resultat.idCliendDone.toString();
+          this.idClient = resultat.idClient.toString();
+
+          //
+          this.getDate = new Date(resultat.dates.toString());
+
+          this.membresId = [];
+          this.selectedItems = [];
+          $('#modalAccident').modal();
+        },
+        (error) => {
+        }
+      );
+  }
+
+
+
+
+  // Get DATA from VOYAGE devis :
+  getDevisVoyageByIdvoy(idvoy: string) {
+
+    this.meswebservices.getDevisVoyageByIdvoy(idvoy).toPromise()
+      .then(
+        resultat => {
+
+          // Process :
+          this.clientRest.nom = resultat.nom;
+          this.clientRest.prenom = resultat.prenom;
+          this.clientRest.contact = resultat.contact;
+          this.clientRest.email = resultat.email;
+
+          this.clientRest.civilite = resultat.civilite;
+          this.clientRest.activite = resultat.activite;
+          this.typeclient = resultat.typeclient;
+
+
+          this.id_voyage = resultat.idvoy;
+          this.idCliendDone = resultat.idCliendDone.toString();
+          this.idClient = resultat.idClient.toString();
+
+          //
+          //alert(resultat.datenaissance.toString());
+          //alert(resultat.datedepart.toString());
+          //alert(resultat.dateretour.toString());
+          this.getNaissVoyage = new Date(resultat.datenaissance.toString());
+          this.getJourDepart = new Date(resultat.datedepart.toString());
+          this.getJourRetour = new Date(resultat.dateretour.toString());
+
+          // VOYAGE data :
+          this.zonedestination = resultat.zonedestination;
+          // update the 'DROPDOWN list'
+          this.getpaysdestination();
+          this.updateDevVoyage = true;
+          this.updatePaysDevVoyage = resultat.paysdestination;
+          //this.paysdestination = resultat.paysdestination;
+
+
+          this.membresId = [];
+          this.selectedItems = [];
+          $('#modalVoyage').modal();
+        },
+        (error) => {
+        }
+      );
+  }
+
+
+
+
+  // Get DATA from ACCIDENT devis :
+  getDevisMrhByIdacc(idmrh: string) {
+    this.meswebservices.getDevisMrhByIdacc(idmrh).toPromise()
+      .then(
+        resultat => {
+          // Process :
+          this.clientRest.nom = resultat.nom;
+          this.clientRest.prenom = resultat.prenom;
+          this.clientRest.contact = resultat.contact;
+          this.clientRest.email = resultat.email;
+          this.clientRest.civilite = resultat.civilite;
+          this.clientRest.activite = resultat.activite;
+          this.typeclient = resultat.typeclient;
+
+          // MRH data :
+          this.adressegeographique = resultat.adresse.toString();
+          this.situationgeographique = resultat.situation.toString();
+          this.qualiteproposant = resultat.proposant;
+          this.choixformule = resultat.formule;
+          this.coutreelmrh = resultat.coutbien.toString();
+
+          this.id_mrh = resultat.idmrh;
+          this.idCliendDone = resultat.idCliendDone.toString();
+          this.idClient = resultat.idClient.toString();
+
+          //
+          this.getNaissanceMrh = new Date(resultat.dates.toString());
+          this.getDateEffet = new Date(resultat.dateeffet.toString());
+          this.getDateExpiration = new Date(resultat.dateexpiration.toString());
+
+          // Update 'RUBRIQUE'
+          this.selectformule();
+
+          // change 'COUT REEL BIEN' :
+
+
+          this.membresId = [];
+          this.selectedItems = [];
+          $('#modalMrh').modal();
+        },
+        (error) => {
+        }
+      );
+  }
+
+
+
+
+
+  initTableAuto() {
     setTimeout(function () {
       $('#datatableAuto').DataTable({
         "pagingType": "full_numbers",
@@ -1351,7 +1660,7 @@ export class DevisComponent implements OnInit {
 
 
   // initTableAccident
-  initTableAccident(){
+  initTableAccident() {
     setTimeout(function () {
       $('#datatableAccident').DataTable({
         "pagingType": "full_numbers",
@@ -1370,25 +1679,44 @@ export class DevisComponent implements OnInit {
   }
 
 
+  // initTableMrh
+  initTableMrh() {
+    setTimeout(function () {
+      $('#datatableMrh').DataTable({
+        "pagingType": "full_numbers",
+        "lengthMenu": [
+          [10, 25, 50, -1],
+          [10, 25, 50, "All"]
+        ],
+        responsive: true,
+        language: {
+          search: "_INPUT_",
+          searchPlaceholder: "Search records",
+        },
+        "order": [[3, "desc"]]
+      });
+    }, 500);
+  }
 
-    // initTableVoyage
-    initTableVoyage(){
-      setTimeout(function () {
-        $('#datatableVoyage').DataTable({
-          "pagingType": "full_numbers",
-          "lengthMenu": [
-            [10, 25, 50, -1],
-            [10, 25, 50, "All"]
-          ],
-          responsive: true,
-          language: {
-            search: "_INPUT_",
-            searchPlaceholder: "Search records",
-          },
-          "order": [[3, "desc"]]
-        });
-      }, 500);
-    }
+
+  // initTableVoyage
+  initTableVoyage() {
+    setTimeout(function () {
+      $('#datatableVoyage').DataTable({
+        "pagingType": "full_numbers",
+        "lengthMenu": [
+          [10, 25, 50, -1],
+          [10, 25, 50, "All"]
+        ],
+        responsive: true,
+        language: {
+          search: "_INPUT_",
+          searchPlaceholder: "Search records",
+        },
+        "order": [[3, "desc"]]
+      });
+    }, 500);
+  }
 
 
 
@@ -1401,7 +1729,7 @@ export class DevisComponent implements OnInit {
       timer: 3000,
       placement: {
         from: 'top',
-        align: 'center'
+        align: 'left'
       },
       template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0} alert-with-icon" role="alert">' +
         '<button mat-raised-button type="button" aria-hidden="true" class="close" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
@@ -1427,7 +1755,7 @@ export class DevisComponent implements OnInit {
       }
     }).focus(function () {
       var mtamp = $(this).val();
-      if (!/^([0-9]*\.[0-9]+|[0-9]+)$/.test(mtamp) ) {
+      if (!/^([0-9]*\.[0-9]+|[0-9]+)$/.test(mtamp)) {
         $(this).val(mtamp.replace(/[^-0-9]/g, ''));
       }
     }).blur(function () {

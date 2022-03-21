@@ -64,6 +64,11 @@ import { BeanDonneDevis } from "../mesbeans/beandonneedevis";
 import { Clientbeanauto } from "../mesbeans/clientbeanauto";
 import { StatsDevisUser } from "../mesbeans/statsdevisuser";
 import { Indemnitemax } from "../mesbeans/indemnitemax";
+import { Clientbeanaccident } from "../mesbeans/clientbeanaccident";
+import { Zonedestination } from "../mesbeans/zonedestination";
+import { Paysdestination } from "../mesbeans/paysdestination";
+import { Clientbeanvoyage } from "../mesbeans/clientbeanvoyage";
+import { Clientbeanmrh } from "../mesbeans/clientbeanmrh";
 
 @Injectable({
     providedIn: 'root'
@@ -1450,6 +1455,23 @@ export class MeswebservService {
     }
 
 
+    // Get ZONE DESTINATION  :
+    getzonedestination(): Observable<Zonedestination[]> {
+        // TRAITEMENT Controller :
+        return this.httpclient.get<Zonedestination[]>(this.webserviceUri.concat("/getzonedestination"), {});
+    }
+
+
+    // PAYS DESTINATION  :
+    getpaysdestination(idzon: string): Observable<Paysdestination[]> {
+        // TRAITEMENT Controller : 
+        var queteObjet = new Quete();
+        queteObjet.code = idzon;
+        // 
+        return this.httpclient.post<Paysdestination[]>(this.webserviceUri.concat("/getpaysdestination"), queteObjet, {});
+    }
+
+
     // Get INDEMNITE MAX (Devis AUTO)  :
     getlesindemnitesauto(): Observable<Indemnitemax[]> {
         // 
@@ -1522,6 +1544,12 @@ export class MeswebservService {
         return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendDevisVoyage"), donnees, {});
     }
 
+    // SEND DATA for DEVIS MRH :
+    sendDevisMrh(donnees : FormData): Observable<Quete> {
+        // 
+        return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendDevisMrh"), donnees, {});
+    }
+
 
 
 
@@ -1544,6 +1572,12 @@ export class MeswebservService {
         return this.httpclient.get<BeanDonneDevis[]>(this.webserviceUri.concat("/getDevisVoyageByTrader"), {});
     }
 
+    // Pull back data for DEVIS MRH  :
+    getDevisMrhByTrader(): Observable<BeanDonneDevis[]> {
+        // -> DevisController
+        return this.httpclient.get<BeanDonneDevis[]>(this.webserviceUri.concat("/getDevisMrhByTrader"), {});
+    }
+
 
     // Pull back data for DEVIS AUTO  :
     getDevisAutoByIdauto(idauto: string): Observable<Clientbeanauto> {
@@ -1552,6 +1586,45 @@ export class MeswebservService {
         let mesParams = new HttpParams();
         mesParams = mesParams.append('idauto', idauto); // 
         return this.httpclient.get<Clientbeanauto>(this.webserviceUri.concat("/getDevisAutoByIdauto"),
+            {
+                params: mesParams
+            });
+    }
+
+
+    // Pull back data for DEVIS ACCIDENT  :
+    getDevisAccidentByIdacc(idacc: string): Observable<Clientbeanaccident> {
+        // -> DevisController
+        // Now, set the parameters :
+        let mesParams = new HttpParams();
+        mesParams = mesParams.append('idacc', idacc); // 
+        return this.httpclient.get<Clientbeanaccident>(this.webserviceUri.concat("/getDevisAccidentByIdacc"),
+            {
+                params: mesParams
+            });
+    }
+
+
+    // Pull back data for DEVIS MRH  :
+    getDevisMrhByIdacc(idmrh: string): Observable<Clientbeanmrh> {
+        // -> DevisController
+        // Now, set the parameters :
+        let mesParams = new HttpParams();
+        mesParams = mesParams.append('idmrh', idmrh); // 
+        return this.httpclient.get<Clientbeanmrh>(this.webserviceUri.concat("/getDevisMrhByIdacc"),
+            {
+                params: mesParams
+            });
+    }
+
+
+    // Pull back data for DEVIS VOYAGE  :
+    getDevisVoyageByIdvoy(idvoy: string): Observable<Clientbeanvoyage> {
+        // -> DevisController
+        // Now, set the parameters :
+        let mesParams = new HttpParams();
+        mesParams = mesParams.append('idvoy', idvoy); // 
+        return this.httpclient.get<Clientbeanvoyage>(this.webserviceUri.concat("/getDevisVoyageByIdvoy"),
             {
                 params: mesParams
             });
