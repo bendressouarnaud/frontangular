@@ -804,7 +804,7 @@ export class DevisComponent implements OnInit {
     this.idCliendDone = "0";
     this.idClient = "0";
 
-    // Reset :
+    // Reset : 
     this.membresId = [];
     this.selectedItems = [];
     this.clientRest.activite = 1;
