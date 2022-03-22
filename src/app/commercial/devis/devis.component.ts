@@ -208,6 +208,16 @@ export class DevisComponent implements OnInit {
   situationgeographique = "";
   id_mrh = 0;
 
+  // Cheque :
+  numerocheque = "";
+  clientcheque = "";
+  montantcheque = "0";
+  banquemettrice = "";
+  ribclient = "";
+  id_devis ="0";
+  getDateCheque = new Date();
+  chequebarre = true;
+  devisType = 1;
 
 
 
@@ -1441,9 +1451,29 @@ export class DevisComponent implements OnInit {
 
 
   // Display PAYMENT METHOD :
-  choixpaiement( idDevis : string, devisType : number){
+  choixpaiement( idDevis : string, devisType : number, nomclient: string){
     // 1 : AUTO
+    this.devisType = devisType;
+    this.id_devis = idDevis;
+    this.clientcheque = nomclient;
     $('#modalpayment').modal();
+  }
+
+
+  // Choix interface :
+  choixinterface(choix: number){
+    $('#modalpayment').modal('hide');
+    $('#modalcheque').modal();
+  }
+
+
+  //
+  enregCheque(){
+    alert("Statut : "+this.chequebarre);
+  }
+
+  togglechequebarre(e) {
+    this.chequebarre = e.checked;
   }
 
 

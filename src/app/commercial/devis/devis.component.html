@@ -3,11 +3,160 @@
 
 
 
+        <!--   CHEQUE   -->
+        <div class="modal fade" id="modalcheque" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content" style="background-image: linear-gradient(#F4F0F0, 95%, #C2A323);">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Renseigner les donn&eacute;es du <span style="font-weight: bold;">CH&Egrave;QUE</span></h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form method="get" action="/" class="form-horizontal">
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">Informations</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-4">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="numerocheque" name='numerocheque' type="text"
+                                                    placeholder="Num&eacute;ro du ch&egrave;que" maxlength="10" 
+                                                    style="background-color: #c1e7b9;">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="clientcheque" name='clientcheque'
+                                                    type="text" placeholder="Nom du client &eacute;metteur" maxlength="40" 
+                                                    style="color: black;"
+                                                    >
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-4">
+                                            <mat-form-field class="example-full-width text-center">
+                                                <input matInput [(ngModel)]="montantcheque" name='email' type="text"
+                                                    placeholder="Montant" maxlength="50" class="keymontant"
+                                                    style="background-color: #9eafdf; color: black; font-weight: bold;"
+                                                    >
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="banquemettrice" name='banquemettrice'
+                                                    type="text" placeholder="Banque &eacute;mettrice" maxlength="30">
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="ribclient" name='ribclient' type="text"
+                                                    placeholder="RIB Client" maxlength="30">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width text-center">
+                                                <input matInput [(ngModel)]="id_devis" name='iddevis'
+                                                    type="text" disabled placeholder="Id Devis" maxlength="5" 
+                                                    style="color: red; font-weight: bold; background-color: #d4cbcb;"
+                                                    >
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <mat-form-field>
+                                                <input matInput [matDatepicker]="basicDatecheque" [(ngModel)]="getDateCheque"
+                                                    name="dates" placeholder="Date de naissance">
+                                                <mat-datepicker-toggle matSuffix [for]="basicDatecheque">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #basicDatecheque></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        
+                                        <div class="col-lg-5 col-md-8 col-sm-4">
+                                            <mat-checkbox [checked]="chequebarre" (change)="togglechequebarre($event)">
+                                                <span style="color: black;">Ch&egrave;que barr&eacute;</span></mat-checkbox>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div style="text-align: center; width: 100%; color:red; font-weight: bold;" id="infos">
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button mat-raised-button type="button" (click)="enregCheque()"
+                            class="btn btn-info">Enregistrer</button> <!-- data-dismiss="modal"  -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
         <!--  Select payment method :  df --> 
         <div class="modal fade" id="modalpayment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
+
                     <div class="modal-header">
                         <h4 class="modal-title">Confirmer la voie de paiement </h4>
                         <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -18,17 +167,18 @@
                         <table style="width: 100%;">
                             <tr><th style="width: 50%;">Ch&egrave;que</th><th style="width: 50%;">Virement</th></tr>
                             <tr>
-                                <td><img src="assets/img/cheque.jpg" style="width:160px; height:80px" /></td>
-                                <td><img src="assets/img/virement.png" style="width:160px; height:80px" /></td>
+                                <td><img src="assets/img/cheque.jpg" 
+                                    style="width:160px; height:80px" class="imgpaiement" 
+                                    (click)="choixinterface(1)"/></td>
+                                <td><img src="assets/img/virement.png" 
+                                    style="width:160px; height:80px" class="imgpaiement" 
+                                    (click)="choixinterface(2)"
+                                    /></td>
                             </tr>
                         </table>
-                        <p>Souhaitez-vous supprimer ce RDV ? </p>
                         <!--<p style="color: crimson; font-weight: bold;">{{ information }}</p>-->
                     </div>
-                    <div class="modal-footer">
-                        <button mat-raised-button type="button" (click)="supprimerRdv()"
-                            class="btn btn-warning">Supprimer</button>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -1657,21 +1807,7 @@
                                                     </mat-option>
                                                 </mat-select>
                                             </mat-form-field>
-                                        </div>
-
-                                        <!--
-                                        <div class="col-md-5">
-                                            <mat-form-field>
-                                                <input matInput [matDatepicker]="basicDatepicker" [(ngModel)]="getDate"
-                                                    name="dates" placeholder="Date de naissance">
-                                                <mat-datepicker-toggle matSuffix [for]="basicDatepicker">
-                                                </mat-datepicker-toggle>
-                                                <mat-datepicker #basicDatepicker></mat-datepicker>
-                                            </mat-form-field>
-                                        </div>
-                                    -->
-
-
+                                        </div>                                        
 
                                     </div>
                                 </div>
@@ -1992,7 +2128,7 @@
                                                             <td class="text-center">
 
                                                                 <a title="Effectuer un paiement"
-                                                                (click)="choixpaiement( donnee.idauto, 1)"
+                                                                (click)="choixpaiement( donnee.idauto, 1, donnee.client)"
                                                                 class="btn btn-link btn-success btn-just-icon edit"><i
                                                                     class="material-icons">add_shopping_cart</i></a>
 

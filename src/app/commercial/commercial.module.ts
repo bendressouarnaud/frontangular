@@ -21,6 +21,7 @@ import { ActiviteComponent } from './activite/activite.component';
 import { DevisComponent } from './devis/devis.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { ExamenComponent } from './examen/examen.component';
+import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { ExamenComponent } from './examen/examen.component';
     MatInputModule,
     MatSelectModule,
     MatOptionModule,
-    MatDatepickerModule,    
+    MatDatepickerModule, 
+    MatCheckboxModule,   
     FormsModule,
     NativeDateModule,
     ReactiveFormsModule,
