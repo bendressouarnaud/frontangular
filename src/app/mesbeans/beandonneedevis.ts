@@ -8,6 +8,7 @@ export class BeanDonneDevis{
     cout : String;
     dates : String;
     idauto : String;
+    iddevis : String;
 
     constructor(){}
 }

@@ -7,6 +7,7 @@ import { ClientRest } from 'src/app/mesbeans/clientrest';
 import { Detailequipe } from 'src/app/mesbeans/detailequipe';
 import { Detailtable } from 'src/app/mesbeans/detailnomenclature';
 import { Indemnitemax } from 'src/app/mesbeans/indemnitemax';
+import { Motifpaiement } from 'src/app/mesbeans/motifpaiement';
 import { Paysdestination } from 'src/app/mesbeans/paysdestination';
 import { RestClient } from 'src/app/mesbeans/restclientcom';
 import { RestPolice } from 'src/app/mesbeans/restpolice';
@@ -214,10 +215,13 @@ export class DevisComponent implements OnInit {
   montantcheque = "0";
   banquemettrice = "";
   ribclient = "";
-  id_devis ="0";
+  donneurordre = "";
+  id_devis = "0";
   getDateCheque = new Date();
   chequebarre = true;
   devisType = 1;
+  listeMotifPaiement: Motifpaiement[];
+  idMotifPaiement = 0;
 
 
 
@@ -245,6 +249,7 @@ export class DevisComponent implements OnInit {
     this.getFormuleMrh();
     this.getAllActivities();
     this.getzonedestination();
+    this.getMotifsPaiement();
 
     // For ASSURANCE AUTO
     this.getDureeContrat();
@@ -448,6 +453,18 @@ export class DevisComponent implements OnInit {
   }
 
 
+  // Get MOTIF PAIEMENT :
+  getMotifsPaiement() {
+    this.meswebservices.getMotifsPaiement().toPromise()
+      .then(
+        resultat => {
+          this.listeMotifPaiement = resultat;
+          this.idMotifPaiement = resultat[0].idmot;
+        }
+      )
+  }
+
+
   // Get ZONE DESTINATION :
   getzonedestination() {
     this.meswebservices.getzonedestination().toPromise()
@@ -460,6 +477,7 @@ export class DevisComponent implements OnInit {
         }
       )
   }
+
 
   // PAYS de destination :
   getpaysdestination(): void {
@@ -627,6 +645,7 @@ export class DevisComponent implements OnInit {
   // Select Formule :
   selectformule() {
     switch (this.choixformule) {
+      case 46:
       case 1039:
         $('#form1').css('background-color', '#697FD0'); // Formule 1
         $('#form2').css('background-color', '#d1caca');
@@ -1451,7 +1470,7 @@ export class DevisComponent implements OnInit {
 
 
   // Display PAYMENT METHOD :
-  choixpaiement( idDevis : string, devisType : number, nomclient: string){
+  choixpaiement(idDevis: string, devisType: number, nomclient: string) {
     // 1 : AUTO
     this.devisType = devisType;
     this.id_devis = idDevis;
@@ -1461,15 +1480,80 @@ export class DevisComponent implements OnInit {
 
 
   // Choix interface :
-  choixinterface(choix: number){
+  choixinterface(choix: number) {
     $('#modalpayment').modal('hide');
     $('#modalcheque').modal();
   }
 
 
   //
-  enregCheque(){
-    alert("Statut : "+this.chequebarre);
+  enregCheque() {
+    //alert("Statut : "+this.chequebarre);
+
+    if (this.numerocheque.trim().toString().length == 0) {
+      this.warnmessage("Le numéro de chèque n'est pas renseigné !");
+      return;
+    }
+
+    if (this.clientcheque.trim().toString().length == 0) {
+      this.warnmessage("Le nom du client n'est pas renseigné !");
+      return;
+    }
+
+    if (this.banquemettrice.trim().toString().length == 0) {
+      this.warnmessage("Le libellé de la banque n'est pas renseigné !");
+      return;
+    }
+
+    // RIB :
+    if (this.ribclient.trim().toString().length == 0) {
+      this.warnmessage("Le RIB n'est pas renseigné !");
+      return;
+    }
+
+    // Donneur d'ordre :
+    if (this.donneurordre.trim().toString().length == 0) {
+      this.warnmessage("Le donneur d'ordre n'est pas spécifié !");
+      return;
+    }
+
+    // Montant
+    let tpCharge = this.montantcheque.replace(/[^0-9]/g, '');
+    if (!/^[0-9]+$/.test(tpCharge)) {
+      this.warnmessage("Le montant du chèque renseigné n'est pas correct !");
+      return;
+    }
+
+    // Set DATA :
+    var ourFormData = new FormData();
+    ourFormData.append("numerocheque", this.numerocheque.trim());
+    ourFormData.append("clientcheque", this.clientcheque.trim());
+    ourFormData.append("montantcheque", tpCharge);
+    ourFormData.append("banquemettrice", this.banquemettrice.trim());
+    ourFormData.append("ribclient", this.ribclient.trim());
+    ourFormData.append("iddevis", this.id_devis.trim());
+
+    // date emission :
+    let momentVariable = moment(this.getDateCheque, 'MM-DD-YYYY');
+    let dateCheque = momentVariable.format('YYYY-MM-DD');
+    ourFormData.append("datemission", dateCheque);
+    ourFormData.append("donneurordre", this.donneurordre.trim());
+    ourFormData.append("chequebarre", (this.chequebarre == true ? "1" : "0"));
+    ourFormData.append("motif", this.idMotifPaiement.toString());
+
+    // now call API to save data :
+    this.meswebservices.sendPaiementCheque(ourFormData).toPromise()
+      .then(
+        resultat => {
+          if (resultat.code == "ok") {
+            location.reload();
+          }
+        },
+        (error) => {
+          this.warnmessage("Impossible de d'enregistrer le RAPPORT !");
+        }
+      );
+
   }
 
   togglechequebarre(e) {

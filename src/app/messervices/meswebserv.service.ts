@@ -69,6 +69,7 @@ import { Zonedestination } from "../mesbeans/zonedestination";
 import { Paysdestination } from "../mesbeans/paysdestination";
 import { Clientbeanvoyage } from "../mesbeans/clientbeanvoyage";
 import { Clientbeanmrh } from "../mesbeans/clientbeanmrh";
+import { Motifpaiement } from "../mesbeans/motifpaiement";
 
 @Injectable({
     providedIn: 'root'
@@ -1456,6 +1457,13 @@ export class MeswebservService {
     }
 
 
+    // Get MOTIF PAIEMENT  :
+    getMotifsPaiement(): Observable<Motifpaiement[]> {
+        // TRAITEMENT Controller :
+        return this.httpclient.get<Motifpaiement[]>(this.webserviceUri.concat("/getMotifsPaiement"), {});
+    }
+
+
     // Get ZONE DESTINATION  :
     getzonedestination(): Observable<Zonedestination[]> {
         // TRAITEMENT Controller :
@@ -1549,6 +1557,13 @@ export class MeswebservService {
     sendDevisMrh(donnees : FormData): Observable<Quete> {
         // 
         return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendDevisMrh"), donnees, {});
+    }
+
+
+    // SEND DATA for PAYMENT CHEQUE :
+    sendPaiementCheque(donnees : FormData): Observable<Quete> {
+        // 
+        return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendPaiementCheque"), donnees, {});
     }
 
 

@@ -104,10 +104,17 @@
                                         <div class="col-md-5">
                                             <mat-form-field>
                                                 <input matInput [matDatepicker]="basicDatecheque" [(ngModel)]="getDateCheque"
-                                                    name="dates" placeholder="Date de naissance">
+                                                    name="dates" placeholder="Date d'&eacute;mission">
                                                 <mat-datepicker-toggle matSuffix [for]="basicDatecheque">
                                                 </mat-datepicker-toggle>
                                                 <mat-datepicker #basicDatecheque></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="donneurordre" name='donneurordre' type="text"
+                                                    placeholder="Donneur d'ordre" maxlength="25">
                                             </mat-form-field>
                                         </div>
 
@@ -125,6 +132,17 @@
                                         <div class="col-lg-5 col-md-8 col-sm-4">
                                             <mat-checkbox [checked]="chequebarre" (change)="togglechequebarre($event)">
                                                 <span style="color: black;">Ch&egrave;que barr&eacute;</span></mat-checkbox>
+                                        </div>
+
+                                        <div class="col-lg-5 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Motif" [(value)]="idMotifPaiement" name="motifpaiement">
+                                                    <mat-option *ngFor="let donnee of listeMotifPaiement"
+                                                        [value]="donnee.idmot">
+                                                        {{ donnee.libelle }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
                                         </div>
 
                                     </div>
@@ -2128,7 +2146,7 @@
                                                             <td class="text-center">
 
                                                                 <a title="Effectuer un paiement"
-                                                                (click)="choixpaiement( donnee.idauto, 1, donnee.client)"
+                                                                (click)="choixpaiement( donnee.iddevis, 1, donnee.client)"
                                                                 class="btn btn-link btn-success btn-just-icon edit"><i
                                                                     class="material-icons">add_shopping_cart</i></a>
 
