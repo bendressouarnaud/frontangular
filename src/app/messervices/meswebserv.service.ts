@@ -70,6 +70,7 @@ import { Paysdestination } from "../mesbeans/paysdestination";
 import { Clientbeanvoyage } from "../mesbeans/clientbeanvoyage";
 import { Clientbeanmrh } from "../mesbeans/clientbeanmrh";
 import { Motifpaiement } from "../mesbeans/motifpaiement";
+import { Clientbeancheque } from "../mesbeans/clientbeancheque";
 
 @Injectable({
     providedIn: 'root'
@@ -659,13 +660,14 @@ export class MeswebservService {
 
 
     getcommercialrdvchart(): Observable<RepGraphe[]> {
-        // Now, set the parameters :
-        let mesParams = new HttpParams();
-        mesParams = mesParams.append('id', localStorage.getItem("identifiant"));
-        return this.httpclient.get<RepGraphe[]>(this.webserviceUri.concat("/getcommercialrdvchart"),
-            {
-                //params : mesParams
-            });
+        // Traitement controller
+        return this.httpclient.get<RepGraphe[]>(this.webserviceUri.concat("/getcommercialrdvchart"), {});
+    }
+
+
+    getcommercialdevischart(): Observable<RepGraphe[]> {
+        // Traitement controller
+        return this.httpclient.get<RepGraphe[]>(this.webserviceUri.concat("/getcommercialdevischart"), {});
     }
 
 
@@ -1567,6 +1569,13 @@ export class MeswebservService {
     }
 
 
+    // SEND DATA for PAYMENT VIREMENT :
+    sendPaiementVirement(donnees : FormData): Observable<Quete> {
+        // 
+        return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendPaiementVirement"), donnees, {});
+    }
+
+
 
 
     // Pull back data for DEVIS AUTO  :
@@ -1651,6 +1660,31 @@ export class MeswebservService {
     getStatsDevisForUser(): Observable<StatsDevisUser> {
         // -> DevisController
         return this.httpclient.get<StatsDevisUser>(this.webserviceUri.concat("/getStatsDevisForUser"), {});
+    }
+
+
+    // Pull back data for CHEQUE  :
+    getChequeData(iddevis: string): Observable<Clientbeancheque> {
+        // -> DevisController
+        // Now, set the parameters :
+        let mesParams = new HttpParams();
+        mesParams = mesParams.append('iddevis', iddevis); // 
+        return this.httpclient.get<Clientbeancheque>(this.webserviceUri.concat("/getChequeData"),
+            {
+                params: mesParams
+            });
+    }
+
+    // Pull back data for CHEQUE  :
+    getVirementData(iddevis: string): Observable<Clientbeancheque> {
+        // -> DevisController
+        // Now, set the parameters :
+        let mesParams = new HttpParams();
+        mesParams = mesParams.append('iddevis', iddevis); // 
+        return this.httpclient.get<Clientbeancheque>(this.webserviceUri.concat("/getVirementData"),
+            {
+                params: mesParams
+            });
     }
 
 

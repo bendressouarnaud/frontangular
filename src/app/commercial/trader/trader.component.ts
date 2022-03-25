@@ -27,6 +27,7 @@ export class TraderComponent implements OnInit {
     // Call :
     this.getBossName();
     this.getMonthlyChart();
+    this.getMonthlyDevisChart();
     this.getStatBySector();
   }
 
@@ -160,7 +161,6 @@ export class TraderComponent implements OnInit {
           //
           tampons.somme = new Array(mTableau.length);
           tampons.somme = mTableau;
-
           tabDataset.push(tampons);
         }
 
@@ -185,9 +185,6 @@ export class TraderComponent implements OnInit {
             cptColor++;
         }
 
-        //alert("Taille tableHold : "+tableHold.length);
-
-
         //
         var ctx = $('#myChart');
         var myChart = new Chart("chartRDV", {
@@ -196,7 +193,156 @@ export class TraderComponent implements OnInit {
             labels: tabLibMois,
             datasets: tableHold
           },
-          /*plugins:[ChartDataLabels],*/
+          plugins:[ChartDataLabels],
+          options: {
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }
+              ]
+            }
+          }
+        });
+
+        //}
+        //45
+      }
+    );
+  }
+
+
+
+
+
+  // Get RDV graphe 
+  getMonthlyDevisChart(): void {
+    this.meswebservices.getcommercialdevischart().toPromise().then(
+      resultat => {
+
+        //if(resultat.length > 0){
+
+        var tabDonnee = [];
+        var tabAnnee = [];
+        var tabMois = [];
+        var tabLibMois = [];
+
+        //
+        for (var i = 0; i < resultat.length; i++) {
+
+          var tampon: DonneGraphe = new DonneGraphe();
+
+          // Now fill :
+          tampon.annee = resultat[i].annee;
+          tampon.mois = resultat[i].mois;
+          tampon.libmois = this.apicalls.retourMois(resultat[i].mois);
+          tampon.tot = resultat[i].tot;
+
+          //
+          if (tabAnnee.indexOf(resultat[i].annee) == -1) {
+            tabAnnee.push(resultat[i].annee);
+          }
+          //
+          if (tabMois.indexOf(resultat[i].mois) == -1) {
+            tabMois.push(resultat[i].mois);
+            tabLibMois.push(this.apicalls.retourMois(resultat[i].mois));
+          }
+
+          //
+          tabDonnee.push(tampon);
+        }
+
+
+        // Fill the ARRAY with '0' :
+        var existe = false;
+        var setLibMois = "";
+        for (var k = 0; k < tabAnnee.length; k++) {
+          for (var j = 0; j < tabLibMois.length; j++) {
+
+            existe = false;
+            setLibMois = tabLibMois[j];
+
+            for (var l = 0; l < tabDonnee.length; l++) {
+              if (tabLibMois[j] == tabDonnee[l].libMois) {
+                // Set it :
+                if (tabDonnee[l].annee == tabAnnee[k]) {
+                  existe = true;
+                  break;
+                }
+              }
+            }
+
+            // False ? Yes :
+            if (!existe) {
+              // Set it : 
+              //alert('OK');
+              var tamponDonnee: DonneGraphe = new DonneGraphe();
+              tamponDonnee.annee = tabAnnee[k];
+              tamponDonnee.mois = tabMois[j];
+              tamponDonnee.tot = 0;
+              tamponDonnee.libmois = setLibMois;
+              tabDonnee.push(tamponDonnee);
+            }
+
+          }
+        }
+
+        // Organize Ressources & Depot:
+        var tabDataset = [];
+        // Organize DTA per YEAR
+        for (var j = 0; j < tabAnnee.length; j++) {  // tabSigle
+
+          var tampons: DonneTampon = new DonneTampon();
+          var mTableau = [];
+          for (var l = 0; l < tabMois.length; l++) {  // tabAnnee              
+            for (var k = 0; k < tabDonnee.length; k++) {
+              if ((tabAnnee[j] == tabDonnee[k].annee) && (tabMois[l] == tabDonnee[k].mois)) {
+                tampons.sigle = tabDonnee[k].annee;
+                mTableau.push(tabDonnee[k].tot);
+                // 
+                break;
+              }
+            }
+          }
+
+          //
+          tampons.somme = new Array(mTableau.length);
+          tampons.somme = mTableau;
+          tabDataset.push(tampons);
+        }
+
+
+        var tabColueur = ["#056CCD", "#A9B2B1", "#908C7E", "#ED9C40", "#06A41E", "#C6D30A",
+          "#8AD195", "#F3928B", "#6FD2CF", "#C6BC98", "#D7A2D4", "#BB8CF5", "#080808"];
+
+
+        // Now, create a table to hold data :
+        var tableHold = [];
+        var cptColor = 0;
+        for (var j = 0; j < tabDataset.length; j++) {
+          tableHold.push(
+            {
+              label: tabDataset[j].sigle,
+              backgroundColor: tabColueur[cptColor],
+              borderColor: tabColueur[cptColor],
+              data: tabDataset[j].somme,
+              fill: false,
+              borderWidth: 2
+            });
+            cptColor++;
+        }
+
+        //
+        var ctx = $('#myChart');
+        var myChart = new Chart("chartDEVIS", {
+          type: 'line',
+          data: {
+            labels: tabLibMois,
+            datasets: tableHold
+          },
+          plugins:[ChartDataLabels],
           options: {
             scales: {
               yAxes: [
@@ -361,7 +507,7 @@ export class TraderComponent implements OnInit {
             labels: tabLibMois,
             datasets: tableHold
           },
-          /*plugins: [ChartDataLabels],*/
+          plugins: [ChartDataLabels],
           options: {
             scales: {
               xAxes: [{

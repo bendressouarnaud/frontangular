@@ -211,6 +211,7 @@ export class DevisComponent implements OnInit {
 
   // Cheque :
   numerocheque = "";
+  idvirement = "";
   clientcheque = "";
   montantcheque = "0";
   banquemettrice = "";
@@ -218,10 +219,14 @@ export class DevisComponent implements OnInit {
   donneurordre = "";
   id_devis = "0";
   getDateCheque = new Date();
+  basicDatecheque = "";
+  getDateVirement = new Date();
+  basicDateVirement = "";
   chequebarre = true;
   devisType = 1;
   listeMotifPaiement: Motifpaiement[];
   idMotifPaiement = 0;
+  devispaye = "";
 
 
 
@@ -1470,11 +1475,15 @@ export class DevisComponent implements OnInit {
 
 
   // Display PAYMENT METHOD :
-  choixpaiement(idDevis: string, devisType: number, nomclient: string) {
+  choixpaiement(idDevis: string, devisType: number, nomclient: string, devispaye: string) {
     // 1 : AUTO
+    // 2 : Voyage
+    // 3 : Accident
+    // 4 : Mrh
     this.devisType = devisType;
     this.id_devis = idDevis;
     this.clientcheque = nomclient;
+    this.devispaye = devispaye;
     $('#modalpayment').modal();
   }
 
@@ -1482,7 +1491,66 @@ export class DevisComponent implements OnInit {
   // Choix interface :
   choixinterface(choix: number) {
     $('#modalpayment').modal('hide');
-    $('#modalcheque').modal();
+    // Go to PICK DATA , base on 'id_devis' and 'choix'
+    if(choix == 1){
+      // CHEQUE
+      if(this.devispaye == "Oui"){
+        // Call 'getChequeData' to display DATA :
+        this.meswebservices.getChequeData(this.id_devis).toPromise()
+        .then(
+          resultat => {
+
+            // Process :
+            this.numerocheque = resultat.numerocheque.toString();
+            this.clientcheque = resultat.nomemetteur.toString();
+            this.montantcheque = resultat.montant.toString();
+            this.banquemettrice = resultat.banquemettrice.toString();
+
+            this.ribclient = resultat.rib.toString();
+            this.getDateCheque = new Date(resultat.datemission.toString());
+            this.donneurordre = resultat.donneurordre.toString();
+
+            this.chequebarre = resultat.chequebarre == 1 ? true:false;
+            this.idMotifPaiement = resultat.motif;
+
+            // Display 
+            $('#modalcheque').modal();
+          },
+          (error) => {
+          }
+        );
+      }
+      else $('#modalcheque').modal();
+    }
+    else{
+      // Virement 
+      if(this.devispaye == "Oui"){
+        // Call 'getChequeData' to display DATA :
+        this.meswebservices.getVirementData(this.id_devis).toPromise()
+        .then(
+          resultat => {
+
+            // Process :
+            this.idvirement = resultat.numerocheque.toString();
+            this.clientcheque = resultat.nomemetteur.toString();
+            this.montantcheque = resultat.montant.toString();
+            this.banquemettrice = resultat.banquemettrice.toString();
+
+            this.ribclient = resultat.rib.toString();
+            // Set DATE :
+            this.getDateVirement = new Date(resultat.datemission.toString());
+            this.donneurordre = resultat.donneurordre.toString();
+            this.idMotifPaiement = resultat.motif;
+
+            // Display 
+            $('#modalvirement').modal();
+          },
+          (error) => {
+          }
+        );
+      }
+      else $('#modalvirement').modal();
+    } 
   }
 
 
@@ -1553,8 +1621,78 @@ export class DevisComponent implements OnInit {
           this.warnmessage("Impossible de d'enregistrer le RAPPORT !");
         }
       );
-
   }
+
+
+
+    //
+    enregVirement() {
+  
+      if (this.idvirement.trim().toString().length == 0) {
+        this.warnmessage("L'identifiant du virement n'est pas renseigné !");
+        return;
+      }
+  
+      if (this.clientcheque.trim().toString().length == 0) {
+        this.warnmessage("Le nom du client n'est pas renseigné !");
+        return;
+      }
+  
+      if (this.banquemettrice.trim().toString().length == 0) {
+        this.warnmessage("Le libellé de la banque n'est pas renseigné !");
+        return;
+      }
+  
+      // RIB :
+      if (this.ribclient.trim().toString().length == 0) {
+        this.warnmessage("Le RIB n'est pas renseigné !");
+        return;
+      }
+  
+      // Donneur d'ordre :
+      if (this.donneurordre.trim().toString().length == 0) {
+        this.warnmessage("Le donneur d'ordre n'est pas spécifié !");
+        return;
+      }
+  
+      // Montant
+      let tpCharge = this.montantcheque.replace(/[^0-9]/g, '');
+      if (!/^[0-9]+$/.test(tpCharge)) {
+        this.warnmessage("Le montant du virement renseigné n'est pas correct !");
+        return;
+      }
+  
+      // Set DATA :
+      var ourFormData = new FormData();
+      ourFormData.append("idvirement", this.idvirement.trim());
+      ourFormData.append("clientcheque", this.clientcheque.trim());
+      ourFormData.append("montant", tpCharge);
+      ourFormData.append("banquemettrice", this.banquemettrice.trim());
+      ourFormData.append("ribclient", this.ribclient.trim());
+      ourFormData.append("iddevis", this.id_devis.trim());
+  
+      // date emission :
+      let momentVariable = moment(this.getDateVirement, 'MM-DD-YYYY');
+      let dateCheque = momentVariable.format('YYYY-MM-DD');
+      ourFormData.append("datemission", dateCheque);
+      ourFormData.append("donneurordre", this.donneurordre.trim());
+      ourFormData.append("motif", this.idMotifPaiement.toString());
+  
+      // now call API to save data :
+      this.meswebservices.sendPaiementVirement(ourFormData).toPromise()
+        .then(
+          resultat => {
+            if (resultat.code == "ok") {
+              location.reload();
+            }
+          },
+          (error) => {
+            this.warnmessage("Impossible de d'enregistrer le RAPPORT !");
+          }
+        );
+    }
+
+
 
   togglechequebarre(e) {
     this.chequebarre = e.checked;
