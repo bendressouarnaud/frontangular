@@ -252,7 +252,7 @@
                                     </div>
                                 </div>
 
-                                <!--
+                                
                                 <div class="tab-pane" id="link4">
                                     <div class="card" style="border: 1px solid black;">
                                         <div class="card-body">
@@ -264,43 +264,29 @@
                                                     >
                                                     <thead>
                                                         <tr>
+                                                            <th>Commercial</th>
                                                             <th>Client</th>
-                                                            <th class="text-center">Mode paiement</th>
-                                                            <th class="text-center">Pay&eacute;</th>
-                                                            <th>Date de cr&eacute;ation</th>
-                                                            <th>Jour d&eacute;part</th>
-                                                            <th>Jour retour</th>
+                                                            <th class="text-center">Secteur</th>
+                                                            <th class="text-center">Destination</th>
+                                                            <th class="text-center">Date retour</th>
+                                                            <th class="text-center">Date de cr&eacute;ation</th>
                                                             <th class="disabled-sorting text-center">Actions</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody *ngIf="this.getDevisVoyage">
-                                                        <tr *ngFor="let donnee of listeDevisVoyage">
+                                                    <tbody *ngIf="this.getVoyageCommecial">
+                                                        <tr *ngFor="let donnee of listeAutoClientBeanComVoyage">
+                                                            <td style="font-weight: bold;">{{ donnee.commercial }} </td>
                                                             <td style="font-weight: bold;">{{ donnee.client }} </td>
-                                                            <td class="text-center" 
-                                                            style="font-weight: bold; background-color: #d4e4d6;">
-                                                            {{ donnee.contact }}</td>
-                                                            <td class="text-center">
-                                                                <a *ngIf="donnee.secteur == 'Oui'" 
-                                                                    class="btn btn-link btn-success btn-just-icon edit">
-                                                                    <i class="material-icons">check_circle</i></a>
-                                                                <a *ngIf="donnee.secteur == 'Non'" 
-                                                                    class="btn btn-link btn-danger btn-just-icon edit">
-                                                                    <i class="material-icons">highlight_off</i></a>
-                                                            </td>
-                                                            <td>{{ donnee.dates }}</td>
-                                                            <td>{{ donnee.dureecontrat }}</td>
-                                                            <td>{{ donnee.offre }}</td>
+                                                            <td class="text-center" >{{ donnee.secteur }}</td>
+                                                            <td class="text-center" >{{ donnee.duree }}</td>
+                                                            <td class="text-center" >{{ donnee.offre }}</td>
+                                                            <td class="text-center" >{{ donnee.dates }}</td>
                                                             <td class="text-center">
 
-                                                                <a title="Effectuer un paiement"
-                                                                    (click)="choixpaiement( donnee.iddevis, 2, donnee.client, donnee.secteur)"
-                                                                    class="btn btn-link btn-success btn-just-icon edit"><i
-                                                                        class="material-icons">add_shopping_cart</i></a>
-
-                                                                <a title="Afficher les donn&eacute;es de la cotation"
-                                                                    (click)="getDevisVoyageByIdvoy( donnee.idauto )"
-                                                                    class="btn btn-link btn-warning btn-just-icon edit"><i
-                                                                        class="material-icons">save_as</i></a>
+                                                                <a title="Cl&ocirc;turer DEVIS"
+                                                                    (click)="cloturerDevis( donnee.iddev, donnee.client )"
+                                                                    class="btn btn-link btn-danger btn-just-icon edit"><i
+                                                                        class="material-icons">delete_forever</i></a>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -322,41 +308,27 @@
                                                     >
                                                     <thead>
                                                         <tr>
+                                                            <th>Commercial</th>
                                                             <th>Client</th>
-                                                            <th class="text-center">Mode paiement</th>
-                                                            <th class="text-center">Pay&eacute;</th>
+                                                            <th class="text-center">Secteur</th>
                                                             <th class="text-center">Frais de traitement</th>
-                                                            <th>Date de cr&eacute;ation</th>
+                                                            <th class="text-center">Date de cr&eacute;ation</th>
                                                             <th class="disabled-sorting text-center">Actions</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody *ngIf="this.getDevisAccident">
-                                                        <tr *ngFor="let donnee of listeDevisAccident">
+                                                    <tbody *ngIf="this.getAccidentCommecial">
+                                                        <tr *ngFor="let donnee of listeAutoClientBeanComAccident">
+                                                            <td style="font-weight: bold;">{{ donnee.commercial }} </td>
                                                             <td style="font-weight: bold;">{{ donnee.client }} </td>
-                                                            <td class="text-center" 
-                                                            style="font-weight: bold; background-color: #d4e4d6;">
-                                                            {{ donnee.contact }}</td>
-                                                            <td class="text-center">
-                                                                <a *ngIf="donnee.secteur == 'Oui'" 
-                                                                    class="btn btn-link btn-success btn-just-icon edit">
-                                                                    <i class="material-icons">check_circle</i></a>
-                                                                <a *ngIf="donnee.secteur == 'Non'" 
-                                                                    class="btn btn-link btn-danger btn-just-icon edit">
-                                                                    <i class="material-icons">highlight_off</i></a>
-                                                            </td>
-                                                            <td style="font-weight: bold;" class="text-center">{{ donnee.dureecontrat }}</td>
-                                                            <td>{{ donnee.dates }}</td>
+                                                            <td class="text-center" >{{ donnee.secteur }}</td>
+                                                            <td class="text-center" >{{ donnee.offre }}</td>
+                                                            <td class="text-center" >{{ donnee.dates }}</td>
                                                             <td class="text-center">
 
-                                                                <a title="Effectuer un paiement"
-                                                                    (click)="choixpaiement( donnee.iddevis, 3, donnee.client, donnee.secteur)"
-                                                                    class="btn btn-link btn-success btn-just-icon edit"><i
-                                                                        class="material-icons">add_shopping_cart</i></a>
-
-                                                                <a title="Afficher les donn&eacute;es de la cotation"
-                                                                    (click)="getDevisAccidentByIdacc( donnee.idauto )"
-                                                                    class="btn btn-link btn-warning btn-just-icon edit"><i
-                                                                        class="material-icons">save_as</i></a>
+                                                                <a title="Cl&ocirc;turer DEVIS"
+                                                                    (click)="cloturerDevis( donnee.iddev, donnee.client )"
+                                                                    class="btn btn-link btn-danger btn-just-icon edit"><i
+                                                                        class="material-icons">delete_forever</i></a>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -367,9 +339,10 @@
                                     </div>
                                 </div>
 
+                                
                                 <div class="tab-pane" id="link6">
                                     <div class="card">
-                                        <div class="card-body">
+                                        <div class="card-body" style="border: 1px solid black;">
 
                                             <div class="material-datatables">
                                                 <table id="datatableMrh"
@@ -378,43 +351,32 @@
                                                     >
                                                     <thead>
                                                         <tr>
+                                                            <th>Commercial</th>
                                                             <th>Client</th>
-                                                            <th class="text-center">Mode paiement</th>
-                                                            <th class="text-center">Pay&eacute;</th>
+                                                            <th class="text-center">Secteur</th>
                                                             <th class="text-center">Formule</th>
-                                                            <th>Date de cr&eacute;ation</th>
-                                                            <th>Date expiration</th>
+                                                            <th class="text-center">Co&ucirc;t</th>
+                                                            <th class="text-center">Date expiration</th>
+                                                            <th class="text-center">Date de cr&eacute;ation</th>
                                                             <th class="disabled-sorting text-center">Actions</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody *ngIf="this.getDevisAccident">
-                                                        <tr *ngFor="let donnee of listeDevisMrh">
+                                                    <tbody *ngIf="this.getMrhCommecial">
+                                                        <tr *ngFor="let donnee of listeAutoClientBeanComMrh">
+                                                            <td style="font-weight: bold;">{{ donnee.commercial }} </td>
                                                             <td style="font-weight: bold;">{{ donnee.client }} </td>
-                                                            <td class="text-center" 
-                                                            style="font-weight: bold; background-color: #d4e4d6;">
-                                                            {{ donnee.contact }}</td>
-                                                            <td class="text-center">
-                                                                <a *ngIf="donnee.secteur == 'Oui'" 
-                                                                    class="btn btn-link btn-success btn-just-icon edit">
-                                                                    <i class="material-icons">check_circle</i></a>
-                                                                <a *ngIf="donnee.secteur == 'Non'" 
-                                                                    class="btn btn-link btn-danger btn-just-icon edit">
-                                                                    <i class="material-icons">highlight_off</i></a>
-                                                            </td>
-                                                            <td style="font-weight: bold;" class="text-center">{{ donnee.dureecontrat }}</td>
-                                                            <td>{{ donnee.dates }}</td>
-                                                            <td>{{ donnee.offre }}</td>
+                                                            <td class="text-center" >{{ donnee.secteur }}</td>
+                                                            <td class="text-center" >{{ donnee.duree }}</td>
+                                                            <td class="text-center" style="color: #2a2deb; font-weight: bold;">
+                                                                {{ donnee.cout }}</td>
+                                                            <td class="text-center" >{{ donnee.offre }}</td>
+                                                            <td class="text-center" >{{ donnee.dates }}</td>
                                                             <td class="text-center">
 
-                                                                <a title="Effectuer un paiement"
-                                                                    (click)="choixpaiement( donnee.iddevis, 4, donnee.client, donnee.secteur)"
-                                                                    class="btn btn-link btn-success btn-just-icon edit"><i
-                                                                        class="material-icons">add_shopping_cart</i></a>
-
-                                                                <a title="Afficher les donn&eacute;es de la cotation"
-                                                                    (click)="getDevisMrhByIdacc( donnee.idauto )"
-                                                                    class="btn btn-link btn-warning btn-just-icon edit"><i
-                                                                        class="material-icons">save_as</i></a>
+                                                                <a title="Cl&ocirc;turer DEVIS"
+                                                                    (click)="cloturerDevis( donnee.iddev, donnee.client )"
+                                                                    class="btn btn-link btn-danger btn-just-icon edit"><i
+                                                                        class="material-icons">delete_forever</i></a>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -424,7 +386,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            -->
+                            
 
                             </div>
                         </div>

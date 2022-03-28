@@ -15,7 +15,13 @@ export class StatdevisequipeComponent implements OnInit {
 
   // Attributes :
   listeAutoClientBeanComAuto: ClientBeanComAuto[]; 
+  listeAutoClientBeanComAccident: ClientBeanComAuto[]; 
+  listeAutoClientBeanComVoyage: ClientBeanComAuto[]; 
+  listeAutoClientBeanComMrh: ClientBeanComAuto[]; 
   getAutoCommecial = false;
+  getVoyageCommecial = false;
+  getAccidentCommecial = false;
+  getMrhCommecial = false;
   statsdevisuser = new StatsDevisUser();
   iddev = 0;
   nomClient = "";
@@ -32,6 +38,23 @@ export class StatdevisequipeComponent implements OnInit {
     this.statsdevisuser.voyage = "0";
 
     this.getCommercialHistoDevisAuto();
+    this.getCommercialHistoDevisAccident();
+    this.getCommercialHistoDevisVoyage();
+    this.getCommercialHistoDevisMrh();
+    this.getStatsDevisEnCoursForManager();
+  }
+
+
+  // Get Statistiques DATA from All TEAM linked :
+  getStatsDevisEnCoursForManager() {
+    this.meswebservices.getStatsDevisEnCoursForManager().toPromise()
+      .then(
+        resultat => {
+          this.statsdevisuser = resultat;
+        },
+        (error) => {
+        }
+      );
   }
 
 
@@ -44,6 +67,48 @@ export class StatdevisequipeComponent implements OnInit {
           this.getAutoCommecial = true;
           // Refresh :
           this.initDevisAutoComm();
+        }
+      )
+  }
+
+
+  // Get DEVIS ACCIDENT for 'Commercial' :
+  getCommercialHistoDevisAccident() {
+    this.meswebservices.getCommercialHistoDevisAccident().toPromise()
+      .then(
+        resultat => {
+          this.listeAutoClientBeanComAccident = resultat;
+          this.getAccidentCommecial = true;
+          // Refresh :
+          this.initDevisAccidentComm();
+        }
+      )
+  }
+
+
+  // Get DEVIS VOYAGE for 'Commercial' :
+  getCommercialHistoDevisVoyage() {
+    this.meswebservices.getCommercialHistoDevisVoyage().toPromise()
+      .then(
+        resultat => {
+          this.listeAutoClientBeanComVoyage = resultat;
+          this.getVoyageCommecial = true;
+          // Refresh :
+          this.initDevisVoyageComm();
+        }
+      )
+  }
+
+
+  // Get DEVIS VOYAGE for 'Commercial' :
+  getCommercialHistoDevisMrh() {
+    this.meswebservices.getCommercialHistoDevisMrh().toPromise()
+      .then(
+        resultat => {
+          this.listeAutoClientBeanComMrh = resultat;
+          this.getMrhCommecial = true;
+          // Refresh :
+          this.initDevisMrhComm();
         }
       )
   }
@@ -94,7 +159,67 @@ export class StatdevisequipeComponent implements OnInit {
           search: "_INPUT_",
           searchPlaceholder: "Search records",
         },
-        "order": [[3, "desc"]]
+        "order": [[6, "desc"]]
+      });
+    }, 500);
+  }
+
+
+  // init DEVIS ACCIDENT for 'Commercial'
+  initDevisAccidentComm() {
+    setTimeout(function () {
+      $('#datatableAccident').DataTable({
+        "pagingType": "full_numbers",
+        "lengthMenu": [
+          [10, 25, 50, -1],
+          [10, 25, 50, "All"]
+        ],
+        responsive: true,
+        language: {
+          search: "_INPUT_",
+          searchPlaceholder: "Search records",
+        },
+        "order": [[4, "desc"]]
+      });
+    }, 500);
+  }
+
+  // init DEVIS VOYAGE for 'Commercial'
+  initDevisVoyageComm() {
+    setTimeout(function () {
+      $('#datatableVoyage').DataTable({
+        "pagingType": "full_numbers",
+        "lengthMenu": [
+          [10, 25, 50, -1],
+          [10, 25, 50, "All"]
+        ],
+        responsive: true,
+        language: {
+          search: "_INPUT_",
+          searchPlaceholder: "Search records",
+        },
+        "order": [[4, "desc"]]
+      });
+    }, 500);
+  }
+
+
+
+  // init DEVIS MRH for 'Commercial'
+  initDevisMrhComm() {
+    setTimeout(function () {
+      $('#datatableMrh').DataTable({
+        "pagingType": "full_numbers",
+        "lengthMenu": [
+          [10, 25, 50, -1],
+          [10, 25, 50, "All"]
+        ],
+        responsive: true,
+        language: {
+          search: "_INPUT_",
+          searchPlaceholder: "Search records",
+        },
+        "order": [[5, "desc"]]
       });
     }, 500);
   }

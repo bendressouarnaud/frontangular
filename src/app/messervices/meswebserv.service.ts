@@ -1664,6 +1664,13 @@ export class MeswebservService {
     }
 
 
+    // Pull back data DEVIS stats for TEAM  :
+    getStatsDevisEnCoursForManager(): Observable<StatsDevisUser> {
+        // -> DevisController
+        return this.httpclient.get<StatsDevisUser>(this.webserviceUri.concat("/getStatsDevisEnCoursForManager"), {});
+    }
+
+
     // Pull back data for CHEQUE  :
     getChequeData(iddevis: string): Observable<Clientbeancheque> {
         // -> DevisController
@@ -1716,6 +1723,26 @@ export class MeswebservService {
         return this.httpclient.get<ClientBeanComAuto[]>(this.webserviceUri.concat("/getCommercialHistoDevisAuto"), {});
     }
 
+
+    // Get DEVIS ACCIDENT for COMMERCIAL related to SUPERVISEUR   :
+    getCommercialHistoDevisAccident(): Observable<ClientBeanComAuto[]> {
+        // DevisController :
+        return this.httpclient.get<ClientBeanComAuto[]>(this.webserviceUri.concat("/getCommercialHistoDevisAccident"), {});
+    }
+
+
+    // Get DEVIS VOYAGE for COMMERCIAL related to SUPERVISEUR   :
+    getCommercialHistoDevisVoyage(): Observable<ClientBeanComAuto[]> {
+        // DevisController :
+        return this.httpclient.get<ClientBeanComAuto[]>(this.webserviceUri.concat("/getCommercialHistoDevisVoyage"), {});
+    }
+
+
+    // Get DEVIS MRH for COMMERCIAL related to SUPERVISEUR   :
+    getCommercialHistoDevisMrh(): Observable<ClientBeanComAuto[]> {
+        // DevisController :
+        return this.httpclient.get<ClientBeanComAuto[]>(this.webserviceUri.concat("/getCommercialHistoDevisMrh"), {});
+    }
 
 
     // CLOSE a DEVIS  :

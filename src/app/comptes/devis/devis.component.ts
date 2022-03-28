@@ -606,28 +606,27 @@ export class DevisComponent implements OnInit {
   selectformule() {
     switch (this.choixformule) {
       case 46:
-      case 1039:
         $('#form1').css('background-color', '#697FD0'); // Formule 1
         $('#form2').css('background-color', '#d1caca');
         $('#form3').css('background-color', '#d1caca');
         $('#form4').css('background-color', '#d1caca');
         break;
 
-      case 1040:
+      case 47:
         $('#form1').css('background-color', '#d1caca');
         $('#form2').css('background-color', '#697FD0'); // Formule 1
         $('#form3').css('background-color', '#d1caca');
         $('#form4').css('background-color', '#d1caca');
         break;
 
-      case 1041:
+      case 48:
         $('#form1').css('background-color', '#d1caca');
         $('#form2').css('background-color', '#d1caca');
         $('#form3').css('background-color', '#697FD0'); // Formule 3
         $('#form4').css('background-color', '#d1caca');
         break;
 
-      case 1042:
+      case 49:
         $('#form1').css('background-color', '#d1caca');
         $('#form2').css('background-color', '#d1caca');
         $('#form3').css('background-color', '#d1caca');
