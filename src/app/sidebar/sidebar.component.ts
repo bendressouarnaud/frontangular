@@ -172,6 +172,18 @@ export const routesSuperviseur: RouteInfo[] = [
             {path: 'reunion', title: 'Réunions', ab:'RS'},
             {path: 'performance', title: 'Performances', ab:'PE'}
         ]
+    },
+    {
+        path: '/gestion',
+        title: 'Operations',
+        type: 'sub',
+        icontype: 'shopping_cart',
+        collapse: 'operations',
+        children: [
+            {path: 'devis', title: 'Gestion des Devis', ab:'GD'},
+            {path: 'devisequipe', title: 'Gestion Devis Equipes', ab:'GE'},
+            {path: 'souscription', title: 'Gestion des Souscriptions', ab:'GS'}
+        ]
     }
 ];
 
@@ -423,7 +435,8 @@ export class SidebarComponent implements OnInit {
             /*localStorage.removeItem("userid");
             localStorage.removeItem("profil");*/
             //window.location.href="#/pages/login";
-            window.location.href="/jcom";
+            window.location.href="/";
+            //window.location.href="/jcom";
         }
     }
 }

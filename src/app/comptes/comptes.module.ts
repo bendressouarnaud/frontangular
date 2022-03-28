@@ -28,13 +28,21 @@ import { ConfigmotifComponent } from './configmotif/configmotif.component';
 import { NomenclatureComponent } from './nomenclature/nomenclature.component';
 import { DetailnomenclatureComponent } from './detailnomenclature/detailnomenclature.component';
 import { ParametresComponent } from './parametres/parametres.component';
+import { DevisComponent } from './devis/devis.component';
+import { StatdevisequipeComponent } from './statdevisequipe/statdevisequipe.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
-  declarations: [GestioncompteComponent, GestioncommerceComponent, GestionrapportComponent, AccueilsupComponent, ConfigactiviteComponent, RdvsupComponent, AgendasupComponent, ReunionComponent, PerformanceComponent, HistoriqueComponent, AddresseComponent, ConfigequipeComponent, ConfigmotifComponent, NomenclatureComponent, DetailnomenclatureComponent, ParametresComponent],
+  declarations: [GestioncompteComponent, GestioncommerceComponent, GestionrapportComponent, AccueilsupComponent, ConfigactiviteComponent, RdvsupComponent, AgendasupComponent, ReunionComponent, PerformanceComponent, HistoriqueComponent, AddresseComponent, ConfigequipeComponent, ConfigmotifComponent, NomenclatureComponent, DetailnomenclatureComponent, ParametresComponent, DevisComponent, StatdevisequipeComponent],
   imports: [
     CommonModule,
     ComptesRoutingModule,
+
+    MatRadioModule,
+    MatCheckboxModule,
+
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,

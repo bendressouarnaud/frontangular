@@ -7,6 +7,7 @@ import { ConfigactiviteComponent } from './configactivite/configactivite.compone
 import { ConfigequipeComponent } from './configequipe/configequipe.component';
 import { ConfigmotifComponent } from './configmotif/configmotif.component';
 import { DetailnomenclatureComponent } from './detailnomenclature/detailnomenclature.component';
+import { DevisComponent } from './devis/devis.component';
 import { GestioncommerceComponent } from './gestioncommerce/gestioncommerce.component';
 import { GestioncompteComponent } from './gestioncompte/gestioncompte.component';
 import { GestionrapportComponent } from './gestionrapport/gestionrapport.component';
@@ -16,6 +17,7 @@ import { ParametresComponent } from './parametres/parametres.component';
 import { PerformanceComponent } from './performance/performance.component';
 import { RdvsupComponent } from './rdvsup/rdvsup.component';
 import { ReunionComponent } from './reunion/reunion.component';
+import { StatdevisequipeComponent } from './statdevisequipe/statdevisequipe.component';
 
 const routes: Routes = [
   {
@@ -83,7 +85,15 @@ const routes: Routes = [
   {
     path:'parametre',
     component: ParametresComponent
-  }         
+  },
+  {
+    path:'devis',
+    component: DevisComponent
+  },
+  {
+    path:'devisequipe',
+    component: StatdevisequipeComponent
+  }           
 
 ];
 

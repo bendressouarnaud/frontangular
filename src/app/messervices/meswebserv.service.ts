@@ -71,6 +71,7 @@ import { Clientbeanvoyage } from "../mesbeans/clientbeanvoyage";
 import { Clientbeanmrh } from "../mesbeans/clientbeanmrh";
 import { Motifpaiement } from "../mesbeans/motifpaiement";
 import { Clientbeancheque } from "../mesbeans/clientbeancheque";
+import { ClientBeanComAuto } from "../mesbeans/clientbeancomauto";
 
 @Injectable({
     providedIn: 'root'
@@ -1703,6 +1704,27 @@ export class MeswebservService {
         mesParams = mesParams.append('coordonnee', coordonnee); // 
         mesParams = mesParams.append('mouvement', mouvement); // 
         return this.httpclient.get<Quete>(this.webserviceUri.concat("/deplacement"),
+            {
+                params: mesParams
+            });
+    }
+
+
+    // Get DEVIS AUTO for COMMERCIAL related to SUPERVISEUR   :
+    getCommercialHistoDevisAuto(): Observable<ClientBeanComAuto[]> {
+        // DevisController :
+        return this.httpclient.get<ClientBeanComAuto[]>(this.webserviceUri.concat("/getCommercialHistoDevisAuto"), {});
+    }
+
+
+
+    // CLOSE a DEVIS  :
+    closeDevis(iddevis: string): Observable<Quete> {
+        // -> DevisController
+        // Now, set the parameters :
+        let mesParams = new HttpParams();
+        mesParams = mesParams.append('iddevis', iddevis); // 
+        return this.httpclient.get<Quete>(this.webserviceUri.concat("/closeDevis"),
             {
                 params: mesParams
             });
