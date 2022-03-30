@@ -32,10 +32,11 @@ import { DevisComponent } from './devis/devis.component';
 import { StatdevisequipeComponent } from './statdevisequipe/statdevisequipe.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
+import { StatdevisattenteComponent } from './statdevisattente/statdevisattente.component';
 
 
 @NgModule({
-  declarations: [GestioncompteComponent, GestioncommerceComponent, GestionrapportComponent, AccueilsupComponent, ConfigactiviteComponent, RdvsupComponent, AgendasupComponent, ReunionComponent, PerformanceComponent, HistoriqueComponent, AddresseComponent, ConfigequipeComponent, ConfigmotifComponent, NomenclatureComponent, DetailnomenclatureComponent, ParametresComponent, DevisComponent, StatdevisequipeComponent],
+  declarations: [GestioncompteComponent, GestioncommerceComponent, GestionrapportComponent, AccueilsupComponent, ConfigactiviteComponent, RdvsupComponent, AgendasupComponent, ReunionComponent, PerformanceComponent, HistoriqueComponent, AddresseComponent, ConfigequipeComponent, ConfigmotifComponent, NomenclatureComponent, DetailnomenclatureComponent, ParametresComponent, DevisComponent, StatdevisequipeComponent, StatdevisattenteComponent],
   imports: [
     CommonModule,
     ComptesRoutingModule,

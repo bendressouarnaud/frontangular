@@ -72,6 +72,8 @@ import { Clientbeanmrh } from "../mesbeans/clientbeanmrh";
 import { Motifpaiement } from "../mesbeans/motifpaiement";
 import { Clientbeancheque } from "../mesbeans/clientbeancheque";
 import { ClientBeanComAuto } from "../mesbeans/clientbeancomauto";
+import { ClientBeanStatComAuto } from "../mesbeans/clientbeanstatcomauto";
+import { BeanPortfolioDevis } from "../mesbeans/beanportfoliodevis";
 
 @Injectable({
     providedIn: 'root'
@@ -679,8 +681,22 @@ export class MeswebservService {
 
     //
     getTeamRdvStatbyManager(): Observable<DataGrapheCours[]> {
-        // 
+        // Traitement
         return this.httpclient.get<DataGrapheCours[]>(this.webserviceUri.concat("/getTeamRdvStatbyManager"), {});
+    }
+
+
+    //
+    getTeamDevisStatbyManager(): Observable<DataGrapheCours[]> {
+        // ApiCallController
+        return this.httpclient.get<DataGrapheCours[]>(this.webserviceUri.concat("/getTeamDevisStatbyManager"), {});
+    }
+
+
+    //
+    getStatsDevisPieChartForManager(): Observable<BeanPortfolioDevis[]> {
+        // DevisController
+        return this.httpclient.get<BeanPortfolioDevis[]>(this.webserviceUri.concat("/getStatsDevisPieChartForManager"), {});
     }
 
 
@@ -1670,6 +1686,12 @@ export class MeswebservService {
         return this.httpclient.get<StatsDevisUser>(this.webserviceUri.concat("/getStatsDevisEnCoursForManager"), {});
     }
 
+    // Pull back data FULL DEVIS stats for TEAM  :
+    getStatsFullDevisForManager(): Observable<StatsDevisUser> {
+        // -> DevisController
+        return this.httpclient.get<StatsDevisUser>(this.webserviceUri.concat("/getStatsFullDevisForManager"), {});
+    }
+
 
     // Pull back data for CHEQUE  :
     getChequeData(iddevis: string): Observable<Clientbeancheque> {
@@ -1721,6 +1743,34 @@ export class MeswebservService {
     getCommercialHistoDevisAuto(): Observable<ClientBeanComAuto[]> {
         // DevisController :
         return this.httpclient.get<ClientBeanComAuto[]>(this.webserviceUri.concat("/getCommercialHistoDevisAuto"), {});
+    }
+
+
+
+    // Get DEVIS STATS AUTO for COMMERCIAL related to SUPERVISEUR   :
+    getCommercialStatsHistoDevisAuto(): Observable<ClientBeanStatComAuto[]> {
+        // DevisController :
+        return this.httpclient.get<ClientBeanStatComAuto[]>(this.webserviceUri.concat("/getCommercialStatsHistoDevisAuto"), {});
+    }
+
+
+    // Get DEVIS STATS VOYAGE for COMMERCIAL related to MANAGER   :
+    getCommercialHistoStatDevisVoyage(): Observable<ClientBeanStatComAuto[]> {
+        // DevisController :
+        return this.httpclient.get<ClientBeanStatComAuto[]>(this.webserviceUri.concat("/getCommercialHistoStatDevisVoyage"), {});
+    }
+
+
+    // Get DEVIS STATS ACCIDENT for COMMERCIAL related to MANAGER   :
+    getCommercialHistoStatDevisAccident(): Observable<ClientBeanStatComAuto[]> {
+        // DevisController :
+        return this.httpclient.get<ClientBeanStatComAuto[]>(this.webserviceUri.concat("/getCommercialHistoStatDevisAccident"), {});
+    }
+
+    // Get DEVIS STATS MRH for COMMERCIAL related to MANAGER   :
+    getCommercialHistoStatDevisMrh(): Observable<ClientBeanStatComAuto[]> {
+        // DevisController :
+        return this.httpclient.get<ClientBeanStatComAuto[]>(this.webserviceUri.concat("/getCommercialHistoStatDevisMrh"), {});
     }
 
 

@@ -17,6 +17,7 @@ import { ParametresComponent } from './parametres/parametres.component';
 import { PerformanceComponent } from './performance/performance.component';
 import { RdvsupComponent } from './rdvsup/rdvsup.component';
 import { ReunionComponent } from './reunion/reunion.component';
+import { StatdevisattenteComponent } from './statdevisattente/statdevisattente.component';
 import { StatdevisequipeComponent } from './statdevisequipe/statdevisequipe.component';
 
 const routes: Routes = [
@@ -93,7 +94,12 @@ const routes: Routes = [
   {
     path:'devisequipe',
     component: StatdevisequipeComponent
-  }           
+  },
+  {
+    path:'statsdevisequipe',
+    component: StatdevisattenteComponent
+  }
+
 
 ];
 

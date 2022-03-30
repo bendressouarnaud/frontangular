@@ -181,7 +181,8 @@ export const routesSuperviseur: RouteInfo[] = [
         collapse: 'operations',
         children: [
             {path: 'devis', title: 'Gestion des Devis', ab:'GD'},
-            {path: 'devisequipe', title: 'Gestion Devis Equipes', ab:'GE'},
+            {path: 'devisequipe', title: 'Clôture des devis en attente', ab:'GE'},
+            {path: 'statsdevisequipe', title: 'Devis en attente de paie', ab:'DP'},
             {path: 'souscription', title: 'Gestion des Souscriptions', ab:'GS'}
         ]
     }
