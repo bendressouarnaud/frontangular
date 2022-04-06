@@ -57,6 +57,7 @@ import { DirecteuragjModule } from './directeuragj/directeuragj.module';
 import { DirecteurModule } from './directeur/directeur.module';
 import { HttpConfigInterceptor } from './messervices/intercepteur';
 import { NgHttpLoaderModule } from 'ng-http-loader';
+import { TresorierModule } from './tresorier/tresorier.module';
 
 @NgModule({
   exports: [
@@ -91,7 +92,7 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     MatTooltipModule,
     MatNativeDateModule
   ],
-  imports: [ComptesModule, CommercialModule, InfasModule, InspecteurModule, ResponsableModule, DirecteuragjModule, DirecteurModule]
+  imports: [ComptesModule, CommercialModule, InfasModule, InspecteurModule, ResponsableModule, DirecteuragjModule, DirecteurModule, TresorierModule]
 })
 export class MaterialModule {}
 
