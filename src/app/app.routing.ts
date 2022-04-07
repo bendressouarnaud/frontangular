@@ -68,6 +68,10 @@ export const AppRoutes: Routes = [
             {
                 path: 'directeur',
                 loadChildren: './directeur/directeur.module#DirecteurModule'
+            }, 
+            {
+                path: 'tresorier',
+                loadChildren: './tresorier/tresorier.module#TresorierModule'
             },
             {
                 path: '',

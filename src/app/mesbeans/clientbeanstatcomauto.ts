@@ -9,6 +9,7 @@ export class ClientBeanStatComAuto{
     dates : string;
     paye : string;
     modepaiement : string;
+    validation : string;
     idauto : Number;    
     iddev : Number;
 

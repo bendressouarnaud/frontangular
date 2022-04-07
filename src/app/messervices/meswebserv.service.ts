@@ -1680,6 +1680,13 @@ export class MeswebservService {
     }
 
 
+    // Pull back data DEVIS stats  :
+    getStatsDevisByTresorier(): Observable<StatsDevisUser> {
+        // -> DevisController
+        return this.httpclient.get<StatsDevisUser>(this.webserviceUri.concat("/getStatsDevisByTresorier"), {});
+    }
+
+
     // Pull back data DEVIS stats for TEAM  :
     getStatsDevisEnCoursForManager(): Observable<StatsDevisUser> {
         // -> DevisController
@@ -1746,6 +1753,17 @@ export class MeswebservService {
     }
 
 
+    // Get DEVIS AUTO to be reviewed by TRESORIER   :
+    getTresorierDevisAuto(): Observable<ClientBeanStatComAuto[]> {
+        // DevisController :
+        return this.httpclient.get<ClientBeanStatComAuto[]>(this.webserviceUri.concat("/getTresorierDevisAuto"), {});
+    }
+
+    // Get DEVIS AUTO to be reviewed by TRESORIER   :
+    getTresorierDevisVoyage(): Observable<ClientBeanStatComAuto[]> {
+        // DevisController :
+        return this.httpclient.get<ClientBeanStatComAuto[]>(this.webserviceUri.concat("/getTresorierDevisVoyage"), {});
+    }
 
     // Get DEVIS STATS AUTO for COMMERCIAL related to SUPERVISEUR   :
     getCommercialStatsHistoDevisAuto(): Observable<ClientBeanStatComAuto[]> {
@@ -1765,6 +1783,19 @@ export class MeswebservService {
     getCommercialHistoStatDevisAccident(): Observable<ClientBeanStatComAuto[]> {
         // DevisController :
         return this.httpclient.get<ClientBeanStatComAuto[]>(this.webserviceUri.concat("/getCommercialHistoStatDevisAccident"), {});
+    }
+
+
+    // Get DEVIS ACCIDENT to be reviewed by TRESORIER   :
+    getTresorierDevisAccident(): Observable<ClientBeanStatComAuto[]> {
+        // DevisController :
+        return this.httpclient.get<ClientBeanStatComAuto[]>(this.webserviceUri.concat("/getTresorierDevisAccident"), {});
+    }
+
+    // Get DEVIS MRH to be reviewed by TRESORIER   :
+    getTresorierDevisMrh(): Observable<ClientBeanStatComAuto[]> {
+        // DevisController :
+        return this.httpclient.get<ClientBeanStatComAuto[]>(this.webserviceUri.concat("/getTresorierDevisMrh"), {});
     }
 
     // Get DEVIS STATS MRH for COMMERCIAL related to MANAGER   :
@@ -1802,6 +1833,20 @@ export class MeswebservService {
         let mesParams = new HttpParams();
         mesParams = mesParams.append('iddevis', iddevis); // 
         return this.httpclient.get<Quete>(this.webserviceUri.concat("/closeDevis"),
+            {
+                params: mesParams
+            });
+    }
+
+
+
+    // VALID a PAYMENT  :
+    validPayment(iddevis: string): Observable<Quete> {
+        // -> DevisController
+        // Now, set the parameters :
+        let mesParams = new HttpParams();
+        mesParams = mesParams.append('iddevis', iddevis); // 
+        return this.httpclient.get<Quete>(this.webserviceUri.concat("/validPayment"),
             {
                 params: mesParams
             });

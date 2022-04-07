@@ -140,6 +140,10 @@ export class LoginComponent implements OnInit, OnDestroy {
                                                 window.location.href = "#/directeur/accueil";
                                                 break;
 
+                                            case "tresorier":
+                                                window.location.href = "#/tresorier/accueil";
+                                                break;
+
                                             default:
                                                 window.location.href = "/";
                                                 break;
