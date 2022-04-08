@@ -700,6 +700,34 @@ export class MeswebservService {
     }
 
 
+    //
+    getStatsDevisPieChartForTresorier(): Observable<BeanPortfolioDevis[]> {
+        // DevisController
+        return this.httpclient.get<BeanPortfolioDevis[]>(this.webserviceUri.concat("/getStatsDevisPieChartForTresorier"), {});
+    }
+
+
+    // Devis PAYé
+    getStatsDevisPayePieChartForTresorier(): Observable<BeanPortfolioDevis[]> {
+        // DevisController
+        return this.httpclient.get<BeanPortfolioDevis[]>(this.webserviceUri.concat("/getStatsDevisPayePieChartForTresorier"), {});
+    }
+
+
+    //
+    getDevisCreatedforYearForTresorier(): Observable<DataGrapheCours[]> {
+        // ApiCallController
+        return this.httpclient.get<DataGrapheCours[]>(this.webserviceUri.concat("/getDevisCreatedforYearForTresorier"), {});
+    }
+
+
+    // Bar CHART for devis PAYés
+    getDevisPayeforYearForTresorier(): Observable<DataGrapheCours[]> {
+        // ApiCallController
+        return this.httpclient.get<DataGrapheCours[]>(this.webserviceUri.concat("/getDevisPayeforYearForTresorier"), {});
+    }
+
+
     getgraphecours(): Observable<RepGraphe[]> {
         // 
         return this.httpclient.get<RepGraphe[]>(this.webserviceUri.concat("/generateGrapheCours"),
