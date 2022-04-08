@@ -4,10 +4,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { TresorierRoutingModule } from './tresorier-routing.module';
 import { AccueilComponent } from './accueil/accueil.component';
+import { StatistiquesComponent } from './statistiques/statistiques.component';
 
 
 @NgModule({
-  declarations: [AccueilComponent],
+  declarations: [AccueilComponent, StatistiquesComponent],
   imports: [
     CommonModule,
     MatFormFieldModule,
