@@ -1,0 +1,434 @@
+<div class="main-content" style=" margin-top: 0px;">
+    <div class="container-fluid" style=" margin-top: 0px; padding-top: 0px;">
+
+
+
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content" style="background-image: linear-gradient(white, 90%, #C2A323);">
+
+                    <div class="modal-header">
+                        <h4 class="modal-title">Renseigner les donn&eacute;es de l'activit&eacute;</h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form method="get" action="/" class="form-horizontal">
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">Donn&eacute;es</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <mat-form-field>
+                                                <input matInput [matDatepicker]="basicDatepicker" [(ngModel)]="getDate"
+                                                    name="datedebut" placeholder="Date d&eacute;but">
+                                                <mat-datepicker-toggle matSuffix [for]="basicDatepicker">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #basicDatepicker></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            <mat-form-field>
+                                                <input matInput [matDatepicker]="basicDatepickerFin"
+                                                    [(ngModel)]="getDateFin" name="datefin" placeholder="Date fin">
+                                                <mat-datepicker-toggle matSuffix [for]="basicDatepickerFin">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #basicDatepickerFin></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <!--    Nom de l'action commerciale    -->
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-10">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="activitecom.libelle" name='libelle'
+                                                    type="text" placeholder="Nom de l'action commerciale"
+                                                    maxlength="40">
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <!--   Responsable de l'action commerciale  -->
+                            <div class="row" style="margin-top: 10px;">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-lg-10 col-md-8 col-sm-4">
+                                            <ng-multiselect-dropdown
+                                                [placeholder]="'Responsable de l\'action commerciale'"
+                                                name="blocinvites" [settings]="dropdownSettings" [data]="dropdownList"
+                                                [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
+                                                (onDeSelect)="onItemDeSelect($event)"
+                                                (onSelectAll)="onSelectAll($event)">
+                                            </ng-multiselect-dropdown>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!--   Nom du chef d'equipe -->
+                            <div class="row" style="margin-top: 10px;">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-lg-10 col-md-8 col-sm-4">
+                                            <ng-multiselect-dropdown [placeholder]="'Nom du chef d\'&eacute;quipe'"
+                                                name="blocequipe" [settings]="dropdownEquipeSettings"
+                                                [data]="dropdownList" [(ngModel)]="selectedEquipeItems"
+                                                (onSelect)="onItemEquipeSelect($event)"
+                                                (onDeSelect)="onItemEquipeDeSelect($event)"
+                                                (onSelectAll)="onSelectEquipeAll($event)">
+                                            </ng-multiselect-dropdown>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row" style="margin-top: 15px;">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="capitalMillier" name='objectif' type="text"
+                                                    placeholder="Objectif du chiffre d'affaire" maxlength="30"
+                                                    (focusout)="setmillier($event)">
+                                            </mat-form-field>
+                                        </div>
+
+
+                                        <div class="col-lg-5 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Produit &agrave; mettre en avant"
+                                                    [(value)]="activitecom.produit" name="produit">
+                                                    <mat-option *ngFor="let donnee of listeProduit"
+                                                        [value]="donnee.idnmd">
+                                                        {{ donnee.libelle }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+                                <div style="text-align: center; width: 100%; color:red; font-weight: bold;" id="infos">
+                                </div>
+                            </div>
+
+
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button mat-raised-button type="button" (click)="enregistrerActivite()"
+                            class="btn btn-info">Enregistrer</button> <!-- data-dismiss="modal"  -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row" style=" margin-top: 0px;">
+            <div class="col-md-12 ml-auto mr-auto">
+                <div class="page-categories">
+                    <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/accueilsup" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/icone_accueil.png" width="85" height="70" />
+                                </i> Accueil
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/rdv" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/rdvweb.jpg" width="85" height="70" />
+                                </i> Gest. RDV
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/devis" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/devis.jpg" width="85" height="70" />
+                                </i> Devis
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active icone" (click)="ouvrirzonegestion()" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/ajout.png" width="85" height="70" />
+                                </i> Nouveau
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link icone" href="#/gestion/portefeuille" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/commercial.png" width="85" height="70" />
+                                </i> Commercial
+                            </a>
+                        </li>
+
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/rapportcom" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/rapportpng.png" width="85" height="70" />
+                                </i> Rapports
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/agenda" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/agenda.jpg" width="85" height="70" />
+                                </i> Agenda
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/reunion" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/reunion.jpg" width="85" height="70" />
+                                </i> R&eacute;union
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/performance" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/performances.jpg" width="85" height="70" />
+                                </i> Performance
+                            </a>
+                        </li>
+
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+        <div class="tab-content tab-space tab-subcategories">
+            <div class="tab-pane active" id="link7">
+
+                <div class="col-md-12">
+                    <div class="card ">
+                        <div class="card-body ">
+                            <ul class="nav nav-pills nav-pills-warning" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#link1" role="tablist">
+                                        Commerciaux
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#link2" role="tablist">
+                                        Mon compte
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#link3" role="tablist">
+                                        Responsable ou Chef d'&eacute;quipe
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content tab-space">
+                                <div class="tab-pane active" id="link1">
+
+                                    <div class="card">
+                                        <div class="card-body">
+
+                                            <div class="material-datatables">
+                                                <table id="datatablesManager"
+                                                    class="table table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%"
+                                                    *ngIf="this.getActiviteManager">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Collaborateur</th>
+                                                            <th>Date d&eacute;but</th>
+                                                            <th>Date fin</th>
+                                                            <th>Action commerciale</th>
+                                                            <th>Responsable</th>
+                                                            <th>Chef d'&eacute;quipe</th>
+                                                            <th>Objectif</th>
+                                                            <th>Produit</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let donnee of listeActiviteManager">
+                                                            <td style="font-weight: bold;">{{ donnee.agent }}</td>
+                                                            <td>{{ donnee.datedebut }} </td>
+                                                            <td>{{ donnee.datefin }}</td>
+                                                            <td>{{ donnee.libelle }}</td>
+                                                            <td style="font-weight: bold;">{{ donnee.responsable }}
+                                                            </td>
+                                                            <td style="font-weight: bold; font-style: italic;">{{
+                                                                donnee.chefequipe }}</td>
+                                                            <td class="chiffremanager">{{ donnee.objectifchiffre }}</td>
+                                                            <td>{{ donnee.produit }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                        <!-- end content-->
+                                    </div>
+                                </div>
+
+
+                                <div class="tab-pane" id="link2">
+
+                                    <div class="card">
+                                        <div class="card-body">
+
+                                            <div class="material-datatables">
+                                                <table id="datatables"
+                                                    class="table table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%"
+                                                    *ngIf="this.getActivite">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Date d&eacute;but</th>
+                                                            <th>Date fin</th>
+                                                            <th>Action commerciale</th>
+                                                            <th>Responsable</th>
+                                                            <th>Chef d'&eacute;quipe</th>
+                                                            <th>Objectif</th>
+                                                            <th>Produit</th>
+                                                            <th class="disabled-sorting text-center">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let donnee of listeActivite">
+                                                            <td>{{ donnee.datedebut }} </td>
+                                                            <td>{{ donnee.datefin }}</td>
+                                                            <td>{{ donnee.libelle }}</td>
+                                                            <td style="font-weight: bold;">{{ donnee.responsable }}
+                                                            </td>
+                                                            <td style="font-weight: bold; font-style: italic;">{{
+                                                                donnee.chefequipe }}</td>
+                                                            <td class="chiffre">{{ donnee.objectifchiffre }}</td>
+                                                            <td>{{ donnee.produit }}</td>
+                                                            <td class="text-center">
+                                                                <a title="Consulter les donn&eacute;es de l'activit&eacute;"
+                                                                    (click)="afficheActivite( donnee.idacm )"
+                                                                    class="btn btn-link btn-warning btn-just-icon edit"><i
+                                                                        class="material-icons">dvr</i></a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                        <!-- end content-->
+                                    </div>
+                                </div>
+
+
+                                <div class="tab-pane" id="link3">
+                                    <div class="card">
+                                        <div class="card-body">
+
+                                            <div class="material-datatables">
+                                                <table id="datatablewe"
+                                                    class="table table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%"
+                                                    *ngIf="this.getActiviteInvite">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Date d&eacute;but</th>
+                                                            <th>Date fin</th>
+                                                            <th>Action commerciale</th>
+                                                            <th>Responsable</th>
+                                                            <th>Chef d'&eacute;quipe</th>
+                                                            <th>Objectif</th>
+                                                            <th>Produit</th>
+                                                            <!--<th class="disabled-sorting text-center">Actions</th>-->
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let donnee of listeActiviteInvite">
+                                                            <td>{{ donnee.datedebut }} </td>
+                                                            <td>{{ donnee.datefin }}</td>
+                                                            <td>{{ donnee.libelle }}</td>
+                                                            <td style="font-weight: bold;">{{ donnee.responsable }}
+                                                            </td>
+                                                            <td style="font-weight: bold; font-style: italic;">{{
+                                                                donnee.chefequipe }}</td>
+                                                            <td class="chiffrewe">{{ donnee.objectifchiffre }}</td>
+                                                            <td>{{ donnee.produit }}</td>
+                                                            <!--<td class="text-center">
+                                                                <a title="Consulter les donn&eacute;es de l'activit&eacute;"
+                                                                    (click)="afficheActivite( donnee.idacm )"
+                                                                    class="btn btn-link btn-warning btn-just-icon edit"><i
+                                                                        class="material-icons">dvr</i></a>
+                                                            </td>
+                                                        -->
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                        <!-- end content-->
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+
+    </div>
+</div>

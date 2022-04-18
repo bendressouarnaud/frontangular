@@ -16,10 +16,11 @@ import { AgendaComponent } from './agenda/agenda.component';
 import { ReunionComponent } from './reunion/reunion.component';
 import { PerformanceComponent } from './performance/performance.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { ActivitecommercialeComponent } from './activitecommerciale/activitecommerciale.component';
 
 
 @NgModule({
-  declarations: [AccueilComponent, InspecteurComponent, RdvComponent, RapportComponent, AgendaComponent, ReunionComponent, PerformanceComponent],
+  declarations: [AccueilComponent, InspecteurComponent, RdvComponent, RapportComponent, AgendaComponent, ReunionComponent, PerformanceComponent, ActivitecommercialeComponent],
   imports: [
     CommonModule,
     ResponsableRoutingModule,

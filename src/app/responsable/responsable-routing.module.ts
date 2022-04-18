@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AccueilComponent } from './accueil/accueil.component';
+import { ActivitecommercialeComponent } from './activitecommerciale/activitecommerciale.component';
 import { AgendaComponent } from './agenda/agenda.component';
 import { InspecteurComponent } from './inspecteur/inspecteur.component';
 import { PerformanceComponent } from './performance/performance.component';
@@ -29,7 +30,11 @@ const routes: Routes = [{
 }, {
   path: 'performance',
   component: PerformanceComponent
-}];
+}, {
+  path: 'actcommerciale',
+  component: ActivitecommercialeComponent
+}
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -7,6 +7,7 @@ export class HistoActivitecommerciale{
     responsable : String;
     chefequipe : String;
     produit : String;
+    agent : String;
 
     constructor(){}
 }

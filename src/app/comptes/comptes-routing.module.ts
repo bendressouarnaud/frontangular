@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AccueilsupComponent } from './accueilsup/accueilsup.component';
+import { ActivitecommercialeComponent } from './activitecommerciale/activitecommerciale.component';
 import { AddresseComponent } from './addresse/addresse.component';
 import { AgendasupComponent } from './agendasup/agendasup.component';
 import { ConfigactiviteComponent } from './configactivite/configactivite.component';
@@ -98,6 +99,10 @@ const routes: Routes = [
   {
     path:'statsdevisequipe',
     component: StatdevisattenteComponent
+  },
+  {
+    path:'actcommerciale',
+    component: ActivitecommercialeComponent
   }
 
 

@@ -890,6 +890,13 @@ export class MeswebservService {
     }
 
 
+    // Liste des ACTIVITES COMMERCIALES vues par le manager sur ses agents directs :
+    getactivitecomformanager(): Observable<HistoActivitecommerciale[]> {
+        // Traitement Controller : 
+        return this.httpclient.get<HistoActivitecommerciale[]>(this.webserviceUri.concat("/getactivitecomformanager"), {});
+    }
+
+
     // Liste des ACTIVITES COMMERCIALES pour lesquelles nous sommes RESPONSABLE ou CHEF D'EQUIPE:
     getActiviteWeAreCalledOn(): Observable<HistoActivitecommerciale[]> {
         // Now, set the parameters :
