@@ -86,7 +86,7 @@ export class MeswebservService {
     private webserviceUri: String = "http://localhost:8081/backend";
     //private webserviceUri : String = "https://217.160.247.10/backend";
     //private webserviceUri : String = "http://oceaneinter.com/backend";
-    //private webserviceUri : String = "https//jcom.nsiaassurances.ci/backend";
+    //private webserviceUri : String = "https://jcom.nsiaassurances.ci/backend";
     private mtoken = "";
 
     constructor(private httpclient: HttpClient) { }

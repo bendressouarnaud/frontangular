@@ -148,6 +148,26 @@
                             </div>
 
 
+                            <!-- PHOTO du CHEQUE -->
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label"><span style="color: black;">PHOTO du ch&egrave;que</span></label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <!-- accept="image/*"  -->
+
+                                        <div class="col-lg-5 col-md-8 col-sm-4">
+                                            <input type="file" id="photocheque" name="photocheque"
+                                                (change)="onPhotoChequeSelected($event)" 
+                                                accept="image/png,image/jpeg,image/jpg" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
                             <div class="row">
                                 <div style="text-align: center; width: 100%; color:red; font-weight: bold;" id="infos">
                                 </div>
@@ -316,7 +336,7 @@
                     </div>
                     <div class="modal-footer">
                         <button mat-raised-button type="button" (click)="enregVirement()"
-                            class="btn btn-info">Enregistrer</button> <!-- enregCheque()  -->
+                            class="btn btn-info">Enregistrer</button> 
                     </div>
                 </div>
             </div>
@@ -577,7 +597,8 @@
                             
                                                                     <div class="col-md-5">
                                                                         <input placeholder="CNI" type="file" id="cni" name="cni"
-                                                                            (change)="onCniSelected($event)" />
+                                                                            (change)="onCniSelected($event)" 
+                                                                            accept="image/png,image/jpeg,image/jpg" />
                                                                     </div>
                             
                                                                 </div>
@@ -592,7 +613,8 @@
                             
                                                                     <div class="col-lg-5 col-md-8 col-sm-4">
                                                                         <input type="file" id="photo" name="photo"
-                                                                            (change)="onPhotoSelected($event)" />
+                                                                            (change)="onPhotoSelected($event)" 
+                                                                            accept="image/png,image/jpeg,image/jpg" />
                                                                     </div>
                             
                                                                 </div>
@@ -1095,7 +1117,9 @@
                             
                                                                     <div class="col-md-5">
                                                                         <input placeholder="CNI" type="file" id="cni" name="cni"
-                                                                            (change)="onCniSelected($event)" />
+                                                                            (change)="onCniSelected($event)" 
+                                                                            accept="image/png,image/jpeg,image/jpg"
+                                                                            />
                                                                     </div>
                             
                                                                 </div>
@@ -1104,13 +1128,14 @@
                             
                             
                                                         <div class="row">
-                                                            <label class="col-sm-2 col-form-label"><span style="color: black;">PHOTO</span></label>
+                                                            <label class="col-sm-2 col-form-label"><span style="color: black;">Carte grise</span></label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
                             
                                                                     <div class="col-lg-5 col-md-8 col-sm-4">
                                                                         <input type="file" id="photo" name="photo"
-                                                                            (change)="onPhotoSelected($event)" />
+                                                                            (change)="onPhotoSelected($event)" 
+                                                                            accept="image/png,image/jpeg,image/jpg" />
                                                                     </div>
                             
                                                                 </div>
@@ -1601,7 +1626,8 @@
 
                                         <div class="col-md-5">
                                             <input placeholder="CNI" type="file" id="cni" name="cni"
-                                                (change)="onCniSelected($event)" />
+                                                (change)="onCniSelected($event)" 
+                                                accept="image/png,image/jpeg,image/jpg" />
                                         </div>
 
                                     </div>
@@ -1616,7 +1642,8 @@
 
                                         <div class="col-lg-5 col-md-8 col-sm-4">
                                             <input type="file" id="photo" name="photo"
-                                                (change)="onPhotoSelected($event)" />
+                                                (change)="onPhotoSelected($event)" 
+                                                accept="image/png,image/jpeg,image/jpg" />
                                         </div>
 
                                     </div>
@@ -1916,7 +1943,8 @@
 
                                         <div class="col-md-5">
                                             <input placeholder="CNI" type="file" id="cni" name="cni"
-                                                (change)="onCniSelected($event)" />
+                                                (change)="onCniSelected($event)" 
+                                                accept="image/png,image/jpeg,image/jpg"/>
                                         </div>
 
                                     </div>
@@ -1931,7 +1959,8 @@
 
                                         <div class="col-lg-5 col-md-8 col-sm-4">
                                             <input type="file" id="photo" name="photo"
-                                                (change)="onPhotoSelected($event)" />
+                                                (change)="onPhotoSelected($event)" 
+                                                accept="image/png,image/jpeg,image/jpg"/>
                                         </div>
 
                                     </div>
@@ -2054,55 +2083,61 @@
                     <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#/gestion/accueilsup" role="tablist">
+                            <a class="nav-link" href="#/gcommercial/accueilcom" role="tablist">
                                 <i class="material-icons">
-
                                     <img src="assets/img/icone_accueil.png" width="85" height="70" />
-
                                 </i> Accueil
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#/gestion/rdv" role="tablist">
+                            <a class="nav-link" href="#/gcommercial/comrdv" role="tablist">
                                 <i class="material-icons">
                                     <img src="assets/img/rdvweb.jpg" width="85" height="70" />
                                 </i> Gest. RDV
                             </a>
                         </li>
 
+                        <!--
                         <li class="nav-item">
-                            <a class="nav-link active icone" href="#/gestion/devis" role="tablist">
+                            <a class="nav-link active icone" (click)="ouvrirzonegestion()" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/ajout.png" width="85" height="70" />
+                                </i> Nouveau
+                            </a>
+                        </li>
+                    -->
+
+
+                        <li class="nav-item">
+                            <a class="nav-link active icone" href="#/gcommercial/devis" role="tablist">
                                 <i class="material-icons">
                                     <img src="assets/img/devis.jpg" width="85" height="70" />
                                 </i> Devis
                             </a>
                         </li>
 
+
                         <li class="nav-item">
-                            <a class="nav-link" href="#/gestion/actcommerciale" role="tablist">
+                            <a class="nav-link" href="#/gcommercial/actcommerciale" role="tablist">
                                 <i class="material-icons">
                                     <img src="assets/img/commercial.jpg" width="85" height="70" />
                                 </i> Act. commerciale
                             </a>
                         </li>
 
+
+
                         <li class="nav-item">
-                            <a class="nav-link icone" href="#/gestion/portefeuille" role="tablist">
+                            <a class="nav-link" href="#/gcommercial/comrap" role="tablist">
                                 <i class="material-icons">
-                                    <img src="assets/img/commercial.png" width="85" height="70" />
-                                </i> Commercial
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#/gestion/rapportcom" role="tablist">
-                                <i class="material-icons"><img src="assets/img/rapportpng.png" width="85"
-                                        height="70" /></i> Rapports
+                                    <img src="assets/img/rapportpng.png" width="85" height="70" />
+                                </i> Gest. RAPPORT
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#/gestion/agenda" role="tablist">
+                            <a class="nav-link" href="#/gcommercial/comagenda" role="tablist">
                                 <i class="material-icons">
                                     <img src="assets/img/agenda.jpg" width="85" height="70" />
                                 </i> Agenda
@@ -2110,21 +2145,19 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#/gestion/reunion" role="tablist">
+                            <a class="nav-link" href="#/gcommercial/performance" role="tablist">
                                 <i class="material-icons">
-                                    <img src="assets/img/reunion.jpg" width="85" height="70" />
-                                </i> R&eacute;union
+                                    <img src="assets/img/performances.jpg" width="85" height="70" />
+                                </i> Performance
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#/gestion/performance" role="tablist">
-                                <i class="material-icons">
-                                    <img src="assets/img/performances.jpg" width="85" height="70" />
-                                </i> Performances
+                            <a class="nav-link" data-toggle="tab" href="#" role="tablist">
+                                <i class="material-icons"><img src="assets/img/parametrespng.png" width="85"
+                                        height="70" /></i> Param&egrave;tres
                             </a>
                         </li>
-                        
                     </ul>
                 </div>
             </div>

@@ -135,8 +135,10 @@ export class DevisComponent implements OnInit {
 
   //
   formData = new FormData();
+  chequeFormData = new FormData();
   presenceCni = true;
   presencePhoto = true;
+  presencePhotoCheque = false;
   lesCivilite: Civilite[];
   //
   choixGarantie = "3";
@@ -892,6 +894,22 @@ export class DevisComponent implements OnInit {
   }
 
 
+  onPhotoChequeSelected(event) {
+    const file: File = event.target.files[0];
+    if (file) {
+      if (this.chequeFormData.has("photocheque")) this.chequeFormData.delete("photocheque");
+      this.chequeFormData.append("photocheque", file);
+      this.presencePhotoCheque = true;
+    }
+    else {
+      if (this.chequeFormData.has("photocheque")) {
+        this.presencePhotoCheque = false;
+        this.chequeFormData.delete("photocheque");
+      }
+    }
+  }
+
+
   // Get GARANTIES based on 'OFFRE COMMERCIALE' :
   getGarantie(): void {
     // this.offrecommerciale
@@ -1557,6 +1575,12 @@ export class DevisComponent implements OnInit {
   enregCheque() {
     //alert("Statut : "+this.chequebarre);
 
+    if((!this.presencePhotoCheque) || (!this.chequeFormData.has("photocheque"))){
+      // Return :
+      this.warnmessage("La photo du chèque n'a pas été ajoutée !");
+      return;
+    }
+
     if (this.numerocheque.trim().toString().length == 0) {
       this.warnmessage("Le numéro de chèque n'est pas renseigné !");
       return;
@@ -1592,24 +1616,23 @@ export class DevisComponent implements OnInit {
     }
 
     // Set DATA :
-    var ourFormData = new FormData();
-    ourFormData.append("numerocheque", this.numerocheque.trim());
-    ourFormData.append("clientcheque", this.clientcheque.trim());
-    ourFormData.append("montantcheque", tpCharge);
-    ourFormData.append("banquemettrice", this.banquemettrice.trim());
-    ourFormData.append("ribclient", this.ribclient.trim());
-    ourFormData.append("iddevis", this.id_devis.trim());
+    this.chequeFormData.append("numerocheque", this.numerocheque.trim());
+    this.chequeFormData.append("clientcheque", this.clientcheque.trim());
+    this.chequeFormData.append("montantcheque", tpCharge);
+    this.chequeFormData.append("banquemettrice", this.banquemettrice.trim());
+    this.chequeFormData.append("ribclient", this.ribclient.trim());
+    this.chequeFormData.append("iddevis", this.id_devis.trim());
 
     // date emission :
     let momentVariable = moment(this.getDateCheque, 'MM-DD-YYYY');
     let dateCheque = momentVariable.format('YYYY-MM-DD');
-    ourFormData.append("datemission", dateCheque);
-    ourFormData.append("donneurordre", this.donneurordre.trim());
-    ourFormData.append("chequebarre", (this.chequebarre == true ? "1" : "0"));
-    ourFormData.append("motif", this.idMotifPaiement.toString());
+    this.chequeFormData.append("datemission", dateCheque);
+    this.chequeFormData.append("donneurordre", this.donneurordre.trim());
+    this.chequeFormData.append("chequebarre", (this.chequebarre == true ? "1" : "0"));
+    this.chequeFormData.append("motif", this.idMotifPaiement.toString());
 
     // now call API to save data :
-    this.meswebservices.sendPaiementCheque(ourFormData).toPromise()
+    this.meswebservices.sendPaiementCheque(this.chequeFormData).toPromise()
       .then(
         resultat => {
           if (resultat.code == "ok") {
