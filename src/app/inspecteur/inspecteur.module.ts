@@ -17,10 +17,15 @@ import { ReunionComponent } from './reunion/reunion.component';
 import { PerformanceComponent } from './performance/performance.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ActivitecommercialeComponent } from './activitecommerciale/activitecommerciale.component';
+import { DevisComponent } from './devis/devis.component';
+import { ClientsComponent } from './clients/clients.component';
+import { StatdevisequipeComponent } from './statdevisequipe/statdevisequipe.component';
+import { StatdevisattenteComponent } from './statdevisattente/statdevisattente.component';
+import { UserdetailsComponent } from './userdetails/userdetails.component';
 
 
 @NgModule({
-  declarations: [AccueilComponent, SuperviseurComponent, RdvComponent, RapportComponent, AgendaComponent, ReunionComponent, PerformanceComponent, ActivitecommercialeComponent],
+  declarations: [AccueilComponent, SuperviseurComponent, RdvComponent, RapportComponent, AgendaComponent, ReunionComponent, PerformanceComponent, ActivitecommercialeComponent, DevisComponent, ClientsComponent, StatdevisequipeComponent, StatdevisattenteComponent, UserdetailsComponent],
   imports: [
     CommonModule,
     InspecteurRoutingModule,

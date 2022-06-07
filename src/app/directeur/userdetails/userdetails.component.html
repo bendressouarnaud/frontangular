@@ -1,0 +1,157 @@
+<div class="main-content" style=" margin-top: 0px;">
+    <div class="container-fluid" style=" margin-top: 0px; padding-top: 0px;">
+
+
+        <div class="row" style=" margin-top: 0px;">
+            <div class="col-md-12 ml-auto mr-auto">
+                <div class="page-categories">
+                    <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#/directeur/accueil" role="tablist">
+                                <i class="material-icons">
+
+                                    <img src="assets/img/icone_accueil.png" width="85" height="70" />
+
+                                </i> Accueil
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/directeur/collaborateur" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/commercial.png" width="85" height="70" />
+                                </i> Collaborateurs
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/directeur/rdv" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/rdvweb.jpg" width="85" height="70" />
+                                </i> Invitation. RDV
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/directeur/rapport" role="tablist">
+                                <i class="material-icons"><img src="assets/img/rapportpng.png" width="85"
+                                        height="70" /></i> Rapports
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/directeur/agenda" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/agenda.jpg" width="85" height="70" />
+                                </i> Agenda
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/directeur/reunion" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/reunion.jpg" width="85" height="70" />
+                                </i> R&eacute;union
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/directeur/performance" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/performances.jpg" width="85" height="70" />
+                                </i> Performance
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#link10" role="tablist">
+                                <i class="material-icons"><img src="assets/img/parametrespng.png" width="85"
+                                        height="70" /></i> Param&egrave;tres
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-md-6">
+              <div class="card card-chart">
+                <div class="card-header card-header-icon card-header-info">
+                  <div class="card-icon">
+                  <i class="material-icons">data_usage</i>
+                  </div>
+                  <h4 class="card-title" style="font-size:18px">R&eacute;partition RDVs / Rapports / Devis</h4>
+                </div>
+                <div class="card-body">
+                  <canvas id="piechartrdvrapportdevis" height="100"></canvas>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="card card-chart">
+                    <div class="card-header card-header-icon card-header-success">
+                        <div class="card-icon">
+                            <i class="material-icons">timeline</i>
+                        </div>
+                        <h4 class="card-title" style="font-size:18px">RDVs</h4>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="chartrdv" height="100"></canvas>
+                    </div>
+                </div>
+            </div>
+
+                
+        </div>
+
+
+
+        <div class="row">
+
+            
+
+
+            <div class="col-md-6">
+                <div class="card card-chart">
+                    <div class="card-header card-header-icon card-header-success">
+                        <div class="card-icon">
+                            <i class="material-icons">timeline</i>
+                        </div>
+                        <h4 class="card-title" style="font-size:18px">Devis</h4>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="chartdevis" height="100"></canvas>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="card card-chart">
+                  <div class="card-header card-header-icon card-header-info">
+                    <div class="card-icon">
+                    <i class="material-icons">timeline</i>
+                    </div>
+                    <h4 class="card-title" style="font-size:18px">Rapports</h4>
+                  </div>
+                  <div class="card-body">
+                    <canvas id="chartrapport" height="100"></canvas>
+                  </div>
+                </div>
+              </div>
+
+                
+        </div>
+
+
+
+
+    </div>
+</div>

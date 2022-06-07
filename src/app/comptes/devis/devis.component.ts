@@ -19,6 +19,51 @@ import { Traitements } from 'src/app/messervices/traitements';
 
 declare const $: any;
 
+export interface IndemniteItems {
+  amount: number;
+  libelle: string;
+}
+
+export interface Destinations {
+  id: number;
+  libelle: string;
+}
+
+export const lesIndemnites: IndemniteItems[] = [
+  { amount: 2500000, libelle: '2 500 000' },
+  { amount: 5000000, libelle: '5 000 000' },
+  { amount: 7500000, libelle: '7 500 000' },
+  { amount: 10000000, libelle: '10 000 000' },
+  { amount: 15000000, libelle: '15 000 000' },
+  { amount: 20000000, libelle: '20 000 000' },
+  { amount: 30000000, libelle: '30 000 000' },
+  { amount: 50000000, libelle: '50 000 000' },
+  { amount: 60000000, libelle: '60 000 000' },
+  { amount: 70000000, libelle: '70 000 000' },
+];
+
+
+export const lesZonesDestinations: Destinations[] = [
+  { id: 1, libelle: 'AFRIQUE' },
+  { id: 2, libelle: 'EUROPE' },
+  { id: 3, libelle: 'AMERIQUE' },
+  { id: 3, libelle: 'ASIE' },
+  { id: 3, libelle: 'OCEANIE' }
+];
+
+export const lesPaysDestinations: Destinations[] = [
+  { id: 1, libelle: 'FRANCE' },
+  { id: 2, libelle: 'ALLEMAGNE' },
+  { id: 3, libelle: 'ETATS-UNIS' },
+  { id: 3, libelle: 'BURKINA-FASO' },
+  { id: 3, libelle: 'AFRIQUE DU SUD' },
+  { id: 3, libelle: 'MAROC' },
+  { id: 3, libelle: 'BELGIQUE' },
+  { id: 3, libelle: 'SUISSE' },
+  { id: 3, libelle: 'MALI' }
+];
+
+
 @Component({
   selector: 'app-devis',
   templateUrl: './devis.component.html',
@@ -42,6 +87,7 @@ export class DevisComponent implements OnInit {
   getPolice = false;
   getPoliceAccident = false;
   getPoliceVoyage = false;
+  getPoliceMrh = false;
   setPolice = "";
   idCliendDone = "0";
   idClient = "0";
@@ -106,6 +152,7 @@ export class DevisComponent implements OnInit {
   menuPaysItems: any[];
   //
   typeclient = 1;
+  origineclient = 0;
   // 
   getCurrentDate = new Date();
   customerBirthDate = new Date();
@@ -184,6 +231,7 @@ export class DevisComponent implements OnInit {
   listeMotifPaiement: Motifpaiement[];
   idMotifPaiement = 0;
   devispaye = "";
+  modepaiement = "";
 
 
 
@@ -201,8 +249,8 @@ export class DevisComponent implements OnInit {
     this.statsdevisuser.mrh = "0";
 
     //this.menuIndemniteItems = lesIndemnites.filter(menuItem => menuItem);
-    //this.menuZoneItems = lesZonesDestinations.filter(menuItem => menuItem);
-    //this.menuPaysItems = lesPaysDestinations.filter(menuItem => menuItem);
+    this.menuZoneItems = lesZonesDestinations.filter(menuItem => menuItem);
+    this.menuPaysItems = lesPaysDestinations.filter(menuItem => menuItem);
 
     this.getclientforoperations();
     this.getLesCivilite();
@@ -385,14 +433,63 @@ export class DevisComponent implements OnInit {
   }
 
 
+  // make a test :
+  displayPolice(){
+    //alert("Police : "+this.setPolice);
+  }
 
-  // Afficher les POLICES :
+
+  // Afficher les POLICES AUTO :
   getlespolicesbyclient(): void {
+    this.getPoliceAccident = false;
     this.meswebservices.getlespolicesbyclient(this.idCliendDone).toPromise()
       .then(
         resultat => {
           this.listePolices = resultat;
+          // Pick first value of the list :
+          if(this.setPolice.trim().length == 0) this.setPolice = resultat[0].Police.toString();
           this.getPolice = true;
+        }
+      )
+  }
+
+  getlespolicesaccidentbyclient(): void {
+    this.getPoliceAccident = false;
+    this.meswebservices.getlespolicesbyclient(this.idCliendDone).toPromise()
+      .then(
+        resultat => {
+          this.listePolices = resultat;
+          // Pick first value of the list :
+          if(this.setPolice.trim().length == 0) this.setPolice = resultat[0].Police.toString();
+          this.getPoliceAccident = true;
+        }
+      )
+  }
+
+
+  getlespolicesvoyagebyclient(): void {
+    this.getPoliceVoyage = false;
+    this.meswebservices.getlespolicesbyclient(this.idCliendDone).toPromise()
+      .then(
+        resultat => {
+          this.listePolices = resultat;
+          // Pick first value of the list :
+          if(this.setPolice.trim().length == 0) this.setPolice = resultat[0].Police.toString();
+          this.getPoliceVoyage = true;
+        }
+      )
+  }
+
+
+  getlespolicesmrhbyclient(): void {
+    this.getPoliceMrh = false;
+    this.meswebservices.getlespolicesbyclient(this.idCliendDone).toPromise()
+      .then(
+        resultat => {
+          this.listePolices = resultat;
+          // Pick first value of the list :
+          if(this.setPolice.trim().length == 0) this.setPolice = resultat[0].Police.toString();
+          this.getPoliceMrh = true;
         }
       )
   }
@@ -738,6 +835,13 @@ export class DevisComponent implements OnInit {
     this.membresId = [];
     this.selectedItems = [];
     this.clientRest.activite = 1;
+
+    // Set values :
+    this.setPolice = "";
+    this.getPoliceMrh = false;
+    this.clientRest.origine = 0;
+    this.clientRest.observation = "";
+
     $('#modalMrh').modal();
   }
 
@@ -754,6 +858,13 @@ export class DevisComponent implements OnInit {
     this.membresId = [];
     this.selectedItems = [];
     this.clientRest.activite = 1;
+
+    // Set values :
+    this.setPolice = "";
+    this.getPoliceVoyage = false;
+    this.clientRest.origine = 0;
+    this.clientRest.observation = "";
+
     $('#modalVoyage').modal();
   }
 
@@ -770,6 +881,13 @@ export class DevisComponent implements OnInit {
     this.membresId = [];
     this.selectedItems = [];
     this.clientRest.activite = 1;
+
+    // Set values :
+    this.setPolice = "";
+    this.getPoliceAccident = false;
+    this.clientRest.origine = 0;
+    this.clientRest.observation = "";
+
     $('#modalAccident').modal();
   }
 
@@ -793,11 +911,19 @@ export class DevisComponent implements OnInit {
     this.id_devisauto = 0;
     this.idCliendDone = "0";
     this.idClient = "0";
+    //
+    this.clientRest.origine = 0;
+    this.clientRest.observation = "";
 
     // Reset : 
     this.membresId = [];
     this.selectedItems = [];
     this.clientRest.activite = 1;
+
+    // Set values :
+    this.setPolice = "";
+    this.getPolice = false;
+
     $('#modalAutomobile').modal();
   }
 
@@ -1086,6 +1212,10 @@ export class DevisComponent implements OnInit {
       this.formData.append("iddevismrh", this.id_mrh.toString());
       this.formData.append("idCliendDone", this.idCliendDone);
       this.formData.append("idclient", this.idClient);
+      //
+      this.formData.append("origine", this.clientRest.origine.toString());
+      this.formData.append("observation", this.clientRest.observation.toString());
+      this.formData.append("police", this.setPolice);
 
       // Call :
       this.meswebservices.sendDevisMrh(this.formData).toPromise()
@@ -1177,6 +1307,10 @@ export class DevisComponent implements OnInit {
       this.formData.append("iddevisauto", this.id_devisauto.toString());
       this.formData.append("idCliendDone", this.idCliendDone);
       this.formData.append("idclient", this.idClient);
+      //
+      this.formData.append("origine", this.clientRest.origine.toString());
+      this.formData.append("observation", this.clientRest.observation.toString());
+      this.formData.append("police", this.setPolice);
 
       // Call :
       this.meswebservices.sendDevisAuto(this.formData).toPromise()
@@ -1261,6 +1395,10 @@ export class DevisComponent implements OnInit {
       this.formData.append("idaccident", this.id_accident.toString());
       this.formData.append("idCliendDone", this.idCliendDone);
       this.formData.append("idclient", this.idClient);
+      //
+      this.formData.append("origine", this.clientRest.origine.toString());
+      this.formData.append("observation", this.clientRest.observation.toString());
+      this.formData.append("police", this.setPolice);
 
       // Call :
       this.meswebservices.sendDevisAccident(this.formData).toPromise()
@@ -1340,6 +1478,11 @@ export class DevisComponent implements OnInit {
       this.formData.append("idvoyage", this.id_voyage.toString());
       this.formData.append("idCliendDone", this.idCliendDone);
       this.formData.append("idclient", this.idClient);
+
+      //
+      this.formData.append("origine", this.clientRest.origine.toString());
+      this.formData.append("observation", this.clientRest.observation.toString());
+      this.formData.append("police", this.setPolice);
 
       // Call :
       this.meswebservices.sendDevisVoyage(this.formData).toPromise()
@@ -1447,7 +1590,7 @@ export class DevisComponent implements OnInit {
 
 
   // Display PAYMENT METHOD :
-  choixpaiement(idDevis: string, devisType: number, nomclient: string, devispaye: string) {
+  choixpaiement(idDevis: string, devisType: number, nomclient: string, devispaye: string, modepaiement: string) {
     // 1 : AUTO
     // 2 : Voyage
     // 3 : Accident
@@ -1456,6 +1599,7 @@ export class DevisComponent implements OnInit {
     this.id_devis = idDevis;
     this.clientcheque = nomclient;
     this.devispaye = devispaye;
+    this.modepaiement = modepaiement;
     $('#modalpayment').modal();
   }
 
@@ -1466,7 +1610,7 @@ export class DevisComponent implements OnInit {
     // Go to PICK DATA , base on 'id_devis' and 'choix'
     if(choix == 1){
       // CHEQUE
-      if(this.devispaye == "Oui"){
+      if((this.devispaye == "Oui") && (this.modepaiement =="Chèque")){
         // Call 'getChequeData' to display DATA :
         this.meswebservices.getChequeData(this.id_devis).toPromise()
         .then(
@@ -1492,11 +1636,12 @@ export class DevisComponent implements OnInit {
           }
         );
       }
+      else if(this.modepaiement =="Virement") this.warnmessage("Ce devis avait été réglé premièrement par VIREMENT !");
       else $('#modalcheque').modal();
     }
     else{
       // Virement 
-      if(this.devispaye == "Oui"){
+      if((this.devispaye == "Oui") && (this.modepaiement =="Virement")){
         // Call 'getChequeData' to display DATA :
         this.meswebservices.getVirementData(this.id_devis).toPromise()
         .then(
@@ -1521,6 +1666,7 @@ export class DevisComponent implements OnInit {
           }
         );
       }
+      else if(this.modepaiement =="Chèque") this.warnmessage("Ce devis avait été réglé premièrement par CHEQUE !");
       else $('#modalvirement').modal();
     } 
   }
@@ -1704,8 +1850,43 @@ export class DevisComponent implements OnInit {
           this.indemnitemax = resultat.indemnitemax;
           this.coutproduit = resultat.cout;
           this.id_devisauto = parseInt(idauto);
+
+          // Set up values for 'CUSTOMER DOP DOWN List':
+          this.setPolice = resultat.police.toString();
           this.idCliendDone = resultat.idCliendDone.toString();
+          if( parseInt(this.idCliendDone) > 0){
+            this.selectedItems = [];
+            this.membresId = [];
+            // Set the drop down list values :
+            for (var i = 0; i < this.listeDesClients.length; i++) {
+              if (parseInt(this.idCliendDone) == this.listeDesClients[i].IdClient) {
+                this.membresId.push({ 
+                  item_id: this.listeDesClients[i].IdClient.toString(), 
+                  item_text: this.listeDesClients[i].RAISONSOCIALE.toString() 
+                });
+                break;
+              }
+            }
+            //
+            this.selectedItems = this.membresId;
+
+
+            // Process for 'POLICE':
+            if(this.setPolice.trim().length > 0){
+              this.getlespolicesbyclient();
+            }
+          }
+          else{
+            this.membresId = [];
+            this.selectedItems = [];
+          }
+
+
           this.idClient = resultat.idClient.toString();
+
+          //
+          this.clientRest.origine = resultat.origine;
+          this.clientRest.observation = resultat.observation;
 
           //
           //let tDate = resultat.dates.toString().split("T");
@@ -1713,8 +1894,8 @@ export class DevisComponent implements OnInit {
           this.customerBirthDate = new Date(resultat.dates.toString());
           //alert("Dates : "+this.getDate);
 
-          this.membresId = [];
-          this.selectedItems = [];
+          //this.membresId = [];
+          //this.selectedItems = [];
           $('#modalAutomobile').modal();
           this.computePrice();
           //alert("OK");
@@ -1757,8 +1938,40 @@ export class DevisComponent implements OnInit {
           //
           this.getDate = new Date(resultat.dates.toString());
 
-          this.membresId = [];
-          this.selectedItems = [];
+          
+          // Set up values for 'CUSTOMER DOP DOWN List':
+          this.setPolice = resultat.police.toString();
+          if( parseInt(this.idCliendDone) > 0){
+            this.selectedItems = [];
+            this.membresId = [];
+            // Set the drop down list values :
+            for (var i = 0; i < this.listeDesClients.length; i++) {
+              if (parseInt(this.idCliendDone) == this.listeDesClients[i].IdClient) {
+                this.membresId.push({ 
+                  item_id: this.listeDesClients[i].IdClient.toString(), 
+                  item_text: this.listeDesClients[i].RAISONSOCIALE.toString() 
+                });
+                break;
+              }
+            }
+            //
+            this.selectedItems = this.membresId;
+
+            // Process for 'POLICE':
+            if(this.setPolice.trim().length > 0){
+              this.getlespolicesaccidentbyclient();
+            }
+          }
+          else{
+            this.membresId = [];
+            this.selectedItems = [];
+          }
+
+          //
+          this.clientRest.origine = resultat.origine;
+          this.clientRest.observation = resultat.observation;
+          
+          //
           $('#modalAccident').modal();
         },
         (error) => {
@@ -1788,7 +2001,6 @@ export class DevisComponent implements OnInit {
 
 
           this.id_voyage = resultat.idvoy;
-          this.idCliendDone = resultat.idCliendDone.toString();
           this.idClient = resultat.idClient.toString();
 
           //
@@ -1808,8 +2020,34 @@ export class DevisComponent implements OnInit {
           //this.paysdestination = resultat.paysdestination;
 
 
+          // Set up values for 'CUSTOMER DOP DOWN List':
+          this.setPolice = resultat.police.toString();
+          this.idCliendDone = resultat.idCliendDone.toString();
           this.membresId = [];
           this.selectedItems = [];
+          if( parseInt(this.idCliendDone) > 0){
+            // Set the drop down list values :
+            for (var i = 0; i < this.listeDesClients.length; i++) {
+              if (parseInt(this.idCliendDone) == this.listeDesClients[i].IdClient) {
+                this.membresId.push({ 
+                  item_id: this.listeDesClients[i].IdClient.toString(), 
+                  item_text: this.listeDesClients[i].RAISONSOCIALE.toString() 
+                });
+                break;
+              }
+            }
+            //
+            this.selectedItems = this.membresId;
+
+            // Process for 'POLICE':
+            if(this.setPolice.trim().length > 0){
+              this.getlespolicesvoyagebyclient();
+            }
+          }
+
+          //
+          this.clientRest.origine = resultat.origine;
+          this.clientRest.observation = resultat.observation;
           $('#modalVoyage').modal();
         },
         (error) => {
@@ -1853,11 +2091,35 @@ export class DevisComponent implements OnInit {
           // Update 'RUBRIQUE'
           this.selectformule();
 
-          // change 'COUT REEL BIEN' :
-
-
+          // Set up values for 'CUSTOMER DOP DOWN List':
+          this.setPolice = resultat.police.toString();
+          this.idCliendDone = resultat.idCliendDone.toString();
           this.membresId = [];
           this.selectedItems = [];
+          if( parseInt(this.idCliendDone) > 0){
+            // Set the drop down list values :
+            for (var i = 0; i < this.listeDesClients.length; i++) {
+              if (parseInt(this.idCliendDone) == this.listeDesClients[i].IdClient) {
+                this.membresId.push({ 
+                  item_id: this.listeDesClients[i].IdClient.toString(), 
+                  item_text: this.listeDesClients[i].RAISONSOCIALE.toString() 
+                });
+                break;
+              }
+            }
+            //
+            this.selectedItems = this.membresId;
+
+            // Process for 'POLICE':
+            if(this.setPolice.trim().length > 0){
+              this.getlespolicesmrhbyclient();
+            }
+          }          
+
+          //
+          this.clientRest.origine = resultat.origine;
+          this.clientRest.observation = resultat.observation;
+
           $('#modalMrh').modal();
         },
         (error) => {
@@ -1922,7 +2184,7 @@ export class DevisComponent implements OnInit {
           search: "_INPUT_",
           searchPlaceholder: "Search records",
         },
-        "order": [[3, "desc"]]
+        "order": [[4, "desc"]]
       });
     }, 500);
   }

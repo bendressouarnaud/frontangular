@@ -4,6 +4,7 @@ import { AccueilsupComponent } from './accueilsup/accueilsup.component';
 import { ActivitecommercialeComponent } from './activitecommerciale/activitecommerciale.component';
 import { AddresseComponent } from './addresse/addresse.component';
 import { AgendasupComponent } from './agendasup/agendasup.component';
+import { ClientsComponent } from './clients/clients.component';
 import { ConfigactiviteComponent } from './configactivite/configactivite.component';
 import { ConfigequipeComponent } from './configequipe/configequipe.component';
 import { ConfigmotifComponent } from './configmotif/configmotif.component';
@@ -20,6 +21,7 @@ import { RdvsupComponent } from './rdvsup/rdvsup.component';
 import { ReunionComponent } from './reunion/reunion.component';
 import { StatdevisattenteComponent } from './statdevisattente/statdevisattente.component';
 import { StatdevisequipeComponent } from './statdevisequipe/statdevisequipe.component';
+import { UserdetailsComponent } from './userdetails/userdetails.component';
 
 const routes: Routes = [
   {
@@ -103,7 +105,12 @@ const routes: Routes = [
   {
     path:'actcommerciale',
     component: ActivitecommercialeComponent
-  }
+  },
+  {
+    path: 'clients',
+    component: ClientsComponent
+  },
+  { path: 'userdetails/:contact', component: UserdetailsComponent }
 
 
 ];

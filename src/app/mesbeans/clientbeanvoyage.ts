@@ -17,5 +17,10 @@ export class Clientbeanvoyage{
     paysdestination : number; 
     idvoy : number;    
 
+    //
+    origine : number;
+    observation : String;
+    police : String
+
     constructor(){}
 }

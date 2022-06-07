@@ -3,11 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { AccueilComponent } from './accueil/accueil.component';
 import { ActivitecommercialeComponent } from './activitecommerciale/activitecommerciale.component';
 import { AgendaComponent } from './agenda/agenda.component';
+import { ClientsComponent } from './clients/clients.component';
+import { DevisComponent } from './devis/devis.component';
 import { PerformanceComponent } from './performance/performance.component';
 import { RapportComponent } from './rapport/rapport.component';
 import { RdvComponent } from './rdv/rdv.component';
 import { ReunionComponent } from './reunion/reunion.component';
+import { StatdevisattenteComponent } from './statdevisattente/statdevisattente.component';
+import { StatdevisequipeComponent } from './statdevisequipe/statdevisequipe.component';
 import { SuperviseurComponent } from './superviseur/superviseur.component';
+import { UserdetailsComponent } from './userdetails/userdetails.component';
 
 const routes: Routes = [
   {
@@ -41,7 +46,24 @@ const routes: Routes = [
   {
     path: 'actcommerciale',
     component: ActivitecommercialeComponent
-  }
+  },
+  {
+    path:'devis',
+    component: DevisComponent
+  },
+  {
+    path:'devisequipe',
+    component: StatdevisequipeComponent
+  },
+  {
+    path:'statsdevisequipe',
+    component: StatdevisattenteComponent
+  },
+  {
+    path: 'clients',
+    component: ClientsComponent
+  },
+  { path: 'userdetails/:contact', component: UserdetailsComponent }
 ];
 
 @NgModule({

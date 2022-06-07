@@ -22,10 +22,11 @@ import { DevisComponent } from './devis/devis.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { ExamenComponent } from './examen/examen.component';
 import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
+import { ClientsComponent } from './clients/clients.component';
 
 
 @NgModule({
-  declarations: [TraderComponent, RdvComponent, RapportComponent, AgendaComponent, PerformanceComponent, ActiviteComponent, DevisComponent, ExamenComponent],
+  declarations: [TraderComponent, RdvComponent, RapportComponent, AgendaComponent, PerformanceComponent, ActiviteComponent, DevisComponent, ExamenComponent, ClientsComponent],
   imports: [
     CommonModule,
     CommercialRoutingModule,

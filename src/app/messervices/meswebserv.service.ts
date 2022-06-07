@@ -74,6 +74,7 @@ import { Clientbeancheque } from "../mesbeans/clientbeancheque";
 import { ClientBeanComAuto } from "../mesbeans/clientbeancomauto";
 import { ClientBeanStatComAuto } from "../mesbeans/clientbeanstatcomauto";
 import { BeanPortfolioDevis } from "../mesbeans/beanportfoliodevis";
+import { Clientportefeuille } from "../mesbeans/clientportefeuille";
 
 @Injectable({
     providedIn: 'root'
@@ -242,6 +243,26 @@ export class MeswebservService {
     }
 
 
+    // Transformer le prospect en client :
+    prospectenclient(idcli: string): Observable<Reponse> {
+        // DevisController :
+        var queteObjet = new Quete();
+        queteObjet.code = idcli;
+        // 
+        return this.httpclient.post<Reponse>(this.webserviceUri.concat("/prospectenclient"), queteObjet, {});
+    }
+
+
+    // Get CNI file :
+    getcnipicture(idcli: string): Observable<Reponse> {
+        // DevisController :
+        var queteObjet = new Quete();
+        queteObjet.code = idcli;
+        // 
+        return this.httpclient.post<Reponse>(this.webserviceUri.concat("/getcnipicture"), queteObjet, {});
+    }
+
+
     // Activer le compte :
     activercompteuser(email: string): Observable<Reponse> {
         var queteObjet = new Quete();
@@ -347,6 +368,17 @@ export class MeswebservService {
 
     }
 
+
+    // Liste des CLIENTS rattachés à un commercial  :
+    getclientportfeuille(): Observable<Clientportefeuille[]> {
+        return this.httpclient.get<Clientportefeuille[]>(this.webserviceUri.concat("/getclientportfeuille"),  {});
+    }
+
+
+    // Liste des CLIENTS rattachés à un commercial  :
+    getreseauxsociauxmycustomers(): Observable<Clientportefeuille[]> {
+        return this.httpclient.get<Clientportefeuille[]>(this.webserviceUri.concat("/getclientreseauxsociauxportfeuille"),  {});
+    }
 
 
     // Liste des RAPPORTs lié à un commercial  :
@@ -691,6 +723,8 @@ export class MeswebservService {
         // ApiCallController
         return this.httpclient.get<DataGrapheCours[]>(this.webserviceUri.concat("/getTeamDevisStatbyManager"), {});
     }
+
+
 
 
     //
@@ -1480,7 +1514,7 @@ export class MeswebservService {
 
     // Liste des POLICES souscrites :
     getlespolicesbyclient(idclient: String): Observable<RestPolice[]> {
-        // 
+        //  ApiNsiaController
         let mesParams = new HttpParams();
         mesParams = mesParams.append('idclient', idclient.toString());
         return this.httpclient.get<RestPolice[]>(this.webserviceUri.concat("/getlespolicesbyclient"),
@@ -1885,6 +1919,57 @@ export class MeswebservService {
             {
                 params: mesParams
             });
+    }
+
+
+    // Get PIE CHART for particular user
+    getStatsRdvRapportDevisForUser(contact : string): Observable<BeanPortfolioDevis[]> {
+        // 
+        var queteObjet = new Quete();
+        queteObjet.code = contact;
+        // 
+        return this.httpclient.post<BeanPortfolioDevis[]>(this.webserviceUri.concat("/getStatsRdvRapportDevisForUser"), 
+        queteObjet, {});
+    }
+
+
+    
+    // Get CHART based on User's RDV :
+    getChartRdvforUniqueUser(contact : string): Observable<DataGrapheCours[]> {
+        // ApiCallController
+        var queteObjet = new Quete();
+        queteObjet.code = contact;
+        // 
+        return this.httpclient.post<DataGrapheCours[]>(this.webserviceUri.concat("/getChartRdvforUniqueUser"), 
+            queteObjet, {});
+    }
+
+    // Get CHART based on User's RAPPORT :
+    getChartRapportforUniqueUser(contact : string): Observable<DataGrapheCours[]> {
+        // ApiCallController
+        var queteObjet = new Quete();
+        queteObjet.code = contact;
+        // 
+        return this.httpclient.post<DataGrapheCours[]>(this.webserviceUri.concat("/getChartRapportforUniqueUser"), 
+            queteObjet, {});
+    }
+
+
+    // Get CHART based on User's DEVIS :
+    getChartDevisforUniqueUser(contact : string): Observable<DataGrapheCours[]> {
+        // ApiCallController
+        var queteObjet = new Quete();
+        queteObjet.code = contact;
+        // 
+        return this.httpclient.post<DataGrapheCours[]>(this.webserviceUri.concat("/getChartDevisforUniqueUser"), 
+            queteObjet, {});
+    }
+
+
+    // Commerciaux LISTE liste
+    getcollaborateurs(): Observable<Utilisateur[]> {
+        return this.httpclient.get<Utilisateur[]>(this.webserviceUri.concat("/getcollaborateurs"),
+            {});
     }
 
 }

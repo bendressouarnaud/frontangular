@@ -173,6 +173,12 @@
                                         <td>{{ commerciaux.email }}</td>
                                         <td>{{ commerciaux.contact }}</td>
                                         <td class="text-center">
+
+                                            <a title="Afficher les statistiques" target="_blank" 
+                                                href="#/inspecteur/userdetails/{{commerciaux.contact}}"
+                                                    class="btn btn-link btn-success btn-just-icon edit"><i
+                                                        class="material-icons">monitoring</i></a>
+
                                             <a title="Supprimer ce collaborateur" (click)="afficherinvit( commerciaux.nom, commerciaux.email )"
                                                     class="btn btn-link btn-warning btn-just-icon edit"><i
                                                         class="material-icons">dvr</i></a>

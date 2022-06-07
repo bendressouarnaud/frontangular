@@ -20,6 +20,10 @@ export class Clientbeanauto{
     indemnitemax : number;
     cout : number;
     dates : Date;
+    //
+    origine : number;
+    observation : String;
+    police : String
 
     constructor(){}
 }

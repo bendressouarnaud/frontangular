@@ -34,10 +34,12 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
 import { StatdevisattenteComponent } from './statdevisattente/statdevisattente.component';
 import { ActivitecommercialeComponent } from './activitecommerciale/activitecommerciale.component';
+import { ClientsComponent } from './clients/clients.component';
+import { UserdetailsComponent } from './userdetails/userdetails.component';
 
 
 @NgModule({
-  declarations: [GestioncompteComponent, GestioncommerceComponent, GestionrapportComponent, AccueilsupComponent, ConfigactiviteComponent, RdvsupComponent, AgendasupComponent, ReunionComponent, PerformanceComponent, HistoriqueComponent, AddresseComponent, ConfigequipeComponent, ConfigmotifComponent, NomenclatureComponent, DetailnomenclatureComponent, ParametresComponent, DevisComponent, StatdevisequipeComponent, StatdevisattenteComponent, ActivitecommercialeComponent],
+  declarations: [GestioncompteComponent, GestioncommerceComponent, GestionrapportComponent, AccueilsupComponent, ConfigactiviteComponent, RdvsupComponent, AgendasupComponent, ReunionComponent, PerformanceComponent, HistoriqueComponent, AddresseComponent, ConfigequipeComponent, ConfigmotifComponent, NomenclatureComponent, DetailnomenclatureComponent, ParametresComponent, DevisComponent, StatdevisequipeComponent, StatdevisattenteComponent, ActivitecommercialeComponent, ClientsComponent, UserdetailsComponent],
   imports: [
     CommonModule,
     ComptesRoutingModule,

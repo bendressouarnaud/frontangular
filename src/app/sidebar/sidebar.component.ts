@@ -68,7 +68,21 @@ export const routesInspecteur: RouteInfo[] = [
             { path: 'rapport', title: 'Rapports', ab: 'RS' },
             { path: 'agenda', title: 'Agenda', ab: 'AG' },
             { path: 'reunion', title: 'Réunion', ab: 'RS' },
-            { path: 'performance', title: 'Performance', ab: 'PE' }
+            { path: 'performance', title: 'Performance', ab: 'PE' },
+            { path: 'clients', title: 'Client', ab: 'CT' }
+        ]
+    },
+    {
+        path: '/gestion',
+        title: 'Operations',
+        type: 'sub',
+        icontype: 'shopping_cart',
+        collapse: 'operations',
+        children: [
+            { path: 'devis', title: 'Gestion des Devis', ab: 'GD' },
+            { path: 'devisequipe', title: 'Clôture des devis en attente', ab: 'GE' },
+            { path: 'statsdevisequipe', title: 'Devis en attente de paie', ab: 'DP' },
+            { path: 'souscription', title: 'Gestion des Souscriptions', ab: 'GS' }
         ]
     }
 ];
@@ -144,7 +158,21 @@ export const routesResponsable: RouteInfo[] = [
             { path: 'rapport', title: 'Rapports', ab: 'RS' },
             { path: 'agenda', title: 'Agenda', ab: 'AG' },
             { path: 'reunion', title: 'Réunion', ab: 'RS' },
-            { path: 'performance', title: 'Performance', ab: 'PE' }
+            { path: 'performance', title: 'Performance', ab: 'PE' },
+            { path: 'clients', title: 'Client', ab: 'CT' }
+        ]
+    },
+    {
+        path: '/gestion',
+        title: 'Operations',
+        type: 'sub',
+        icontype: 'shopping_cart',
+        collapse: 'operations',
+        children: [
+            { path: 'devis', title: 'Gestion des Devis', ab: 'GD' },
+            { path: 'devisequipe', title: 'Clôture des devis en attente', ab: 'GE' },
+            { path: 'statsdevisequipe', title: 'Devis en attente de paie', ab: 'DP' },
+            { path: 'souscription', title: 'Gestion des Souscriptions', ab: 'GS' }
         ]
     }
 ];
@@ -170,7 +198,8 @@ export const routesSuperviseur: RouteInfo[] = [
             { path: 'rapportcom', title: 'Rapports Commerciaux', ab: 'RC' },
             { path: 'agenda', title: 'Planning commerciaux', ab: 'GS' },
             { path: 'reunion', title: 'Réunions', ab: 'RS' },
-            { path: 'performance', title: 'Performances', ab: 'PE' }
+            { path: 'performance', title: 'Performances', ab: 'PE' },
+            { path: 'clients', title: 'Client', ab: 'CT' }
         ]
     },
     {
@@ -208,7 +237,8 @@ export const routesCommercial: RouteInfo[] = [
             { path: 'actcommerciale', title: 'Activité commerciale', ab: 'AC' },
             { path: 'comrap', title: 'Gestion Rapports', ab: 'GA' },
             { path: 'comagenda', title: 'Agenda', ab: 'AG' },
-            { path: 'performance', title: 'Performance', ab: 'PE' }
+            { path: 'performance', title: 'Performance', ab: 'PE' },
+            { path: 'clients', title: 'Client', ab: 'CT' }
         ]
     },
     {

@@ -15,7 +15,12 @@ export class Clientbeanaccident{
     capitaldeces : number;
     capitalinfirmite : number;
     fraisdetraitement : number;    
-    idacc : number;    
+    idacc : number; 
+    
+    //
+    origine : number;
+    observation : String;
+    police : String
 
     constructor(){}
 }

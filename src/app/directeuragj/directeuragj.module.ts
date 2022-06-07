@@ -15,10 +15,12 @@ import { ReunionComponent } from './reunion/reunion.component';
 import { PerformanceComponent } from './performance/performance.component';
 import { RdvComponent } from './rdv/rdv.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { CollaborateurComponent } from './collaborateur/collaborateur.component';
+import { UserdetailsComponent } from './userdetails/userdetails.component';
 
 
 @NgModule({
-  declarations: [AccueilComponent, RapportComponent, AgendaComponent, ReunionComponent, PerformanceComponent, RdvComponent],
+  declarations: [AccueilComponent, RapportComponent, AgendaComponent, ReunionComponent, PerformanceComponent, RdvComponent, CollaborateurComponent, UserdetailsComponent],
   imports: [
     CommonModule,
     DirecteuragjRoutingModule,

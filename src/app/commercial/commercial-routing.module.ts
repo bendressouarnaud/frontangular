@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ActiviteComponent } from './activite/activite.component';
 import { AgendaComponent } from './agenda/agenda.component';
+import { ClientsComponent } from './clients/clients.component';
 import { DevisComponent } from './devis/devis.component';
 import { ExamenComponent } from './examen/examen.component';
 import { PerformanceComponent } from './performance/performance.component';
@@ -41,6 +42,10 @@ const routes: Routes = [
   {
     path: 'examen',
     component: ExamenComponent
+  },
+  {
+    path: 'clients',
+    component: ClientsComponent
   }
 ];
 

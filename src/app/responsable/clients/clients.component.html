@@ -1,0 +1,323 @@
+<div class="main-content" style=" margin-top: 0px;">
+    <div class="container-fluid" style=" margin-top: 0px; padding-top: 0px;">
+
+
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">S&eacute;lectionner un commercial</h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="get" action="/" class="form-horizontal">
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">Choix</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Commercial" [(value)]="identifiant"
+                                                    name="identifiant">
+                                                    <mat-option *ngFor="let user of listeAllCommerciaux"
+                                                        [value]="user.identifiant">
+                                                        {{ user.nom }}&nbsp;{{ user.prenom }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button mat-raised-button type="button" (click)="enregistrerUser()" class="btn btn-success"
+                            data-dismiss="modal">Enregistrer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="modal fade" id="modalchange" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Confirmer l'op&eacute;ration</h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                        <p>Souhaitez-vous transformer le prospect <span style="font-weight: bold;">{{ emailClient
+                                }}</span> ? en client</p>
+                        <p>&nbsp;</p>
+                        <p>{{ information }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button mat-raised-button type="button" (click)="lancerTransformation()"
+                            class="btn btn-info">Confirmer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="modal fade" id="modalphoto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog  modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">CNI - <span style="color: #211ed7;">{{emailClient}}</span></h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                        <img [@rotatedState]='state' [src]="customerPhoto" style="border: 1px solid black; "
+                        id="cniid"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button mat-raised-button type="button" (click)="rotate()"
+                            class="btn btn-info">Rotation</button>&nbsp;
+                        <button mat-raised-button type="button" (click)="agrandir()"
+                            class="btn btn-success">Agrandir</button>&nbsp;
+                        <button mat-raised-button type="button" (click)="reduire()"
+                            class="btn btn-danger" *ngIf="zoom > 0">R&eacute;duire</button>                            
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="row" style=" margin-top: 0px;">
+            <div class="col-md-12 ml-auto mr-auto">
+                <div class="page-categories">
+                    <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/responsable/accueil" role="tablist">
+                                <i class="material-icons">
+
+                                    <img src="assets/img/icone_accueil.png" width="85" height="70" />
+
+                                </i> Accueil
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/responsable/rdv" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/rdvweb.jpg" width="85" height="70" />
+                                </i> Gest. RDV
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/responsable/actcommerciale" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/commercial.jpg" width="85" height="70" />
+                                </i> Act. commerciale
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link icone" href="#/responsable/inspecteur" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/utilisateur.png" width="85" height="70" />
+                                </i> Inspecteur
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/responsable/rapport" role="tablist">
+                                <i class="material-icons"><img src="assets/img/rapportpng.png" width="85"
+                                        height="70" /></i> Rapports
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/responsable/agenda" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/agenda.jpg" width="85" height="70" />
+                                </i> Agenda
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/responsable/reunion" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/reunion.jpg" width="85" height="70" />
+                                </i> R&eacute;union
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/responsable/performance" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/performances.jpg" width="85" height="70" />
+                                </i> Performance
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="tab-content tab-space tab-subcategories">
+            <div class="tab-pane active" id="link7">
+
+                <div class="col-md-12">
+                    <div class="card ">
+                        <div class="card-body ">
+                            <ul class="nav nav-pills nav-pills-warning" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#link1" role="tablist">
+                                        Liste global des clients
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#link2" role="tablist">
+                                        Clients provenant des r&eacute;seaux sociaux
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content tab-space">
+                                <div class="tab-pane active" id="link1">
+
+                                    <div class="card">
+                                        <div class="card-body">
+
+                                            <div class="material-datatables">
+                                                <table id="datatables"
+                                                    class="table table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%"
+                                                    *ngIf="this.getListeClient">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Nom</th>
+                                                            <th>Pr&eacute;nom</th>
+                                                            <th>Email</th>
+                                                            <th>Contact</th>
+                                                            <th>Type du client</th>
+                                                            <th class="disabled-sorting text-center">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let clt of listeClients">
+                                                            <td>{{ clt.nom }}</td>
+                                                            <td>{{ clt.prenom }}</td>
+                                                            <td>{{ clt.email }}</td>
+                                                            <td>{{ clt.contact }}</td>
+                                                            <td>{{ clt.typclient }}</td>
+                                                            <td class="text-center">
+
+                                                                <a title="Afficher CNI"
+                                                                    (click)="afficherCNI( clt.email, clt.idcli )"
+                                                                    class="btn btn-link btn-info btn-just-icon edit"><i
+                                                                        class="material-icons">fit_screen</i></a>
+
+                                                                <a *ngIf="clt.typeclient == 0"
+                                                                    title="Transformer ce client"
+                                                                    (click)="transformer( clt.email, clt.idcli )"
+                                                                    class="btn btn-link btn-warning btn-just-icon edit"><i
+                                                                        class="material-icons">exit_to_app</i></a>
+
+                                                                <span *ngIf="clt.typeclient == 1"
+                                                                    style="font-weight:bold;">---</span>
+
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                        <!-- end content-->
+                                    </div>
+                                </div>
+
+
+                                <div class="tab-pane" id="link2">
+                                    <div class="card">
+                                        <div class="card-body">
+
+                                            <div class="material-datatables">
+                                                <table id="datatablesreseauxsociaux"
+                                                    class="table table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%"
+                                                    *ngIf="this.getListeReseauClient">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Nom</th>
+                                                            <th>Pr&eacute;nom</th>
+                                                            <th>Email</th>
+                                                            <th>Contact</th>
+                                                            <th>Type du client</th>
+                                                            <th class="disabled-sorting text-center">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let clt of listeReseauClients">
+                                                            <td>{{ clt.nom }}</td>
+                                                            <td>{{ clt.prenom }}</td>
+                                                            <td>{{ clt.email }}</td>
+                                                            <td>{{ clt.contact }}</td>
+                                                            <td>{{ clt.typclient }}</td>
+                                                            <td class="text-center">
+
+                                                                <a title="Afficher CNI"
+                                                                    (click)="afficherCNI( clt.email, clt.idcli )"
+                                                                    class="btn btn-link btn-info btn-just-icon edit"><i
+                                                                        class="material-icons">fit_screen</i></a>
+
+                                                                <a *ngIf="clt.typeclient == 0"
+                                                                    title="Transformer ce client"
+                                                                    (click)="transformer( clt.email, clt.idcli )"
+                                                                    class="btn btn-link btn-warning btn-just-icon edit"><i
+                                                                        class="material-icons">exit_to_app</i></a>
+
+                                                                <span *ngIf="clt.typeclient == 1"
+                                                                    style="font-weight:bold;">---</span>
+
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                        <!-- end content-->
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+</div>

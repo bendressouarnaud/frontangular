@@ -22,5 +22,10 @@ export class Clientbeanmrh{
     dateeffet: String;
     dateexpiration: String;
 
+    //
+    origine : number;
+    observation : String;
+    police : String
+
     constructor(){}
 }

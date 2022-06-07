@@ -7,7 +7,8 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content" style="background-image: linear-gradient(#F4F0F0, 95%, #C2A323);">
                     <div class="modal-header">
-                        <h4 class="modal-title">Renseigner les donn&eacute;es du <span style="font-weight: bold;">CH&Egrave;QUE</span></h4>
+                        <h4 class="modal-title">Renseigner les donn&eacute;es du <span
+                                style="font-weight: bold;">CH&Egrave;QUE</span></h4>
                         <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             <i class="material-icons">clear</i>
                         </button>
@@ -23,18 +24,17 @@
 
                                         <div class="col-md-4">
                                             <mat-form-field class="example-full-width">
-                                                <input matInput [(ngModel)]="numerocheque" name='numerocheque' type="text"
-                                                    placeholder="Num&eacute;ro du ch&egrave;que" maxlength="10" 
-                                                    style="background-color: #c1e7b9;">
+                                                <input matInput [(ngModel)]="numerocheque" name='numerocheque'
+                                                    type="text" placeholder="Num&eacute;ro du ch&egrave;que"
+                                                    maxlength="10" style="background-color: #c1e7b9;">
                                             </mat-form-field>
                                         </div>
 
                                         <div class="col-md-6">
                                             <mat-form-field class="example-full-width">
                                                 <input matInput [(ngModel)]="clientcheque" name='clientcheque'
-                                                    type="text" placeholder="Nom du client &eacute;metteur" maxlength="40" 
-                                                    style="color: black;"
-                                                    >
+                                                    type="text" placeholder="Nom du client &eacute;metteur"
+                                                    maxlength="40" style="color: black;">
                                             </mat-form-field>
                                         </div>
 
@@ -50,10 +50,9 @@
 
                                         <div class="col-md-4">
                                             <mat-form-field class="example-full-width text-center">
-                                                <input matInput [(ngModel)]="montantcheque" name='montantcheque' type="text"
-                                                    placeholder="Montant" maxlength="50" class="keymontant"
-                                                    style="background-color: #9eafdf; color: black; font-weight: bold;"
-                                                    >
+                                                <input matInput [(ngModel)]="montantcheque" name='montantcheque'
+                                                    type="text" placeholder="Montant" maxlength="50" class="keymontant"
+                                                    style="background-color: #9eafdf; color: black; font-weight: bold;">
                                             </mat-form-field>
                                         </div>
 
@@ -82,10 +81,9 @@
 
                                         <div class="col-md-5">
                                             <mat-form-field class="example-full-width text-center">
-                                                <input matInput [(ngModel)]="id_devis" name='iddevis'
-                                                    type="text" disabled placeholder="Id Devis" maxlength="5" 
-                                                    style="color: red; font-weight: bold; background-color: #d4cbcb;"
-                                                    >
+                                                <input matInput [(ngModel)]="id_devis" name='iddevis' type="text"
+                                                    disabled placeholder="Id Devis" maxlength="5"
+                                                    style="color: red; font-weight: bold; background-color: #d4cbcb;">
                                             </mat-form-field>
                                         </div>
 
@@ -101,8 +99,9 @@
 
                                         <div class="col-md-5">
                                             <mat-form-field>
-                                                <input matInput [matDatepicker]="basicDatecheque" [(ngModel)]="getDateCheque"
-                                                    name="dates" placeholder="Date d'&eacute;mission">
+                                                <input matInput [matDatepicker]="basicDatecheque"
+                                                    [(ngModel)]="getDateCheque" name="dates"
+                                                    placeholder="Date d'&eacute;mission">
                                                 <mat-datepicker-toggle matSuffix [for]="basicDatecheque">
                                                 </mat-datepicker-toggle>
                                                 <mat-datepicker #basicDatecheque></mat-datepicker>
@@ -111,8 +110,8 @@
 
                                         <div class="col-md-5">
                                             <mat-form-field class="example-full-width">
-                                                <input matInput [(ngModel)]="donneurordre" name='donneurordre' type="text"
-                                                    placeholder="Donneur d'ordre" maxlength="25">
+                                                <input matInput [(ngModel)]="donneurordre" name='donneurordre'
+                                                    type="text" placeholder="Donneur d'ordre" maxlength="25">
                                             </mat-form-field>
                                         </div>
 
@@ -126,15 +125,17 @@
                                 <div class="col-sm-10">
                                     <div class="row">
 
-                                        
+
                                         <div class="col-lg-5 col-md-8 col-sm-4">
                                             <mat-checkbox [checked]="chequebarre" (change)="togglechequebarre($event)">
-                                                <span style="color: black;">Ch&egrave;que barr&eacute;</span></mat-checkbox>
+                                                <span style="color: black;">Ch&egrave;que barr&eacute;</span>
+                                            </mat-checkbox>
                                         </div>
 
                                         <div class="col-lg-5 col-md-8 col-sm-4">
                                             <mat-form-field>
-                                                <mat-select placeholder="Motif" [(value)]="idMotifPaiement" name="motifpaiement">
+                                                <mat-select placeholder="Motif" [(value)]="idMotifPaiement"
+                                                    name="motifpaiement">
                                                     <mat-option *ngFor="let donnee of listeMotifPaiement"
                                                         [value]="donnee.idmot">
                                                         {{ donnee.libelle }}
@@ -150,7 +151,8 @@
 
                             <!-- PHOTO du CHEQUE -->
                             <div class="row">
-                                <label class="col-sm-2 col-form-label"><span style="color: black;">PHOTO du ch&egrave;que</span></label>
+                                <label class="col-sm-2 col-form-label"><span style="color: black;">PHOTO du
+                                        ch&egrave;que</span></label>
                                 <div class="col-sm-10">
                                     <div class="row">
 
@@ -158,7 +160,7 @@
 
                                         <div class="col-lg-5 col-md-8 col-sm-4">
                                             <input type="file" id="photocheque" name="photocheque"
-                                                (change)="onPhotoChequeSelected($event)" 
+                                                (change)="onPhotoChequeSelected($event)"
                                                 accept="image/png,image/jpeg,image/jpg" />
                                         </div>
 
@@ -193,7 +195,8 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content" style="background-image: linear-gradient(#F4F0F0, 95%, #6886c7);">
                     <div class="modal-header">
-                        <h4 class="modal-title">Renseigner les donn&eacute;es du <span style="font-weight: bold;">VIREMENT</span></h4>
+                        <h4 class="modal-title">Renseigner les donn&eacute;es du <span
+                                style="font-weight: bold;">VIREMENT</span></h4>
                         <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             <i class="material-icons">clear</i>
                         </button>
@@ -210,7 +213,7 @@
                                         <div class="col-md-4">
                                             <mat-form-field class="example-full-width">
                                                 <input matInput [(ngModel)]="idvirement" name='idvirement' type="text"
-                                                    placeholder="Id. virement" maxlength="10" 
+                                                    placeholder="Id. virement" maxlength="10"
                                                     style="background-color: #cec6ab; font-weight: bold;">
                                             </mat-form-field>
                                         </div>
@@ -218,9 +221,8 @@
                                         <div class="col-md-6">
                                             <mat-form-field class="example-full-width">
                                                 <input matInput [(ngModel)]="clientcheque" name='clientcheque'
-                                                    type="text" placeholder="Nom du client" maxlength="40" 
-                                                    style="color: black;"
-                                                    >
+                                                    type="text" placeholder="Nom du client" maxlength="40"
+                                                    style="color: black;">
                                             </mat-form-field>
                                         </div>
 
@@ -236,10 +238,9 @@
 
                                         <div class="col-md-4">
                                             <mat-form-field class="example-full-width text-center">
-                                                <input matInput [(ngModel)]="montantcheque" name='montantcheque' type="text"
-                                                    placeholder="Montant" maxlength="50" class="keymontant"
-                                                    style="background-color: #9eafdf; color: black; font-weight: bold;"
-                                                    >
+                                                <input matInput [(ngModel)]="montantcheque" name='montantcheque'
+                                                    type="text" placeholder="Montant" maxlength="50" class="keymontant"
+                                                    style="background-color: #9eafdf; color: black; font-weight: bold;">
                                             </mat-form-field>
                                         </div>
 
@@ -268,10 +269,9 @@
 
                                         <div class="col-md-5">
                                             <mat-form-field class="example-full-width text-center">
-                                                <input matInput [(ngModel)]="id_devis" name='iddevis'
-                                                    type="text" disabled placeholder="Id Devis" maxlength="5" 
-                                                    style="color: red; font-weight: bold; background-color: #d4cbcb;"
-                                                    >
+                                                <input matInput [(ngModel)]="id_devis" name='iddevis' type="text"
+                                                    disabled placeholder="Id Devis" maxlength="5"
+                                                    style="color: red; font-weight: bold; background-color: #d4cbcb;">
                                             </mat-form-field>
                                         </div>
 
@@ -287,8 +287,9 @@
 
                                         <div class="col-md-5">
                                             <mat-form-field>
-                                                <input matInput [matDatepicker]="basicDateVirement" [(ngModel)]="getDateVirement"
-                                                    name="dates" placeholder="Date d'&eacute;mission">
+                                                <input matInput [matDatepicker]="basicDateVirement"
+                                                    [(ngModel)]="getDateVirement" name="dates"
+                                                    placeholder="Date d'&eacute;mission">
                                                 <mat-datepicker-toggle matSuffix [for]="basicDateVirement">
                                                 </mat-datepicker-toggle>
                                                 <mat-datepicker #basicDateVirement></mat-datepicker>
@@ -297,8 +298,8 @@
 
                                         <div class="col-md-5">
                                             <mat-form-field class="example-full-width">
-                                                <input matInput [(ngModel)]="donneurordre" name='donneurordre' type="text"
-                                                    placeholder="Donneur d'ordre" maxlength="25">
+                                                <input matInput [(ngModel)]="donneurordre" name='donneurordre'
+                                                    type="text" placeholder="Donneur d'ordre" maxlength="25">
                                             </mat-form-field>
                                         </div>
 
@@ -314,7 +315,8 @@
 
                                         <div class="col-lg-5 col-md-8 col-sm-4">
                                             <mat-form-field>
-                                                <mat-select placeholder="Motif" [(value)]="idMotifPaiement" name="motifpaiement">
+                                                <mat-select placeholder="Motif" [(value)]="idMotifPaiement"
+                                                    name="motifpaiement">
                                                     <mat-option *ngFor="let donnee of listeMotifPaiement"
                                                         [value]="donnee.idmot">
                                                         {{ donnee.libelle }}
@@ -336,7 +338,7 @@
                     </div>
                     <div class="modal-footer">
                         <button mat-raised-button type="button" (click)="enregVirement()"
-                            class="btn btn-info">Enregistrer</button> 
+                            class="btn btn-info">Enregistrer</button>
                     </div>
                 </div>
             </div>
@@ -345,7 +347,7 @@
 
 
 
-        <!--  Select payment method :  df --> 
+        <!--  Select payment method :  df -->
         <div class="modal fade" id="modalpayment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
@@ -359,20 +361,20 @@
                     </div>
                     <div class="modal-body" style="text-align: center;">
                         <table style="width: 100%;">
-                            <tr><th style="width: 50%;">Ch&egrave;que</th><th style="width: 50%;">Virement</th></tr>
                             <tr>
-                                <td><img src="assets/img/cheque.jpg" 
-                                    style="width:160px; height:80px" class="imgpaiement" 
-                                    (click)="choixinterface(1)"/></td>
-                                <td><img src="assets/img/virement.png" 
-                                    style="width:160px; height:80px" class="imgpaiement" 
-                                    (click)="choixinterface(2)"
-                                    /></td>
+                                <th style="width: 50%;">Ch&egrave;que</th>
+                                <th style="width: 50%;">Virement</th>
+                            </tr>
+                            <tr>
+                                <td><img src="assets/img/cheque.jpg" style="width:160px; height:80px"
+                                        class="imgpaiement" (click)="choixinterface(1)" /></td>
+                                <td><img src="assets/img/virement.png" style="width:160px; height:80px"
+                                        class="imgpaiement" (click)="choixinterface(2)" /></td>
                             </tr>
                         </table>
                         <!--<p style="color: crimson; font-weight: bold;">{{ information }}</p>-->
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -380,8 +382,9 @@
 
 
         <div class="modal fade" id="modalMrh" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true" > <!--  modal-lg  -->
-            <div class="modal-dialog modal-xl" >
+            aria-hidden="true">
+            <!--  modal-lg  -->
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content" style="background-image: linear-gradient(#F4F0F0, 97%, #B0B6AE); ">
                     <div class="modal-header">
                         <h4 class="modal-title">Renseigner les donn&eacute;es du <span style="font-weight: bold;">DEVIS
@@ -394,24 +397,27 @@
 
                         <div class="tab-content tab-space tab-subcategories" style="padding: 0px; ">
                             <div class="tab-pane active" id="link7" style="margin-top: 0px; ">
-                
+
                                 <div class="col-md-12" style="margin-top: 0px; ">
                                     <div class="card " style="margin-top: 0px; ">
                                         <div class="card-body ">
                                             <ul class="nav nav-pills nav-pills-warning" role="tablist">
                                                 <li class="nav-item">
-                                                    <a class="nav-link active" data-toggle="tab" href="#link20" role="tablist">
+                                                    <a class="nav-link active" data-toggle="tab" href="#link20"
+                                                        role="tablist">
                                                         Information g&eacute;n&eacute;rale
                                                     </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" data-toggle="tab" href="#link21" id="garantieslink" role="tablist">
+                                                    <a class="nav-link" data-toggle="tab" href="#link21"
+                                                        id="garantieslink" role="tablist">
                                                         Rubriques
                                                     </a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content tab-space">
-                                                <div class="tab-pane active" id="link20" style="background-image: linear-gradient(#F4F0F0, 70%, #E1EAF7);">
+                                                <div class="tab-pane active" id="link20"
+                                                    style="background-image: linear-gradient(#F4F0F0, 70%, #E1EAF7);">
                                                     <form method="get" action="/" class="form-horizontal">
 
                                                         <div class="row">
@@ -419,153 +425,182 @@
                                                                     style="color: black;">Souscripteur</span></label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
-                            
+
                                                                     <div class="col-lg-6 col-md-8 col-sm-4">
-                                                                        <ng-multiselect-dropdown [placeholder]="'Choisissez le client'"
-                                                                            name="client" [settings]="dropdownSettings" [data]="dropdownList"
-                                                                            [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
+                                                                        <ng-multiselect-dropdown
+                                                                            [placeholder]="'Choisissez le client'"
+                                                                            name="client" [settings]="dropdownSettings"
+                                                                            [data]="dropdownList"
+                                                                            [(ngModel)]="selectedItems"
+                                                                            (onSelect)="onItemSelect($event)"
                                                                             (onDeSelect)="onItemDeSelect($event)"
                                                                             (onSelectAll)="onSelectAll($event)">
                                                                         </ng-multiselect-dropdown>
                                                                     </div>
-                            
-                            
+
+
                                                                     <div class="col-md-4">
-                            
-                                                                        <button mat-raised-button class="btn btn-success" (click)="getlespolicesbyclient()">
+
+                                                                        <button mat-raised-button
+                                                                            class="btn btn-success"
+                                                                            (click)="getlespolicesmrhbyclient()">
                                                                             <span class="btn-label">
                                                                                 <i class="material-icons">search</i>
                                                                             </span>
                                                                             Polices
                                                                         </button>
-                            
+
                                                                         <!--
                                                                         <button mat-raised-button type="button" 
                                                                         class="btn btn-info">Afficher les polices</button>  data-dismiss="modal"  -->
                                                                     </div>
-                            
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                            
-                            
-                                                        <div class="row" *ngIf="this.getPolice">
+
+
+                                                        <div class="row" *ngIf="this.getPoliceMrh">
                                                             <label class="col-sm-2 col-form-label">&nbsp;</label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
-                            
+
                                                                     <div class="col-lg-6 col-md-8 col-sm-4">
                                                                         <mat-form-field>
-                                                                            <mat-select placeholder="Police(s)" [(value)]="setPolice" name="police">
-                                                                                <mat-option *ngFor="let donnee of listePolices"
+                                                                            <mat-select placeholder="Police(s)"
+                                                                                [(value)]="setPolice" name="police">
+                                                                                <mat-option
+                                                                                    *ngFor="let donnee of listePolices"
                                                                                     [value]="donnee.Police">
                                                                                     {{ donnee.Police }}
                                                                                 </mat-option>
                                                                             </mat-select>
                                                                         </mat-form-field>
                                                                     </div>
-                            
-                            
+
+
                                                                     <div class="col-md-4">
-                            
-                                                                        <button mat-raised-button class="btn btn-info" (click)="getlespolicesbyclient()">
+
+                                                                        <button mat-raised-button class="btn btn-info"
+                                                                            (click)="displayPolice()">
                                                                             <span class="btn-label">
-                                                                                <i class="material-icons">shopping_cart</i>
+                                                                                <i
+                                                                                    class="material-icons">shopping_cart</i>
                                                                             </span>
                                                                             Afficher
                                                                         </button>
-                            
+
                                                                         <!--
                                                                         <button mat-raised-button type="button" (click)="enregistrerRdv()"
                                                                             class="btn btn-info">Enregistrer</button>  data-dismiss="modal"  -->
                                                                     </div>
-                            
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                            
-                            
+
+
                                                         <div class="row">
                                                             <label class="col-sm-2 col-form-label">&nbsp;</label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
-                            
+
                                                                     <div class="col-md-3">
-                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
-                                                                            <input matInput [(ngModel)]="clientRest.nom" name='nom' type="text"
-                                                                                placeholder="Nom" maxlength="30">
-                                                                        </mat-form-field>
-                                                                    </div>
-                            
-                                                                    <div class="col-md-3">
-                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
-                                                                            <input matInput [(ngModel)]="clientRest.prenom" name='prenom'
-                                                                                type="text" placeholder="Pr&eacute;nom" maxlength="50">
+                                                                        <mat-form-field class="example-full-width"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput [(ngModel)]="clientRest.nom"
+                                                                                name='nom' type="text" placeholder="Nom"
+                                                                                maxlength="30">
                                                                         </mat-form-field>
                                                                     </div>
 
                                                                     <div class="col-md-3">
-                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
-                                                                            <input matInput [(ngModel)]="clientRest.contact" name='contact'
-                                                                                type="text" placeholder="Contact" maxlength="20">
+                                                                        <mat-form-field class="example-full-width"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput
+                                                                                [(ngModel)]="clientRest.prenom"
+                                                                                name='prenom' type="text"
+                                                                                placeholder="Pr&eacute;nom"
+                                                                                maxlength="50">
                                                                         </mat-form-field>
                                                                     </div>
-                            
+
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field class="example-full-width"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput
+                                                                                [(ngModel)]="clientRest.contact"
+                                                                                name='contact' type="text"
+                                                                                placeholder="Contact" maxlength="20">
+                                                                        </mat-form-field>
+                                                                    </div>
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                            
-                            
+
+
                                                         <div class="row">
                                                             <label class="col-sm-2 col-form-label">&nbsp;</label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
-                            
+
                                                                     <div class="col-md-3">
-                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
-                                                                            <input matInput [(ngModel)]="clientRest.email" name='email' type="text"
+                                                                        <mat-form-field class="example-full-width"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput
+                                                                                [(ngModel)]="clientRest.email"
+                                                                                name='email' type="text"
                                                                                 placeholder="Email" maxlength="50">
                                                                         </mat-form-field>
                                                                     </div>
 
                                                                     <div class="col-md-3">
                                                                         <mat-form-field style="font-size: 16px;">
-                                                                            <input matInput [matDatepicker]="basicDatepickerMrh"
-                                                                                [(ngModel)]="getNaissanceMrh" name="dates" 
+                                                                            <input matInput
+                                                                                [matDatepicker]="basicDatepickerMrh"
+                                                                                [(ngModel)]="getNaissanceMrh"
+                                                                                name="dates"
                                                                                 placeholder="Date de naissance">
-                                                                            <mat-datepicker-toggle matSuffix [for]="basicDatepickerMrh">
+                                                                            <mat-datepicker-toggle matSuffix
+                                                                                [for]="basicDatepickerMrh">
                                                                             </mat-datepicker-toggle>
-                                                                            <mat-datepicker #basicDatepickerMrh></mat-datepicker>
+                                                                            <mat-datepicker #basicDatepickerMrh>
+                                                                            </mat-datepicker>
                                                                         </mat-form-field>
                                                                     </div>
-                            
+
                                                                     <div class="col-lg-3 col-md-8 col-sm-4">
                                                                         <mat-form-field style="font-size: 16px;">
                                                                             <mat-select placeholder="Civilit&eacute;"
-                                                                                [(value)]="clientRest.civilite" name="civilite">
-                                                                                <mat-option *ngFor="let donnee of lesCivilite"
+                                                                                [(value)]="clientRest.civilite"
+                                                                                name="civilite">
+                                                                                <mat-option
+                                                                                    *ngFor="let donnee of lesCivilite"
                                                                                     [value]="donnee.idciv">
                                                                                     {{ donnee.libelle }}
                                                                                 </mat-option>
                                                                             </mat-select>
                                                                         </mat-form-field>
                                                                     </div>
-                            
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                            
-                            
+
+
                                                         <div class="row">
                                                             <label class="col-sm-2 col-form-label">&nbsp;</label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
-                            
+
                                                                     <div class="col-lg-6 col-md-8 col-sm-4">
                                                                         <mat-form-field>
                                                                             <mat-select placeholder="Activit&eacute;"
-                                                                                [(value)]="clientRest.activite" name="activite">
-                                                                                <mat-option *ngFor="let donnee of listeActivite"
+                                                                                [(value)]="clientRest.activite"
+                                                                                name="activite">
+                                                                                <mat-option
+                                                                                    *ngFor="let donnee of listeActivite"
                                                                                     [value]="donnee.idact">
                                                                                     {{ donnee.libelle }}
                                                                                 </mat-option>
@@ -576,52 +611,95 @@
                                                                     <div class="col-lg-3 col-md-8 col-sm-4">
                                                                         <mat-form-field>
                                                                             <mat-select placeholder="Type du client"
-                                                                                [(value)]="typeclient" name="typeclient">
-                                                                                <mat-option [value]="1">Client</mat-option>
-                                                                                <mat-option [value]="0">Prospect</mat-option>
+                                                                                [(value)]="typeclient"
+                                                                                name="typeclient">
+                                                                                <mat-option [value]="1">Client
+                                                                                </mat-option>
+                                                                                <mat-option [value]="0">Prospect
+                                                                                </mat-option>
                                                                             </mat-select>
                                                                         </mat-form-field>
                                                                     </div>
-                            
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                            
-                            
-                            
-                            
+
+
+
+                                                        <!--  Provenance CLIENT   -->
                                                         <div class="row">
-                                                            <label class="col-sm-2 col-form-label"><span style="color: black;">CNI</span></label>
+                                                            <label class="col-sm-2 col-form-label">&nbsp;</label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
-                            
+
+                                                                    <div class="col-lg-4 col-md-8 col-sm-4">
+                                                                        <mat-form-field>
+                                                                            <mat-select placeholder="Origine du client"
+                                                                                [(value)]="clientRest.origine"
+                                                                                name="origineclient">
+                                                                                <mat-option [value]="0">Prospecté
+                                                                                </mat-option>
+                                                                                <mat-option [value]="1">Recommandé
+                                                                                </mat-option>
+                                                                                <mat-option [value]="2">Réseaux sociaux
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <div class="col-md-6">
+                                                                        <mat-form-field class="example-full-width"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput
+                                                                                [(ngModel)]="clientRest.observation"
+                                                                                name='observation' type="text"
+                                                                                placeholder="Observation"
+                                                                                maxlength="100">
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+
+
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label"><span
+                                                                    style="color: black;">CNI</span></label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+
                                                                     <div class="col-md-5">
-                                                                        <input placeholder="CNI" type="file" id="cni" name="cni"
-                                                                            (change)="onCniSelected($event)" 
+                                                                        <input placeholder="CNI" type="file" id="cni"
+                                                                            name="cni" (change)="onCniSelected($event)"
                                                                             accept="image/png,image/jpeg,image/jpg" />
                                                                     </div>
-                            
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                            
-                            
+
+
                                                         <div class="row">
-                                                            <label class="col-sm-2 col-form-label"><span style="color: black;">PHOTO</span></label>
+                                                            <label class="col-sm-2 col-form-label"><span
+                                                                    style="color: black;">PHOTO</span></label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
-                            
+
                                                                     <div class="col-lg-5 col-md-8 col-sm-4">
                                                                         <input type="file" id="photo" name="photo"
-                                                                            (change)="onPhotoSelected($event)" 
+                                                                            (change)="onPhotoSelected($event)"
                                                                             accept="image/png,image/jpeg,image/jpg" />
                                                                     </div>
-                            
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                            
-                            
+
+
                                                         <div class="row" style="margin-top: 10px;">
                                                             <label class="col-sm-2 col-form-label"><span
                                                                     style="color: black;">Contenu</span></label>
@@ -629,8 +707,10 @@
                                                                 <div class="row">
 
                                                                     <div class="col-md-3">
-                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
-                                                                            <input matInput [(ngModel)]="adressegeographique" 
+                                                                        <mat-form-field class="example-full-width"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput
+                                                                                [(ngModel)]="adressegeographique"
                                                                                 name='adressegeographique' type="text"
                                                                                 placeholder="Adresse g&eacute;ographique"
                                                                                 maxlength="35">
@@ -638,43 +718,53 @@
                                                                     </div>
 
                                                                     <div class="col-md-3">
-                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
-                                                                            <input matInput [(ngModel)]="situationgeographique" 
+                                                                        <mat-form-field class="example-full-width"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput
+                                                                                [(ngModel)]="situationgeographique"
                                                                                 name='situationgeographique' type="text"
                                                                                 placeholder="Situation g&eacute;ographique"
                                                                                 maxlength="35">
                                                                         </mat-form-field>
                                                                     </div>
-                            
+
                                                                     <div class="col-lg-3 col-md-8 col-sm-4">
                                                                         <mat-form-field>
-                                                                            <mat-select placeholder="Qualit&eacute; proposant"
-                                                                                [(value)]="qualiteproposant" name="qualiteproposant">
-                                                                                <mat-option [value]="1">Locataire</mat-option>
-                                                                                <mat-option [value]="0">Propri&eacute;taire occupant</mat-option>
+                                                                            <mat-select
+                                                                                placeholder="Qualit&eacute; proposant"
+                                                                                [(value)]="qualiteproposant"
+                                                                                name="qualiteproposant">
+                                                                                <mat-option [value]="1">Locataire
+                                                                                </mat-option>
+                                                                                <mat-option [value]="0">
+                                                                                    Propri&eacute;taire occupant
+                                                                                </mat-option>
                                                                             </mat-select>
                                                                         </mat-form-field>
                                                                     </div>
-                            
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                            
-                            
-                            
+
+
+
                                                         <div class="row">
                                                             <label class="col-sm-2 col-form-label">&nbsp;</label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
-                            
+
                                                                     <!--    (selectionChange)="computePrice()"     -->
                                                                     <div class="col-lg-5 col-md-8 col-sm-4">
-                                                                        <mat-form-field style="font-size: 16px; font-weight: bold;">
+                                                                        <mat-form-field
+                                                                            style="font-size: 16px; font-weight: bold;">
                                                                             <mat-select placeholder="Choix de formules"
-                                                                                [(value)]="choixformule" name="choixformule" 
-                                                                                style="background-color: #92ABE0;" 
+                                                                                [(value)]="choixformule"
+                                                                                name="choixformule"
+                                                                                style="background-color: #92ABE0;"
                                                                                 (selectionChange)="selectformule()">
-                                                                                <mat-option *ngFor="let donnee of listeFormuleMrh"
+                                                                                <mat-option
+                                                                                    *ngFor="let donnee of listeFormuleMrh"
                                                                                     [value]="donnee.idnmd">
                                                                                     {{ donnee.libelle }}
                                                                                 </mat-option>
@@ -683,84 +773,109 @@
                                                                     </div>
 
                                                                     <div class="col-md-4">
-                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
-                                                                            <input matInput [(ngModel)]="coutreelmrh" 
+                                                                        <mat-form-field class="example-full-width"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput [(ngModel)]="coutreelmrh"
                                                                                 name='coutreelmrh' type="text"
-                                                                                placeholder="Co&ucirc;t r&eacute;el du bien" 
-                                                                                class="keymontant"
-                                                                                maxlength="30">
+                                                                                placeholder="Co&ucirc;t r&eacute;el du bien"
+                                                                                class="keymontant" maxlength="30">
                                                                         </mat-form-field>
                                                                     </div>
-                            
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                            
-                            
-                            
+
+
+
                                                         <div class="row">
-                                                            <label class="col-sm-2 col-form-label">Dur&eacute;e du contrat</label>
+                                                            <label class="col-sm-2 col-form-label">Dur&eacute;e du
+                                                                contrat</label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
 
                                                                     <div class="col-md-5">
                                                                         <mat-form-field style="font-size: 16px;">
-                                                                            <input matInput [matDatepicker]="basicDateEffet"
-                                                                                [(ngModel)]="getDateEffet" name="dateeffet" 
+                                                                            <input matInput
+                                                                                [matDatepicker]="basicDateEffet"
+                                                                                [(ngModel)]="getDateEffet"
+                                                                                name="dateeffet"
                                                                                 placeholder="Date effet">
-                                                                            <mat-datepicker-toggle matSuffix [for]="basicDateEffet">
+                                                                            <mat-datepicker-toggle matSuffix
+                                                                                [for]="basicDateEffet">
                                                                             </mat-datepicker-toggle>
-                                                                            <mat-datepicker #basicDateEffet></mat-datepicker>
+                                                                            <mat-datepicker #basicDateEffet>
+                                                                            </mat-datepicker>
                                                                         </mat-form-field>
                                                                     </div>
 
-                                                                    <div class="col-md-4" >
+                                                                    <div class="col-md-4">
                                                                         <mat-form-field style="font-size: 16px;">
-                                                                            <input matInput [matDatepicker]="basicDateExpiration"
-                                                                                [(ngModel)]="getDateExpiration" name="dateexpiration" 
+                                                                            <input matInput
+                                                                                [matDatepicker]="basicDateExpiration"
+                                                                                [(ngModel)]="getDateExpiration"
+                                                                                name="dateexpiration"
                                                                                 placeholder="Date expiration">
-                                                                            <mat-datepicker-toggle matSuffix [for]="basicDateExpiration">
+                                                                            <mat-datepicker-toggle matSuffix
+                                                                                [for]="basicDateExpiration">
                                                                             </mat-datepicker-toggle>
-                                                                            <mat-datepicker #basicDateExpiration></mat-datepicker>
+                                                                            <mat-datepicker #basicDateExpiration>
+                                                                            </mat-datepicker>
                                                                         </mat-form-field>
                                                                     </div>
-                            
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                            
-                            
-                            
+
+
+
                                                         <div class="row">
-                                                            <div style="text-align: center; width: 100%; color:red; font-weight: bold;" id="infos">
+                                                            <div style="text-align: center; width: 100%; color:red; font-weight: bold;"
+                                                                id="infos">
                                                             </div>
                                                         </div>
-                            
-                            
+
+
                                                     </form>
                                                 </div>
 
                                                 <div class="tab-pane" id="link21">
                                                     <table style="width: 100%;" border="1">
                                                         <tr style="background-color: #d1caca;">
-                                                            <th style="width: 40%;">DESIGANTION DES RISQUES GARANTIS</th>
-                                                            <th style="width: 15%;" class="datarubrique" id="form1">Formule 1</th>
-                                                            <th style="width: 15%;" class="datarubrique" id="form2">Formule 2</th>
-                                                            <th style="width: 15%;" class="datarubrique" id="form3">Formule 3</th>
-                                                            <th style="width: 15%;" class="datarubrique" id="form4">Formule 4</th>
+                                                            <th style="width: 40%;">DESIGANTION DES RISQUES GARANTIS
+                                                            </th>
+                                                            <th style="width: 15%;" class="datarubrique" id="form1">
+                                                                Formule 1</th>
+                                                            <th style="width: 15%;" class="datarubrique" id="form2">
+                                                                Formule 2</th>
+                                                            <th style="width: 15%;" class="datarubrique" id="form3">
+                                                                Formule 3</th>
+                                                            <th style="width: 15%;" class="datarubrique" id="form4">
+                                                                Formule 4</th>
                                                         </tr>
                                                         <tr>
                                                             <td rowspan="5">
                                                                 <table border="1" width="100%">
                                                                     <tr>
                                                                         <td rowspan="5" class="datarubrique bold"
-                                                                        style="width: 20%;">Incendie</td>
-                                                                        <td style="width: 80%;">B&acirc;timent / Risque locatif</td>
+                                                                            style="width: 20%;">Incendie</td>
+                                                                        <td style="width: 80%;">B&acirc;timent / Risque
+                                                                            locatif</td>
                                                                     </tr>
-                                                                    <tr><td>Frais suppl&eacute;mentaires</td></tr>
-                                                                    <tr><td>Dommages &eacute;lectriques</td></tr>
-                                                                    <tr><td>Recours des voisins et tiers</td></tr>
-                                                                    <tr><td>Mat&eacute;riels, Mobiliers, Effets personnels</td></tr>
+                                                                    <tr>
+                                                                        <td>Frais suppl&eacute;mentaires</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Dommages &eacute;lectriques</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Recours des voisins et tiers</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Mat&eacute;riels, Mobiliers, Effets
+                                                                            personnels</td>
+                                                                    </tr>
                                                                 </table>
                                                             </td>
                                                             <td class="datarubrique">15.000.000</td>
@@ -796,8 +911,10 @@
                                                         <tr>
                                                             <table border="1" width="100%">
                                                                 <tr>
-                                                                    <td class="datarubrique bold" style="width: 20%;">Vol</td>
-                                                                    <td style="width: 80%;">Mat&eacute;riels, Mobiliers, Effets personnels</td>
+                                                                    <td class="datarubrique bold" style="width: 20%;">
+                                                                        Vol</td>
+                                                                    <td style="width: 80%;">Mat&eacute;riels, Mobiliers,
+                                                                        Effets personnels</td>
                                                                 </tr>
                                                             </table>
                                                             <td class="datarubrique">750.000</td>
@@ -812,11 +929,16 @@
                                                                 <table border="1" width="100%">
                                                                     <tr>
                                                                         <td rowspan="5" class="datarubrique bold"
-                                                                        style="width: 20%;">D&eacute;g&acirc;ts des eaux</td>
+                                                                            style="width: 20%;">D&eacute;g&acirc;ts des
+                                                                            eaux</td>
                                                                         <td style="width: 80%;">Dommages directs</td>
                                                                     </tr>
-                                                                    <tr><td>Recherche de fuite</td></tr>
-                                                                    <tr><td>Recours des voisins et tiers</td></tr>
+                                                                    <tr>
+                                                                        <td>Recherche de fuite</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Recours des voisins et tiers</td>
+                                                                    </tr>
                                                                 </table>
                                                             </td>
                                                             <td class="datarubrique">3.250.000</td>
@@ -843,8 +965,10 @@
                                                             <td>
                                                                 <table border="1" width="100%">
                                                                     <tr>
-                                                                        <td class="datarubrique bold" style="width: 20%;">RC</td>
-                                                                        <td style="width: 80%;">Tous dommages confondus</td>
+                                                                        <td class="datarubrique bold"
+                                                                            style="width: 20%;">RC</td>
+                                                                        <td style="width: 80%;">Tous dommages confondus
+                                                                        </td>
                                                                     </tr>
                                                                 </table>
                                                             </td>
@@ -855,7 +979,9 @@
                                                         </tr>
 
                                                         <!--   PRIME   -->
-                                                        <tr style="background-color: #d1caca;"><td colspan="5" class="datarubrique bold">PRIME</td></tr>
+                                                        <tr style="background-color: #d1caca;">
+                                                            <td colspan="5" class="datarubrique bold">PRIME</td>
+                                                        </tr>
                                                         <tr>
                                                             <td class="bold">Prime nette annuelle</td>
                                                             <td class="datarubrique">25 110</td>
@@ -872,8 +998,10 @@
                                                         </tr>
 
                                                         <!--   FRANCHISE   -->
-                                                        <tr style="background-color: #d1caca;"><td colspan="5" class="datarubrique bold">
-                                                            FRANCHISE (F CFA) : 10%. min 50 000</td></tr>
+                                                        <tr style="background-color: #d1caca;">
+                                                            <td colspan="5" class="datarubrique bold">
+                                                                FRANCHISE (F CFA) : 10%. min 50 000</td>
+                                                        </tr>
                                                     </table>
                                                 </div>
                                             </div>
@@ -883,8 +1011,6 @@
                             </div>
                         </div>
 
-
-                        
                     </div>
                     <div class="modal-footer">
                         <button mat-raised-button type="button" (click)="enregDevisMrh()"
@@ -900,8 +1026,9 @@
 
 
         <div class="modal fade" id="modalAutomobile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true" > <!--  modal-lg  -->
-            <div class="modal-dialog modal-xl" >
+            aria-hidden="true">
+            <!--  modal-lg  -->
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content" style="background-image: linear-gradient(#F4F0F0, 97%, #C2A323); ">
                     <div class="modal-header">
                         <h4 class="modal-title">Renseigner les donn&eacute;es du <span style="font-weight: bold;">DEVIS
@@ -914,24 +1041,27 @@
 
                         <div class="tab-content tab-space tab-subcategories" style="padding: 0px; ">
                             <div class="tab-pane active" id="link7" style="margin-top: 0px; ">
-                
+
                                 <div class="col-md-12" style="margin-top: 0px; ">
                                     <div class="card " style="margin-top: 0px; ">
                                         <div class="card-body ">
                                             <ul class="nav nav-pills nav-pills-warning" role="tablist">
                                                 <li class="nav-item">
-                                                    <a class="nav-link active" data-toggle="tab" href="#link1" role="tablist">
+                                                    <a class="nav-link active" data-toggle="tab" href="#link1"
+                                                        role="tablist">
                                                         Information g&eacute;n&eacute;rale
                                                     </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" data-toggle="tab" href="#link2" id="garantieslink" role="tablist">
+                                                    <a class="nav-link" data-toggle="tab" href="#link2"
+                                                        id="garantieslink" role="tablist">
                                                         Garanties
                                                     </a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content tab-space">
-                                                <div class="tab-pane active" id="link1" style="background-image: linear-gradient(#F4F0F0, 70%, #E1EAF7);">
+                                                <div class="tab-pane active" id="link1"
+                                                    style="background-image: linear-gradient(#F4F0F0, 70%, #E1EAF7);">
                                                     <form method="get" action="/" class="form-horizontal">
 
                                                         <div class="row">
@@ -939,153 +1069,177 @@
                                                                     style="color: black;">Souscripteur</span></label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
-                            
+
                                                                     <div class="col-lg-6 col-md-8 col-sm-4">
-                                                                        <ng-multiselect-dropdown [placeholder]="'Choisissez le client'"
-                                                                            name="client" [settings]="dropdownSettings" [data]="dropdownList"
-                                                                            [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
+                                                                        <ng-multiselect-dropdown
+                                                                            [placeholder]="'Choisissez le client'"
+                                                                            name="client" [settings]="dropdownSettings"
+                                                                            [data]="dropdownList"
+                                                                            [(ngModel)]="selectedItems"
+                                                                            (onSelect)="onItemSelect($event)"
                                                                             (onDeSelect)="onItemDeSelect($event)"
                                                                             (onSelectAll)="onSelectAll($event)">
                                                                         </ng-multiselect-dropdown>
                                                                     </div>
-                            
-                            
+
+
                                                                     <div class="col-md-4">
-                            
-                                                                        <button mat-raised-button class="btn btn-success" (click)="getlespolicesbyclient()">
+
+                                                                        <button mat-raised-button
+                                                                            class="btn btn-success"
+                                                                            (click)="getlespolicesbyclient()">
                                                                             <span class="btn-label">
                                                                                 <i class="material-icons">search</i>
                                                                             </span>
                                                                             Polices
                                                                         </button>
-                            
+
                                                                         <!--
                                                                         <button mat-raised-button type="button" 
                                                                         class="btn btn-info">Afficher les polices</button>  data-dismiss="modal"  -->
                                                                     </div>
-                            
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                            
-                            
+
+
                                                         <div class="row" *ngIf="this.getPolice">
                                                             <label class="col-sm-2 col-form-label">&nbsp;</label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
-                            
+
                                                                     <div class="col-lg-6 col-md-8 col-sm-4">
                                                                         <mat-form-field>
-                                                                            <mat-select placeholder="Police(s)" [(value)]="setPolice" name="police">
-                                                                                <mat-option *ngFor="let donnee of listePolices"
+                                                                            <mat-select placeholder="Police(s)"
+                                                                                [(value)]="setPolice" name="police">
+                                                                                <mat-option
+                                                                                    *ngFor="let donnee of listePolices"
                                                                                     [value]="donnee.Police">
                                                                                     {{ donnee.Police }}
                                                                                 </mat-option>
                                                                             </mat-select>
                                                                         </mat-form-field>
                                                                     </div>
-                            
-                            
+
+
                                                                     <div class="col-md-4">
-                            
-                                                                        <button mat-raised-button class="btn btn-info" (click)="getlespolicesbyclient()">
+                                                                        <button mat-raised-button class="btn btn-info"
+                                                                            (click)="displayPolice()">
                                                                             <span class="btn-label">
-                                                                                <i class="material-icons">shopping_cart</i>
+                                                                                <i
+                                                                                    class="material-icons">shopping_cart</i>
                                                                             </span>
                                                                             Afficher
                                                                         </button>
-                            
-                                                                        <!--
-                                                                        <button mat-raised-button type="button" (click)="enregistrerRdv()"
-                                                                            class="btn btn-info">Enregistrer</button>  data-dismiss="modal"  -->
                                                                     </div>
-                            
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                            
-                            
+
+
                                                         <div class="row">
                                                             <label class="col-sm-2 col-form-label">&nbsp;</label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
-                            
+
                                                                     <div class="col-md-3">
-                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
-                                                                            <input matInput [(ngModel)]="clientRest.nom" name='nom' type="text"
-                                                                                placeholder="Nom" maxlength="30">
-                                                                        </mat-form-field>
-                                                                    </div>
-                            
-                                                                    <div class="col-md-3">
-                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
-                                                                            <input matInput [(ngModel)]="clientRest.prenom" name='prenom'
-                                                                                type="text" placeholder="Pr&eacute;nom" maxlength="50">
+                                                                        <mat-form-field class="example-full-width"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput [(ngModel)]="clientRest.nom"
+                                                                                name='nom' type="text" placeholder="Nom"
+                                                                                maxlength="30">
                                                                         </mat-form-field>
                                                                     </div>
 
                                                                     <div class="col-md-3">
-                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
-                                                                            <input matInput [(ngModel)]="clientRest.contact" name='contact'
-                                                                                type="text" placeholder="Contact" maxlength="20">
+                                                                        <mat-form-field class="example-full-width"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput
+                                                                                [(ngModel)]="clientRest.prenom"
+                                                                                name='prenom' type="text"
+                                                                                placeholder="Pr&eacute;nom"
+                                                                                maxlength="50">
                                                                         </mat-form-field>
                                                                     </div>
-                            
+
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field class="example-full-width"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput
+                                                                                [(ngModel)]="clientRest.contact"
+                                                                                name='contact' type="text"
+                                                                                placeholder="Contact" maxlength="20">
+                                                                        </mat-form-field>
+                                                                    </div>
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                            
-                            
+
+
                                                         <div class="row">
                                                             <label class="col-sm-2 col-form-label">&nbsp;</label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
-                            
+
                                                                     <div class="col-md-3">
-                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
-                                                                            <input matInput [(ngModel)]="clientRest.email" name='email' type="text"
+                                                                        <mat-form-field class="example-full-width"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput
+                                                                                [(ngModel)]="clientRest.email"
+                                                                                name='email' type="text"
                                                                                 placeholder="Email" maxlength="50">
                                                                         </mat-form-field>
                                                                     </div>
 
                                                                     <div class="col-md-3">
                                                                         <mat-form-field style="font-size: 16px;">
-                                                                            <input matInput [matDatepicker]="basicDatepickerAuto"
-                                                                                [(ngModel)]="customerBirthDate" name="dates" 
+                                                                            <input matInput
+                                                                                [matDatepicker]="basicDatepickerAuto"
+                                                                                [(ngModel)]="customerBirthDate"
+                                                                                name="dates"
                                                                                 placeholder="Date de naissance">
-                                                                            <mat-datepicker-toggle matSuffix [for]="basicDatepickerAuto">
+                                                                            <mat-datepicker-toggle matSuffix
+                                                                                [for]="basicDatepickerAuto">
                                                                             </mat-datepicker-toggle>
-                                                                            <mat-datepicker #basicDatepickerAuto></mat-datepicker>
+                                                                            <mat-datepicker #basicDatepickerAuto>
+                                                                            </mat-datepicker>
                                                                         </mat-form-field>
                                                                     </div>
-                            
+
                                                                     <div class="col-lg-3 col-md-8 col-sm-4">
                                                                         <mat-form-field style="font-size: 16px;">
                                                                             <mat-select placeholder="Civilit&eacute;"
-                                                                                [(value)]="clientRest.civilite" name="civilite">
-                                                                                <mat-option *ngFor="let donnee of lesCivilite"
+                                                                                [(value)]="clientRest.civilite"
+                                                                                name="civilite">
+                                                                                <mat-option
+                                                                                    *ngFor="let donnee of lesCivilite"
                                                                                     [value]="donnee.idciv">
                                                                                     {{ donnee.libelle }}
                                                                                 </mat-option>
                                                                             </mat-select>
                                                                         </mat-form-field>
                                                                     </div>
-                            
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                            
-                            
+
+
                                                         <div class="row">
                                                             <label class="col-sm-2 col-form-label">&nbsp;</label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
-                            
+
                                                                     <div class="col-lg-6 col-md-8 col-sm-4">
                                                                         <mat-form-field>
                                                                             <mat-select placeholder="Activit&eacute;"
-                                                                                [(value)]="clientRest.activite" name="activite">
-                                                                                <mat-option *ngFor="let donnee of listeActivite"
+                                                                                [(value)]="clientRest.activite"
+                                                                                name="activite">
+                                                                                <mat-option
+                                                                                    *ngFor="let donnee of listeActivite"
                                                                                     [value]="donnee.idact">
                                                                                     {{ donnee.libelle }}
                                                                                 </mat-option>
@@ -1096,76 +1250,122 @@
                                                                     <div class="col-lg-3 col-md-8 col-sm-4">
                                                                         <mat-form-field>
                                                                             <mat-select placeholder="Type du client"
-                                                                                [(value)]="typeclient" name="typeclient">
-                                                                                <mat-option [value]="1">Client</mat-option>
-                                                                                <mat-option [value]="0">Prospect</mat-option>
+                                                                                [(value)]="typeclient"
+                                                                                name="typeclient">
+                                                                                <mat-option [value]="1">Client
+                                                                                </mat-option>
+                                                                                <mat-option [value]="0">Prospect
+                                                                                </mat-option>
                                                                             </mat-select>
                                                                         </mat-form-field>
                                                                     </div>
-                            
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                            
-                            
-                            
-                            
+
+
+                                                        <!--  Provenance CLIENT   -->
                                                         <div class="row">
-                                                            <label class="col-sm-2 col-form-label"><span style="color: black;">CNI</span></label>
+                                                            <label class="col-sm-2 col-form-label">&nbsp;</label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
-                            
-                                                                    <div class="col-md-5">
-                                                                        <input placeholder="CNI" type="file" id="cni" name="cni"
-                                                                            (change)="onCniSelected($event)" 
-                                                                            accept="image/png,image/jpeg,image/jpg"
-                                                                            />
+
+                                                                    <div class="col-lg-3 col-md-8 col-sm-4">
+                                                                        <mat-form-field>
+                                                                            <mat-select placeholder="Origine du client"
+                                                                                [(value)]="clientRest.origine"
+                                                                                name="origineclient">
+                                                                                <mat-option [value]="0">Prospecté
+                                                                                </mat-option>
+                                                                                <mat-option [value]="1">Recommandé
+                                                                                </mat-option>
+                                                                                <mat-option [value]="2">Réseaux sociaux
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
                                                                     </div>
-                            
+
+                                                                    <div class="col-md-6">
+                                                                        <mat-form-field class="example-full-width"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput
+                                                                                [(ngModel)]="clientRest.observation"
+                                                                                name='observation' type="text"
+                                                                                placeholder="Observation"
+                                                                                maxlength="100">
+                                                                        </mat-form-field>
+                                                                    </div>
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                            
-                            
+
+
+
+
                                                         <div class="row">
-                                                            <label class="col-sm-2 col-form-label"><span style="color: black;">Carte grise</span></label>
+                                                            <label class="col-sm-2 col-form-label"><span
+                                                                    style="color: black;">CNI</span></label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
-                            
-                                                                    <div class="col-lg-5 col-md-8 col-sm-4">
-                                                                        <input type="file" id="photo" name="photo"
-                                                                            (change)="onPhotoSelected($event)" 
+
+                                                                    <div class="col-md-5">
+                                                                        <input placeholder="CNI" type="file" id="cni"
+                                                                            name="cni" (change)="onCniSelected($event)"
                                                                             accept="image/png,image/jpeg,image/jpg" />
                                                                     </div>
-                            
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                            
-                            
+
+
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label"><span
+                                                                    style="color: black;">Carte grise</span></label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+
+                                                                    <div class="col-lg-5 col-md-8 col-sm-4">
+                                                                        <input type="file" id="photo" name="photo"
+                                                                            (change)="onPhotoSelected($event)"
+                                                                            accept="image/png,image/jpeg,image/jpg" />
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
                                                         <div class="row" style="margin-top: 10px;">
                                                             <label class="col-sm-2 col-form-label"><span
                                                                     style="color: black;">Contenu</span></label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
-                            
+
                                                                     <div class="col-lg-3 col-md-8 col-sm-4">
                                                                         <mat-form-field style="font-size: 16px;">
-                                                                            <mat-select placeholder="&Eacute;nergie du v&eacute;hicule"
-                                                                                [(value)]="energievehicule" name="energievehicule">
-                                                                                <mat-option *ngFor="let donnee of listeEnergieVehicule"
+                                                                            <mat-select
+                                                                                placeholder="&Eacute;nergie du v&eacute;hicule"
+                                                                                [(value)]="energievehicule"
+                                                                                name="energievehicule">
+                                                                                <mat-option
+                                                                                    *ngFor="let donnee of listeEnergieVehicule"
                                                                                     [value]="donnee.idnmd">
                                                                                     {{ donnee.libelle }}
                                                                                 </mat-option>
                                                                             </mat-select>
                                                                         </mat-form-field>
                                                                     </div>
-                            
+
                                                                     <div class="col-lg-3 col-md-8 col-sm-4">
                                                                         <mat-form-field style="font-size: 16px;">
                                                                             <mat-select placeholder="Nombre de places"
-                                                                                [(value)]="nombreplacevehicule" name="nombreplacevehicule">
-                                                                                <mat-option *ngFor="let donnee of listePlaceVehicule"
+                                                                                [(value)]="nombreplacevehicule"
+                                                                                name="nombreplacevehicule">
+                                                                                <mat-option
+                                                                                    *ngFor="let donnee of listePlaceVehicule"
                                                                                     [value]="donnee.idnmd">
                                                                                     {{ donnee.libelle }}
                                                                                 </mat-option>
@@ -1176,8 +1376,10 @@
                                                                     <div class="col-lg-3 col-md-8 col-sm-4">
                                                                         <mat-form-field style="font-size: 16px;">
                                                                             <mat-select placeholder="Puissance (CV)"
-                                                                                [(value)]="puissanceVehicule" name="puissanceVehicule">
-                                                                                <mat-option *ngFor="let donnee of listePuissanceVehicule"
+                                                                                [(value)]="puissanceVehicule"
+                                                                                name="puissanceVehicule">
+                                                                                <mat-option
+                                                                                    *ngFor="let donnee of listePuissanceVehicule"
                                                                                     [value]="donnee.idnmd">
                                                                                     {{ donnee.libelle }}
                                                                                 </mat-option>
@@ -1193,87 +1395,108 @@
                                                                                 maxlength="15">
                                                                         </mat-form-field>
                                                                     </div>-->
-                            
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                            
-                            
-                            
+
+
+
                                                         <div class="row">
                                                             <label class="col-sm-2 col-form-label">&nbsp;</label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
 
                                                                     <div class="col-md-3">
-                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
-                                                                            <input matInput [(ngModel)]="chargeutile" name='chargeutile' type="text"
+                                                                        <mat-form-field class="example-full-width"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput [(ngModel)]="chargeutile"
+                                                                                name='chargeutile' type="text"
                                                                                 placeholder="Charge Utile (Kg)"
-                                                                                class="keymontant"
-                                                                                maxlength="15">
+                                                                                class="keymontant" maxlength="15">
                                                                         </mat-form-field>
                                                                     </div>
-                            
+
                                                                     <div class="col-lg-3 col-md-8 col-sm-4">
-                                                                        <mat-form-field style="font-size: 16px; font-weight: bold;">
-                                                                            <mat-select placeholder="Dur&eacute;e du contrat"
-                                                                                [(value)]="dureecontrat" name="dureecontrat" 
-                                                                                (selectionChange)="computePrice()" style="background-color: #92ABE0;">
-                                                                                <mat-option *ngFor="let donnee of listeDureeContrat"
+                                                                        <mat-form-field
+                                                                            style="font-size: 16px; font-weight: bold;">
+                                                                            <mat-select
+                                                                                placeholder="Dur&eacute;e du contrat"
+                                                                                [(value)]="dureecontrat"
+                                                                                name="dureecontrat"
+                                                                                (selectionChange)="computePrice()"
+                                                                                style="background-color: #92ABE0;">
+                                                                                <mat-option
+                                                                                    *ngFor="let donnee of listeDureeContrat"
                                                                                     [value]="donnee.idnmd">
                                                                                     {{ donnee.libelle }}
                                                                                 </mat-option>
                                                                             </mat-select>
                                                                         </mat-form-field>
                                                                     </div>
-                            
+
                                                                     <div class="col-lg-3 col-md-8 col-sm-4">
-                                                                        <mat-form-field style="font-size: 16px; font-weight: bold;">
-                                                                            <mat-select placeholder="Offre commerciale" [(value)]="offrecommerciale"
-                                                                                name="offrecommerciale" (selectionChange)="displayOffre()" style="background-color: #E0CA92;">
-                                                                                <mat-option *ngFor="let donnee of listeOffreCommerciale"
+                                                                        <mat-form-field
+                                                                            style="font-size: 16px; font-weight: bold;">
+                                                                            <mat-select placeholder="Offre commerciale"
+                                                                                [(value)]="offrecommerciale"
+                                                                                name="offrecommerciale"
+                                                                                (selectionChange)="displayOffre()"
+                                                                                style="background-color: #E0CA92;">
+                                                                                <mat-option
+                                                                                    *ngFor="let donnee of listeOffreCommerciale"
                                                                                     [value]="donnee.idnmd">
                                                                                     {{ donnee.libelle }}
                                                                                 </mat-option>
                                                                             </mat-select>
                                                                         </mat-form-field>
                                                                     </div>
-                            
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                            
-                            
-                            
+
+
+
                                                         <div class="row">
                                                             <label class="col-sm-2 col-form-label">&nbsp;</label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
 
                                                                     <div class="col-md-5">
-                                                                        <mat-form-field style="font-size: 16px; font-weight: bold;">
+                                                                        <mat-form-field
+                                                                            style="font-size: 16px; font-weight: bold;">
 
-                                                                            <mat-select id="selectIdemn" placeholder="Indemnit&eacute; maximum garantie" 
+                                                                            <mat-select id="selectIdemn"
+                                                                                placeholder="Indemnit&eacute; maximum garantie"
                                                                                 [(value)]="indemnitemax"
-                                                                                name="idemnitemax" (selectionChange)="computePrice()" style="background-color: #ACE092;">
-                                                                                <mat-option *ngFor="let donnee of listeIdemniteAuto"
+                                                                                name="idemnitemax"
+                                                                                (selectionChange)="computePrice()"
+                                                                                style="background-color: #ACE092;">
+                                                                                <mat-option
+                                                                                    *ngFor="let donnee of listeIdemniteAuto"
                                                                                     [value]="donnee.code">
                                                                                     {{ donnee.libelle }}
                                                                                 </mat-option>
                                                                             </mat-select>
-                                                                            
+
                                                                         </mat-form-field>
                                                                     </div>
 
-                                                                    <div class="col-md-4" >
-                                                                        <mat-form-field class="example-full-width text-center" style="font-size: 16px; font-weight: bold;">
-                                                                            <input style="color: red; font-size: 18px; background-color: white;" disabled matInput 
+                                                                    <div class="col-md-4">
+                                                                        <mat-form-field
+                                                                            class="example-full-width text-center"
+                                                                            style="font-size: 16px; font-weight: bold;">
+                                                                            <input
+                                                                                style="color: red; font-size: 18px; background-color: white;"
+                                                                                disabled matInput
                                                                                 [(ngModel)]="displayCout"
                                                                                 name='displayCout' type="text"
-                                                                                placeholder="Cotation retenue" maxlength="15">
+                                                                                placeholder="Cotation retenue"
+                                                                                maxlength="15">
                                                                         </mat-form-field>
                                                                     </div>
-                            
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1285,62 +1508,74 @@
                                                             <div class="col-sm-10">
                                                                 <div class="row">
 
-                                                                    <div class="col-md-2" >
-                                                                        <mat-form-field class="example-full-width text-center" 
-                                                                        style="font-size: 16px; font-weight: bold;">
-                                                                            <input style="color: #0A4CAC; font-size: 18px; background-color: white;" 
-                                                                                disabled matInput 
+                                                                    <div class="col-md-2">
+                                                                        <mat-form-field
+                                                                            class="example-full-width text-center"
+                                                                            style="font-size: 16px; font-weight: bold;">
+                                                                            <input
+                                                                                style="color: #0A4CAC; font-size: 18px; background-color: white;"
+                                                                                disabled matInput
                                                                                 [(ngModel)]="cotationECO"
                                                                                 name='cotationECO' type="text"
-                                                                                placeholder="Cotation ECO" maxlength="15">
+                                                                                placeholder="Cotation ECO"
+                                                                                maxlength="15">
                                                                         </mat-form-field>
                                                                     </div>
 
                                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                                                                    <div class="col-md-2" >
-                                                                        <mat-form-field class="example-full-width text-center" 
-                                                                        style="font-size: 16px; font-weight: bold;">
-                                                                            <input style="color: #0A4CAC; font-size: 18px; background-color: white;" 
-                                                                                disabled matInput 
+                                                                    <div class="col-md-2">
+                                                                        <mat-form-field
+                                                                            class="example-full-width text-center"
+                                                                            style="font-size: 16px; font-weight: bold;">
+                                                                            <input
+                                                                                style="color: #0A4CAC; font-size: 18px; background-color: white;"
+                                                                                disabled matInput
                                                                                 [(ngModel)]="cotationSTANDARD"
                                                                                 name='cotationSTANDARD' type="text"
-                                                                                placeholder="Cotation STANDARD" maxlength="15">
+                                                                                placeholder="Cotation STANDARD"
+                                                                                maxlength="15">
                                                                         </mat-form-field>
                                                                     </div>
 
                                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                                                                    <div class="col-md-2" >
-                                                                        <mat-form-field class="example-full-width text-center" 
-                                                                        style="font-size: 16px; font-weight: bold;">
-                                                                            <input style="color: #0A4CAC; font-size: 18px; background-color: white;" 
-                                                                                disabled matInput 
+                                                                    <div class="col-md-2">
+                                                                        <mat-form-field
+                                                                            class="example-full-width text-center"
+                                                                            style="font-size: 16px; font-weight: bold;">
+                                                                            <input
+                                                                                style="color: #0A4CAC; font-size: 18px; background-color: white;"
+                                                                                disabled matInput
                                                                                 [(ngModel)]="cotationCONFORT"
                                                                                 name='cotationCONFORT' type="text"
-                                                                                placeholder="Cotation CONFORT" maxlength="15">
+                                                                                placeholder="Cotation CONFORT"
+                                                                                maxlength="15">
                                                                         </mat-form-field>
                                                                     </div>
 
                                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                                                                    <div class="col-md-2" >
-                                                                        <mat-form-field class="example-full-width text-center" 
-                                                                        style="font-size: 16px; font-weight: bold;">
-                                                                            <input style="color: #0A4CAC; font-size: 18px; background-color: white;" 
-                                                                                disabled matInput 
+                                                                    <div class="col-md-2">
+                                                                        <mat-form-field
+                                                                            class="example-full-width text-center"
+                                                                            style="font-size: 16px; font-weight: bold;">
+                                                                            <input
+                                                                                style="color: #0A4CAC; font-size: 18px; background-color: white;"
+                                                                                disabled matInput
                                                                                 [(ngModel)]="cotationPRESTIGE"
                                                                                 name='cotationprestige' type="text"
-                                                                                placeholder="Cotation PRESTIGE" maxlength="15">
+                                                                                placeholder="Cotation PRESTIGE"
+                                                                                maxlength="15">
                                                                         </mat-form-field>
                                                                     </div>
-                            
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                            
-                            
-                            
+
+
+
                                                         <!--  G A R A N T I E :   
                                                         <div class="row">
                                                             <label class="col-sm-2 col-form-label"><span style="color: black;">&nbsp;</span></label>
@@ -1361,45 +1596,66 @@
                                                             </div>
                                                         </div>
                                                         -->
-                            
-                            
-                            
-                            
+
+
+
+
                                                         <div class="row">
-                                                            <div style="text-align: center; width: 100%; color:red; font-weight: bold;" id="infos">
+                                                            <div style="text-align: center; width: 100%; color:red; font-weight: bold;"
+                                                                id="infos">
                                                             </div>
                                                         </div>
-                            
-                            
+
+
                                                     </form>
                                                 </div>
 
                                                 <div class="tab-pane" id="link2">
                                                     <table style="width: 100%;" border="1">
                                                         <tr>
-                                                            <td style="width: 25%;"><img src="assets/img/offreEco.PNG" width="254" height="457" /></td>
-                                                            <td style="width: 25%;"><img src="assets/img/offreStandard.PNG" width="254" height="457" /></td>
-                                                            <td style="width: 25%;"><img src="assets/img/offreConfort.PNG" width="254" height="457" /></td>
-                                                            <td style="width: 25%;"><img src="assets/img/offrePrestige.PNG" width="254" height="457" /></td>
+                                                            <td style="width: 25%;"><img src="assets/img/offreEco.PNG"
+                                                                    width="254" height="457" /></td>
+                                                            <td style="width: 25%;"><img
+                                                                    src="assets/img/offreStandard.PNG" width="254"
+                                                                    height="457" /></td>
+                                                            <td style="width: 25%;"><img
+                                                                    src="assets/img/offreConfort.PNG" width="254"
+                                                                    height="457" /></td>
+                                                            <td style="width: 25%;"><img
+                                                                    src="assets/img/offrePrestige.PNG" width="254"
+                                                                    height="457" /></td>
                                                         </tr>
                                                         <tr>
-                                                            <td colspan="4" style="text-align: center; background-color: #EFEBE6;" >
+                                                            <td colspan="4"
+                                                                style="text-align: center; background-color: #EFEBE6;">
                                                                 <br>
-                                                                <mat-radio-group [(ngModel)] = "choixGarantie">
-                                                                    <mat-radio-button value="1" id="eco" (click)="setRadioBut(1)" name="exampleRadios" 
-                                                                    ><span style="color:black; font-weight: bold;">ECO</span></mat-radio-button>
+                                                                <mat-radio-group [(ngModel)]="choixGarantie">
+                                                                    <mat-radio-button value="1" id="eco"
+                                                                        (click)="setRadioBut(1)" name="exampleRadios">
+                                                                        <span
+                                                                            style="color:black; font-weight: bold;">ECO</span>
+                                                                    </mat-radio-button>
                                                                     &nbsp;&nbsp;
-                                                                    <mat-radio-button value="2" id="standard" (click)="setRadioBut(2)" name="exampleRadios">
-                                                                        <span style="color:black; font-weight: bold;">STANDARD</span></mat-radio-button>
+                                                                    <mat-radio-button value="2" id="standard"
+                                                                        (click)="setRadioBut(2)" name="exampleRadios">
+                                                                        <span
+                                                                            style="color:black; font-weight: bold;">STANDARD</span>
+                                                                    </mat-radio-button>
                                                                     &nbsp;&nbsp;
-                                                                    <mat-radio-button value="3" id="confort" (click)="setRadioBut(3)" name="exampleRadios">
-                                                                        <span style="color:black; font-weight: bold;">CONFORT</span></mat-radio-button>
+                                                                    <mat-radio-button value="3" id="confort"
+                                                                        (click)="setRadioBut(3)" name="exampleRadios">
+                                                                        <span
+                                                                            style="color:black; font-weight: bold;">CONFORT</span>
+                                                                    </mat-radio-button>
                                                                     &nbsp;&nbsp;
-                                                                    <mat-radio-button value="4" id="prestige" (click)="setRadioBut(4)" name="exampleRadios">
-                                                                        <span style="color:black; font-weight: bold;">PRESTIGE</span></mat-radio-button>
+                                                                    <mat-radio-button value="4" id="prestige"
+                                                                        (click)="setRadioBut(4)" name="exampleRadios">
+                                                                        <span
+                                                                            style="color:black; font-weight: bold;">PRESTIGE</span>
+                                                                    </mat-radio-button>
                                                                 </mat-radio-group>
                                                             </td>
-                                                            
+
                                                         </tr>
                                                     </table>
                                                 </div>
@@ -1411,7 +1667,7 @@
                         </div>
 
 
-                        
+
                     </div>
                     <div class="modal-footer">
                         <button mat-raised-button type="button" (click)="enregDevisAuto()"
@@ -1456,9 +1712,9 @@
                                         </div>
 
                                         <div class="col-md-4">
-                            
-                                            <!--  (click)="getlespolicesbyclient()"  -->
-                                            <button mat-raised-button class="btn btn-success" >
+                                            <!--    -->
+                                            <button mat-raised-button class="btn btn-success"
+                                                (click)="getlespolicesvoyagebyclient()">
                                                 <span class="btn-label">
                                                     <i class="material-icons">search</i>
                                                 </span>
@@ -1490,7 +1746,8 @@
 
                                         <div class="col-md-4">
 
-                                            <button mat-raised-button class="btn btn-info" (click)="getlespolicesbyclient()">
+                                            <button mat-raised-button class="btn btn-info"
+                                                (click)="displayPolice()">
                                                 <span class="btn-label">
                                                     <i class="material-icons">shopping_cart</i>
                                                 </span>
@@ -1558,8 +1815,9 @@
 
                                         <div class="col-md-5">
                                             <mat-form-field>
-                                                <input matInput [matDatepicker]="basicnaissvoyage" [(ngModel)]="getNaissVoyage"
-                                                    name="dates" placeholder="Date de naissance">
+                                                <input matInput [matDatepicker]="basicnaissvoyage"
+                                                    [(ngModel)]="getNaissVoyage" name="dates"
+                                                    placeholder="Date de naissance">
                                                 <mat-datepicker-toggle matSuffix [for]="basicnaissvoyage">
                                                 </mat-datepicker-toggle>
                                                 <mat-datepicker #basicnaissvoyage></mat-datepicker>
@@ -1604,11 +1862,41 @@
 
                                         <div class="col-lg-3 col-md-8 col-sm-4">
                                             <mat-form-field>
-                                                <mat-select placeholder="Type du client"
-                                                    [(value)]="typeclient" name="typeclient">
+                                                <mat-select placeholder="Type du client" [(value)]="typeclient"
+                                                    name="typeclient">
                                                     <mat-option [value]="1">Client</mat-option>
                                                     <mat-option [value]="0">Prospect</mat-option>
                                                 </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <!--  Provenance CLIENT   -->
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-4 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Origine du client"
+                                                    [(value)]="clientRest.origine" name="origineclient">
+                                                    <mat-option [value]="0">Prospecté</mat-option>
+                                                    <mat-option [value]="1">Recommandé</mat-option>
+                                                    <mat-option [value]="2">Réseaux sociaux</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <mat-form-field class="example-full-width" style="font-size: 16px;">
+                                                <input matInput [(ngModel)]="clientRest.observation" name='observation'
+                                                    type="text" placeholder="Observation" maxlength="100">
                                             </mat-form-field>
                                         </div>
 
@@ -1626,7 +1914,7 @@
 
                                         <div class="col-md-5">
                                             <input placeholder="CNI" type="file" id="cni" name="cni"
-                                                (change)="onCniSelected($event)" 
+                                                (change)="onCniSelected($event)"
                                                 accept="image/png,image/jpeg,image/jpg" />
                                         </div>
 
@@ -1642,7 +1930,7 @@
 
                                         <div class="col-lg-5 col-md-8 col-sm-4">
                                             <input type="file" id="photo" name="photo"
-                                                (change)="onPhotoSelected($event)" 
+                                                (change)="onPhotoSelected($event)"
                                                 accept="image/png,image/jpeg,image/jpg" />
                                         </div>
 
@@ -1659,28 +1947,28 @@
 
                                         <div class="col-md-5">
                                             <mat-form-field class="example-full-width">
-                                                <mat-select id="selectIdzone" placeholder="Zone de destination" 
-                                                    [(value)]="zonedestination"
-                                                    name="zonedestination" style="background-color: #b4bed3;" 
+                                                <mat-select id="selectIdzone" placeholder="Zone de destination"
+                                                    [(value)]="zonedestination" name="zonedestination"
+                                                    style="background-color: #b4bed3;"
                                                     (selectionChange)="getpaysdestination()">
                                                     <mat-option *ngFor="let donnee of listeZoneDestination"
                                                         [value]="donnee.idzon">
                                                         {{ donnee.libelle }}
                                                     </mat-option>
-                                                </mat-select>                                                
+                                                </mat-select>
                                             </mat-form-field>
                                         </div>
 
                                         <div class="col-md-5">
                                             <mat-form-field class="example-full-width">
-                                                <mat-select id="selectIdpays" placeholder="Pays de destination" 
-                                                    [(value)]="paysdestination"
-                                                    name="paysdestination" style="background-color: #92cf73;">
+                                                <mat-select id="selectIdpays" placeholder="Pays de destination"
+                                                    [(value)]="paysdestination" name="paysdestination"
+                                                    style="background-color: #92cf73;">
                                                     <mat-option *ngFor="let donnee of listePaysDestination"
                                                         [value]="donnee.iddes">
                                                         {{ donnee.libelle }}
                                                     </mat-option>
-                                                </mat-select> 
+                                                </mat-select>
                                             </mat-form-field>
                                         </div>
 
@@ -1696,8 +1984,9 @@
 
                                         <div class="col-lg-5 col-md-8 col-sm-4">
                                             <mat-form-field>
-                                                <input matInput [matDatepicker]="basicjourdepart" [(ngModel)]="getJourDepart"
-                                                    name="datedepart" placeholder="Jour de d&eacute;part">
+                                                <input matInput [matDatepicker]="basicjourdepart"
+                                                    [(ngModel)]="getJourDepart" name="datedepart"
+                                                    placeholder="Jour de d&eacute;part">
                                                 <mat-datepicker-toggle matSuffix [for]="basicjourdepart">
                                                 </mat-datepicker-toggle>
                                                 <mat-datepicker #basicjourdepart></mat-datepicker>
@@ -1706,8 +1995,9 @@
 
                                         <div class="col-lg-5 col-md-8 col-sm-4">
                                             <mat-form-field>
-                                                <input matInput [matDatepicker]="basicjourretour" [(ngModel)]="getJourRetour"
-                                                    name="dateretour" placeholder="Jour de retour">
+                                                <input matInput [matDatepicker]="basicjourretour"
+                                                    [(ngModel)]="getJourRetour" name="dateretour"
+                                                    placeholder="Jour de retour">
                                                 <mat-datepicker-toggle matSuffix [for]="basicjourretour">
                                                 </mat-datepicker-toggle>
                                                 <mat-datepicker #basicjourretour></mat-datepicker>
@@ -1773,9 +2063,10 @@
                                         </div>
 
                                         <div class="col-md-4">
-                            
+
                                             <!--  (click)="getlespolicesbyclient()"  -->
-                                            <button mat-raised-button class="btn btn-success" >
+                                            <button mat-raised-button class="btn btn-success"
+                                                (click)="getlespolicesaccidentbyclient()">
                                                 <span class="btn-label">
                                                     <i class="material-icons">search</i>
                                                 </span>
@@ -1807,7 +2098,7 @@
 
                                         <div class="col-md-4">
 
-                                            <button mat-raised-button class="btn btn-info" (click)="getlespolicesbyclient()">
+                                            <button mat-raised-button class="btn btn-info" (click)="displayPolice()">
                                                 <span class="btn-label">
                                                     <i class="material-icons">shopping_cart</i>
                                                 </span>
@@ -1919,13 +2210,43 @@
                                             </mat-form-field>
                                         </div>
 
-                                        <div class="col-lg-3 col-md-8 col-sm-4">
+                                        <div class="col-lg-4 col-md-8 col-sm-4">
                                             <mat-form-field>
-                                                <mat-select placeholder="Type du client"
-                                                    [(value)]="typeclient" name="typeclient">
+                                                <mat-select placeholder="Type du client" [(value)]="typeclient"
+                                                    name="typeclient">
                                                     <mat-option [value]="1">Client</mat-option>
                                                     <mat-option [value]="0">Prospect</mat-option>
                                                 </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <!--  Provenance CLIENT   -->
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-4 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Origine du client"
+                                                    [(value)]="clientRest.origine" name="origineclient">
+                                                    <mat-option [value]="0">Prospecté</mat-option>
+                                                    <mat-option [value]="1">Recommandé</mat-option>
+                                                    <mat-option [value]="2">Réseaux sociaux</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <mat-form-field class="example-full-width" style="font-size: 16px;">
+                                                <input matInput [(ngModel)]="clientRest.observation" name='observation'
+                                                    type="text" placeholder="Observation" maxlength="100">
                                             </mat-form-field>
                                         </div>
 
@@ -1943,8 +2264,8 @@
 
                                         <div class="col-md-5">
                                             <input placeholder="CNI" type="file" id="cni" name="cni"
-                                                (change)="onCniSelected($event)" 
-                                                accept="image/png,image/jpeg,image/jpg"/>
+                                                (change)="onCniSelected($event)"
+                                                accept="image/png,image/jpeg,image/jpg" />
                                         </div>
 
                                     </div>
@@ -1959,8 +2280,8 @@
 
                                         <div class="col-lg-5 col-md-8 col-sm-4">
                                             <input type="file" id="photo" name="photo"
-                                                (change)="onPhotoSelected($event)" 
-                                                accept="image/png,image/jpeg,image/jpg"/>
+                                                (change)="onPhotoSelected($event)"
+                                                accept="image/png,image/jpeg,image/jpg" />
                                         </div>
 
                                     </div>
@@ -2010,7 +2331,7 @@
                                                     </mat-option>
                                                 </mat-select>
                                             </mat-form-field>
-                                        </div>                                        
+                                        </div>
 
                                     </div>
                                 </div>
@@ -2180,7 +2501,8 @@
                 <button class="btn btn-success" (click)="afficherVoyage()">
                     <i class="material-icons">airplanemode_active</i> Voyage
                 </button>
-                &nbsp; <!-- (click)="afficherVoyage()"  -->
+                &nbsp;
+                <!-- (click)="afficherVoyage()"  -->
                 <button class="btn btn" (click)="afficherMrh()">
                     <i class="material-icons">home</i> MRH
                 </button>
@@ -2218,7 +2540,7 @@
                         <!--<div class="card-icon">
                             <i class="material-icons">equalizer</i>
                         </div>-->
-                        <p class="card-category" style="color: black; font-weight: bold;" >Devis VOYAGE</p>
+                        <p class="card-category" style="color: black; font-weight: bold;">Devis VOYAGE</p>
                         <h3 class="card-title">{{ statsdevisuser.voyage }}</h3>
                     </div>
                     <div class="card-footer">
@@ -2239,7 +2561,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons text-warning">error</i> ACCIDENT  
+                            <i class="material-icons text-warning">error</i> ACCIDENT
                         </div>
                     </div>
                 </div>
@@ -2296,13 +2618,12 @@
                                 <div class="tab-pane active" id="link3">
 
                                     <div class="card" style="border: 1px solid black;">
-                                        <div class="card-body" >
+                                        <div class="card-body">
 
-                                            <div class="material-datatables" >
+                                            <div class="material-datatables">
                                                 <table id="datatableAuto"
                                                     class="table table-striped table-no-bordered table-hover"
-                                                    cellspacing="0" width="100%" style="width:100%"
-                                                    >
+                                                    cellspacing="0" width="100%" style="width:100%">
                                                     <thead>
                                                         <tr>
                                                             <th>Client</th>
@@ -2318,27 +2639,28 @@
                                                     <tbody *ngIf="this.getDevisAuto">
                                                         <tr *ngFor="let donnee of listeDevisAuto">
                                                             <td style="font-weight: bold;">{{ donnee.client }} </td>
-                                                            <td class="text-center" 
-                                                            style="font-weight: bold; background-color: #d4e4d6;">
-                                                            {{ donnee.contact }}</td>
+                                                            <td class="text-center"
+                                                                style="font-weight: bold; background-color: #d4e4d6;">
+                                                                {{ donnee.contact }}</td>
                                                             <td class="text-center">
-                                                                <a *ngIf="donnee.secteur == 'Oui'" 
+                                                                <a *ngIf="donnee.secteur == 'Oui'"
                                                                     class="btn btn-link btn-success btn-just-icon edit">
                                                                     <i class="material-icons">check_circle</i></a>
-                                                                <a *ngIf="donnee.secteur == 'Non'" 
+                                                                <a *ngIf="donnee.secteur == 'Non'"
                                                                     class="btn btn-link btn-danger btn-just-icon edit">
                                                                     <i class="material-icons">highlight_off</i></a>
                                                             </td>
                                                             <td>{{ donnee.offre }}</td>
                                                             <td>{{ donnee.dates }}</td>
-                                                            <td class="text-center" style="background-color: #BED5F0; padding-top: 30px;">
+                                                            <td class="text-center"
+                                                                style="background-color: #BED5F0; padding-top: 30px;">
                                                                 <span style="font-weight: bold; " class="displaycout">
                                                                     {{ donnee.cout }}
                                                                 </span>
                                                             </td>
                                                             <td class="text-center">
                                                                 <a title="Effectuer un paiement"
-                                                                    (click)="choixpaiement( donnee.iddevis, 1, donnee.client, donnee.secteur)"
+                                                                    (click)="choixpaiement( donnee.iddevis, 1, donnee.client, donnee.secteur, donnee.contact)"
                                                                     class="btn btn-link btn-success btn-just-icon edit"><i
                                                                         class="material-icons">add_shopping_cart</i></a>
 
@@ -2365,8 +2687,7 @@
                                             <div class="material-datatables">
                                                 <table id="datatableVoyage"
                                                     class="table table-striped table-no-bordered table-hover"
-                                                    cellspacing="0" width="100%" style="width:100%"
-                                                    >
+                                                    cellspacing="0" width="100%" style="width:100%">
                                                     <thead>
                                                         <tr>
                                                             <th>Client</th>
@@ -2381,14 +2702,14 @@
                                                     <tbody *ngIf="this.getDevisVoyage">
                                                         <tr *ngFor="let donnee of listeDevisVoyage">
                                                             <td style="font-weight: bold;">{{ donnee.client }} </td>
-                                                            <td class="text-center" 
-                                                            style="font-weight: bold; background-color: #d4e4d6;">
-                                                            {{ donnee.contact }}</td>
+                                                            <td class="text-center"
+                                                                style="font-weight: bold; background-color: #d4e4d6;">
+                                                                {{ donnee.contact }}</td>
                                                             <td class="text-center">
-                                                                <a *ngIf="donnee.secteur == 'Oui'" 
+                                                                <a *ngIf="donnee.secteur == 'Oui'"
                                                                     class="btn btn-link btn-success btn-just-icon edit">
                                                                     <i class="material-icons">check_circle</i></a>
-                                                                <a *ngIf="donnee.secteur == 'Non'" 
+                                                                <a *ngIf="donnee.secteur == 'Non'"
                                                                     class="btn btn-link btn-danger btn-just-icon edit">
                                                                     <i class="material-icons">highlight_off</i></a>
                                                             </td>
@@ -2398,7 +2719,7 @@
                                                             <td class="text-center">
 
                                                                 <a title="Effectuer un paiement"
-                                                                    (click)="choixpaiement( donnee.iddevis, 2, donnee.client, donnee.secteur)"
+                                                                    (click)="choixpaiement( donnee.iddevis, 2, donnee.client, donnee.secteur, donnee.contact)"
                                                                     class="btn btn-link btn-success btn-just-icon edit"><i
                                                                         class="material-icons">add_shopping_cart</i></a>
 
@@ -2424,8 +2745,7 @@
                                             <div class="material-datatables">
                                                 <table id="datatableAccident"
                                                     class="table table-striped table-no-bordered table-hover"
-                                                    cellspacing="0" width="100%" style="width:100%"
-                                                    >
+                                                    cellspacing="0" width="100%" style="width:100%">
                                                     <thead>
                                                         <tr>
                                                             <th>Client</th>
@@ -2439,23 +2759,24 @@
                                                     <tbody *ngIf="this.getDevisAccident">
                                                         <tr *ngFor="let donnee of listeDevisAccident">
                                                             <td style="font-weight: bold;">{{ donnee.client }} </td>
-                                                            <td class="text-center" 
-                                                            style="font-weight: bold; background-color: #d4e4d6;">
-                                                            {{ donnee.contact }}</td>
+                                                            <td class="text-center"
+                                                                style="font-weight: bold; background-color: #d4e4d6;">
+                                                                {{ donnee.contact }}</td>
                                                             <td class="text-center">
-                                                                <a *ngIf="donnee.secteur == 'Oui'" 
+                                                                <a *ngIf="donnee.secteur == 'Oui'"
                                                                     class="btn btn-link btn-success btn-just-icon edit">
                                                                     <i class="material-icons">check_circle</i></a>
-                                                                <a *ngIf="donnee.secteur == 'Non'" 
+                                                                <a *ngIf="donnee.secteur == 'Non'"
                                                                     class="btn btn-link btn-danger btn-just-icon edit">
                                                                     <i class="material-icons">highlight_off</i></a>
                                                             </td>
-                                                            <td style="font-weight: bold;" class="text-center">{{ donnee.dureecontrat }}</td>
+                                                            <td style="font-weight: bold;" class="text-center">{{
+                                                                donnee.dureecontrat }}</td>
                                                             <td>{{ donnee.dates }}</td>
                                                             <td class="text-center">
 
                                                                 <a title="Effectuer un paiement"
-                                                                    (click)="choixpaiement( donnee.iddevis, 3, donnee.client, donnee.secteur)"
+                                                                    (click)="choixpaiement( donnee.iddevis, 3, donnee.client, donnee.secteur, donnee.contact)"
                                                                     class="btn btn-link btn-success btn-just-icon edit"><i
                                                                         class="material-icons">add_shopping_cart</i></a>
 
@@ -2475,14 +2796,13 @@
                                 </div>
 
                                 <div class="tab-pane" id="link6">
-                                    <div class="card">
+                                    <div class="card" style="border: 1px solid black;">
                                         <div class="card-body">
 
                                             <div class="material-datatables">
                                                 <table id="datatableMrh"
                                                     class="table table-striped table-no-bordered table-hover"
-                                                    cellspacing="0" width="100%" style="width:100%"
-                                                    >
+                                                    cellspacing="0" width="100%" style="width:100%">
                                                     <thead>
                                                         <tr>
                                                             <th>Client</th>
@@ -2497,24 +2817,25 @@
                                                     <tbody *ngIf="this.getDevisAccident">
                                                         <tr *ngFor="let donnee of listeDevisMrh">
                                                             <td style="font-weight: bold;">{{ donnee.client }} </td>
-                                                            <td class="text-center" 
-                                                            style="font-weight: bold; background-color: #d4e4d6;">
-                                                            {{ donnee.contact }}</td>
+                                                            <td class="text-center"
+                                                                style="font-weight: bold; background-color: #d4e4d6;">
+                                                                {{ donnee.contact }}</td>
                                                             <td class="text-center">
-                                                                <a *ngIf="donnee.secteur == 'Oui'" 
+                                                                <a *ngIf="donnee.secteur == 'Oui'"
                                                                     class="btn btn-link btn-success btn-just-icon edit">
                                                                     <i class="material-icons">check_circle</i></a>
-                                                                <a *ngIf="donnee.secteur == 'Non'" 
+                                                                <a *ngIf="donnee.secteur == 'Non'"
                                                                     class="btn btn-link btn-danger btn-just-icon edit">
                                                                     <i class="material-icons">highlight_off</i></a>
                                                             </td>
-                                                            <td style="font-weight: bold;" class="text-center">{{ donnee.dureecontrat }}</td>
+                                                            <td style="font-weight: bold;" class="text-center">{{
+                                                                donnee.dureecontrat }}</td>
                                                             <td>{{ donnee.dates }}</td>
                                                             <td>{{ donnee.offre }}</td>
                                                             <td class="text-center">
 
                                                                 <a title="Effectuer un paiement"
-                                                                    (click)="choixpaiement( donnee.iddevis, 4, donnee.client, donnee.secteur)"
+                                                                    (click)="choixpaiement( donnee.iddevis, 4, donnee.client, donnee.secteur, donnee.contact)"
                                                                     class="btn btn-link btn-success btn-just-icon edit"><i
                                                                         class="material-icons">add_shopping_cart</i></a>
 

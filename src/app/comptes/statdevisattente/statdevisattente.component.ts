@@ -318,7 +318,7 @@ export class StatdevisattenteComponent implements OnInit {
                 borderColor: tabColueur[cptColor],
                 data: tabDataset[j].somme,
                 borderWidth: 2,
-                fill: false
+                fill: true
               });
               cptColor++;
           }
