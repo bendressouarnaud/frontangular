@@ -4,6 +4,8 @@ export class StatsDevisUser{
     voyage : string;
     accident : string;
     mrh : string;
+    sante : string;
+    total : string;
 
     constructor(){}
 }

@@ -88,6 +88,7 @@ export class DevisComponent implements OnInit {
   getPoliceAccident = false;
   getPoliceVoyage = false;
   getPoliceMrh = false;
+  getPoliceSante = false
   setPolice = "";
   idCliendDone = "0";
   idClient = "0";
@@ -163,11 +164,14 @@ export class DevisComponent implements OnInit {
   listeDevisAccident: BeanDonneDevis[];
   listeDevisVoyage: BeanDonneDevis[];
   listeDevisMrh: BeanDonneDevis[];
+  listeDevisSante: BeanDonneDevis[];
   getDevisAuto = false;
   getDevisAccident = false;
   getDevisVoyage = false;
   getDevisMrh = false;
+  getDevisSante = false;
   statsdevisuser = new StatsDevisUser();
+  totalStatsdevis = "0";
   //
   cotationECO = "0";
   cotationSTANDARD = "0";
@@ -213,6 +217,206 @@ export class DevisComponent implements OnInit {
   situationgeographique = "";
   id_mrh = 0;
 
+  // SANTE :
+  taille = 0;
+  poids = 0;
+  listeGroupeSanguin: Detailtable[];
+  listeFormuleSante: Detailtable[];
+  getListeFormuleSante = false;
+  formulesante = 0;
+  groupesanguin = 0;
+  idsante = 0;
+
+  numpolice = "";
+  numclient = "";
+  nmapporteur = "";
+  libcode = "";
+  libinspection = "";
+
+  tensionarterielle = "";
+  getNaissanceSante = new Date();
+  basicDatepickerSante = "";
+  lieunaissance = "";
+  quartierresidence = "";
+  adressepostale = "";
+  id_devissante = 0;
+  /* conjoint(e) */
+  nomconjoint = "";
+  prenomconjoint = "";
+  contactconjoint = "";
+  tailleconjoint = 0;
+  poidsconjoint = 0;
+  groupesanguinconjoint = 0;
+  tensionarterielleconjoint = "";
+  getNaissanceSanteConjoint = new Date();
+  basicDatepickerSanteConjoint = "";
+  lieunaissanceconjoint = "";
+  quartierresidenceconjoint = "";
+  adressepostaleconjoint = "";
+  civiliteconjoint : number;
+  /* 1er ENFANT */
+  nomEnfantUn = "";
+  prenomEnfantUn = "";
+  tailleEnfantUn = 0;
+  poidsEnfantUn = 0;
+  sexeEnfantUn = 0;
+  contactEnfantUn = "";
+  groupesanguinEnfantUn = 0;
+  tensionarterielleEnfantUn = "";
+  getNaissanceSanteEnfantUn = new Date();
+  basicDatepickerSanteEnfantUn = "";
+  lieunaissanceEnfantUn = "";
+  villeEnfantUn = "";
+  emailEnfantUn = "";
+  /* 2eme ENFANT */
+  nomEnfantDe = "";
+  prenomEnfantDe = "";
+  tailleEnfantDe = 0;
+  poidsEnfantDe = 0;
+  sexeEnfantDe = 0;
+  contactEnfantDe = "";
+  groupesanguinEnfantDe = 0;
+  tensionarterielleEnfantDe = "";
+  getNaissanceSanteEnfantDe = new Date();
+  basicDatepickerSanteEnfantDe = "";
+  lieunaissanceEnfantDe = "";
+  villeEnfantDe = "";
+  emailEnfantDe = "";
+  /* 3eme ENFANT */
+  nomEnfantTr = "";
+  prenomEnfantTr = "";
+  tailleEnfantTr = 0;
+  poidsEnfantTr = 0;
+  sexeEnfantTr = 0;
+  contactEnfantTr = "";
+  groupesanguinEnfantTr = 0;
+  tensionarterielleEnfantTr = "";
+  getNaissanceSanteEnfantTr = new Date();
+  basicDatepickerSanteEnfantTr = "";
+  lieunaissanceEnfantTr = "";
+  villeEnfantTr = "";
+  emailEnfantTr = "";
+  /* 4eme ENFANT */
+  nomEnfantQu = "";
+  prenomEnfantQu = "";
+  tailleEnfantQu = 0;
+  poidsEnfantQu = 0;
+  sexeEnfantQu = 0;
+  contactEnfantQu = "";
+  groupesanguinEnfantQu = 0;
+  tensionarterielleEnfantQu = "";
+  getNaissanceSanteEnfantQu = new Date();
+  basicDatepickerSanteEnfantQu = "";
+  lieunaissanceEnfantQu = "";
+  villeEnfantQu = "";
+  emailEnfantQu = "";
+
+  // Questionnaire medical :
+  maladieAdherent = 0;
+  maladieConjoint = 0;
+  maladieEnfantUn = 0;
+  maladieEnfantDe = 0;
+  maladieEnfantTr = 0;
+  maladieEnfantQu = 0;
+  // Perte de poids
+  pertepoidsAdherent = 0;
+  pertepoidsConjoint = 0;
+  pertepoidsEnfantUn = 0;
+  pertepoidsEnfantDe = 0;
+  pertepoidsEnfantTr = 0;
+  pertepoidsEnfantQu = 0;
+  // Ganglions
+  ganglionAdherent = 0;
+  ganglionConjoint = 0;
+  ganglionEnfantUn = 0;
+  ganglionEnfantDe = 0;
+  ganglionEnfantTr = 0;
+  ganglionEnfantQu = 0;
+  // Coeur
+  coeurAdherent = 0;
+  coeurConjoint = 0;
+  coeurEnfantUn = 0;
+  coeurEnfantDe = 0;
+  coeurEnfantTr = 0;
+  coeurEnfantQu = 0;
+  // Appareil digestif, foie
+  foieAdherent = 0;
+  foieConjoint = 0;
+  foieEnfantUn = 0;
+  foieEnfantDe = 0;
+  foieEnfantTr = 0;
+  foieEnfantQu = 0;
+  // Appareil digestif, foie
+  glandeAdherent = 0;
+  glandeConjoint = 0;
+  glandeEnfantUn = 0;
+  glandeEnfantDe = 0;
+  glandeEnfantTr = 0;
+  glandeEnfantQu = 0;
+  // anemie
+  anemieAdherent = 0;
+  anemieConjoint = 0;
+  anemieEnfantUn = 0;
+  anemieEnfantDe = 0;
+  anemieEnfantTr = 0;
+  anemieEnfantQu = 0;
+  // colique
+  coliqueAdherent = 0;
+  coliqueConjoint = 0;
+  coliqueEnfantUn = 0;
+  coliqueEnfantDe = 0;
+  coliqueEnfantTr = 0;
+  coliqueEnfantQu = 0;
+  // colique
+  prostateAdherent = 0;
+  prostateConjoint = 0;
+  prostateEnfantUn = 0;
+  prostateEnfantDe = 0;
+  prostateEnfantTr = 0;
+  prostateEnfantQu = 0;
+  // enceinte
+  enceinteAdherent = 0;
+  enceinteConjoint = 0;
+  enceinteEnfantUn = 0;
+  enceinteEnfantDe = 0;
+  enceinteEnfantTr = 0;
+  enceinteEnfantQu = 0;
+  // arthrose
+  arthroseAdherent = 0;
+  arthroseConjoint = 0;
+  arthroseEnfantUn = 0;
+  arthroseEnfantDe = 0;
+  arthroseEnfantTr = 0;
+  arthroseEnfantQu = 0;
+  // yeux
+  yeuxAdherent = 0;
+  yeuxConjoint = 0;
+  yeuxEnfantUn = 0;
+  yeuxEnfantDe = 0;
+  yeuxEnfantTr = 0;
+  yeuxEnfantQu = 0;
+  // lunettes
+  lunettesAdherent = 0;
+  lunettesConjoint = 0;
+  lunettesEnfantUn = 0;
+  lunettesEnfantDe = 0;
+  lunettesEnfantTr = 0;
+  lunettesEnfantQu = 0;
+  // hospitalise
+  hospitaliseAdherent = 0;
+  hospitaliseConjoint = 0;
+  hospitaliseEnfantUn = 0;
+  hospitaliseEnfantDe = 0;
+  hospitaliseEnfantTr = 0;
+  hospitaliseEnfantQu = 0;
+  // traitement
+  traitementAdherent = 0;
+  traitementConjoint = 0;
+  traitementEnfantUn = 0;
+  traitementEnfantDe = 0;
+  traitementEnfantTr = 0;
+  traitementEnfantQu = 0;
+
   // Cheque :
   numerocheque = "";
   idvirement = "";
@@ -247,6 +451,8 @@ export class DevisComponent implements OnInit {
     this.statsdevisuser.accident = "0";
     this.statsdevisuser.voyage = "0";
     this.statsdevisuser.mrh = "0";
+    this.statsdevisuser.sante = "0";
+    this.statsdevisuser.total = "0";
 
     //this.menuIndemniteItems = lesIndemnites.filter(menuItem => menuItem);
     this.menuZoneItems = lesZonesDestinations.filter(menuItem => menuItem);
@@ -257,6 +463,8 @@ export class DevisComponent implements OnInit {
     //this.getCivilite();
     this.getFraisTraitemente();
     this.getFormuleMrh();
+    this.getGroupeSanguin();
+    this.getFormuleSante();
     this.getAllActivities();
     this.getzonedestination();
     this.getMotifsPaiement();
@@ -273,6 +481,7 @@ export class DevisComponent implements OnInit {
     this.getDevisAccidentByTrader();
     this.getDevisVoyageByTrader();
     this.getDevisMrhByTrader();
+    this.getDevisSanteByTrader();
 
     //
     this.separateurMillierOnFields();
@@ -495,6 +704,21 @@ export class DevisComponent implements OnInit {
   }
 
 
+  // Look for 'POLICE' devis SANTE:
+  getlespolicessantebyclient(): void {
+    this.getPoliceSante = false;
+    this.meswebservices.getlespolicesbyclient(this.idCliendDone).toPromise()
+      .then(
+        resultat => {
+          this.listePolices = resultat;
+          // Pick first value of the list :
+          if(this.setPolice.trim().length == 0) this.setPolice = resultat[0].Police.toString();
+          this.getPoliceSante = true;
+        }
+      )
+  }
+
+
 
   // Go to pull FORMULE MRH , id : 13 :
   getFormuleMrh(): void {
@@ -507,6 +731,37 @@ export class DevisComponent implements OnInit {
 
           // :
           this.selectformule();
+        }
+      )
+  }
+
+
+  // Go to pull GROUPE SANGUIN , id : 14 :
+  getGroupeSanguin(): void {
+    this.meswebservices.getdonneeparametree("14").toPromise()
+      .then(
+        resultat => {
+          this.listeGroupeSanguin = resultat;
+          // Init 
+          this.groupesanguin = resultat[0].idnmd;
+          this.groupesanguinconjoint = resultat[0].idnmd;
+          this.groupesanguinEnfantUn = resultat[0].idnmd;
+          this.groupesanguinEnfantDe = resultat[0].idnmd;
+          this.groupesanguinEnfantTr = resultat[0].idnmd;
+          this.groupesanguinEnfantQu = resultat[0].idnmd;
+        }
+      )
+  }
+
+
+  // Go to pull FORMULE SANTE , id : 15 :
+  getFormuleSante(): void {
+    this.meswebservices.getdonneeparametree("15").toPromise()
+      .then(
+        resultat => {
+          this.listeFormuleSante = resultat;
+          this.getListeFormuleSante = true;
+          this.formulesante = resultat[0].idnmd;
         }
       )
   }
@@ -818,6 +1073,7 @@ export class DevisComponent implements OnInit {
         resultat => {
           this.lesCivilite = resultat;
           this.clientRest.civilite = resultat[0].idciv;
+          this.civiliteconjoint = resultat[0].idciv;
         }
       )
   }
@@ -844,6 +1100,38 @@ export class DevisComponent implements OnInit {
 
     $('#modalMrh').modal();
   }
+
+
+
+  // SANTE
+  afficherSante() {
+    // Clear :
+    //if (this.formData.has("photo")) this.formData.delete("photo");
+    //if (this.formData.has("cni")) this.formData.delete("cni");
+    //this.presencePhoto = false;
+    //this.presenceCni = false;
+
+    // Reset :
+    this.membresId = [];
+    this.selectedItems = [];
+    this.clientRest.activite = 1;
+
+    // Set values :
+    this.setPolice = "";
+    this.getPoliceSante = false;
+    this.clientRest.origine = 0;
+    this.clientRest.observation = "";
+
+    // 
+    this.poids = 0;
+    this.taille = 0;
+    //
+    this.tailleconjoint = 0;
+    this.poidsconjoint = 0;
+
+    $('#modalSante').modal();
+  }
+
 
 
   // Voyage
@@ -1133,6 +1421,271 @@ export class DevisComponent implements OnInit {
 
 
 
+  // Save DEVIS sante :
+  enregDevisSante(){
+    // Naissance 'ASSURE' :
+    let momentVariable = moment(this.getNaissanceSante, 'MM-DD-YYYY');
+    let dateAssure = momentVariable.format('YYYY-MM-DD');
+    // Naissance 'Conjoint' :
+    let momentConjoint = moment(this.getNaissanceSanteConjoint, 'MM-DD-YYYY');
+    let dateConjoint = momentConjoint.format('YYYY-MM-DD');
+    // Naissance '1er Enfant' :
+    let momentEnfUn = moment(this.getNaissanceSanteEnfantUn, 'MM-DD-YYYY');
+    let dateEnfUn = momentEnfUn.format('YYYY-MM-DD');
+    // Naissance '2eme Enfant' :
+    let momentEnfDe = moment(this.getNaissanceSanteEnfantDe, 'MM-DD-YYYY');
+    let dateEnfDe = momentEnfDe.format('YYYY-MM-DD');
+    // Naissance '3eme Enfant' :
+    let momentEnfTr = moment(this.getNaissanceSanteEnfantTr, 'MM-DD-YYYY');
+    let dateEnfTr = momentEnfTr.format('YYYY-MM-DD');
+    // Naissance '4eme Enfant' :
+    let momentEnfQu = moment(this.getNaissanceSanteEnfantQu, 'MM-DD-YYYY');
+    let dateEnfQu = momentEnfQu.format('YYYY-MM-DD');
+
+
+    var diffYear = (this.getCurrentDate.getTime() - this.getNaissanceSante.getTime()) / 1000;
+    diffYear /= (60 * 60 * 24);
+    let difference = Math.abs(Math.round(diffYear / 365.25));
+
+    if (this.clientRest.nom.trim().toString().length == 0) {
+      this.warnmessage("Le nom du client n'est pas renseigné !");
+      return;
+    }
+
+    if (this.clientRest.prenom.trim().toString().length == 0) {
+      this.warnmessage("Le prénom du client n'est pas renseigné !");
+      return;
+    }
+
+    if (this.clientRest.contact.trim().toString().length == 0) {
+      this.warnmessage("Le contact du client n'est pas renseigné !");
+      return;
+    }
+
+    if (this.clientRest.email.trim().toString().length == 0) {
+      this.warnmessage("L'adresse mail du client n'est pas renseignée !");
+      return;
+    }
+
+    // Now prepare the data :
+    if (difference >= 18) {
+      // Assure
+      this.formData.append("nomAssure", this.clientRest.nom.toString());
+      this.formData.append("prenomAssure", this.clientRest.prenom.toString());
+      this.formData.append("contactAssure", this.clientRest.contact.toString());
+      this.formData.append("emailAssure", this.clientRest.email.toString());
+      this.formData.append("naissanceAssure", dateAssure);
+      this.formData.append("civiliteAssure", this.clientRest.civilite.toString());
+      this.formData.append("activiteAssure", this.clientRest.activite.toString());
+      this.formData.append("typeduclientAssure", this.typeclient.toString());
+      this.formData.append("tailleAssure", this.taille.toString());
+      this.formData.append("poidsAssure", this.poids.toString());
+      this.formData.append("groupesanguinAssure", this.groupesanguin.toString());
+      this.formData.append("tensionAssure", this.tensionarterielle);
+      this.formData.append("lieunaissanceAssure", this.lieunaissance);
+      this.formData.append("residenceAssure", this.quartierresidence);
+      this.formData.append("adresseAssure", this.adressepostale);
+      // Conjoint
+      this.formData.append("civiliteConjoint", this.civiliteconjoint.toString());
+      this.formData.append("tailleConjoint", this.tailleconjoint.toString());
+      this.formData.append("poidsConjoint", this.poidsconjoint.toString());
+      this.formData.append("groupesanguinConjoint", this.groupesanguinconjoint.toString());
+      this.formData.append("tensionConjoint", this.tensionarterielleconjoint);
+      this.formData.append("nomConjoint", this.nomconjoint.toString());
+      this.formData.append("prenomConjoint", this.prenomconjoint.toString());
+      this.formData.append("naissanceConjoint", dateConjoint);
+      this.formData.append("lieunaissanceConjoint", this.lieunaissanceconjoint);
+      this.formData.append("residenceConjoint", this.quartierresidenceconjoint);
+      this.formData.append("adresseConjoint", this.adressepostaleconjoint);
+      this.formData.append("contactConjoint", this.contactconjoint);
+      // 1er Enfant
+      this.formData.append("nomEnfantUn", this.nomEnfantUn);
+      this.formData.append("tailleEnfantUn", this.tailleEnfantUn.toString());
+      this.formData.append("prenomEnfantUn", this.prenomEnfantUn.toString());
+      this.formData.append("poidsEnfantUn", this.poidsEnfantUn.toString());
+      this.formData.append("sexeEnfantUn", this.sexeEnfantUn.toString());
+      this.formData.append("groupesanguinEnfantUn", this.groupesanguinEnfantUn.toString());
+      this.formData.append("tensionEnfantUn", this.tensionarterielleEnfantUn);
+      this.formData.append("naissanceEnfantUn", dateEnfUn);
+      this.formData.append("lieunaissanceEnfantUn", this.lieunaissanceEnfantUn);
+      this.formData.append("contactEnfantUn", this.contactEnfantUn);
+      this.formData.append("emailEnfantUn", this.emailEnfantUn);
+      this.formData.append("villeEnfantUn", this.villeEnfantUn);
+      // 2eme Enfant
+      this.formData.append("nomEnfantDe", this.nomEnfantDe);
+      this.formData.append("tailleEnfantDe", this.tailleEnfantDe.toString());
+      this.formData.append("prenomEnfantDe", this.prenomEnfantDe.toString());
+      this.formData.append("poidsEnfantDe", this.poidsEnfantDe.toString());
+      this.formData.append("sexeEnfantDe", this.sexeEnfantDe.toString());
+      this.formData.append("groupesanguinEnfantDe", this.groupesanguinEnfantDe.toString());
+      this.formData.append("tensionEnfantDe", this.tensionarterielleEnfantDe);
+      this.formData.append("naissanceEnfantDe", dateEnfUn);
+      this.formData.append("lieunaissanceEnfantDe", this.lieunaissanceEnfantDe);
+      this.formData.append("contactEnfantDe", this.contactEnfantDe);
+      this.formData.append("emailEnfantDe", this.emailEnfantDe);
+      this.formData.append("villeEnfantDe", this.villeEnfantDe);
+      // 3eme Enfant
+      this.formData.append("nomEnfantTr", this.nomEnfantTr);
+      this.formData.append("tailleEnfantTr", this.tailleEnfantTr.toString());
+      this.formData.append("prenomEnfantTr", this.prenomEnfantTr.toString());
+      this.formData.append("poidsEnfantTr", this.poidsEnfantTr.toString());
+      this.formData.append("sexeEnfantTr", this.sexeEnfantTr.toString());
+      this.formData.append("groupesanguinEnfantTr", this.groupesanguinEnfantTr.toString());
+      this.formData.append("tensionEnfantTr", this.tensionarterielleEnfantTr);
+      this.formData.append("naissanceEnfantTr", dateEnfUn);
+      this.formData.append("lieunaissanceEnfantTr", this.lieunaissanceEnfantTr);
+      this.formData.append("contactEnfantTr", this.contactEnfantTr);
+      this.formData.append("emailEnfantTr", this.emailEnfantTr);
+      this.formData.append("villeEnfantTr", this.villeEnfantTr);
+      // 4eme Enfant
+      this.formData.append("nomEnfantQu", this.nomEnfantQu);
+      this.formData.append("tailleEnfantQu", this.tailleEnfantQu.toString());
+      this.formData.append("prenomEnfantQu", this.prenomEnfantQu.toString());
+      this.formData.append("poidsEnfantQu", this.poidsEnfantQu.toString());
+      this.formData.append("sexeEnfantQu", this.sexeEnfantQu.toString());
+      this.formData.append("groupesanguinEnfantQu", this.groupesanguinEnfantQu.toString());
+      this.formData.append("tensionEnfantQu", this.tensionarterielleEnfantQu);
+      this.formData.append("naissanceEnfantQu", dateEnfUn);
+      this.formData.append("lieunaissanceEnfantQu", this.lieunaissanceEnfantQu);
+      this.formData.append("contactEnfantQu", this.contactEnfantQu);
+      this.formData.append("emailEnfantQu", this.emailEnfantQu);
+      this.formData.append("villeEnfantQu", this.villeEnfantQu);
+
+      // Questionnaire medical :
+      this.formData.append("maladieAdherent", this.maladieAdherent.toString());
+      this.formData.append("maladieConjoint", this.maladieConjoint.toString());
+      this.formData.append("maladieEnfantUn", this.maladieEnfantUn.toString());
+      this.formData.append("maladieEnfantDe", this.maladieEnfantDe.toString());
+      this.formData.append("maladieEnfantTr", this.maladieEnfantTr.toString());
+      this.formData.append("maladieEnfantQu", this.maladieEnfantQu.toString());
+      // Perte de poids
+      this.formData.append("pertepoidsAdherent", this.pertepoidsAdherent.toString());
+      this.formData.append("pertepoidsConjoint", this.pertepoidsConjoint.toString());
+      this.formData.append("pertepoidsEnfantUn", this.pertepoidsEnfantUn.toString());
+      this.formData.append("pertepoidsEnfantDe", this.pertepoidsEnfantDe.toString());
+      this.formData.append("pertepoidsEnfantTr", this.pertepoidsEnfantTr.toString());
+      this.formData.append("pertepoidsEnfantQu", this.pertepoidsEnfantQu.toString());
+      // Ganglions
+      this.formData.append("ganglionAdherent", this.ganglionAdherent.toString());
+      this.formData.append("ganglionConjoint", this.ganglionConjoint.toString());
+      this.formData.append("ganglionEnfantUn", this.ganglionEnfantUn.toString());
+      this.formData.append("ganglionEnfantDe", this.ganglionEnfantDe.toString());
+      this.formData.append("ganglionEnfantTr", this.ganglionEnfantTr.toString());
+      this.formData.append("ganglionEnfantQu", this.ganglionEnfantQu.toString());
+      // Coeur
+      this.formData.append("coeurAdherent", this.coeurAdherent.toString());
+      this.formData.append("coeurConjoint", this.coeurConjoint.toString());
+      this.formData.append("coeurEnfantUn", this.coeurEnfantUn.toString());
+      this.formData.append("coeurEnfantDe", this.coeurEnfantDe.toString());
+      this.formData.append("coeurEnfantTr", this.coeurEnfantTr.toString());
+      this.formData.append("coeurEnfantQu", this.coeurEnfantQu.toString());
+      // Appareil digestif, foie
+      this.formData.append("foieAdherent", this.foieAdherent.toString());
+      this.formData.append("foieConjoint", this.foieConjoint.toString());
+      this.formData.append("foieEnfantUn", this.foieEnfantUn.toString());
+      this.formData.append("foieEnfantDe", this.foieEnfantDe.toString());
+      this.formData.append("foieEnfantTr", this.foieEnfantTr.toString());
+      this.formData.append("foieEnfantQu", this.foieEnfantQu.toString());
+      // glande
+      this.formData.append("glandeAdherent", this.glandeAdherent.toString());
+      this.formData.append("glandeConjoint", this.glandeConjoint.toString());
+      this.formData.append("glandeEnfantUn", this.glandeEnfantUn.toString());
+      this.formData.append("glandeEnfantDe", this.glandeEnfantDe.toString());
+      this.formData.append("glandeEnfantTr", this.glandeEnfantTr.toString());
+      this.formData.append("glandeEnfantQu", this.glandeEnfantQu.toString());
+      // anemie
+      this.formData.append("anemieAdherent", this.anemieAdherent.toString());
+      this.formData.append("anemieConjoint", this.anemieConjoint.toString());
+      this.formData.append("anemieEnfantUn", this.anemieEnfantUn.toString());
+      this.formData.append("anemieEnfantDe", this.anemieEnfantDe.toString());
+      this.formData.append("anemieEnfantTr", this.anemieEnfantTr.toString());
+      this.formData.append("anemieEnfantQu", this.anemieEnfantQu.toString());
+      // colique
+      this.formData.append("coliqueAdherent", this.coliqueAdherent.toString());
+      this.formData.append("coliqueConjoint", this.coliqueConjoint.toString());
+      this.formData.append("coliqueEnfantUn", this.coliqueEnfantUn.toString());
+      this.formData.append("coliqueEnfantDe", this.coliqueEnfantDe.toString());
+      this.formData.append("coliqueEnfantTr", this.coliqueEnfantTr.toString());
+      this.formData.append("coliqueEnfantQu", this.coliqueEnfantQu.toString());
+      // colique
+      this.formData.append("prostateAdherent", this.prostateAdherent.toString());
+      this.formData.append("prostateConjoint", this.prostateConjoint.toString());
+      this.formData.append("prostateEnfantUn", this.prostateEnfantUn.toString());
+      this.formData.append("prostateEnfantDe", this.prostateEnfantDe.toString());
+      this.formData.append("prostateEnfantTr", this.prostateEnfantTr.toString());
+      this.formData.append("prostateEnfantQu", this.prostateEnfantQu.toString());
+      // enceinte
+      this.formData.append("enceinteAdherent", this.enceinteAdherent.toString());
+      this.formData.append("enceinteConjoint", this.enceinteConjoint.toString());
+      this.formData.append("enceinteEnfantUn", this.enceinteEnfantUn.toString());
+      this.formData.append("enceinteEnfantDe", this.enceinteEnfantDe.toString());
+      this.formData.append("enceinteEnfantTr", this.enceinteEnfantTr.toString());
+      this.formData.append("enceinteEnfantQu", this.enceinteEnfantQu.toString());
+      // arthrose
+      this.formData.append("arthroseAdherent", this.arthroseAdherent.toString());
+      this.formData.append("arthroseConjoint", this.arthroseConjoint.toString());
+      this.formData.append("arthroseEnfantUn", this.arthroseEnfantUn.toString());
+      this.formData.append("arthroseEnfantDe", this.arthroseEnfantDe.toString());
+      this.formData.append("arthroseEnfantTr", this.arthroseEnfantTr.toString());
+      this.formData.append("arthroseEnfantQu", this.arthroseEnfantQu.toString());
+      // yeux                                  
+      this.formData.append("yeuxAdherent", this.yeuxAdherent.toString());
+      this.formData.append("yeuxConjoint", this.yeuxConjoint.toString());
+      this.formData.append("yeuxEnfantUn", this.yeuxEnfantUn.toString());
+      this.formData.append("yeuxEnfantDe", this.yeuxEnfantDe.toString());
+      this.formData.append("yeuxEnfantTr", this.yeuxEnfantTr.toString());
+      this.formData.append("yeuxEnfantQu", this.yeuxEnfantQu.toString());
+      // lunettes                             
+      this.formData.append("lunettesAdherent", this.lunettesAdherent.toString());
+      this.formData.append("lunettesConjoint", this.lunettesConjoint.toString());
+      this.formData.append("lunettesEnfantUn", this.lunettesEnfantUn.toString());
+      this.formData.append("lunettesEnfantDe", this.lunettesEnfantDe.toString());
+      this.formData.append("lunettesEnfantTr", this.lunettesEnfantTr.toString());
+      this.formData.append("lunettesEnfantQu", this.lunettesEnfantQu.toString());
+      // hospitalise                          
+      this.formData.append("hospitaliseAdherent", this.hospitaliseAdherent.toString());
+      this.formData.append("hospitaliseConjoint", this.hospitaliseConjoint.toString());
+      this.formData.append("hospitaliseEnfantUn", this.hospitaliseEnfantUn.toString());
+      this.formData.append("hospitaliseEnfantDe", this.hospitaliseEnfantDe.toString());
+      this.formData.append("hospitaliseEnfantTr", this.hospitaliseEnfantTr.toString());
+      this.formData.append("hospitaliseEnfantQu", this.hospitaliseEnfantQu.toString());
+      // traitement                           
+      this.formData.append("traitementAdherent", this.traitementAdherent.toString());
+      this.formData.append("traitementConjoint", this.traitementConjoint.toString());
+      this.formData.append("traitementEnfantUn", this.traitementEnfantUn.toString());
+      this.formData.append("traitementEnfantDe", this.traitementEnfantDe.toString());
+      this.formData.append("traitementEnfantTr", this.traitementEnfantTr.toString());
+      this.formData.append("traitementEnfantQu", this.traitementEnfantQu.toString());
+
+      // Data PERSONAL :
+      this.formData.append("iddevissante", this.id_devissante.toString());
+      this.formData.append("idCliendDone", this.idCliendDone);
+      this.formData.append("idclient", this.idClient);
+      //
+      this.formData.append("origine", this.clientRest.origine.toString());
+      this.formData.append("observation", this.clientRest.observation.toString());
+      this.formData.append("police", this.setPolice);
+
+      // Call :
+      this.meswebservices.sendDevisSante(this.formData).toPromise()
+        .then(
+          resultat => {
+            if (resultat.code == "ok") {
+              location.reload();
+            }
+          },
+          (error) => {
+            this.warnmessage("Impossible d'enregistrer le DEVIS SANTE !");
+          }
+        );
+    }
+    else {
+      this.warnmessage("Le client est mineur pour souscrire à ce produit d'assurance !");
+    }
+
+  }
+
+
 
   // Save the DEVIS MRH :
   enregDevisMrh() {
@@ -1226,7 +1779,7 @@ export class DevisComponent implements OnInit {
             }
           },
           (error) => {
-            this.warnmessage("Impossible de d'enregistrer le RAPPORT !");
+            this.warnmessage("Impossible d'enregistrer le DEVIS MRH !");
           }
         );
     }
@@ -1321,7 +1874,7 @@ export class DevisComponent implements OnInit {
             }
           },
           (error) => {
-            this.warnmessage("Impossible de d'enregistrer le RAPPORT !");
+            this.warnmessage("Impossible d'enregistrer le DEVIS AUTO !");
           }
         );
     }
@@ -1409,7 +1962,7 @@ export class DevisComponent implements OnInit {
             }
           },
           (error) => {
-            this.warnmessage("Impossible de d'enregistrer le RAPPORT !");
+            this.warnmessage("Impossible d'enregistrer le DEBIS ACCIDENT !");
           }
         );
     }
@@ -1493,7 +2046,7 @@ export class DevisComponent implements OnInit {
             }
           },
           (error) => {
-            this.warnmessage("Impossible de d'enregistrer le RAPPORT !");
+            this.warnmessage("Impossible d'enregistrer le DEVIS VOYAGE !");
           }
         );
     }
@@ -1558,6 +2111,24 @@ export class DevisComponent implements OnInit {
 
 
 
+  // Get DATA from SANTE devis :
+  getDevisSanteByTrader() {
+    this.meswebservices.getDevisSanteByTrader().toPromise()
+      .then(
+        resultat => {
+          this.listeDevisSante = resultat;
+          this.getDevisSante = true;
+          this.initTableSante();
+        },
+        (error) => {
+          this.getDevisSante = true;
+          this.initTableSante();
+        }
+      );
+  }
+
+
+
   // Get DATA from AUTO devis :
   getDevisAccidentByTrader() {
     this.meswebservices.getDevisAccidentByTrader().toPromise()
@@ -1586,6 +2157,52 @@ export class DevisComponent implements OnInit {
         (error) => {
         }
       );
+  }
+
+
+  // Display MORE DATA :
+  infonsia(idsan: string){
+    this.meswebservices.getInfoSanteByIdsan(idsan).toPromise()
+      .then(
+        resultat => {
+          this.numpolice = resultat.numpolice;
+          this.numclient = resultat.numclient;
+          this.nmapporteur = resultat.apporteur;
+          this.libcode = resultat.code;
+          this.libinspection = resultat.inspection;
+          this.formulesante = resultat.formule;
+          this.idsante = resultat.idsan;
+        },
+        (error) => {
+        }
+      )
+    $('#infonsia').modal();
+  }
+
+
+  // Save INFONSIA :
+  enregInfoSante(){
+    var formInfoData = new FormData();
+    formInfoData.append("numpolice", this.numpolice);
+    formInfoData.append("numclient", this.numclient);
+    formInfoData.append("nmapporteur", this.nmapporteur);
+    formInfoData.append("libcode", this.libcode);
+    formInfoData.append("libinspection", this.libinspection);
+    formInfoData.append("formulesante", this.formulesante.toString());
+    //
+    formInfoData.append("idsan", this.idsante.toString());
+    // sendInfoSante 
+    this.meswebservices.sendInfoSante(formInfoData).toPromise()
+    .then(
+      resultat => {
+        if (resultat.code == "ok") {
+          location.reload();
+        }
+      },
+      (error) => {
+        this.warnmessage("Impossible d'enregistrer les informations SANTE supplémentaires  !");
+      }
+    );
   }
 
 
@@ -1741,7 +2358,7 @@ export class DevisComponent implements OnInit {
           }
         },
         (error) => {
-          this.warnmessage("Impossible de d'enregistrer le RAPPORT !");
+          this.warnmessage("Impossible d'enregistrer le PAIEMENT !");
         }
       );
   }
@@ -1810,7 +2427,7 @@ export class DevisComponent implements OnInit {
             }
           },
           (error) => {
-            this.warnmessage("Impossible de d'enregistrer le RAPPORT !");
+            this.warnmessage("Impossible d'enregistrer le PAIEMENT par VIREMENT !");
           }
         );
     }
@@ -2058,7 +2675,249 @@ export class DevisComponent implements OnInit {
 
 
 
-  // Get DATA from ACCIDENT devis :
+  // Get DATA from SANTE devis :
+  getDevisSanteByIdsan(idsan: string) {
+    this.meswebservices.getDevisSanteByIdsan(idsan).toPromise()
+      .then(
+        resultat => {
+          // Assure :
+          this.clientRest.nom = resultat.nomAssure;
+          this.clientRest.prenom = resultat.prenomAssure;
+          this.clientRest.contact = resultat.contactAssure;
+          this.clientRest.email = resultat.emailAssure;
+          this.clientRest.civilite = resultat.civiliteAssure;
+          this.clientRest.activite = resultat.activiteAssure;
+          this.typeclient = resultat.typeduclientAssure;
+          this.getNaissanceSante = new Date(resultat.naissanceAssure.toString());
+          // Info SANTE :
+          this.tensionarterielle = resultat.tensionAssure;
+          this.lieunaissance = resultat.lieunaissanceAssure;
+          this.quartierresidence = resultat.residenceAssure;
+          this.adressepostale = resultat.adresseAssure;
+          this.taille = resultat.tailleAssure;
+          this.poids = resultat.poidsAssure;
+          this.groupesanguin = resultat.groupesanguinAssure;
+          // Questionnaire MEDICAL :
+          this.maladieAdherent = resultat.maladieAdherent;
+          this.pertepoidsAdherent = resultat.pertepoidsAdherent;
+          this.ganglionAdherent = resultat.ganglionAdherent;
+          this.coeurAdherent = resultat.coeurAdherent;
+          this.foieAdherent = resultat.foieAdherent;
+          this.glandeAdherent = resultat.glandeAdherent;
+          this.anemieAdherent = resultat.anemieAdherent;
+          this.coliqueAdherent = resultat.coliqueAdherent;
+          this.prostateAdherent = resultat.prostateAdherent;
+          this.enceinteAdherent = resultat.enceinteAdherent;
+          this.arthroseAdherent = resultat.arthroseAdherent;
+          this.yeuxAdherent = resultat.yeuxAdherent;
+          this.lunettesAdherent = resultat.lunettesAdherent;
+          this.hospitaliseAdherent = resultat.hospitaliseAdherent;
+          this.traitementAdherent = resultat.traitementAdherent;
+
+
+          // Conjoint :
+          this.nomconjoint = resultat.nomConjoint;
+          this.prenomconjoint = resultat.prenomConjoint;
+          this.contactconjoint = resultat.contactConjoint;
+          this.civiliteconjoint = resultat.civiliteConjoint;
+          this.getNaissanceSanteConjoint = new Date(resultat.naissanceConjoint.toString());
+          // Info SANTE :
+          this.tensionarterielleconjoint = resultat.tensionConjoint;
+          this.lieunaissanceconjoint = resultat.lieunaissanceConjoint;
+          this.quartierresidenceconjoint = resultat.residenceConjoint;
+          this.adressepostaleconjoint = resultat.adresseConjoint;
+          this.tailleconjoint = resultat.tailleConjoint;
+          this.poidsconjoint = resultat.poidsConjoint;
+          this.groupesanguinconjoint = resultat.groupesanguinConjoint;
+          // Questionnaire MEDICAL :
+          this.maladieConjoint = resultat.maladieConjoint;
+          this.pertepoidsConjoint = resultat.pertepoidsConjoint;
+          this.ganglionConjoint = resultat.ganglionConjoint;
+          this.coeurConjoint = resultat.coeurConjoint;
+          this.foieConjoint = resultat.foieConjoint;
+          this.glandeConjoint = resultat.glandeConjoint;
+          this.anemieConjoint = resultat.anemieConjoint;
+          this.coliqueConjoint = resultat.coliqueConjoint;
+          this.prostateConjoint = resultat.prostateConjoint;
+          this.enceinteConjoint = resultat.enceinteConjoint;
+          this.arthroseConjoint = resultat.arthroseConjoint;
+          this.yeuxConjoint = resultat.yeuxConjoint;
+          this.lunettesConjoint = resultat.lunettesConjoint;
+          this.hospitaliseConjoint = resultat.hospitaliseConjoint;
+          this.traitementConjoint = resultat.traitementConjoint;
+
+
+          // 1er ENFANT :
+          this.nomEnfantUn = resultat.nomEnfantUn;
+          this.prenomEnfantUn = resultat.prenomEnfantUn;
+          this.contactEnfantUn = resultat.contactEnfantUn;
+          this.sexeEnfantUn = resultat.sexeEnfantUn;
+          this.emailEnfantUn = resultat.emailEnfantUn;
+          this.getNaissanceSanteEnfantUn = new Date(resultat.naissanceEnfantUn.toString());
+          // Info SANTE :
+          this.tensionarterielleEnfantUn = resultat.tensionEnfantUn;
+          this.lieunaissanceEnfantUn = resultat.lieunaissanceEnfantUn;
+          this.villeEnfantUn = resultat.residenceEnfantUn;
+          this.tailleEnfantUn = resultat.tailleEnfantUn;
+          this.poidsEnfantUn = resultat.poidsEnfantUn;
+          this.groupesanguinEnfantUn = resultat.groupesanguinEnfantUn;
+          // Questionnaire MEDICAL :
+          this.maladieEnfantUn = resultat.maladieEnfantUn;
+          this.pertepoidsEnfantUn = resultat.pertepoidsEnfantUn;
+          this.ganglionEnfantUn = resultat.ganglionEnfantUn;
+          this.coeurEnfantUn = resultat.coeurEnfantUn;
+          this.foieEnfantUn = resultat.foieEnfantUn;
+          this.glandeEnfantUn = resultat.glandeEnfantUn;
+          this.anemieEnfantUn = resultat.anemieEnfantUn;
+          this.coliqueEnfantUn = resultat.coliqueEnfantUn;
+          this.prostateEnfantUn = resultat.prostateEnfantUn;
+          this.enceinteEnfantUn = resultat.enceinteEnfantUn;
+          this.arthroseEnfantUn = resultat.arthroseEnfantUn;
+          this.yeuxEnfantUn = resultat.yeuxEnfantUn;
+          this.lunettesEnfantUn = resultat.lunettesEnfantUn;
+          this.hospitaliseEnfantUn = resultat.hospitaliseEnfantUn;
+          this.traitementEnfantUn = resultat.traitementEnfantUn;
+
+
+          // 2eme ENFANT :
+          this.nomEnfantDe = resultat.nomEnfantDe;
+          this.prenomEnfantDe = resultat.prenomEnfantDe;
+          this.contactEnfantDe = resultat.contactEnfantDe;
+          this.sexeEnfantDe = resultat.sexeEnfantDe;
+          this.emailEnfantDe = resultat.emailEnfantDe;
+          this.getNaissanceSanteEnfantDe = new Date(resultat.naissanceEnfantDe.toString());
+          // Info SANTE :
+          this.tensionarterielleEnfantDe = resultat.tensionEnfantDe;
+          this.lieunaissanceEnfantDe = resultat.lieunaissanceEnfantDe;
+          this.villeEnfantDe = resultat.residenceEnfantDe;
+          this.tailleEnfantDe = resultat.tailleEnfantDe;
+          this.poidsEnfantDe = resultat.poidsEnfantDe;
+          this.groupesanguinEnfantDe = resultat.groupesanguinEnfantDe;
+          // Questionnaire MEDICAL :
+          this.maladieEnfantDe = resultat.maladieEnfantDe;
+          this.pertepoidsEnfantDe = resultat.pertepoidsEnfantDe;
+          this.ganglionEnfantDe = resultat.ganglionEnfantDe;
+          this.coeurEnfantDe = resultat.coeurEnfantDe;
+          this.foieEnfantDe = resultat.foieEnfantDe;
+          this.glandeEnfantDe = resultat.glandeEnfantDe;
+          this.anemieEnfantDe = resultat.anemieEnfantDe;
+          this.coliqueEnfantDe = resultat.coliqueEnfantDe;
+          this.prostateEnfantDe = resultat.prostateEnfantDe;
+          this.enceinteEnfantDe = resultat.enceinteEnfantDe;
+          this.arthroseEnfantDe = resultat.arthroseEnfantDe;
+          this.yeuxEnfantDe = resultat.yeuxEnfantDe;
+          this.lunettesEnfantDe = resultat.lunettesEnfantDe;
+          this.hospitaliseEnfantDe = resultat.hospitaliseEnfantDe;
+          this.traitementEnfantDe = resultat.traitementEnfantDe;
+
+
+          // 3eme ENFANT :
+          this.nomEnfantTr = resultat.nomEnfantTr;
+          this.prenomEnfantTr = resultat.prenomEnfantTr;
+          this.contactEnfantTr = resultat.contactEnfantTr;
+          this.sexeEnfantTr = resultat.sexeEnfantTr;
+          this.emailEnfantTr = resultat.emailEnfantTr;
+          this.getNaissanceSanteEnfantTr = new Date(resultat.naissanceEnfantTr.toString());
+          // Info SANTE :
+          this.tensionarterielleEnfantTr = resultat.tensionEnfantTr;
+          this.lieunaissanceEnfantTr = resultat.lieunaissanceEnfantTr;
+          this.villeEnfantTr = resultat.residenceEnfantTr;
+          this.tailleEnfantTr = resultat.tailleEnfantTr;
+          this.poidsEnfantTr = resultat.poidsEnfantTr;
+          this.groupesanguinEnfantTr = resultat.groupesanguinEnfantTr;
+          // Questionnaire MEDICAL :
+          this.maladieEnfantTr = resultat.maladieEnfantTr;
+          this.pertepoidsEnfantTr = resultat.pertepoidsEnfantTr;
+          this.ganglionEnfantTr = resultat.ganglionEnfantTr;
+          this.coeurEnfantTr = resultat.coeurEnfantTr;
+          this.foieEnfantTr = resultat.foieEnfantTr;
+          this.glandeEnfantTr = resultat.glandeEnfantTr;
+          this.anemieEnfantTr = resultat.anemieEnfantTr;
+          this.coliqueEnfantTr = resultat.coliqueEnfantTr;
+          this.prostateEnfantTr = resultat.prostateEnfantTr;
+          this.enceinteEnfantTr = resultat.enceinteEnfantTr;
+          this.arthroseEnfantTr = resultat.arthroseEnfantTr;
+          this.yeuxEnfantTr = resultat.yeuxEnfantTr;
+          this.lunettesEnfantTr = resultat.lunettesEnfantTr;
+          this.hospitaliseEnfantTr = resultat.hospitaliseEnfantTr;
+          this.traitementEnfantTr = resultat.traitementEnfantTr;
+
+          // 4eme ENFANT :
+          this.nomEnfantQu = resultat.nomEnfantQu;
+          this.prenomEnfantQu = resultat.prenomEnfantQu;
+          this.contactEnfantQu = resultat.contactEnfantQu;
+          this.sexeEnfantQu = resultat.sexeEnfantQu;
+          this.emailEnfantQu = resultat.emailEnfantQu;
+          this.getNaissanceSanteEnfantQu = new Date(resultat.naissanceEnfantQu.toString());
+          // Info SANTE :
+          this.tensionarterielleEnfantQu = resultat.tensionEnfantQu;
+          this.lieunaissanceEnfantQu = resultat.lieunaissanceEnfantQu;
+          this.villeEnfantQu = resultat.residenceEnfantQu;
+          this.tailleEnfantQu = resultat.tailleEnfantQu;
+          this.poidsEnfantQu = resultat.poidsEnfantQu;
+          this.groupesanguinEnfantQu = resultat.groupesanguinEnfantQu;
+          // Questionnaire MEDICAL :
+          this.maladieEnfantQu = resultat.maladieEnfantQu;
+          this.pertepoidsEnfantQu = resultat.pertepoidsEnfantQu;
+          this.ganglionEnfantQu = resultat.ganglionEnfantQu;
+          this.coeurEnfantQu = resultat.coeurEnfantQu;
+          this.foieEnfantQu = resultat.foieEnfantQu;
+          this.glandeEnfantQu = resultat.glandeEnfantQu;
+          this.anemieEnfantQu = resultat.anemieEnfantQu;
+          this.coliqueEnfantQu = resultat.coliqueEnfantQu;
+          this.prostateEnfantQu = resultat.prostateEnfantQu;
+          this.enceinteEnfantQu = resultat.enceinteEnfantQu;
+          this.arthroseEnfantQu = resultat.arthroseEnfantQu;
+          this.yeuxEnfantQu = resultat.yeuxEnfantQu;
+          this.lunettesEnfantQu = resultat.lunettesEnfantQu;
+          this.hospitaliseEnfantQu = resultat.hospitaliseEnfantQu;
+          this.traitementEnfantQu = resultat.traitementEnfantQu;
+          
+
+          this.id_devissante = resultat.idsan;
+          this.idCliendDone = resultat.idCliendDone.toString();
+          this.idClient = resultat.idClient.toString();
+
+          // Set up values for 'CUSTOMER DOP DOWN List':
+          this.setPolice = resultat.police.toString();
+          this.membresId = [];
+          this.selectedItems = [];
+          if( parseInt(this.idCliendDone) > 0){
+            // Set the drop down list values :
+            for (var i = 0; i < this.listeDesClients.length; i++) {
+              if (parseInt(this.idCliendDone) == this.listeDesClients[i].IdClient) {
+                this.membresId.push({ 
+                  item_id: this.listeDesClients[i].IdClient.toString(), 
+                  item_text: this.listeDesClients[i].RAISONSOCIALE.toString() 
+                });
+                break;
+              }
+            }
+            //
+            this.selectedItems = this.membresId;
+
+            // Process for 'POLICE':
+            if(this.setPolice.trim().length > 0){
+              this.getlespolicessantebyclient();
+            }
+          }          
+
+          //
+          this.clientRest.origine = resultat.origine;
+          this.clientRest.observation = resultat.observation;
+
+          $('#modalSante').modal();
+        },
+        (error) => {
+          //alert("Erreur SANTE getting");
+        }
+      );
+  }  
+
+
+
+
+  // Get DATA from MRH devis :
   getDevisMrhByIdacc(idmrh: string) {
     this.meswebservices.getDevisMrhByIdacc(idmrh).toPromise()
       .then(
@@ -2134,6 +2993,25 @@ export class DevisComponent implements OnInit {
   initTableAuto() {
     setTimeout(function () {
       $('#datatableAuto').DataTable({
+        "pagingType": "full_numbers",
+        "lengthMenu": [
+          [10, 25, 50, -1],
+          [10, 25, 50, "All"]
+        ],
+        responsive: true,
+        language: {
+          search: "_INPUT_",
+          searchPlaceholder: "Search records",
+        },
+        "order": [[4, "desc"]]
+      });
+    }, 500);
+  }
+
+
+  initTableSante() {
+    setTimeout(function () {
+      $('#datatableSante').DataTable({
         "pagingType": "full_numbers",
         "lengthMenu": [
           [10, 25, 50, -1],

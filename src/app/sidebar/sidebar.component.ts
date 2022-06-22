@@ -73,7 +73,7 @@ export const routesInspecteur: RouteInfo[] = [
         ]
     },
     {
-        path: '/gestion',
+        path: '/inspecteur',
         title: 'Operations',
         type: 'sub',
         icontype: 'shopping_cart',
@@ -103,7 +103,8 @@ export const routesDirecteurAdj: RouteInfo[] = [
         icontype: 'apps',
         collapse: 'directeuragj',
         children: [
-            { path: 'rapport', title: 'Rapports', ab: 'RS' },
+            { path: 'devis', title: 'Devis', ab: 'DS' },
+            { path: 'rapport', title: 'Rapports', ab: 'RT' },
             { path: 'rdv', title: 'Rdv', ab: 'RV' },
             { path: 'agenda', title: 'Agenda', ab: 'AG' },
             { path: 'reunion', title: 'Réunion', ab: 'RS' },

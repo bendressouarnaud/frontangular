@@ -75,6 +75,8 @@ import { ClientBeanComAuto } from "../mesbeans/clientbeancomauto";
 import { ClientBeanStatComAuto } from "../mesbeans/clientbeanstatcomauto";
 import { BeanPortfolioDevis } from "../mesbeans/beanportfoliodevis";
 import { Clientportefeuille } from "../mesbeans/clientportefeuille";
+import { Clientbeansante } from "../mesbeans/clientbeansante";
+import { Clientbeaninfosante } from "../mesbeans/clientbeaninfosante";
 
 @Injectable({
     providedIn: 'root'
@@ -84,9 +86,9 @@ import { Clientportefeuille } from "../mesbeans/clientportefeuille";
 export class MeswebservService {
 
     /* Attributes */
-    private webserviceUri: String = "http://localhost:8081/backend";
+    //private webserviceUri: String = "http://localhost:8081/backend";
     //private webserviceUri : String = "https://217.160.247.10/backend";
-    //private webserviceUri : String = "http://oceaneinter.com/backend";
+    private webserviceUri : String = "http://oceaneinter.com/backend";
     //private webserviceUri : String = "https://jcom.nsiaassurances.ci/backend";
     private mtoken = "";
 
@@ -984,6 +986,20 @@ export class MeswebservService {
 
 
 
+    // Delete a RDV :
+    getUserContact(idrdv: string): Observable<Reponse> {
+        // Now, set the parameters :
+        let mesParams = new HttpParams();
+        mesParams = mesParams.append('idrdv', idrdv); // 
+        return this.httpclient.get<Reponse>(this.webserviceUri.concat("/getUserContact"),
+            {
+                params: mesParams
+            });
+    }
+
+
+
+
 
     //
     getSpecificRdvFull(idrdv: string): Observable<RdvRetour> {
@@ -1629,6 +1645,20 @@ export class MeswebservService {
     }
 
 
+    // SEND DATA for DEVIS SANTE :
+    sendDevisSante(donnees : FormData): Observable<Quete> {
+        // 
+        return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendDevisSante"), donnees, {});
+    }
+
+
+    // SEND INFO for DEVISSANTE Table :
+    sendInfoSante(donnees : FormData): Observable<Quete> {
+        // 
+        return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendInfoSante"), donnees, {});
+    }
+
+
     // SEND DATA for DEVIS ACCIDENT :
     sendDevisAccident(donnees : FormData): Observable<Quete> {
         // 
@@ -1668,6 +1698,13 @@ export class MeswebservService {
     getDevisAutoByTrader(): Observable<BeanDonneDevis[]> {
         // -> DevisController
         return this.httpclient.get<BeanDonneDevis[]>(this.webserviceUri.concat("/getDevisAutoByTrader"), {});
+    }
+
+
+    // Pull back data for DEVIS SANTE  :
+    getDevisSanteByTrader(): Observable<BeanDonneDevis[]> {
+        // -> DevisController
+        return this.httpclient.get<BeanDonneDevis[]>(this.webserviceUri.concat("/getDevisSanteByTrader"), {});
     }
 
 
@@ -1727,6 +1764,33 @@ export class MeswebservService {
                 params: mesParams
             });
     }
+
+
+    // Pull back data for DEVIS SANTE  :
+    getDevisSanteByIdsan(idsan: string): Observable<Clientbeansante> {
+        // -> DevisController
+        // Now, set the parameters :
+        let mesParams = new HttpParams();
+        mesParams = mesParams.append('idsan', idsan); // 
+        return this.httpclient.get<Clientbeansante>(this.webserviceUri.concat("/getDevisSanteByIdsan"),
+            {
+                params: mesParams
+            });
+    }  
+    
+    
+
+    // Pull back data from DEVISSANTE  :
+    getInfoSanteByIdsan(idsan: string): Observable<Clientbeaninfosante> {
+        // -> DevisController
+        // Now, set the parameters :
+        let mesParams = new HttpParams();
+        mesParams = mesParams.append('idsan', idsan); // 
+        return this.httpclient.get<Clientbeaninfosante>(this.webserviceUri.concat("/getInfosSanteByIdsan"),
+            {
+                params: mesParams
+            });
+    }   
 
 
     // Pull back data for DEVIS VOYAGE  :

@@ -725,6 +725,27 @@ export class RdvComponent implements OnInit {
 
 
 
+  // Now, suppress :
+  displaystatistiques(idrdv: number) {
+    this.meswebservices.getUserContact(idrdv.toString()).toPromise().then(
+      resultat => {
+        //
+        if (resultat.profil == "ok") {
+          // Forward :
+          window.location.href = "#/responsable/userdetails/"+resultat.element;
+        }
+        else {
+          this.warnmessage("Impossible d'afficher les statistiques");
+        }
+      },
+      (error) => {
+        this.warnmessage("Impossible d'afficher les statistiques!");
+      }
+    );
+  }
+
+
+
   // Link to download file :
   downloadfiche(idrdv: number): void {
 

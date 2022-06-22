@@ -17,10 +17,11 @@ import { RdvComponent } from './rdv/rdv.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CollaborateurComponent } from './collaborateur/collaborateur.component';
 import { UserdetailsComponent } from './userdetails/userdetails.component';
+import { DevisComponent } from './devis/devis.component';
 
 
 @NgModule({
-  declarations: [AccueilComponent, RapportComponent, AgendaComponent, ReunionComponent, PerformanceComponent, RdvComponent, CollaborateurComponent, UserdetailsComponent],
+  declarations: [AccueilComponent, RapportComponent, AgendaComponent, ReunionComponent, PerformanceComponent, RdvComponent, CollaborateurComponent, UserdetailsComponent, DevisComponent],
   imports: [
     CommonModule,
     DirecteuragjRoutingModule,

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AccueilComponent } from './accueil/accueil.component';
 import { AgendaComponent } from './agenda/agenda.component';
 import { CollaborateurComponent } from './collaborateur/collaborateur.component';
+import { DevisComponent } from './devis/devis.component';
 import { PerformanceComponent } from './performance/performance.component';
 import { RapportComponent } from './rapport/rapport.component';
 import { RdvComponent } from './rdv/rdv.component';
@@ -29,7 +30,11 @@ const routes: Routes = [{
   component: RdvComponent
 },
 {path: 'collaborateur', component: CollaborateurComponent },
-{ path: 'userdetails/:contact', component: UserdetailsComponent }
+{ path: 'userdetails/:contact', component: UserdetailsComponent },
+{
+  path: 'devis',
+  component: DevisComponent
+}
 ];
 
 @NgModule({
