@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientBeanComAuto } from 'src/app/mesbeans/clientbeancomauto';
+import { ClientBeanComSante } from 'src/app/mesbeans/clientbeancomsante';
 import { StatsDevisUser } from 'src/app/mesbeans/statsdevisuser';
 import { MeswebservService } from 'src/app/messervices/meswebserv.service';
 
@@ -15,6 +16,7 @@ export class StatdevisequipeComponent implements OnInit {
 
   // Attributes :
   listeAutoClientBeanComAuto: ClientBeanComAuto[]; 
+  listeSanteClientBeanCom: ClientBeanComSante[]; 
   listeAutoClientBeanComAccident: ClientBeanComAuto[]; 
   listeAutoClientBeanComVoyage: ClientBeanComAuto[]; 
   listeAutoClientBeanComMrh: ClientBeanComAuto[]; 
@@ -22,6 +24,7 @@ export class StatdevisequipeComponent implements OnInit {
   getVoyageCommecial = false;
   getAccidentCommecial = false;
   getMrhCommecial = false;
+  getSanteCommecial = false;
   statsdevisuser = new StatsDevisUser();
   iddev = 0;
   nomClient = "";
@@ -36,11 +39,14 @@ export class StatdevisequipeComponent implements OnInit {
     this.statsdevisuser.accident = "0";
     this.statsdevisuser.mrh = "0";
     this.statsdevisuser.voyage = "0";
+    this.statsdevisuser.sante = "0";
+    this.statsdevisuser.total = "0";
 
     this.getCommercialHistoDevisAuto();
     this.getCommercialHistoDevisAccident();
     this.getCommercialHistoDevisVoyage();
     this.getCommercialHistoDevisMrh();
+    this.getCommercialHistoDevisSante();
     this.getStatsDevisEnCoursForManager();
   }
 
@@ -67,6 +73,20 @@ export class StatdevisequipeComponent implements OnInit {
           this.getAutoCommecial = true;
           // Refresh :
           this.initDevisAutoComm();
+        }
+      )
+  }
+
+
+  // Get DEVIS SANTE for 'Commercial' :
+  getCommercialHistoDevisSante() {
+    this.meswebservices.getCommercialHistoDevisSante().toPromise()
+      .then(
+        resultat => {
+          this.listeSanteClientBeanCom = resultat;
+          this.getSanteCommecial = true;
+          // Refresh :
+          this.initDevisSanteComm();
         }
       )
   }
@@ -163,6 +183,28 @@ export class StatdevisequipeComponent implements OnInit {
       });
     }, 500);
   }
+
+
+
+  // init DEVIS Sante for 'Commercial'
+  initDevisSanteComm() {
+    setTimeout(function () {
+      $('#datatableSante').DataTable({
+        "pagingType": "full_numbers",
+        "lengthMenu": [
+          [10, 25, 50, -1],
+          [10, 25, 50, "All"]
+        ],
+        responsive: true,
+        language: {
+          search: "_INPUT_",
+          searchPlaceholder: "Search records",
+        },
+        "order": [[4, "desc"]]
+      });
+    }, 500);
+  }
+
 
 
   // init DEVIS ACCIDENT for 'Commercial'

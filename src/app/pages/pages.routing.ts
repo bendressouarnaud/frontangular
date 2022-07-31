@@ -6,6 +6,7 @@ import { LockComponent } from './lock/lock.component';
 import { LoginComponent } from './login/login.component';
 import { PasswordchangeComponent } from './passwordchange/passwordchange.component';
 import { GetmailComponent } from './getmail/getmail.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 
 export const PagesRoutes: Routes = [
 
@@ -29,6 +30,11 @@ export const PagesRoutes: Routes = [
         }, {
             path: 'email',
             component: GetmailComponent
-        }]
+        }
+        , {
+            path: 'rstpwd',
+            component: ResetpasswordComponent
+        }
+    ]
     }
 ];

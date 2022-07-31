@@ -6,6 +6,7 @@ import { Utilisateur } from 'src/app/mesbeans/utilisateur';
 import { MeswebservService } from 'src/app/messervices/meswebserv.service';
 import { Location } from '@angular/common';
 import { PerfRest } from 'src/app/mesbeans/reponseperform';
+import { PerfRestModif } from 'src/app/mesbeans/perfrestmodif';
 
 declare const $: any;
 
@@ -18,7 +19,7 @@ export class PerformanceComponent implements OnInit {
 
   /* ATTRIBUTES  */
   listeCommerciaux: Utilisateur[];
-  listePerformTeam: PerfRest[];
+  listePerformTeam: PerfRestModif[];
   getTeamAdj = false;
   listeMois: Mois[];
   listeAnne: Annee[];
@@ -30,12 +31,12 @@ export class PerformanceComponent implements OnInit {
   listeMyPerformTeam: PerfRest[];
   getMyPerform = false;
   /* */
-  listePerformSuperviseur: PerfRest[];
+  listePerformSuperviseur: PerfRestModif[];
   getSuperviseur = false;
   getInspecteur = false;
-  listePerformInspecteur: PerfRest[];
+  listePerformInspecteur: PerfRestModif[];
   /**** */
-  listePerformResponsable: PerfRest[];
+  listePerformResponsable: PerfRestModif[];
   getResponsable = false;
   /**** */
   userId = 0;

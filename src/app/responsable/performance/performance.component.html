@@ -221,22 +221,29 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>Nom</th>
-                                                                <th>Type</th>
-                                                                <th>Ann&eacute;e</th>
-                                                                <th>Mois</th>
-                                                                <th>Objectif</th>
-                                                                <th>R&eacute;alis&eacute;</th>
+                                                                <th class="text-center">Type</th>
+                                                                <th class="text-center">Ann&eacute;e</th>
+                                                                <th class="text-center">Mois</th>
+                                                                <th class="text-center">Objectif</th>
+                                                                <th class="text-center">R&eacute;alis&eacute;</th>
                                                                 <th class="disabled-sorting text-right">Actions</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <tr *ngFor="let donnee of listePerformTeam">
-                                                                <td>{{ donnee.employe }}</td>
-                                                                <td>{{ donnee.libperf }}</td>
-                                                                <td>{{ donnee.an }}</td>
-                                                                <td>{{ donnee.libmois }}</td>
-                                                                <td>{{ donnee.valeur }}</td>
-                                                                <td>{{ donnee.realise }}</td>
+                                                                <td style="font-weight: bold;">{{ donnee.employe }}</td>
+                                                                <td *ngIf="donnee.libperf=='Performance mensuelle'" class="text-center" style="font-weight: bold; background-image: linear-gradient(#F1F9FA, 50%, #cfc37f);">
+                                                                    {{ donnee.libperf }}</td>
+                                                                <td *ngIf="donnee.libperf=='Performance annuelle'" class="text-center" style="font-weight: bold; background-image: linear-gradient(#F1F9FA, 50%, #7fcf92);">
+                                                                    {{ donnee.libperf }}</td>
+                                                                <td class="text-center">{{ donnee.an }}</td>
+                                                                <td class="text-center">{{ donnee.libmois }}</td>
+                                                                <td *ngIf="donnee.valeur==donnee.realise" class="text-center" style="font-weight: bold; background-image: linear-gradient(#F1F9FA, 50%, #c37356);">
+                                                                    {{ donnee.valeur }}</td>
+                                                                <td *ngIf="donnee.valeur!=donnee.realise" class="text-center" style="font-weight: bold; ">
+                                                                    {{ donnee.valeur }}</td>
+                                                                <td class="text-center" 
+                                                                style="font-weight: bold; background-image: linear-gradient(#F1F9FA, 50%, #7f9dcf);">{{ donnee.realise }}</td>
                                                                 <td class="text-right">
                                                                     <a title="Consulter les donn&eacute;es de R&eacute;union"
                                                                         (click)="affichePerformance( donnee.idper )"

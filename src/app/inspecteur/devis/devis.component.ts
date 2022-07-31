@@ -2170,7 +2170,7 @@ export class DevisComponent implements OnInit {
           this.nmapporteur = resultat.apporteur;
           this.libcode = resultat.code;
           this.libinspection = resultat.inspection;
-          this.formulesante = resultat.formule;
+          this.formulesante = resultat.formule != 0 ? resultat.formule : this.formulesante;
           this.idsante = resultat.idsan;
         },
         (error) => {

@@ -77,6 +77,9 @@ import { BeanPortfolioDevis } from "../mesbeans/beanportfoliodevis";
 import { Clientportefeuille } from "../mesbeans/clientportefeuille";
 import { Clientbeansante } from "../mesbeans/clientbeansante";
 import { Clientbeaninfosante } from "../mesbeans/clientbeaninfosante";
+import { QueteResetPwd } from "../mesbeans/queteresetpwd";
+import { ClientBeanComSante } from "../mesbeans/clientbeancomsante";
+import { ClientBeanStatComSante } from "../mesbeans/clientbeanstatcomsante";
 
 @Injectable({
     providedIn: 'root'
@@ -86,9 +89,9 @@ import { Clientbeaninfosante } from "../mesbeans/clientbeaninfosante";
 export class MeswebservService {
 
     /* Attributes */
-    //private webserviceUri: String = "http://localhost:8081/backend";
+    private webserviceUri: String = "http://localhost:8081/backend";
     //private webserviceUri : String = "https://217.160.247.10/backend";
-    private webserviceUri : String = "http://oceaneinter.com/backend";
+    //private webserviceUri : String = "http://oceaneinter.com/backend";
     //private webserviceUri : String = "https://jcom.nsiaassurances.ci/backend";
     private mtoken = "";
 
@@ -292,6 +295,13 @@ export class MeswebservService {
     }
 
 
+    // Changez son mot de passe :
+    getresetpassword(objet: QueteResetPwd): Observable<Reponse> {
+        // 
+        return this.httpclient.post<Reponse>(this.webserviceUri.concat("/getresetpassword"), objet, {});
+    }
+
+
     // Commerciaux LISTE liste
     getusersbyprofil(profil: string): Observable<ReponseUser[]> {
         // Now, set the parameters :
@@ -373,13 +383,13 @@ export class MeswebservService {
 
     // Liste des CLIENTS rattachés à un commercial  :
     getclientportfeuille(): Observable<Clientportefeuille[]> {
-        return this.httpclient.get<Clientportefeuille[]>(this.webserviceUri.concat("/getclientportfeuille"),  {});
+        return this.httpclient.get<Clientportefeuille[]>(this.webserviceUri.concat("/getclientportfeuille"), {});
     }
 
 
     // Liste des CLIENTS rattachés à un commercial  :
     getreseauxsociauxmycustomers(): Observable<Clientportefeuille[]> {
-        return this.httpclient.get<Clientportefeuille[]>(this.webserviceUri.concat("/getclientreseauxsociauxportfeuille"),  {});
+        return this.httpclient.get<Clientportefeuille[]>(this.webserviceUri.concat("/getclientreseauxsociauxportfeuille"), {});
     }
 
 
@@ -1341,11 +1351,11 @@ export class MeswebservService {
 
 
     //
-    getperformancemanagers(profil: string): Observable<PerfRest[]> {
+    getperformancemanagers(profil: string): Observable<PerfRestModif[]> {
         // Now, set the parameters :
         let mesParams = new HttpParams();
         mesParams = mesParams.append('profil', profil); // 
-        return this.httpclient.get<PerfRest[]>(this.webserviceUri.concat("/getperformancemanagers"),
+        return this.httpclient.get<PerfRestModif[]>(this.webserviceUri.concat("/getperformancemanagers"),
             {
                 params: mesParams
             });
@@ -1639,54 +1649,54 @@ export class MeswebservService {
 
 
     // SEND DATA for DEVIS AUTO :
-    sendDevisAuto(donnees : FormData): Observable<Quete> {
+    sendDevisAuto(donnees: FormData): Observable<Quete> {
         // 
         return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendDevisAuto"), donnees, {});
     }
 
 
     // SEND DATA for DEVIS SANTE :
-    sendDevisSante(donnees : FormData): Observable<Quete> {
+    sendDevisSante(donnees: FormData): Observable<Quete> {
         // 
         return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendDevisSante"), donnees, {});
     }
 
 
     // SEND INFO for DEVISSANTE Table :
-    sendInfoSante(donnees : FormData): Observable<Quete> {
+    sendInfoSante(donnees: FormData): Observable<Quete> {
         // 
         return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendInfoSante"), donnees, {});
     }
 
 
     // SEND DATA for DEVIS ACCIDENT :
-    sendDevisAccident(donnees : FormData): Observable<Quete> {
+    sendDevisAccident(donnees: FormData): Observable<Quete> {
         // 
         return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendDevisAccident"), donnees, {});
     }
 
     // SEND DATA for DEVIS VOYAGE :
-    sendDevisVoyage(donnees : FormData): Observable<Quete> {
+    sendDevisVoyage(donnees: FormData): Observable<Quete> {
         // 
         return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendDevisVoyage"), donnees, {});
     }
 
     // SEND DATA for DEVIS MRH :
-    sendDevisMrh(donnees : FormData): Observable<Quete> {
+    sendDevisMrh(donnees: FormData): Observable<Quete> {
         // 
         return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendDevisMrh"), donnees, {});
     }
 
 
     // SEND DATA for PAYMENT CHEQUE :
-    sendPaiementCheque(donnees : FormData): Observable<Quete> {
+    sendPaiementCheque(donnees: FormData): Observable<Quete> {
         // 
         return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendPaiementCheque"), donnees, {});
     }
 
 
     // SEND DATA for PAYMENT VIREMENT :
-    sendPaiementVirement(donnees : FormData): Observable<Quete> {
+    sendPaiementVirement(donnees: FormData): Observable<Quete> {
         // 
         return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendPaiementVirement"), donnees, {});
     }
@@ -1776,9 +1786,9 @@ export class MeswebservService {
             {
                 params: mesParams
             });
-    }  
-    
-    
+    }
+
+
 
     // Pull back data from DEVISSANTE  :
     getInfoSanteByIdsan(idsan: string): Observable<Clientbeaninfosante> {
@@ -1790,7 +1800,7 @@ export class MeswebservService {
             {
                 params: mesParams
             });
-    }   
+    }
 
 
     // Pull back data for DEVIS VOYAGE  :
@@ -1859,7 +1869,7 @@ export class MeswebservService {
 
 
     // SEND DATA for FORET :
-    sendforet(donnees : FormData): Observable<Quete> {
+    sendforet(donnees: FormData): Observable<Quete> {
         // 
         return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendforet"), donnees, {});
     }
@@ -1886,6 +1896,13 @@ export class MeswebservService {
     }
 
 
+    // Get DEVIS SANTE for COMMERCIAL related to SUPERVISEUR   :
+    getCommercialHistoDevisSante(): Observable<ClientBeanComSante[]> {
+        // DevisController :
+        return this.httpclient.get<ClientBeanComSante[]>(this.webserviceUri.concat("/getCommercialHistoDevisSante"), {});
+    }
+
+
     // Get DEVIS AUTO to be reviewed by TRESORIER   :
     getTresorierDevisAuto(): Observable<ClientBeanStatComAuto[]> {
         // DevisController :
@@ -1902,6 +1919,13 @@ export class MeswebservService {
     getCommercialStatsHistoDevisAuto(): Observable<ClientBeanStatComAuto[]> {
         // DevisController :
         return this.httpclient.get<ClientBeanStatComAuto[]>(this.webserviceUri.concat("/getCommercialStatsHistoDevisAuto"), {});
+    }
+
+
+    // Get DEVIS STATS SANTE for COMMERCIAL related to SUPERVISEUR   :
+    getCommercialStatsHistoDevisSante(): Observable<ClientBeanStatComSante[]> {
+        // DevisController :
+        return this.httpclient.get<ClientBeanStatComSante[]>(this.webserviceUri.concat("/getCommercialStatsHistoDevisSante"), {});
     }
 
 
@@ -1987,45 +2011,55 @@ export class MeswebservService {
 
 
     // Get PIE CHART for particular user
-    getStatsRdvRapportDevisForUser(contact : string): Observable<BeanPortfolioDevis[]> {
+    getStatsRdvRapportDevisForUser(contact: string): Observable<BeanPortfolioDevis[]> {
         // 
         var queteObjet = new Quete();
         queteObjet.code = contact;
         // 
-        return this.httpclient.post<BeanPortfolioDevis[]>(this.webserviceUri.concat("/getStatsRdvRapportDevisForUser"), 
-        queteObjet, {});
+        return this.httpclient.post<BeanPortfolioDevis[]>(this.webserviceUri.concat("/getStatsRdvRapportDevisForUser"),
+            queteObjet, {});
     }
 
 
-    
+
     // Get CHART based on User's RDV :
-    getChartRdvforUniqueUser(contact : string): Observable<DataGrapheCours[]> {
+    getChartRdvforUniqueUser(contact: string): Observable<DataGrapheCours[]> {
         // ApiCallController
         var queteObjet = new Quete();
         queteObjet.code = contact;
         // 
-        return this.httpclient.post<DataGrapheCours[]>(this.webserviceUri.concat("/getChartRdvforUniqueUser"), 
+        return this.httpclient.post<DataGrapheCours[]>(this.webserviceUri.concat("/getChartRdvforUniqueUser"),
+            queteObjet, {});
+    }
+
+    // Get CHART based on User's RDV & PERFORMANCE :
+    getObjectifMonthlyforUser(contact: string): Observable<DataGrapheCours[]> {
+        // ApiCallController
+        var queteObjet = new Quete();
+        queteObjet.code = contact;
+        // 
+        return this.httpclient.post<DataGrapheCours[]>(this.webserviceUri.concat("/getObjectifMonthlyforUser"),
             queteObjet, {});
     }
 
     // Get CHART based on User's RAPPORT :
-    getChartRapportforUniqueUser(contact : string): Observable<DataGrapheCours[]> {
+    getChartRapportforUniqueUser(contact: string): Observable<DataGrapheCours[]> {
         // ApiCallController
         var queteObjet = new Quete();
         queteObjet.code = contact;
         // 
-        return this.httpclient.post<DataGrapheCours[]>(this.webserviceUri.concat("/getChartRapportforUniqueUser"), 
+        return this.httpclient.post<DataGrapheCours[]>(this.webserviceUri.concat("/getChartRapportforUniqueUser"),
             queteObjet, {});
     }
 
 
     // Get CHART based on User's DEVIS :
-    getChartDevisforUniqueUser(contact : string): Observable<DataGrapheCours[]> {
+    getChartDevisforUniqueUser(contact: string): Observable<DataGrapheCours[]> {
         // ApiCallController
         var queteObjet = new Quete();
         queteObjet.code = contact;
         // 
-        return this.httpclient.post<DataGrapheCours[]>(this.webserviceUri.concat("/getChartDevisforUniqueUser"), 
+        return this.httpclient.post<DataGrapheCours[]>(this.webserviceUri.concat("/getChartDevisforUniqueUser"),
             queteObjet, {});
     }
 

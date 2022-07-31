@@ -7,6 +7,7 @@ import { Chart } from 'node_modules/chart.js';
 import ChartDataLabels from 'node_modules/chartjs-plugin-datalabels';
 import { DataGrapheCours } from 'src/app/mesbeans/dataGrapheCours';
 import { DonneTampon } from 'src/app/mesbeans/donnetampon';
+import { ClientBeanStatComSante } from 'src/app/mesbeans/clientbeanstatcomsante';
 
 declare const $: any;
 
@@ -19,6 +20,7 @@ export class StatdevisattenteComponent implements OnInit {
 
   // Attribute :   
   listeDevisAuto: ClientBeanStatComAuto[];
+  listeDevisSante: ClientBeanStatComSante[];
   listeDevisAccident: ClientBeanStatComAuto[];
   listeDevisVoyage: ClientBeanStatComAuto[];
   listeDevisMrh: ClientBeanStatComAuto[];
@@ -26,6 +28,7 @@ export class StatdevisattenteComponent implements OnInit {
   getDevisAccident = false;
   getDevisVoyage = false;
   getDevisMrh = false;
+  getDevisSante = false;
   statsdevisuser = new StatsDevisUser();
 
 
@@ -38,6 +41,8 @@ export class StatdevisattenteComponent implements OnInit {
     this.statsdevisuser.accident = "0";
     this.statsdevisuser.voyage = "0";
     this.statsdevisuser.mrh = "0";
+    this.statsdevisuser.sante = "0";
+    this.statsdevisuser.total = "0";
 
     //
     this.getStatsFullDevisForManager();
@@ -45,6 +50,7 @@ export class StatdevisattenteComponent implements OnInit {
     this.getDevisVoyageByTrader();
     this.getDevisAccidentByTrader();
     this.getDevisMrhByTrader();
+    this.getDevisSanteByTrader();
     this.getTeamDevisStatbyManager();
     this.getStatsDevisPieChartForManager();
   }
@@ -77,6 +83,25 @@ export class StatdevisattenteComponent implements OnInit {
         (error) => {
           this.getDevisAuto = true;
           this.initTableAuto();
+        }
+      );
+  }
+
+
+
+  // Get DATA from SANTE devis :
+  getDevisSanteByTrader() {
+    this.meswebservices.getCommercialStatsHistoDevisSante().toPromise()
+      .then(
+        resultat => {
+          this.listeDevisSante = resultat;
+          this.getDevisSante = true;
+          this.initTableSante();
+          //this.separateurMillierOnTable();
+        },
+        (error) => {
+          this.getDevisSante = true;
+          this.initTableSante();
         }
       );
   }
@@ -135,6 +160,29 @@ export class StatdevisattenteComponent implements OnInit {
         }
       );
   }
+
+
+
+
+  initTableSante() {
+    setTimeout(function () {
+      $('#datatableSante').DataTable({
+        "pagingType": "full_numbers",
+        "lengthMenu": [
+          [10, 25, 50, -1],
+          [10, 25, 50, "All"]
+        ],
+        responsive: true,
+        language: {
+          search: "_INPUT_",
+          searchPlaceholder: "Search records",
+        },
+        "order": [[4, "desc"]]
+      });
+    }, 500);
+  }  
+
+
 
 
 
@@ -318,7 +366,7 @@ export class StatdevisattenteComponent implements OnInit {
                 borderColor: tabColueur[cptColor],
                 data: tabDataset[j].somme,
                 borderWidth: 2,
-                fill: false
+                fill: true
               });
               cptColor++;
           }

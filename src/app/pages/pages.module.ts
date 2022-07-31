@@ -13,6 +13,7 @@ import { LockComponent } from './lock/lock.component';
 import { LoginComponent } from './login/login.component';
 import { PasswordchangeComponent } from './passwordchange/passwordchange.component';
 import { GetmailComponent } from './getmail/getmail.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { GetmailComponent } from './getmail/getmail.component';
     PricingComponent,
     LockComponent,
     PasswordchangeComponent,
-    GetmailComponent
+    GetmailComponent,
+    ResetpasswordComponent
   ]
 })
 
