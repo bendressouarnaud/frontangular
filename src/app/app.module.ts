@@ -59,6 +59,9 @@ import { HttpConfigInterceptor } from './messervices/intercepteur';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { TresorierModule } from './tresorier/tresorier.module';
 
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive'; // this includes the core NgIdleModule but includes keepalive providers for easy wireup
+import { MomentModule } from 'angular2-moment'; // optional, provides moment-style pipes for date formatting
+
 @NgModule({
   exports: [
     MatAutocompleteModule,
@@ -110,7 +113,9 @@ export class MaterialModule {}
         SidebarModule,
         NavbarModule,
         FooterModule,
-        FixedpluginModule
+        FixedpluginModule,
+        NgIdleKeepaliveModule.forRoot(),
+        MomentModule,
     ],
     declarations: [
         AppComponent,

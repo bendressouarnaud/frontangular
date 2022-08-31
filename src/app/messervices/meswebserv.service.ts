@@ -89,10 +89,10 @@ import { ClientBeanStatComSante } from "../mesbeans/clientbeanstatcomsante";
 export class MeswebservService {
 
     /* Attributes */
-    private webserviceUri: String = "http://localhost:8081/backend";
+    //private webserviceUri: String = "http://localhost:8081/backend";
     //private webserviceUri : String = "https://217.160.247.10/backend";
     //private webserviceUri : String = "http://oceaneinter.com/backend";
-    //private webserviceUri : String = "https://jcom.nsiaassurances.ci/backend";
+    private webserviceUri : String = "https://jcom.nsiaassurances.ci/backend";
     private mtoken = "";
 
     constructor(private httpclient: HttpClient) { }
@@ -265,6 +265,17 @@ export class MeswebservService {
         queteObjet.code = idcli;
         // 
         return this.httpclient.post<Reponse>(this.webserviceUri.concat("/getcnipicture"), queteObjet, {});
+    }
+
+
+    // Get file :
+    getclientpicture(idcli: string): Observable<any> {
+        // DevisController :
+        var queteObjet = new Quete();
+        queteObjet.code = idcli;
+        // 
+        //return this.httpclient.post<Blob>(this.webserviceUri.concat("/getclientpicture"), queteObjet, {});
+        return this.httpclient.get(this.webserviceUri.concat("/getclientpicture?idcli=" + idcli), { responseType: 'blob' });
     }
 
 
@@ -1900,6 +1911,13 @@ export class MeswebservService {
     getCommercialHistoDevisSante(): Observable<ClientBeanComSante[]> {
         // DevisController :
         return this.httpclient.get<ClientBeanComSante[]>(this.webserviceUri.concat("/getCommercialHistoDevisSante"), {});
+    }
+
+
+    // Get DEVIS SANTE to be reviewed by TRESORIER   :
+    getTresorierDevisSante(): Observable<ClientBeanStatComAuto[]> {
+        // DevisController :
+        return this.httpclient.get<ClientBeanStatComAuto[]>(this.webserviceUri.concat("/getTresorierDevisSante"), {});
     }
 
 

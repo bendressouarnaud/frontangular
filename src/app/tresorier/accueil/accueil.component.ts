@@ -16,6 +16,7 @@ export class AccueilComponent implements OnInit {
   // Attributes :
   statsdevisuser = new StatsDevisUser();
   listeDevisAuto: ClientBeanStatComAuto[];
+  listeDevisSante: ClientBeanStatComAuto[];
   listeDevisAccident: ClientBeanStatComAuto[];
   listeDevisVoyage: ClientBeanStatComAuto[];
   listeDevisMrh: ClientBeanStatComAuto[];
@@ -23,6 +24,7 @@ export class AccueilComponent implements OnInit {
   getDevisAccident = false;
   getDevisVoyage = false;
   getDevisMrh = false;
+  getDevisSante = false;
   iddev = 0;
   nomClient = "";
   numDevis = "";
@@ -39,6 +41,8 @@ export class AccueilComponent implements OnInit {
     this.statsdevisuser.accident = "0";
     this.statsdevisuser.voyage = "0";
     this.statsdevisuser.mrh = "0";
+    this.statsdevisuser.sante = "0";
+    this.statsdevisuser.total = "0";
 
     //
     this.getStatsDevisByTresorier();
@@ -46,6 +50,7 @@ export class AccueilComponent implements OnInit {
     this.getTresorierDevisVoyage();
     this.getTresorierDevisAccident();
     this.getTresorierDevisMrh();
+    this.getTresorierDevisSante();
 
   }
 
@@ -72,6 +77,20 @@ export class AccueilComponent implements OnInit {
           this.getDevisAuto = true;
           // Refresh :
           this.initDevisAutoComm();
+        }
+      )
+  }
+
+
+  // Get DEVIS SANTE  :
+  getTresorierDevisSante() {
+    this.meswebservices.getTresorierDevisSante().toPromise()
+      .then(
+        resultat => {
+          this.listeDevisSante = resultat;
+          this.getDevisSante = true;
+          // Refresh :
+          this.initDevisSanteComm();
         }
       )
   }
@@ -236,6 +255,26 @@ export class AccueilComponent implements OnInit {
       });
     }, 500);
   }
+
+
+
+  initDevisSanteComm() {
+    setTimeout(function () {
+      $('#datatableSante').DataTable({
+        "pagingType": "full_numbers",
+        "lengthMenu": [
+          [10, 25, 50, -1],
+          [10, 25, 50, "All"]
+        ],
+        responsive: true,
+        language: {
+          search: "_INPUT_",
+          searchPlaceholder: "Search records",
+        },
+        "order": [[5, "desc"]]
+      });
+    }, 500);
+  }  
 
 
 

@@ -37,6 +37,8 @@ export class ClientsComponent implements OnInit {
   largeurInitial = 0;
   hauteurInitial = 0;
   zoom = 0;
+  imageToShow: any = null;
+  photocustom: any = null;
 
 
 
@@ -81,6 +83,47 @@ export class ClientsComponent implements OnInit {
             }
             $('#modalphoto').modal();
           }
+        },
+        (error) => {
+        }
+      );
+  }
+
+
+  telechargerCNI(email: string, idcli: string): void {
+    // Open modal :
+    this.emailClient = email;
+    this.idcli = idcli;
+    this.largeurInitial = 0;
+
+    this.meswebservices.getclientpicture(this.idcli).toPromise()
+      .then(
+        resultat => {
+
+          //alert("Size : "+resultat.size);
+          let file = new Blob([resultat], { type: 'image/jpeg' });
+          let fileUrl = window.URL.createObjectURL(file);
+
+          /*
+          const link = document.createElement('a');
+          link.href = fileUrl;
+          var filename = "fichecni_" + idcli.toString() + ".jpeg";
+          link.setAttribute('download', filename);
+          document.body.appendChild(link);
+          link.click();
+          */
+
+          // Display :
+          this.zoom = 0;
+          if (this.largeurInitial > 0) {
+            // we reset if PICTURE has been already manipulated :
+            $('#cniid').css({ 'width': (this.largeurInitial.toString() + 'px'), 'height': (this.hauteurInitial.toString() + 'px') });
+          }
+
+          this.photocustom = this._sanitizer.bypassSecurityTrustResourceUrl(fileUrl);
+          $('#modalphotohard').modal();
+
+
         },
         (error) => {
         }
@@ -178,23 +221,18 @@ export class ClientsComponent implements OnInit {
 
         setTimeout(function () {
 
-          if (!this.tableauCom) {
-            $('#datatables').DataTable({
-              "pagingType": "full_numbers",
-              "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-              ],
-              responsive: true,
-              language: {
-                search: "_INPUT_",
-                searchPlaceholder: "Search records",
-              }
-            });
-          }
-          else {
-            $('#datatables').DataTable();
-          }
+          $('#datatables').DataTable({
+            "pagingType": "full_numbers",
+            "lengthMenu": [
+              [10, 25, 50, -1],
+              [10, 25, 50, "All"]
+            ],
+            responsive: true,
+            language: {
+              search: "_INPUT_",
+              searchPlaceholder: "Search records",
+            }
+          });
 
           this.tableauCom = true;
         }, 1000);
@@ -218,23 +256,18 @@ export class ClientsComponent implements OnInit {
 
         setTimeout(function () {
 
-          if (!this.tableauCom) {
-            $('#datatablesreseauxsociaux').DataTable({
-              "pagingType": "full_numbers",
-              "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-              ],
-              responsive: true,
-              language: {
-                search: "_INPUT_",
-                searchPlaceholder: "Search records",
-              }
-            });
-          }
-          else {
-            $('#datatables').DataTable();
-          }
+          $('#datatablesreseauxsociaux').DataTable({
+            "pagingType": "full_numbers",
+            "lengthMenu": [
+              [10, 25, 50, -1],
+              [10, 25, 50, "All"]
+            ],
+            responsive: true,
+            language: {
+              search: "_INPUT_",
+              searchPlaceholder: "Search records",
+            }
+          });
 
           this.tableauCom = true;
         }, 1000);

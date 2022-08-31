@@ -74,6 +74,35 @@
 
 
 
+        <div class="modal fade" id="modalphotohard" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog  modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">CNI - <span style="color: #211ed7;">{{emailClient}}</span></h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                        <img [@rotatedState]='state' [src]="photocustom" style="border: 1px solid black; " id="cniid"
+                            width="300" height="250" />
+                    </div>
+
+                    <div class="modal-footer">
+                        <button mat-raised-button type="button" (click)="rotate()"
+                            class="btn btn-info">Rotation</button>&nbsp;
+                        <button mat-raised-button type="button" (click)="agrandir()"
+                            class="btn btn-success">Agrandir</button>&nbsp;
+                        <button mat-raised-button type="button" (click)="reduire()" class="btn btn-danger"
+                            *ngIf="zoom > 0">R&eacute;duire</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
         <div class="modal fade" id="modalphoto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
             aria-hidden="true">
             <div class="modal-dialog  modal-lg">
@@ -86,15 +115,15 @@
                     </div>
                     <div class="modal-body" style="text-align: center;">
                         <img [@rotatedState]='state' [src]="customerPhoto" style="border: 1px solid black; "
-                        id="cniid"/>
+                            id="cniid" />
                     </div>
                     <div class="modal-footer">
                         <button mat-raised-button type="button" (click)="rotate()"
                             class="btn btn-info">Rotation</button>&nbsp;
                         <button mat-raised-button type="button" (click)="agrandir()"
                             class="btn btn-success">Agrandir</button>&nbsp;
-                        <button mat-raised-button type="button" (click)="reduire()"
-                            class="btn btn-danger" *ngIf="zoom > 0">R&eacute;duire</button>                            
+                        <button mat-raised-button type="button" (click)="reduire()" class="btn btn-danger"
+                            *ngIf="zoom > 0">R&eacute;duire</button>
                     </div>
                 </div>
             </div>
@@ -228,10 +257,10 @@
                                                             <td>{{ clt.typclient }}</td>
                                                             <td class="text-center">
 
-                                                                <a title="Afficher CNI"
-                                                                    (click)="afficherCNI( clt.email, clt.idcli )"
-                                                                    class="btn btn-link btn-info btn-just-icon edit"><i
-                                                                        class="material-icons">fit_screen</i></a>
+                                                                <a title="T&eacute;l&eacute;charger CNI"
+                                                                    (click)="telechargerCNI( clt.email, clt.idcli )"
+                                                                    class="btn btn-link btn-success btn-just-icon edit"><i
+                                                                        class="material-icons">manage_search</i></a>
 
                                                                 <a *ngIf="clt.typeclient == 0"
                                                                     title="Transformer ce client"
@@ -282,10 +311,10 @@
                                                             <td>{{ clt.typclient }}</td>
                                                             <td class="text-center">
 
-                                                                <a title="Afficher CNI"
-                                                                    (click)="afficherCNI( clt.email, clt.idcli )"
-                                                                    class="btn btn-link btn-info btn-just-icon edit"><i
-                                                                        class="material-icons">fit_screen</i></a>
+                                                                <a title="T&eacute;l&eacute;charger CNI"
+                                                                    (click)="telechargerCNI( clt.email, clt.idcli )"
+                                                                    class="btn btn-link btn-success btn-just-icon edit"><i
+                                                                        class="material-icons">manage_search</i></a>
 
                                                                 <a *ngIf="clt.typeclient == 0"
                                                                     title="Transformer ce client"

@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { UserLog } from 'src/app/mesbeans/userlogin';
 import { UserLogChg } from 'src/app/mesbeans/userloginchg';
+import { AppService } from 'src/app/messervices/appservice';
 import { MeswebservService } from 'src/app/messervices/meswebserv.service';
 
 declare var $: any;
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
 
-    constructor(private element: ElementRef, private meswebservices: MeswebservService) {
+    constructor(private element: ElementRef, private meswebservices: MeswebservService, private appService: AppService) {
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
     }
@@ -197,6 +198,9 @@ export class LoginComponent implements OnInit, OnDestroy {
                                 // Succes
                                 if (resultat.actions == '1') {
                                     if (resultat.code == '200') {
+
+                                        // Set the FLAG :
+                                        this.appService.setUserLoggedIn(true)
 
                                         // Keep the TOKEN :
                                         this.meswebservices.setToken(resultat.data);

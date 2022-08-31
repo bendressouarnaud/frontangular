@@ -421,6 +421,7 @@ export class SidebarComponent implements OnInit {
         //alert("Profil : "+this.nom_utilisateur);
 
         switch (localStorage.getItem("profil")) {
+            
             case "superviseur":
                 this.menuItems = routesSuperviseur.filter(menuItem => menuItem);
                 break;
@@ -457,7 +458,7 @@ export class SidebarComponent implements OnInit {
             case "tresorier":
                 this.menuItems = routesTresorier.filter(menuItem => menuItem);
                 break;
-
+            
 
             default:
                 this.menuItems = ROUTES.filter(menuItem => menuItem);
