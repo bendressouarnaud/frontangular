@@ -19,6 +19,7 @@ export class Clientbeanaccident{
     
     //
     origine : number;
+    cout : number;
     observation : String;
     police : String
 

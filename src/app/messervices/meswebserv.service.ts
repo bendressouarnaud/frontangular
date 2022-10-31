@@ -80,6 +80,13 @@ import { Clientbeaninfosante } from "../mesbeans/clientbeaninfosante";
 import { QueteResetPwd } from "../mesbeans/queteresetpwd";
 import { ClientBeanComSante } from "../mesbeans/clientbeancomsante";
 import { ClientBeanStatComSante } from "../mesbeans/clientbeanstatcomsante";
+import { Clientbeansanteadherent } from "../mesbeans/clientbeansanteadherent";
+import { Detailresumefamille } from "../mesbeans/detailresumefamille";
+import { Detailconjoint } from "../mesbeans/detailconjoint";
+import { Clientbeansantefamille } from "../mesbeans/clientbeansantefamille";
+import { Detailenfant } from "../mesbeans/detailenfant";
+import { Clientbeansanteadulte } from "../mesbeans/clientbeansanteadulte";
+import { Activiteia } from "../mesbeans/activiteia";
 
 @Injectable({
     providedIn: 'root'
@@ -90,6 +97,7 @@ export class MeswebservService {
 
     /* Attributes */
     private webserviceUri: String = "http://localhost:8081/backend";
+    //private webserviceUri: String = "http://172.16.192.83:81/backend";
     //private webserviceUri : String = "https://217.160.247.10/backend";
     //private webserviceUri : String = "http://oceaneinter.com/backend";
     //private webserviceUri : String = "https://jcom.nsiaassurances.ci/backend";
@@ -201,6 +209,13 @@ export class MeswebservService {
     // Activities
     getAllActivities(): Observable<Activite[]> {
         return this.httpclient.get<Activite[]>(this.webserviceUri.concat("/getAllActivities"),
+            {});
+    }
+
+
+    // Activities -- Accident
+    getAllActivitiesAccident(): Observable<Activiteia[]> {
+        return this.httpclient.get<Activiteia[]>(this.webserviceUri.concat("/getAllActivitiesAccident"),
             {});
     }
 
@@ -1673,6 +1688,27 @@ export class MeswebservService {
     }
 
 
+    // SEND DATA for DEVIS SANTE :
+    sendDevisSanteConjoint(donnees: FormData): Observable<Quete> {
+        // 
+        return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendDevisSanteConjoint"), donnees, {});
+    }
+
+
+    //  :
+    sendDevisSanteAdulte(donnees: FormData): Observable<Quete> {
+        // 
+        return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendDevisSanteAdulte"), donnees, {});
+    }
+
+
+    // SEND DATA for DEVIS SANTE :
+    sendDevisSanteEnfantFam(donnees: FormData): Observable<Quete> {
+        // 
+        return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendDevisSanteEnfantFam"), donnees, {});
+    }
+
+
     // SEND INFO for DEVISSANTE Table :
     sendInfoSante(donnees: FormData): Observable<Quete> {
         // 
@@ -1794,6 +1830,58 @@ export class MeswebservService {
         let mesParams = new HttpParams();
         mesParams = mesParams.append('idsan', idsan); // 
         return this.httpclient.get<Clientbeansante>(this.webserviceUri.concat("/getDevisSanteByIdsan"),
+            {
+                params: mesParams
+            });
+    }
+
+
+    // Pull back data for DEVIS SANTE NEW  :
+    getDevisSanteByIdsanNew(idsan: string): Observable<Clientbeansanteadherent> {
+        // -> DevisController
+        // Now, set the parameters :
+        let mesParams = new HttpParams();
+        mesParams = mesParams.append('idsan', idsan); // 
+        return this.httpclient.get<Clientbeansanteadherent>(this.webserviceUri.concat("/getDevisSanteByIdsan"),
+            {
+                params: mesParams
+            });
+    }
+
+
+    // Pull back data for DEVIS SANTE NEW  :
+    getconjointsantedata(idsan: string): Observable<Clientbeansantefamille> {
+        // -> DevisController
+        // Now, set the parameters :
+        let mesParams = new HttpParams();
+        mesParams = mesParams.append('idsan', idsan); // 
+        return this.httpclient.get<Clientbeansantefamille>(this.webserviceUri.concat("/getconjointsantedata"),
+            {
+                params: mesParams
+            });
+    }
+
+
+    getenfantsantedata(idenf: string, idsan: string): Observable<Clientbeansantefamille> {
+        // -> DevisController
+        // Now, set the parameters :
+        let mesParams = new HttpParams();
+        mesParams = mesParams.append('idenf', idenf); // 
+        mesParams = mesParams.append('idsan', idsan); // 
+        return this.httpclient.get<Clientbeansantefamille>(this.webserviceUri.concat("/getenfantsantedata"),
+            {
+                params: mesParams
+            });
+    }
+
+
+    getadultesantedata(idadu: string, idsan: string): Observable<Clientbeansanteadulte> {
+        // -> DevisController
+        // Now, set the parameters :
+        let mesParams = new HttpParams();
+        mesParams = mesParams.append('idadu', idadu); // 
+        mesParams = mesParams.append('idsan', idsan); // 
+        return this.httpclient.get<Clientbeansanteadulte>(this.webserviceUri.concat("/getadultesantedata"),
             {
                 params: mesParams
             });
@@ -2086,6 +2174,49 @@ export class MeswebservService {
     getcollaborateurs(): Observable<Utilisateur[]> {
         return this.httpclient.get<Utilisateur[]>(this.webserviceUri.concat("/getcollaborateurs"),
             {});
+    }
+
+
+
+    // Get CHART based on User's DEVIS :
+    getResumeFamille(idsan: string): Observable<Detailresumefamille[]> {
+        // ApiCallController
+        var queteObjet = new Quete();
+        queteObjet.code = idsan;
+        // 
+        return this.httpclient.post<Detailresumefamille[]>(this.webserviceUri.concat("/getResumeFamille"),
+            queteObjet, {});
+    }
+
+    // Get  :
+    getConjointHistorique(idsan: string): Observable<Detailconjoint[]> {
+        // ApiCallController
+        var queteObjet = new Quete();
+        queteObjet.code = idsan;
+        // 
+        return this.httpclient.post<Detailconjoint[]>(this.webserviceUri.concat("/getConjointHistorique"),
+            queteObjet, {});
+    }
+
+    // Get  :
+    getEnfantHistorique(idsan: string): Observable<Detailenfant[]> {
+        // ApiCallController
+        var queteObjet = new Quete();
+        queteObjet.code = idsan;
+        // 
+        return this.httpclient.post<Detailenfant[]>(this.webserviceUri.concat("/getEnfantHistorique"),
+            queteObjet, {});
+    }
+
+
+    // Get  :
+    getAdulteHistorique(idsan: string): Observable<Detailenfant[]> {
+        // ApiCallController
+        var queteObjet = new Quete();
+        queteObjet.code = idsan;
+        // 
+        return this.httpclient.post<Detailenfant[]>(this.webserviceUri.concat("/getAdulteHistorique"),
+            queteObjet, {});
     }
 
 }

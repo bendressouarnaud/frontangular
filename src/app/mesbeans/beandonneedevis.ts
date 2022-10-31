@@ -6,6 +6,8 @@ export class BeanDonneDevis{
     dureecontrat : String;
     offre : String;
     cout : String;
+    cotation : String;
+    couverture : String;
     dates : String;
     idauto : String;
     iddevis : String;

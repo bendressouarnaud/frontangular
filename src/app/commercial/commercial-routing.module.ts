@@ -8,6 +8,8 @@ import { ExamenComponent } from './examen/examen.component';
 import { PerformanceComponent } from './performance/performance.component';
 import { RapportComponent } from './rapport/rapport.component';
 import { RdvComponent } from './rdv/rdv.component';
+import { SanteavantageComponent } from './santeavantage/santeavantage.component';
+import { SantefamilleComponent } from './santefamille/santefamille.component';
 import { TraderComponent } from './trader/trader.component';
 
 const routes: Routes = [
@@ -46,6 +48,14 @@ const routes: Routes = [
   {
     path: 'clients',
     component: ClientsComponent
+  },
+  {
+    path: 'santefamille/:idsan',
+    component: SantefamilleComponent
+  },
+  {
+    path: 'santeavantage/:idsan',
+    component: SanteavantageComponent
   }
 ];
 

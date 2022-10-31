@@ -421,7 +421,7 @@ export class SidebarComponent implements OnInit {
         //alert("Profil : "+this.nom_utilisateur);
 
         switch (localStorage.getItem("profil")) {
-            /*
+            
             case "superviseur":
                 this.menuItems = routesSuperviseur.filter(menuItem => menuItem);
                 break;
@@ -454,7 +454,7 @@ export class SidebarComponent implements OnInit {
             case "dircom":
                 this.menuItems = routesDirecteur.filter(menuItem => menuItem);
                 break;
-                */
+                
 
             case "tresorier":
                 this.menuItems = routesTresorier.filter(menuItem => menuItem);
@@ -488,11 +488,8 @@ export class SidebarComponent implements OnInit {
     deconnexion(): void {
         if (localStorage.length > 0) {
             localStorage.clear();
-            /*localStorage.removeItem("userid");
-            localStorage.removeItem("profil");*/
-            //window.location.href="#/pages/login";
             window.location.href = "/";
-            //window.location.href="/jcom";
+            //window.location.href = "http://172.16.192.83:81/localcom";
         }
     }
 }
