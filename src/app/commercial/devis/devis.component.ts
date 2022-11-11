@@ -450,6 +450,12 @@ export class DevisComponent implements OnInit {
 
   // Identifiant Profession IA :
   idpia: Number;
+  idpiabeneficiaire: Number;
+  preferencemanuelle = 0;
+  nombeneficiaire = "";
+  prenombeneficiaire = "";
+  adressebeneficiaire = "";
+
   precisionmaladie = "";
   maladieSettings = {};
   maladieList = [];
@@ -1313,6 +1319,7 @@ export class DevisComponent implements OnInit {
           if (resultat.length > 0) {
             this.listeActiviteIa = resultat;
             this.idpia = this.listeActiviteIa[1].idpia;
+            this.idpiabeneficiaire = this.listeActiviteIa[2].idpia;
             this.getListeActiviteIa = true;
           }
 
@@ -1895,6 +1902,12 @@ export class DevisComponent implements OnInit {
       this.formData.append("origine", this.clientRest.origine.toString());
       this.formData.append("observation", this.clientRest.observation.toString());
       this.formData.append("police", this.setPolice);
+      // Pour le souscripteur :
+      this.formData.append("nomsouscripteur", this.nombeneficiaire);
+      this.formData.append("prenomsouscripteur", this.prenombeneficiaire);
+      this.formData.append("adressesouscripteur", this.adressebeneficiaire);
+      this.formData.append("professionsouscripteur", this.idpiabeneficiaire.toString());
+      this.formData.append("preferencemanuelle", this.preferencemanuelle.toString());
 
       // Call :
       this.meswebservices.sendDevisAccident(this.formData).toPromise()
@@ -2498,6 +2511,13 @@ export class DevisComponent implements OnInit {
 
           //
           this.getDate = new Date(resultat.dates.toString());
+
+          // 
+          this.nombeneficiaire = resultat.nomsouscripteur;
+          this.prenombeneficiaire = resultat.prenomsouscripteur;
+          this.adressebeneficiaire = resultat.adresse;
+          this.idpiabeneficiaire = resultat.profession;
+          this.preferencemanuelle = resultat.preferencemanuelle;
 
 
           // Set up values for 'CUSTOMER DOP DOWN List':

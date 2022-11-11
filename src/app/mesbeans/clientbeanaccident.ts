@@ -21,7 +21,13 @@ export class Clientbeanaccident{
     origine : number;
     cout : number;
     observation : String;
-    police : String
+    police : String;
+
+    nomsouscripteur : string;
+    prenomsouscripteur : string;
+    adresse : string;
+    profession : number;
+    preferencemanuelle : number;
 
     constructor(){}
 }
