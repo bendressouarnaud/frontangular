@@ -3,7 +3,7 @@
 
         <!--   CHEQUE   -->
         <div class="modal fade" id="modalcheque" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true">
+            aria-hidden="true" data-backdrop="static">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content" style="background-image: linear-gradient(#F4F0F0, 95%, #C2A323);">
                     <div class="modal-header">
@@ -189,7 +189,7 @@
 
         <!--   VIREMENT   -->
         <div class="modal fade" id="modalvirement" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true">
+            aria-hidden="true" data-backdrop="static">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content" style="background-image: linear-gradient(#F4F0F0, 95%, #6886c7);">
                     <div class="modal-header">
@@ -1815,7 +1815,7 @@
                                                             </div>
                                                         </div>
 
-
+                                                        <!--
                                                         <div class="row">
                                                             <label class="col-sm-2 col-form-label"><span
                                                                     style="color: black;">PHOTO</span></label>
@@ -1830,7 +1830,7 @@
 
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div>-->
 
 
                                                         <div class="row" style="margin-top: 10px;">
@@ -1888,7 +1888,7 @@
                                                                 <div class="row">
 
                                                                     <!--    (selectionChange)="computePrice()"     -->
-                                                                    <div class="col-lg-5 col-md-8 col-sm-4">
+                                                                    <div class="col-lg-3 col-md-8 col-sm-4">
                                                                         <mat-form-field
                                                                             style="font-size: 16px; font-weight: bold;">
                                                                             <mat-select placeholder="Choix de formules"
@@ -1905,7 +1905,23 @@
                                                                         </mat-form-field>
                                                                     </div>
 
-                                                                    <div class="col-md-4">
+
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field
+                                                                            class="example-full-width text-center"
+                                                                            style="font-size: 16px; font-weight: bold;">
+                                                                            <input
+                                                                                style="color: red; font-size: 18px; background-color: white;"
+                                                                                disabled matInput
+                                                                                [(ngModel)]="cotationmrh"
+                                                                                name='cotationmrh' type="text"
+                                                                                placeholder="Prime annuelle TTC"
+                                                                                maxlength="15">
+                                                                        </mat-form-field>
+                                                                    </div>
+
+
+                                                                    <div class="col-md-3">
                                                                         <mat-form-field class="example-full-width"
                                                                             style="font-size: 16px;">
                                                                             <input matInput [(ngModel)]="coutreelmrh"
@@ -2156,7 +2172,7 @@
 
         <!-- AUTO -->
         <div class="modal fade" id="modalAutomobile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true">
+            aria-hidden="true"  data-backdrop="static">
             <!--  modal-lg  -->
             <div class="modal-dialog modal-xl">
                 <div class="modal-content" style="background-image: linear-gradient(#F4F0F0, 97%, #C2A323); ">
@@ -2811,8 +2827,8 @@
 
         <!--   DEVIS VOYAGE   -->
         <div class="modal fade" id="modalVoyage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg">
+            aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content" style="background-image: linear-gradient(#F4F0F0, 97%, #348F12);">
                     <div class="modal-header">
                         <h4 class="modal-title">Renseigner les donn&eacute;es du <span style="font-weight: bold;">DEVIS
@@ -2892,44 +2908,27 @@
                                 <div class="col-sm-10">
                                     <div class="row">
 
-                                        <div class="col-md-5">
+                                        <div class="col-md-3">
                                             <mat-form-field class="example-full-width">
                                                 <input matInput [(ngModel)]="clientRest.nom" name='nom' type="text"
                                                     placeholder="Nom" maxlength="30">
                                             </mat-form-field>
                                         </div>
 
-                                        <div class="col-md-5">
+                                        <div class="col-md-4">
                                             <mat-form-field class="example-full-width">
                                                 <input matInput [(ngModel)]="clientRest.prenom" name='prenom'
                                                     type="text" placeholder="Pr&eacute;nom" maxlength="50">
                                             </mat-form-field>
                                         </div>
 
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label">&nbsp;</label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-md-5">
+                                        <div class="col-md-3">
                                             <mat-form-field class="example-full-width">
                                                 <input matInput [(ngModel)]="clientRest.contact" name='contact'
                                                     type="text" placeholder="Contact" maxlength="20">
                                             </mat-form-field>
                                         </div>
 
-                                        <div class="col-md-5">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput [(ngModel)]="clientRest.email" name='email' type="text"
-                                                    placeholder="Email" maxlength="50">
-                                            </mat-form-field>
-                                        </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -2940,18 +2939,25 @@
                                 <div class="col-sm-10">
                                     <div class="row">
 
-                                        <div class="col-md-5">
+                                        <div class="col-md-4">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="clientRest.email" name='email' type="text"
+                                                    placeholder="Email" maxlength="50">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-3">
                                             <mat-form-field>
                                                 <input matInput [matDatepicker]="basicnaissvoyage"
                                                     [(ngModel)]="getNaissVoyage" name="dates"
-                                                    placeholder="Date de naissance">
+                                                    placeholder="Date de naissance" (dateChange)="callVoyagePrice()">
                                                 <mat-datepicker-toggle matSuffix [for]="basicnaissvoyage">
                                                 </mat-datepicker-toggle>
                                                 <mat-datepicker #basicnaissvoyage></mat-datepicker>
                                             </mat-form-field>
                                         </div>
 
-                                        <div class="col-lg-5 col-md-8 col-sm-4">
+                                        <div class="col-lg-3 col-md-8 col-sm-4">
                                             <mat-form-field>
                                                 <mat-select placeholder="Civilit&eacute;"
                                                     [(value)]="clientRest.civilite" name="activite">
@@ -2975,7 +2981,7 @@
                                 <div class="col-sm-10">
                                     <div class="row">
 
-                                        <div class="col-lg-6 col-md-8 col-sm-4">
+                                        <div class="col-lg-4 col-md-8 col-sm-4">
                                             <mat-form-field>
                                                 <mat-select placeholder="Activit&eacute;"
                                                     [(value)]="clientRest.activite" name="activite">
@@ -2997,6 +3003,17 @@
                                             </mat-form-field>
                                         </div>
 
+                                        <div class="col-lg-3 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Origine du client"
+                                                    [(value)]="clientRest.origine" name="origineclient">
+                                                    <mat-option [value]="0">Prospecté</mat-option>
+                                                    <mat-option [value]="1">Recommandé</mat-option>
+                                                    <mat-option [value]="2">Réseaux sociaux</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -3009,18 +3026,34 @@
                                 <div class="col-sm-10">
                                     <div class="row">
 
-                                        <div class="col-lg-4 col-md-8 col-sm-4">
-                                            <mat-form-field>
-                                                <mat-select placeholder="Origine du client"
-                                                    [(value)]="clientRest.origine" name="origineclient">
-                                                    <mat-option [value]="0">Prospecté</mat-option>
-                                                    <mat-option [value]="1">Recommandé</mat-option>
-                                                    <mat-option [value]="2">Réseaux sociaux</mat-option>
+                                        <div class="col-md-3">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-select id="selectIdzone" placeholder="Zone de destination"
+                                                    [(value)]="zonedestination" name="zonedestination"
+                                                    style="background-color: #b4bed3;"
+                                                    (selectionChange)="getpaysdestination()">
+                                                    <mat-option *ngFor="let donnee of listeZoneDestination"
+                                                        [value]="donnee.idzon">
+                                                        {{ donnee.libelle }}
+                                                    </mat-option>
                                                 </mat-select>
                                             </mat-form-field>
                                         </div>
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-select id="selectIdpays" placeholder="Pays de destination"
+                                                    [(value)]="paysdestination" name="paysdestination"
+                                                    style="background-color: #92cf73;">
+                                                    <mat-option *ngFor="let donnee of listePaysDestination"
+                                                        [value]="donnee.iddes">
+                                                        {{ donnee.libelle }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-4">
                                             <mat-form-field class="example-full-width" style="font-size: 16px;">
                                                 <input matInput [(ngModel)]="clientRest.observation" name='observation'
                                                     type="text" placeholder="Observation" maxlength="100">
@@ -3029,9 +3062,53 @@
 
                                     </div>
                                 </div>
+                            </div>  
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-3 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <input matInput [matDatepicker]="basicjourdepart"
+                                                    [(ngModel)]="getJourDepart" name="datedepart"
+                                                    placeholder="Jour de d&eacute;part" (dateChange)="callVoyagePrice()">
+                                                <mat-datepicker-toggle matSuffix [for]="basicjourdepart">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #basicjourdepart></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-3 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <input matInput [matDatepicker]="basicjourretour"
+                                                    [(ngModel)]="getJourRetour" name="dateretour"
+                                                    placeholder="Jour de retour" (dateChange)="callVoyagePrice()">
+                                                <mat-datepicker-toggle matSuffix [for]="basicjourretour">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #basicjourretour></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <mat-form-field
+                                                class="example-full-width text-center"
+                                                style="font-size: 16px; font-weight: bold;">
+                                                <input
+                                                    style="color: red; font-size: 18px; background-color: white;"
+                                                    disabled matInput
+                                                    [(ngModel)]="cotationvoyage"
+                                                    name='cotationvoyage' type="text"
+                                                    placeholder="Prime TTC"
+                                                    maxlength="15">
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
-
-
 
 
                             <div class="row">
@@ -3050,6 +3127,7 @@
                             </div>
 
 
+                            <!--
                             <div class="row">
                                 <label class="col-sm-2 col-form-label"><span style="color: black;">PHOTO</span></label>
                                 <div class="col-sm-10">
@@ -3063,77 +3141,7 @@
 
                                     </div>
                                 </div>
-                            </div>
-
-
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label"><span
-                                        style="color: black;">Contenu</span></label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-md-5">
-                                            <mat-form-field class="example-full-width">
-                                                <mat-select id="selectIdzone" placeholder="Zone de destination"
-                                                    [(value)]="zonedestination" name="zonedestination"
-                                                    style="background-color: #b4bed3;"
-                                                    (selectionChange)="getpaysdestination()">
-                                                    <mat-option *ngFor="let donnee of listeZoneDestination"
-                                                        [value]="donnee.idzon">
-                                                        {{ donnee.libelle }}
-                                                    </mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-
-                                        <div class="col-md-5">
-                                            <mat-form-field class="example-full-width">
-                                                <mat-select id="selectIdpays" placeholder="Pays de destination"
-                                                    [(value)]="paysdestination" name="paysdestination"
-                                                    style="background-color: #92cf73;">
-                                                    <mat-option *ngFor="let donnee of listePaysDestination"
-                                                        [value]="donnee.iddes">
-                                                        {{ donnee.libelle }}
-                                                    </mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label">&nbsp;</label>
-                                <div class="col-sm-10">
-                                    <div class="row">
-
-                                        <div class="col-lg-5 col-md-8 col-sm-4">
-                                            <mat-form-field>
-                                                <input matInput [matDatepicker]="basicjourdepart"
-                                                    [(ngModel)]="getJourDepart" name="datedepart"
-                                                    placeholder="Jour de d&eacute;part">
-                                                <mat-datepicker-toggle matSuffix [for]="basicjourdepart">
-                                                </mat-datepicker-toggle>
-                                                <mat-datepicker #basicjourdepart></mat-datepicker>
-                                            </mat-form-field>
-                                        </div>
-
-                                        <div class="col-lg-5 col-md-8 col-sm-4">
-                                            <mat-form-field>
-                                                <input matInput [matDatepicker]="basicjourretour"
-                                                    [(ngModel)]="getJourRetour" name="dateretour"
-                                                    placeholder="Jour de retour">
-                                                <mat-datepicker-toggle matSuffix [for]="basicjourretour">
-                                                </mat-datepicker-toggle>
-                                                <mat-datepicker #basicjourretour></mat-datepicker>
-                                            </mat-form-field>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
+                            </div>-->
 
 
 
@@ -3161,7 +3169,7 @@
 
         <!--   DEVIS ACCIDENT   -->
         <div class="modal fade" id="modalAccident" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true">
+            aria-hidden="true"  data-backdrop="static">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content" style="background-image: linear-gradient(#F4F0F0, 95%, #C2A323);">
                     <div class="modal-header">
@@ -3445,21 +3453,21 @@
 
                                         <div class="col-md-3">
                                             <mat-form-field class="example-full-width">
-                                                <input matInput [(ngModel)]="nombeneficiaire" name='nom' type="text"
+                                                <input matInput [(ngModel)]="nombeneficiaire" name='nombenef' type="text"
                                                     placeholder="Nom" maxlength="30">
                                             </mat-form-field>
                                         </div>
 
                                         <div class="col-md-3">
                                             <mat-form-field class="example-full-width">
-                                                <input matInput [(ngModel)]="prenombeneficiaire" name='prenom'
+                                                <input matInput [(ngModel)]="prenombeneficiaire" name='prenombenef'
                                                     type="text" placeholder="Pr&eacute;nom" maxlength="50">
                                             </mat-form-field>
                                         </div>
 
                                         <div class="col-md-3">
                                             <mat-form-field class="example-full-width">
-                                                <input matInput [(ngModel)]="adressebeneficiaire" name='contact'
+                                                <input matInput [(ngModel)]="adressebeneficiaire" name='contactbenef'
                                                     type="text" placeholder="Adresse" maxlength="20">
                                             </mat-form-field>
                                         </div>
@@ -3507,7 +3515,7 @@
                                 </div>
                             </div>
 
-
+                            <!--
                             <div class="row">
                                 <label class="col-sm-2 col-form-label"><span style="color: black;">PHOTO</span></label>
                                 <div class="col-sm-10">
@@ -3521,7 +3529,7 @@
 
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
 
                             <div class="row">
                                 <div style="text-align: center; width: 100%; color:red; font-weight: bold;" id="infos">
@@ -3917,10 +3925,11 @@
                                                         <tr>
                                                             <th>Client</th>
                                                             <th class="text-center">Mode paiement</th>
+                                                            <th class="text-center">Montant</th>
                                                             <th class="text-center">Pay&eacute;</th>
                                                             <th>Date de cr&eacute;ation</th>
                                                             <th>Jour d&eacute;part</th>
-                                                            <th>Jour retour</th>
+                                                            <!--<th>Jour retour</th>-->
                                                             <th class="disabled-sorting text-center">Actions</th>
                                                         </tr>
                                                     </thead>
@@ -3930,6 +3939,8 @@
                                                             <td class="text-center"
                                                                 style="font-weight: bold; background-image: linear-gradient(#F1F9FA, 50%, #7eb384);">
                                                                 {{ donnee.contact }}</td>
+                                                            <td class="text-center" style="font-weight: bold;">
+                                                                {{ donnee.cout }}</td>
                                                             <td class="text-center">
                                                                 <a *ngIf="donnee.secteur == 'Oui'"
                                                                     class="btn btn-link btn-success btn-just-icon edit">
@@ -3940,7 +3951,7 @@
                                                             </td>
                                                             <td>{{ donnee.dates }}</td>
                                                             <td>{{ donnee.dureecontrat }}</td>
-                                                            <td>{{ donnee.offre }}</td>
+                                                            <!--<td>{{ donnee.offre }}</td>-->
                                                             <td class="text-center">
 
                                                                 <a title="Effectuer un paiement"
@@ -4035,7 +4046,7 @@
                                                             <th class="text-center">Pay&eacute;</th>
                                                             <th class="text-center">Formule</th>
                                                             <th>Date de cr&eacute;ation</th>
-                                                            <th>Date expiration</th>
+                                                            <th class="text-center">Cotation</th>
                                                             <th class="disabled-sorting text-center">Actions</th>
                                                         </tr>
                                                     </thead>
@@ -4056,7 +4067,7 @@
                                                             <td style="font-weight: bold;" class="text-center">{{
                                                                 donnee.dureecontrat }}</td>
                                                             <td>{{ donnee.dates }}</td>
-                                                            <td>{{ donnee.offre }}</td>
+                                                            <td style="font-weight: bold;" class="text-center">{{ donnee.cout }}</td>
                                                             <td class="text-center">
 
                                                                 <a title="Effectuer un paiement"

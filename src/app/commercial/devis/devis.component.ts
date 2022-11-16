@@ -151,6 +151,8 @@ export class DevisComponent implements OnInit {
   coutproduit = 0;
   displayCout = "0";
   cotationaccident = "0";
+  cotationvoyage = "0";
+  cotationmrh = "0";
   //
   indemnitemax = 2500000;
   menuIndemniteItems: any[];
@@ -890,6 +892,8 @@ export class DevisComponent implements OnInit {
             this.updateDevVoyage = false;
             this.paysdestination = this.updatePaysDevVoyage;
           }
+
+          this.computeVoyagePrice();
         }
       )
   }
@@ -1050,6 +1054,7 @@ export class DevisComponent implements OnInit {
         $('#form2').css('background-color', '#d1caca');
         $('#form3').css('background-color', '#d1caca');
         $('#form4').css('background-color', '#d1caca');
+        this.cotationmrh = (30780).toLocaleString();
         break;
 
       case 47:
@@ -1057,6 +1062,7 @@ export class DevisComponent implements OnInit {
         $('#form2').css('background-color', '#697FD0'); // Formule 1
         $('#form3').css('background-color', '#d1caca');
         $('#form4').css('background-color', '#d1caca');
+        this.cotationmrh = (61560).toLocaleString();
         break;
 
       case 48:
@@ -1064,6 +1070,7 @@ export class DevisComponent implements OnInit {
         $('#form2').css('background-color', '#d1caca');
         $('#form3').css('background-color', '#697FD0'); // Formule 3
         $('#form4').css('background-color', '#d1caca');
+        this.cotationmrh = (102600).toLocaleString();
         break;
 
       case 49:
@@ -1071,6 +1078,7 @@ export class DevisComponent implements OnInit {
         $('#form2').css('background-color', '#d1caca');
         $('#form3').css('background-color', '#d1caca');
         $('#form4').css('background-color', '#697FD0'); // Formule 4
+        this.cotationmrh = (143640).toLocaleString();
         break;
 
       default:
@@ -1078,6 +1086,7 @@ export class DevisComponent implements OnInit {
         $('#form2').css('background-color', '#d1caca');
         $('#form3').css('background-color', '#d1caca');
         $('#form4').css('background-color', '#d1caca');
+        this.cotationmrh = (30780).toLocaleString();
         break;
     }
   }
@@ -1717,7 +1726,8 @@ export class DevisComponent implements OnInit {
       //
       this.formData.append("origine", this.clientRest.origine.toString());
       this.formData.append("observation", this.clientRest.observation.toString());
-      this.formData.append("police", this.setPolice);
+      this.formData.append("police", this.setPolice);//
+      this.formData.append("coutmrh", this.cotationmrh.replace(/[^0-9]/g, ''));
 
       // Call :
       this.meswebservices.sendDevisMrh(this.formData).toPromise()
@@ -1992,6 +2002,8 @@ export class DevisComponent implements OnInit {
       this.formData.append("origine", this.clientRest.origine.toString());
       this.formData.append("observation", this.clientRest.observation.toString());
       this.formData.append("police", this.setPolice);
+      //
+      this.formData.append("cout", this.cotationvoyage.replace(/[^0-9]/g, ''));
 
       // Call :
       this.meswebservices.sendDevisVoyage(this.formData).toPromise()
@@ -2144,7 +2156,7 @@ export class DevisComponent implements OnInit {
     formInfoData.append("nmapporteur", this.nmapporteur);
     formInfoData.append("libcode", this.libcode);
     formInfoData.append("libinspection", this.libinspection);
-    formInfoData.append("formulesante", this.formulesante.toString());
+    //formInfoData.append("formulesante", this.formulesante.toString());
     //
     formInfoData.append("idsan", this.idsante.toString());
     // sendInfoSante 
@@ -2715,9 +2727,9 @@ export class DevisComponent implements OnInit {
           this.clientRest.origine = resultat.origine;
           this.clientRest.observation = resultat.observation;
 
-          
+
           // Process 'COMMENTAIRE' and 'CHOIX'
-          if(resultat.surprimes.length > 0){
+          if (resultat.surprimes.length > 0) {
 
             let tpData = [];
             let tempMalSelectedItems = [];
@@ -2748,31 +2760,31 @@ export class DevisComponent implements OnInit {
                       });*/
 
                       // perte de poids, fièvres répétées, fatigue chronique   68, 69, 70
-                      if(parseInt(su) === 68 || parseInt(su) === 69 || parseInt(su) === 70) this.pertepoidsId.push(su);
+                      if (parseInt(su) === 68 || parseInt(su) === 69 || parseInt(su) === 70) this.pertepoidsId.push(su);
                       //  ganglions, des furoncles, des abcès ou des maladies de peau
-                      else if(parseInt(su) === 71 || parseInt(su) === 102 || parseInt(su) === 103 || parseInt(su) === 104) this.ganglionsId.push(su);
+                      else if (parseInt(su) === 71 || parseInt(su) === 102 || parseInt(su) === 103 || parseInt(su) === 104) this.ganglionsId.push(su);
                       //  coeur, infections chroniques,pneumopathies, tuberculose
-                      else if(parseInt(su) === 105 || parseInt(su) === 72 || parseInt(su) === 73 || parseInt(su) === 74) this.coeurId.push(su);
+                      else if (parseInt(su) === 105 || parseInt(su) === 72 || parseInt(su) === 73 || parseInt(su) === 74) this.coeurId.push(su);
                       //  l’appareil digestif, foie, intestin, et anus (hémorroïdes, ulcère, hépatite….)
-                      else if(parseInt(su) === 75 || parseInt(su) === 76 || parseInt(su) === 77 || parseInt(su) === 78
+                      else if (parseInt(su) === 75 || parseInt(su) === 76 || parseInt(su) === 77 || parseInt(su) === 78
                         || parseInt(su) === 79) this.foieId.push(su);
                       //  glandes endocrines, de la nutrition, diabète, goitre
-                      else if(parseInt(su) === 80 || parseInt(su) === 81 || parseInt(su) === 82 || parseInt(su) === 83) this.glandeId.push(su);
+                      else if (parseInt(su) === 80 || parseInt(su) === 81 || parseInt(su) === 82 || parseInt(su) === 83) this.glandeId.push(su);
                       //  anémie, drépanocytose
-                      else if(parseInt(su) === 84 || parseInt(su) === 85) this.anemieId.push(su);
+                      else if (parseInt(su) === 84 || parseInt(su) === 85) this.anemieId.push(su);
                       //  coliques néphrétiques,dialyses, troubles urinaires, calcul rénal
-                      else if(parseInt(su) === 86 || parseInt(su) === 87 || parseInt(su) === 88 || parseInt(su) === 89) this.coliqueId.push(su);
+                      else if (parseInt(su) === 86 || parseInt(su) === 87 || parseInt(su) === 88 || parseInt(su) === 89) this.coliqueId.push(su);
                       //  prostate,Fibrome, kyste
-                      else if(parseInt(su) === 90 || parseInt(su) === 91 || parseInt(su) === 92) this.prostateId.push(su);
+                      else if (parseInt(su) === 90 || parseInt(su) === 91 || parseInt(su) === 92) this.prostateId.push(su);
                       //  arthrose, rhumatisme
-                      else if(parseInt(su) === 93 || parseInt(su) === 94) this.arthroseId.push(su);
+                      else if (parseInt(su) === 93 || parseInt(su) === 94) this.arthroseId.push(su);
                       //  yeux, de l’ouïe, du nez
-                      else if(parseInt(su) === 95 || parseInt(su) === 96 || parseInt(su) === 97) this.yeuxId.push(su);
+                      else if (parseInt(su) === 95 || parseInt(su) === 96 || parseInt(su) === 97) this.yeuxId.push(su);
                       //  fracture, traumatisme crânien,brulures, AVC
-                      else if(parseInt(su) === 98 || parseInt(su) === 99 || parseInt(su) === 100 || parseInt(su) === 101) this.fractureId.push(su);
+                      else if (parseInt(su) === 98 || parseInt(su) === 99 || parseInt(su) === 100 || parseInt(su) === 101) this.fractureId.push(su);
                       //  traitement
-                      else if(parseInt(su) === 106 || parseInt(su) === 107 || parseInt(su) === 108 || parseInt(su) === 109 
-                      || parseInt(su) === 110 || parseInt(su) === 111) this.traitementId.push(su);
+                      else if (parseInt(su) === 106 || parseInt(su) === 107 || parseInt(su) === 108 || parseInt(su) === 109
+                        || parseInt(su) === 110 || parseInt(su) === 111) this.traitementId.push(su);
 
                       return;
                     }
@@ -3065,6 +3077,11 @@ export class DevisComponent implements OnInit {
   }
 
 
+  callVoyagePrice() {
+    this.computeVoyagePrice();
+  }
+
+
   onKeyUpDeces(x) { // appending the updated value to the variable
     let tpCapitaldeces = x.target.value.replace(/[^0-9]/g, '');
     if (/^[0-9]+$/.test(tpCapitaldeces)) {
@@ -3113,6 +3130,14 @@ export class DevisComponent implements OnInit {
     // Afficher le 
     this.cotationaccident = primeNette.toLocaleString();
   }
+
+
+
+
+
+
+
+
 
   test() {
     alert("OK");
@@ -3455,18 +3480,18 @@ export class DevisComponent implements OnInit {
       maxHeight: 400,
       allowSearchFilter: true
     };
-    
+
     document.getElementById("modalSante").style.visibility = "hidden";
-    if(document.getElementById("modalmaladie").style.visibility === "hidden"){
-      if(this.reinitWindows){
+    if (document.getElementById("modalmaladie").style.visibility === "hidden") {
+      if (this.reinitWindows) {
         document.getElementById("modalmaladie").style.visibility = "visible"
         $('#modalmaladie').modal('show');
         this.reinitWindows = false;
       }
       else document.getElementById("modalmaladie").style.visibility = "visible"
-    } 
+    }
     else $('#modalmaladie').modal('show');
-    
+
   }
 
   // Display it :
@@ -3476,8 +3501,8 @@ export class DevisComponent implements OnInit {
   }
 
   //
-  checkwindows(){
-    if(document.getElementById("modalmaladie").style.visibility === "hidden"){
+  checkwindows() {
+    if (document.getElementById("modalmaladie").style.visibility === "hidden") {
       $('#modalmaladie').modal('hide');
       $('#modalSante').modal('hide');
       this.reinitWindows = true;
@@ -3858,7 +3883,93 @@ export class DevisComponent implements OnInit {
       }
     );
     this.formData.append("choixtraitement", this.tamponquestionnaire);
-    this.formData.append("commenttraitement", this.precisiontraitement);    
+    this.formData.append("commenttraitement", this.precisiontraitement);
+  }
+
+
+
+  // Compute the price :
+  computeVoyagePrice() {
+
+    // set the date :
+    let momentVariable = moment(this.getNaissVoyage, 'MM-DD-YYYY');
+    let dates = momentVariable.format('YYYY-MM-DD');
+    // : 
+    let momentVariableDepart = moment(this.getJourDepart, 'MM-DD-YYYY');
+    let dateDepart = momentVariableDepart.format('YYYY-MM-DD');
+    let ddt = new Date(dateDepart);
+    // : 
+    let momentVariableRetour = moment(this.getJourRetour, 'MM-DD-YYYY');
+    let dateRetour = momentVariableRetour.format('YYYY-MM-DD');
+    let drr = new Date(dateRetour);
+
+    let dureeVoyage = Math.abs(Math.round(((drr.getTime() - ddt.getTime()) / 1000) / (60 * 60 * 24)));
+
+    var diffYear = (this.getCurrentDate.getTime() - this.getNaissVoyage.getTime()) / 1000;
+    diffYear /= (60 * 60 * 24);
+    let difference = Math.abs(Math.round(diffYear / 365.25));
+
+    // Keep
+    this.cotationvoyage = this.setBackVoyagePrice(Math.abs(diffYear / 365.25), dureeVoyage).toLocaleString();
+  }
+
+  setBackVoyagePrice(age: number, duree: number): number {
+
+    let retour = 0;
+    
+    switch (this.zonedestination) {
+      case 1:
+      case 2:
+      case 3:
+        // ZONE 1 : europe- afrique- moyen orient
+        if(duree <= 7){
+          if(age <= 18) retour = 15401;  
+          else if(age > 18) retour = 19857;
+        } 
+        else if(duree <= 10){
+          if(age <= 18) retour = 18559;  
+          else if(age > 18) retour = 22017;
+        } 
+        else if(duree <= 15){
+          if(age <= 18) retour = 24083;  
+          else if(age > 18) retour = 25861;
+        } 
+        else if(duree <= 21){
+          if(age <= 18) retour = 29619;  
+          else if(age > 18) retour = 32345;
+        }
+        else if(duree <= 32){
+          if(age <= 18) retour = 31865;  
+          else if(age > 18) retour = 33306;
+        }  
+        else if(duree <= 45){
+          if(age <= 18) retour = 41472;  
+          else if(age > 18) retour = 54465;
+        }  
+        else if(duree <= 62){
+          if(age <= 18) retour = 44990;  
+          else if(age > 18) retour = 59365;
+        } 
+        else if(duree <= 93){ // 3 mois
+          if(age <= 18) retour = 53817;  
+          else if(age > 18) retour = 71975;
+        }   
+        else if(duree <= 186){ // 6 mois
+          if(age <= 18) retour = 67940;  
+          else if(age > 18) retour = 92149;
+        }   
+        else if(duree <= 365){ // 1 an
+          if(age <= 18) retour = 79420;  
+          else if(age > 18) retour = 108541;
+        }  
+        else if(duree <= 730){ // 2 an
+          if(age <= 18) retour = 166796;  
+          else if(age > 18) retour = 233373;
+        }  
+        break;
+    }
+    
+    return retour;
   }
 
 }
