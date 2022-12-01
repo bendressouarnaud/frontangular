@@ -1,0 +1,974 @@
+<div class="main-content" style=" margin-top: 0px;">
+    <div class="container-fluid" style=" margin-top: 0px; padding-top: 0px;">
+
+        <!--  Afficher ls CHOIX -->
+        <div class="modal fade" id="modalmaladie" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h4 class="modal-title">S&eacute;lectionner les diff&eacute;rentes maladies </h4>
+                        <!--<button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                <i class="material-icons">clear</i>
+                            </button>-->
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                        <div class="row">
+                            <div class="col-lg-10 col-md-8 col-sm-4">
+                                <ng-multiselect-dropdown [placeholder]="'Choisissez...'" name="blocategorie"
+                                    [settings]="maladieSettings" [data]="maladieList" [(ngModel)]="selectedMaladieItems"
+                                    (onSelect)="onMaladieIItemSelect($event)"
+                                    (onDeSelect)="onMaladieItemDeSelect($event)"
+                                    (onSelectAll)="onMaladieSelectAll($event)">
+                                </ng-multiselect-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <!--<button mat-raised-button type="button" (click)="annulerMaladie()"
+                                class="btn btn-danger">Annuler</button>
+                            &nbsp;&nbsp;&nbsp;-->
+                        <button mat-raised-button type="button" (click)="enregistrerMaladie()"
+                            class="btn btn-success">Enregistrer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SANTE -->
+        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true" data-backdrop="static">
+            <!--  modal-lg  -->
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content" style="background-image: linear-gradient(#F4F0F0, 97%, #B0B6AE); ">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Renseigner les donn&eacute;es de <span style="font-weight: bold;">la
+                                personne</span></h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="checkwindows()">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="padding: 0px; ">
+
+                        <div class="tab-content tab-space tab-subcategories" style="padding: 0px; ">
+                            <div class="tab-pane active" id="link7" style="margin-top: 0px; ">
+
+                                <div class="col-md-12" style="margin-top: 0px; ">
+                                    <div class="card " style="margin-top: 0px; ">
+                                        <div class="card-body ">
+                                            <ul class="nav nav-pills nav-pills-warning" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" data-toggle="tab" href="#link23"
+                                                        role="tablist">
+                                                        Personne
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#link29" role="tablist">
+                                                        Questionnaire m&eacute;dical
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content tab-space">
+                                                <div class="tab-pane active" id="link23"
+                                                    style="background-image: linear-gradient(#F4F0F0, 70%, #E1EAF7);">
+
+                                                    <form method="get" action="/" class="form-horizontal">
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field class="example-full-width"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput [(ngModel)]="nom" name='nom'
+                                                                                type="text" placeholder="Nom"
+                                                                                maxlength="30">
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field class="example-full-width"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput [(ngModel)]="prenom"
+                                                                                name='prenom' type="text"
+                                                                                placeholder="Pr&eacute;nom"
+                                                                                maxlength="50">
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field class="example-full-width"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput [(ngModel)]="contact"
+                                                                                name='contact' type="text"
+                                                                                placeholder="Contact" maxlength="20">
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <!--  TAILLE & Poids  -->
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field
+                                                                            class="example-full-width text-center"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput [(ngModel)]="taille"
+                                                                                name='taille' type="text"
+                                                                                placeholder="Taille (cm)" maxlength="3">
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field
+                                                                            class="example-full-width text-center"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput [(ngModel)]="poids"
+                                                                                name='poids' type="text"
+                                                                                placeholder="Poids (kg)" maxlength="3">
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <div class="col-lg-3 col-md-8 col-sm-4">
+                                                                        <mat-form-field
+                                                                            style="font-size: 16px; font-weight: bold;">
+                                                                            <mat-select placeholder="Groupe sanguin"
+                                                                                [(value)]="groupesanguin"
+                                                                                name="groupesanguin"
+                                                                                style="background-color: #92ABE0;">
+                                                                                <mat-option
+                                                                                    *ngFor="let donnee of listeGroupeSanguin"
+                                                                                    [value]="donnee.idnmd">
+                                                                                    {{ donnee.libelle }}
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                        <!--  Tensioin arterielle  -->
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field
+                                                                            class="example-full-width text-center"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput
+                                                                                [(ngModel)]="tensionarterielle"
+                                                                                name='tensionarterielle' type="text"
+                                                                                placeholder="Tension art&eacute;rielle"
+                                                                                maxlength="7">
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field style="font-size: 16px;">
+                                                                            <input matInput
+                                                                                [matDatepicker]="basicDatepickerSante"
+                                                                                [(ngModel)]="getNaissanceSante"
+                                                                                name="dates"
+                                                                                placeholder="Date de naissance">
+                                                                            <mat-datepicker-toggle matSuffix
+                                                                                [for]="basicDatepickerSante">
+                                                                            </mat-datepicker-toggle>
+                                                                            <mat-datepicker #basicDatepickerSante>
+                                                                            </mat-datepicker>
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field
+                                                                            class="example-full-width text-center"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput [(ngModel)]="lieunaissance"
+                                                                                name='lieunaissance' type="text"
+                                                                                placeholder="Lieu naissance"
+                                                                                maxlength="20">
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <!-- Quartier residence ...   -->
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field
+                                                                            class="example-full-width text-center"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput
+                                                                                [(ngModel)]="quartierresidence"
+                                                                                name='quartierresidence' type="text"
+                                                                                placeholder="Quartier r&eacute;sidence"
+                                                                                maxlength="30">
+                                                                        </mat-form-field>
+                                                                    </div>
+
+
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field
+                                                                            class="example-full-width text-center"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput [(ngModel)]="email"
+                                                                                name='email' type="text"
+                                                                                placeholder="Email" maxlength="20">
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <div class="col-lg-3 col-md-8 col-sm-4">
+                                                                        <mat-form-field style="font-size: 16px;">
+                                                                            <mat-select placeholder="Civilit&eacute;"
+                                                                                [(value)]="civilite" name="civilite">
+                                                                                <mat-option
+                                                                                    *ngFor="let donnee of lesCivilite"
+                                                                                    [value]="donnee.idciv">
+                                                                                    {{ donnee.libelle }}
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <!--  Situation maritale & Autres INFORMATIONS   -->
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+
+                                                                    <div *ngIf="getListeSituationMaritale"
+                                                                        class="col-lg-3 col-md-8 col-sm-4">
+                                                                        <mat-form-field
+                                                                            style="font-size: 16px; font-weight: bold;">
+                                                                            <mat-select placeholder="Situation maritale"
+                                                                                [(value)]="situationmaritale"
+                                                                                name="situationmaritale">
+
+                                                                                <mat-option
+                                                                                    *ngFor="let donnee of listeSituationMaritale"
+                                                                                    [value]="donnee.idnmd">
+                                                                                    {{ donnee.libelle }}
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+
+                                                <div class="tab-pane" id="link29">
+                                                    <table style="width: 100%;" border="1">
+                                                        <tr style="background-color: #d1caca;">
+                                                            <th style="width: 60%;">NATURE</th>
+                                                            <th style="width: 7%;" class="datarubrique">R&eacute;ponse</th>
+                                                            <th style="width: 10%;">Choix</th>
+                                                            <th style="width: 22%;">Pr&eacute;cision</th>
+                                                            
+                                                        </tr>
+                                                        <tr>
+                                                            <td
+                                                                style="background-image: linear-gradient(#d1caf6, 50%, #f0f4ee); font-weight: bold;">
+                                                                Avez-vous &eacute;t&eacute; malade au cours des 2
+                                                                derni&egrave;res ann&eacute;es?</td>
+                                                            <td>
+                                                                <mat-form-field>
+                                                                    <mat-select [(value)]="maladie" name="maladie">
+                                                                        <mat-option [value]="1">Oui</mat-option>
+                                                                        <mat-option [value]="0">Non</mat-option>
+                                                                    </mat-select>
+                                                                </mat-form-field>
+                                                            </td>
+                                                            <td colspan="2">
+                                                                <textarea placeholder="..."
+                                                                    [(ngModel)]="precisionmaladie" name="resume" 
+                                                                    class="form-control"
+                                                                    rows="2" maxlength="100"></textarea>
+                                                            </td>
+                                                        </tr>
+
+                                                        <!--  PERTE POIDS   -->
+                                                        <tr>
+                                                            <td
+                                                                style="background-image: linear-gradient(#d1caf6, 50%, #f0f4ee); font-weight: bold;">
+                                                                Avez-vous souffert ou souffrez-vous de perte de poids,
+                                                                fi&egrave;vres r&eacute;p&eacute;t&eacute;es, fatigue
+                                                                chronique?
+                                                            </td>
+                                                            <td>
+                                                                <mat-form-field>
+                                                                    <mat-select [(value)]="pertepoids"
+                                                                        name="pertepoids">
+                                                                        <mat-option [value]="1">Oui</mat-option>
+                                                                        <mat-option [value]="0">Non</mat-option>
+                                                                    </mat-select>
+                                                                </mat-form-field>
+                                                            </td>
+                                                            <td><button mat-raised-button type="button" (click)="selectchoix(1)"
+                                                                class="btn btn-info">S&eacute;lect.</button></td>
+                                                            <td>
+                                                                <textarea placeholder="..."
+                                                                    [(ngModel)]="precisionpertepoids" name="resume" 
+                                                                    class="form-control"
+                                                                    rows="2" maxlength="100"></textarea>
+                                                            </td>
+                                                        </tr>
+
+
+                                                        <!--  GANGLIONS   -->
+                                                        <tr>
+                                                            <td
+                                                                style="background-image: linear-gradient(#d1caf6, 50%, #f0f4ee); font-weight: bold;">
+                                                                Avez-vous des ganglions, des furoncles, des abc&egrave;s
+                                                                ou des maladies de peau?
+                                                            </td>
+                                                            <td>
+                                                                <mat-form-field>
+                                                                    <mat-select [(value)]="ganglion"
+                                                                        name="ganglionAdherent">
+                                                                        <mat-option [value]="1">Oui</mat-option>
+                                                                        <mat-option [value]="0">Non</mat-option>
+                                                                    </mat-select>
+                                                                </mat-form-field>
+                                                            </td>
+                                                            <td>
+                                                                <button mat-raised-button type="button" (click)="selectchoix(2)"
+                                                                class="btn btn-info">S&eacute;lect.</button>
+                                                            </td>
+                                                            <td>
+                                                                <textarea placeholder="..."
+                                                                    [(ngModel)]="precisionganglions" name="resume" 
+                                                                    class="form-control"
+                                                                    rows="2" maxlength="100"></textarea>
+                                                            </td>
+                                                        </tr>
+
+                                                        <!--  COEUR, INFECTIONS CHRONIQUES    -->
+                                                        <tr>
+                                                            <td
+                                                                style="background-image: linear-gradient(#d1caf6, 50%, #f0f4ee); font-weight: bold;">
+                                                                Avez-vous souffert ou souffrez-vous du coeur, infections
+                                                                chroniques,pneumopathies, tuberculose
+                                                            </td>
+                                                            <td>
+                                                                <mat-form-field>
+                                                                    <mat-select [(value)]="coeur"
+                                                                        name="coeurAdherent">
+                                                                        <mat-option [value]="1">Oui</mat-option>
+                                                                        <mat-option [value]="0">Non</mat-option>
+                                                                    </mat-select>
+                                                                </mat-form-field>
+                                                            </td>
+                                                            <td>
+                                                                <button mat-raised-button type="button" (click)="selectchoix(3)"
+                                                                class="btn btn-info">S&eacute;lect.</button>
+                                                            </td>
+                                                            <td>
+                                                                <textarea placeholder="..."
+                                                                    [(ngModel)]="precisioncoeur" name="resume" 
+                                                                    class="form-control"
+                                                                    rows="2" maxlength="100"></textarea>
+                                                            </td>
+                                                        </tr>
+
+
+                                                        <!--  APPAREIl digestif, foie    -->
+                                                        <tr>
+                                                            <td
+                                                                style="background-image: linear-gradient(#d1caf6, 50%, #f0f4ee); font-weight: bold;">
+                                                                Avez-vous souffert ou souffrez-vous de l’appareil
+                                                                digestif, foie, intestin, et anus
+                                                                (h&eacute;morro&iuml;des, ulc&egrave;re,
+                                                                h&eacute;patite….)?
+                                                            </td>
+                                                            <td>
+                                                                <mat-form-field>
+                                                                    <mat-select [(value)]="foie"
+                                                                        name="foieAdherent">
+                                                                        <mat-option [value]="1">Oui</mat-option>
+                                                                        <mat-option [value]="0">Non</mat-option>
+                                                                    </mat-select>
+                                                                </mat-form-field>
+                                                            </td>
+                                                            <td>
+                                                                <button mat-raised-button type="button" (click)="selectchoix(4)"
+                                                                class="btn btn-info">S&eacute;lect.</button>
+                                                            </td>
+                                                            <td>
+                                                                <textarea placeholder="..."
+                                                                    [(ngModel)]="precisionfoie" name="resume" 
+                                                                    class="form-control"
+                                                                    rows="2" maxlength="100"></textarea>
+                                                            </td>
+                                                        </tr>
+
+
+
+                                                        <!--  GLANDES    -->
+                                                        <tr>
+                                                            <td
+                                                                style="background-image: linear-gradient(#d1caf6, 50%, #f0f4ee); font-weight: bold;">
+                                                                Avez-vous souffert ou souffrez-vous des glandes
+                                                                endocrines, de la
+                                                                nutrition, diab&egrave;te, goitre?
+                                                            </td>
+                                                            <td>
+                                                                <mat-form-field>
+                                                                    <mat-select [(value)]="glande"
+                                                                        name="glandeAdherent">
+                                                                        <mat-option [value]="1">Oui</mat-option>
+                                                                        <mat-option [value]="0">Non</mat-option>
+                                                                    </mat-select>
+                                                                </mat-form-field>
+                                                            </td>
+                                                            <td>
+                                                                <button mat-raised-button type="button" (click)="selectchoix(5)"
+                                                                class="btn btn-info">S&eacute;lect.</button>
+                                                            </td>
+                                                            <td>
+                                                                <textarea placeholder="..."
+                                                                    [(ngModel)]="precisionglande" name="resume" 
+                                                                    class="form-control"
+                                                                    rows="2" maxlength="100"></textarea>
+                                                            </td>
+                                                        </tr>
+
+
+                                                        <!--  ANEMIE    -->
+                                                        <tr>
+                                                            <td
+                                                                style="background-image: linear-gradient(#d1caf6, 50%, #f0f4ee); font-weight: bold;">
+                                                                Avez-vous souffert ou souffrez-vous du sang
+                                                                (an&eacute;mie, dr&eacute;panocytose…)?</td>
+                                                            <td>
+                                                                <mat-form-field>
+                                                                    <mat-select [(value)]="anemie"
+                                                                        name="anemieAdherent">
+                                                                        <mat-option [value]="1">Oui</mat-option>
+                                                                        <mat-option [value]="0">Non</mat-option>
+                                                                    </mat-select>
+                                                                </mat-form-field>
+                                                            </td>
+                                                            <td>
+                                                                <button mat-raised-button type="button" (click)="selectchoix(6)"
+                                                                class="btn btn-info">S&eacute;lect.</button>
+                                                            </td>
+                                                            <td>
+                                                                <textarea placeholder="..."
+                                                                    [(ngModel)]="precisionanemie" name="resume" 
+                                                                    class="form-control"
+                                                                    rows="2" maxlength="100"></textarea>
+                                                            </td>
+                                                        </tr>
+
+
+
+                                                        <!--  COLIQUE    -->
+                                                        <tr>
+                                                            <td
+                                                                style="background-image: linear-gradient(#d1caf6, 50%, #f0f4ee); font-weight: bold;">
+                                                                Avez-vous souffert ou souffrez-vous des reins (coliques
+                                                                n&eacute;phrétiques,dialyses, troubles urinaires, calcul
+                                                                r&eacute;nal…)?
+                                                            </td>
+                                                            <td>
+                                                                <mat-form-field>
+                                                                    <mat-select [(value)]="colique"
+                                                                        name="coliqueAdherent">
+                                                                        <mat-option [value]="1">Oui</mat-option>
+                                                                        <mat-option [value]="0">Non</mat-option>
+                                                                    </mat-select>
+                                                                </mat-form-field>
+                                                            </td>
+                                                            <td>
+                                                                <button mat-raised-button type="button" (click)="selectchoix(7)"
+                                                                class="btn btn-info">S&eacute;lect.</button>
+                                                            </td>
+                                                            <td>
+                                                                <textarea placeholder="..."
+                                                                    [(ngModel)]="precisioncolique" name="resume" 
+                                                                    class="form-control"
+                                                                    rows="2" maxlength="100"></textarea>
+                                                            </td>
+                                                        </tr>
+
+
+                                                        <!--  PROSTATE    -->
+                                                        <tr>
+                                                            <td
+                                                                style="background-image: linear-gradient(#d1caf6, 50%, #f0f4ee); font-weight: bold;">
+                                                                Avez-vous souffert ou souffrez-vous de l’appareil
+                                                                génital (prostate,Fibrome, kyste…..)?
+                                                            </td>
+                                                            <td>
+                                                                <mat-form-field>
+                                                                    <mat-select [(value)]="prostate"
+                                                                        name="prostateAdherent">
+                                                                        <mat-option [value]="1">Oui</mat-option>
+                                                                        <mat-option [value]="0">Non</mat-option>
+                                                                    </mat-select>
+                                                                </mat-form-field>
+                                                            </td>
+                                                            <td>
+                                                                <button mat-raised-button type="button" (click)="selectchoix(8)"
+                                                                class="btn btn-info">S&eacute;lect.</button>
+                                                            </td>
+                                                            <td>
+                                                                <textarea placeholder="..."
+                                                                    [(ngModel)]="precisionprostate" name="resume" 
+                                                                    class="form-control"
+                                                                    rows="2" maxlength="100"></textarea>
+                                                            </td>
+                                                        </tr>
+
+
+
+                                                        <!--  ENCEINTE    -->
+                                                        <tr>
+                                                            <td
+                                                                style="background-image: linear-gradient(#d1caf6, 50%, #f0f4ee); font-weight: bold;">
+                                                                Etes vous enceinte ?
+                                                            </td>
+                                                            <td>
+                                                                <mat-form-field>
+                                                                    <mat-select [(value)]="enceinte"
+                                                                        name="enceinteAdherent">
+                                                                        <mat-option [value]="1">Oui</mat-option>
+                                                                        <mat-option [value]="0">Non</mat-option>
+                                                                    </mat-select>
+                                                                </mat-form-field>
+                                                            </td>
+                                                            <td colspan="2">
+                                                                <textarea placeholder="..."
+                                                                    [(ngModel)]="precisionenceinte" name="resume" 
+                                                                    class="form-control"
+                                                                    rows="2" maxlength="100"></textarea>
+                                                            </td>
+                                                        </tr>
+
+
+
+                                                        <!--  ARTHROSE    -->
+                                                        <tr>
+                                                            <td
+                                                                style="background-image: linear-gradient(#d1caf6, 50%, #f0f4ee); font-weight: bold;">
+                                                                Avez-vous souffert ou souffrez-vous des os ou des
+                                                                articulations (arthrose, rhumatisme….)?
+                                                            </td>
+                                                            <td>
+                                                                <mat-form-field>
+                                                                    <mat-select [(value)]="arthrose"
+                                                                        name="arthroseAdherent">
+                                                                        <mat-option [value]="1">Oui</mat-option>
+                                                                        <mat-option [value]="0">Non</mat-option>
+                                                                    </mat-select>
+                                                                </mat-form-field>
+                                                            </td>
+                                                            <td>
+                                                                <button mat-raised-button type="button" (click)="selectchoix(9)"
+                                                                class="btn btn-info">S&eacute;lect.</button>
+                                                            </td>
+                                                            <td>
+                                                                <textarea placeholder="..."
+                                                                    [(ngModel)]="precisionarthrose" name="resume" 
+                                                                    class="form-control"
+                                                                    rows="2" maxlength="100"></textarea>
+                                                            </td>
+                                                        </tr>
+
+
+
+                                                        <!--  YEUX    -->
+                                                        <tr>
+                                                            <td
+                                                                style="background-image: linear-gradient(#d1caf6, 50%, #f0f4ee); font-weight: bold;">
+                                                                Avez-vous souffert ou souffrez-vous des yeux, de
+                                                                l’ou&iuml;e, du nez ?
+                                                            </td>
+                                                            <td>
+                                                                <mat-form-field>
+                                                                    <mat-select [(value)]="yeux"
+                                                                        name="yeuxAdherent">
+                                                                        <mat-option [value]="1">Oui</mat-option>
+                                                                        <mat-option [value]="0">Non</mat-option>
+                                                                    </mat-select>
+                                                                </mat-form-field>
+                                                            </td>
+                                                            <td>
+                                                                <button mat-raised-button type="button" (click)="selectchoix(10)"
+                                                                class="btn btn-info">S&eacute;lect.</button>
+                                                            </td>
+                                                            <td>
+                                                                <textarea placeholder="..."
+                                                                    [(ngModel)]="precisionyeux" name="resume" 
+                                                                    class="form-control"
+                                                                    rows="2" maxlength="100"></textarea>
+                                                            </td>
+                                                        </tr>
+
+
+
+
+                                                        <!--  LUNETTES    -->
+                                                        <tr>
+                                                            <td
+                                                                style="background-image: linear-gradient(#d1caf6, 50%, #f0f4ee); font-weight: bold;">
+                                                                Portez-vous des lunettes ?
+                                                            </td>
+                                                            <td>
+                                                                <mat-form-field>
+                                                                    <mat-select [(value)]="lunettes"
+                                                                        name="lunettesAdherent">
+                                                                        <mat-option [value]="1">Oui</mat-option>
+                                                                        <mat-option [value]="0">Non</mat-option>
+                                                                    </mat-select>
+                                                                </mat-form-field>
+                                                            </td>
+                                                            <td colspan="2">
+                                                                <textarea placeholder="..."
+                                                                    [(ngModel)]="precisionlunette" name="resume" 
+                                                                    class="form-control"
+                                                                    rows="2" maxlength="100"></textarea>
+                                                            </td>
+                                                        </tr>
+
+
+
+                                                        <!--  hospitalise    -->
+                                                        <tr>
+                                                            <td
+                                                                style="background-image: linear-gradient(#d1caf6, 50%, #f0f4ee); font-weight: bold;">
+                                                                Avez-vous d&eacute;j&agrave; &eacute;t&eacute;
+                                                                hospitalis&eacute;,victime d’un accident grave
+                                                                (fracture, traumatisme cr&acirc;nien,brulures, AVC) ?
+                                                            </td>
+                                                            <td>
+                                                                <mat-form-field>
+                                                                    <mat-select [(value)]="hospitalise" name="hospitaliseAdherent">
+                                                                        <mat-option [value]="1">Oui</mat-option>
+                                                                        <mat-option [value]="0">Non</mat-option>
+                                                                    </mat-select>
+                                                                </mat-form-field>
+                                                            </td>
+                                                            <td>
+                                                                <button mat-raised-button type="button" (click)="selectchoix(11)"
+                                                                class="btn btn-info">S&eacute;lect.</button>
+                                                            </td>
+                                                            <td>
+                                                                <textarea placeholder="..."
+                                                                    [(ngModel)]="precisionfracture" name="resume" 
+                                                                    class="form-control"
+                                                                    rows="2" maxlength="100"></textarea>
+                                                            </td>
+                                                        </tr>
+
+
+
+                                                        <!--  traitement    -->
+                                                        <tr>
+                                                            <td
+                                                                style="background-image: linear-gradient(#d1caf6, 50%, #f0f4ee); font-weight: bold;">
+                                                                Suivez-vous actuellement un traitement?
+                                                            </td>
+                                                            <td>
+                                                                <mat-form-field>
+                                                                    <mat-select [(value)]="traitement"
+                                                                        name="traitementAdherent">
+                                                                        <mat-option [value]="1">Oui</mat-option>
+                                                                        <mat-option [value]="0">Non</mat-option>
+                                                                    </mat-select>
+                                                                </mat-form-field>
+                                                            </td>
+                                                            <td>
+                                                                <button mat-raised-button type="button" (click)="selectchoix(12)"
+                                                                class="btn btn-info">S&eacute;lect.</button>
+                                                            </td>
+                                                            <td>
+                                                                <textarea placeholder="..."
+                                                                    [(ngModel)]="precisiontraitement" name="resume" 
+                                                                    class="form-control"
+                                                                    rows="2" maxlength="100"></textarea>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button mat-raised-button type="button" (click)="enregData()"
+                            class="btn btn-info">Enregistrer</button> <!-- data-dismiss="modal"  -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--  Supprimer ce RDV  -->
+        <div class="modal fade" id="modaldelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Confirmer la suppression</h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                        <p>Souhaitez-vous supprimer ce RDV ? </p>
+                        <p style="color: crimson; font-weight: bold;">{{ information }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button mat-raised-button type="button" (click)="supprimerRdv()"
+                            class="btn btn-warning">Supprimer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row" style=" margin-top: 0px;">
+            <div class="col-md-12 ml-auto mr-auto">
+                <div class="page-categories">
+                    <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/responsable/accueil" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/icone_accueil.png" width="85" height="70" />
+                                </i> Accueil
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/responsable/rdv" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/rdvweb.jpg" width="85" height="70" />
+                                </i> Gest. RDV
+                            </a>
+                        </li>
+						
+						<li class="nav-item">
+                            <a class="nav-link active icone" href="#/responsable/devis" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/devis.jpg" width="85" height="70" />
+                                </i> Devis
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/responsable/actcommerciale" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/commercial.jpg" width="85" height="70" />
+                                </i> Act. commerciale
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link icone" href="#/responsable/inspecteur" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/utilisateur.png" width="85" height="70" />
+                                </i> Inspecteur
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/responsable/rapport" role="tablist">
+                                <i class="material-icons"><img src="assets/img/rapportpng.png" width="85"
+                                        height="70" /></i> Rapports
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/responsable/agenda" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/agenda.jpg" width="85" height="70" />
+                                </i> Agenda
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/responsable/reunion" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/reunion.jpg" width="85" height="70" />
+                                </i> R&eacute;union
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/responsable/performance" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/performances.jpg" width="85" height="70" />
+                                </i> Performance
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-12" style="margin-top:70px;">
+            <div style='text-align:center; margin-top:20px'>
+                <button class="btn btn-warning btn-round" (click)="afficher()" id="btconj">
+                    <i class="material-icons">group</i> Ajouter
+                </button>
+            </div>
+        </div>
+
+
+        <!--  Add -->
+        <div class="tab-content tab-space tab-subcategories" style="padding-top: 0px; ">
+            <div class="tab-pane active" id="link7" style="padding-top: 0px; ">
+
+                <div class="col-md-12">
+                    <div class="card ">
+                        <div class="card-body ">
+                            <ul class="nav nav-pills nav-pills-warning" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#link3" role="tablist">
+                                        Adh&eacute;rent
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#link4" role="tablist">
+                                        B&eacute;n&eacute;ficiaires
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content tab-space">
+                                <div class="tab-pane active" id="link3">
+
+                                    <div class="card" style="border: 1px solid black;">
+                                        <div class="card-body">
+
+                                            <div class="material-datatables">
+                                                <table id="datatableAuto"
+                                                    class="table table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Nom</th>
+                                                            <th class="text-center">Formule</th>
+                                                            <th class="text-center">Couverture</th>
+                                                            <th class="text-center">Date de cr&eacute;ation</th>
+                                                            <th class="text-center">Cotation</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody *ngIf="this.getResume">
+                                                        <tr *ngFor="let donnee of listeResumeFamille">
+                                                            <td style="font-weight: bold;">{{ donnee.nom }} </td>
+                                                            <td class="text-center"
+                                                                style="font-weight: bold; background-image: linear-gradient(#F1F9FA, 50%, #7eb384);">
+                                                                {{ donnee.formule }}</td>
+                                                            <td class="text-center"
+                                                                style="background-image: linear-gradient(#F1F9FA, 50%, #BED5F0);">
+                                                                <span style="font-weight: bold; " class="displaycout">
+                                                                    {{ donnee.couverture }}
+                                                                </span>
+                                                            </td>
+                                                            <td class="text-center" style="font-weight: bold;">{{
+                                                                donnee.datecreation }} </td>
+                                                            <td class="text-center"
+                                                                style="font-weight: bold; color:#de0303">{{
+                                                                donnee.cotation }} </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                        <!-- end content-->
+                                    </div>
+                                </div>
+
+
+                                <div class="tab-pane" id="link4">
+                                    <div class="card" style="border: 1px solid black;">
+                                        <div class="card-body">
+
+                                            <div class="material-datatables">
+                                                <table id="datatableBeneficiare"
+                                                    class="table table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Nom</th>
+                                                            <th class="text-center">Contact</th>
+                                                            <th class="text-center">Groupe sanguin</th>
+                                                            <th class="text-center">Date de naissance</th>
+                                                            <th class="text-center">Civili&eacute;</th>
+                                                            <th class="disabled-sorting text-center">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody *ngIf="this.getBeneficiaire">
+                                                        <tr *ngFor="let donnee of listeBeneficiaire">
+                                                            <td style="font-weight: bold;">{{ donnee.nom }} </td>
+                                                            <td class="text-center">{{ donnee.contact }}</td>
+                                                            <td class="text-center">{{ donnee.groupesanguin }}</td>
+                                                            <td class="text-center">{{ donnee.datenaissance }}</td>
+                                                            <td class="text-center">{{ donnee.genre }}</td>
+                                                            <td class="text-center">
+
+                                                                <a title="Afficher les donn&eacute;es "
+                                                                    (click)="displaybeneficiaire( donnee.idenf )"
+                                                                    class="btn btn-link btn-warning btn-just-icon edit"><i
+                                                                        class="material-icons">save_as</i></a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                        <!-- end content-->
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

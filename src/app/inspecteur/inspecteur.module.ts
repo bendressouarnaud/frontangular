@@ -22,10 +22,12 @@ import { ClientsComponent } from './clients/clients.component';
 import { StatdevisequipeComponent } from './statdevisequipe/statdevisequipe.component';
 import { StatdevisattenteComponent } from './statdevisattente/statdevisattente.component';
 import { UserdetailsComponent } from './userdetails/userdetails.component';
+import { SantefamilleComponent } from './santefamille/santefamille.component';
+import { SanteavantageComponent } from './santeavantage/santeavantage.component';
 
 
 @NgModule({
-  declarations: [AccueilComponent, SuperviseurComponent, RdvComponent, RapportComponent, AgendaComponent, ReunionComponent, PerformanceComponent, ActivitecommercialeComponent, DevisComponent, ClientsComponent, StatdevisequipeComponent, StatdevisattenteComponent, UserdetailsComponent],
+  declarations: [AccueilComponent, SuperviseurComponent, RdvComponent, RapportComponent, AgendaComponent, ReunionComponent, PerformanceComponent, ActivitecommercialeComponent, DevisComponent, ClientsComponent, StatdevisequipeComponent, StatdevisattenteComponent, UserdetailsComponent, SantefamilleComponent, SanteavantageComponent],
   imports: [
     CommonModule,
     InspecteurRoutingModule,

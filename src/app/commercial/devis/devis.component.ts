@@ -4,6 +4,7 @@ import { Activite } from 'src/app/mesbeans/activite';
 import { Activiteia } from 'src/app/mesbeans/activiteia';
 import { BeanDonneDevis } from 'src/app/mesbeans/beandonneedevis';
 import { Civilite } from 'src/app/mesbeans/civilite';
+import { ClientFullRest } from 'src/app/mesbeans/clentrestnew';
 import { ClientRest } from 'src/app/mesbeans/clientrest';
 import { Detailequipe } from 'src/app/mesbeans/detailequipe';
 import { Detailtable } from 'src/app/mesbeans/detailnomenclature';
@@ -11,6 +12,7 @@ import { Indemnitemax } from 'src/app/mesbeans/indemnitemax';
 import { Motifpaiement } from 'src/app/mesbeans/motifpaiement';
 import { Paysdestination } from 'src/app/mesbeans/paysdestination';
 import { RestClient } from 'src/app/mesbeans/restclientcom';
+import { RestClientFull } from 'src/app/mesbeans/restclientfull';
 import { RestPolice } from 'src/app/mesbeans/restpolice';
 import { StatsDevisUser } from 'src/app/mesbeans/statsdevisuser';
 import { UtilisateurInfo } from 'src/app/mesbeans/utilisateurinfo';
@@ -79,7 +81,7 @@ export class DevisComponent implements OnInit {
   dropdownSettings = {};
   tempSelectedItems = [];
   listeClients: UtilisateurInfo[];
-  listeDesClients: RestClient[];
+  listeDesClients:RestClientFull[];// ClientFullRest[];
   membresId = [];
   clientRest = new ClientRest();
   //
@@ -574,20 +576,13 @@ export class DevisComponent implements OnInit {
             this.listeDesClients = resultat;
           }
 
-          // Init 
-          /*this.tempUsers.push({
-            item_id: 0,
-            item_text: 'Aucun choix'
-          });
-          */
-
-          // Browse :
+          // Browse : this.listeDesClients[i].RAISONSOCIALE !== undefined ? this.listeDesClients[i].RAISONSOCIALE.toString() : ""
           if (resultat.length > 0) {
             for (var i = 0; i < this.listeDesClients.length; i++) {
               var deq = new Detailequipe();
               this.tempUsers.push({
-                item_id: this.listeDesClients[i].IdClient,
-                item_text: this.listeDesClients[i].RAISONSOCIALE.toString()
+                item_id: this.listeDesClients[i].idclient,
+                item_text: this.listeDesClients[i].raisonsociale.toString()
               });
             }
           }
@@ -613,12 +608,12 @@ export class DevisComponent implements OnInit {
   // Display Customer name :
   displayCustomerName() {
     for (var customer of this.listeDesClients) {
-      if (parseInt(this.idCliendDone) == customer.IdClient) {
+      if (parseInt(this.idCliendDone) == customer.idclient) {
 
         // set TELEPHONE Id :
-        this.clientRest.contact = customer.TELEP1;
+        this.clientRest.contact = customer.contact;
 
-        var tampNom = customer.RAISONSOCIALE.split(" ");
+        var tampNom = customer.raisonsociale.split(" ");
         switch (tampNom.length) {
           case 1:
             this.clientRest.nom = tampNom[0];
@@ -643,8 +638,10 @@ export class DevisComponent implements OnInit {
             this.clientRest.nom = tampNom[0];
             this.clientRest.prenom = tampNom[1];
             break;
-
         }
+
+        // From there, pick client 'idcli' :
+        this.idClient = customer.idcliloc.toString();   
 
         // close doors : 
         break;
@@ -726,13 +723,16 @@ export class DevisComponent implements OnInit {
 
   getlespolicesaccidentbyclient(): void {
     this.getPoliceAccident = false;
-    this.meswebservices.getlespolicesbyclient(this.idCliendDone).toPromise()
+    //this.meswebservices.getlespolicesbyclient(this.idCliendDone).toPromise()
+    this.meswebservices.getNewlespolicesbyclient(this.idCliendDone, this.idClient.toString()).toPromise()
       .then(
         resultat => {
-          this.listePolices = resultat;
-          // Pick first value of the list :
-          if (this.setPolice.trim().length == 0) this.setPolice = resultat[0].Police.toString();
-          this.getPoliceAccident = true;
+          if(resultat !== null){
+            this.listePolices = resultat;
+            // Pick first value of the list :
+            if (this.setPolice.trim().length == 0) this.setPolice = resultat[0].Police.toString();
+            this.getPoliceAccident = true;
+          }
         }
       )
   }
@@ -1179,6 +1179,14 @@ export class DevisComponent implements OnInit {
     this.clientRest.prenom = "";
     this.clientRest.contact = "";
     this.clientRest.email = "";
+    //
+    this.idCliendDone = "0";
+    this.idClient = "0";
+    this.setPolice = "";
+    this.getPolice = false;
+
+    this.presencePhoto = false;
+    this.presenceCni = false;
   }
 
 
@@ -1210,10 +1218,8 @@ export class DevisComponent implements OnInit {
   // SANTE
   afficherSante() {
     // Clear :
-    //if (this.formData.has("photo")) this.formData.delete("photo");
-    //if (this.formData.has("cni")) this.formData.delete("cni");
-    //this.presencePhoto = false;
-    //this.presenceCni = false;
+    if (this.formData.has("photo")) this.formData.delete("photo");
+    if (this.formData.has("cni")) this.formData.delete("cni");
 
     // Reset :
     this.membresId = [];
@@ -1285,6 +1291,7 @@ export class DevisComponent implements OnInit {
     this.prepareFields();
 
     $('#modalAccident').modal();
+    this.computeAccidentPrice();
   }
 
   // Auto :
@@ -1299,8 +1306,6 @@ export class DevisComponent implements OnInit {
     this.puissancevehicule = "0";
     this.chargeutile = "0";
     this.id_devisauto = 0;
-    this.idCliendDone = "0";
-    this.idClient = "0";
     //
     this.clientRest.origine = 0;
     this.clientRest.observation = "";
@@ -2444,10 +2449,10 @@ export class DevisComponent implements OnInit {
             this.membresId = [];
             // Set the drop down list values :
             for (var i = 0; i < this.listeDesClients.length; i++) {
-              if (parseInt(this.idCliendDone) == this.listeDesClients[i].IdClient) {
+              if (parseInt(this.idCliendDone) == this.listeDesClients[i].idclient) {
                 this.membresId.push({
-                  item_id: this.listeDesClients[i].IdClient.toString(),
-                  item_text: this.listeDesClients[i].RAISONSOCIALE.toString()
+                  item_id: this.listeDesClients[i].idclient.toString(),
+                  item_text: this.listeDesClients[i].raisonsociale.toString()
                 });
                 break;
               }
@@ -2539,10 +2544,10 @@ export class DevisComponent implements OnInit {
             this.membresId = [];
             // Set the drop down list values :
             for (var i = 0; i < this.listeDesClients.length; i++) {
-              if (parseInt(this.idCliendDone) == this.listeDesClients[i].IdClient) {
+              if (parseInt(this.idCliendDone) == this.listeDesClients[i].idclient) {
                 this.membresId.push({
-                  item_id: this.listeDesClients[i].IdClient.toString(),
-                  item_text: this.listeDesClients[i].RAISONSOCIALE.toString()
+                  item_id: this.listeDesClients[i].idclient.toString(),
+                  item_text: this.listeDesClients[i].raisonsociale.toString()
                 });
                 break;
               }
@@ -2566,6 +2571,7 @@ export class DevisComponent implements OnInit {
 
           //
           $('#modalAccident').modal();
+          this.computeAccidentPrice();
         },
         (error) => {
         }
@@ -2621,10 +2627,10 @@ export class DevisComponent implements OnInit {
           if (parseInt(this.idCliendDone) > 0) {
             // Set the drop down list values :
             for (var i = 0; i < this.listeDesClients.length; i++) {
-              if (parseInt(this.idCliendDone) == this.listeDesClients[i].IdClient) {
+              if (parseInt(this.idCliendDone) == this.listeDesClients[i].idclient) {
                 this.membresId.push({
-                  item_id: this.listeDesClients[i].IdClient.toString(),
-                  item_text: this.listeDesClients[i].RAISONSOCIALE.toString()
+                  item_id: this.listeDesClients[i].idclient.toString(),
+                  item_text: this.listeDesClients[i].raisonsociale.toString()
                 });
                 break;
               }
@@ -2706,10 +2712,10 @@ export class DevisComponent implements OnInit {
           if (parseInt(this.idCliendDone) > 0) {
             // Set the drop down list values :
             for (var i = 0; i < this.listeDesClients.length; i++) {
-              if (parseInt(this.idCliendDone) == this.listeDesClients[i].IdClient) {
+              if (parseInt(this.idCliendDone) == this.listeDesClients[i].idclient) {
                 this.membresId.push({
-                  item_id: this.listeDesClients[i].IdClient.toString(),
-                  item_text: this.listeDesClients[i].RAISONSOCIALE.toString()
+                  item_id: this.listeDesClients[i].idclient.toString(),
+                  item_text: this.listeDesClients[i].raisonsociale.toString()
                 });
                 break;
               }
@@ -2863,10 +2869,10 @@ export class DevisComponent implements OnInit {
           if (parseInt(this.idCliendDone) > 0) {
             // Set the drop down list values :
             for (var i = 0; i < this.listeDesClients.length; i++) {
-              if (parseInt(this.idCliendDone) == this.listeDesClients[i].IdClient) {
+              if (parseInt(this.idCliendDone) == this.listeDesClients[i].idclient) {
                 this.membresId.push({
-                  item_id: this.listeDesClients[i].IdClient.toString(),
-                  item_text: this.listeDesClients[i].RAISONSOCIALE.toString()
+                  item_id: this.listeDesClients[i].idclient.toString(),
+                  item_text: this.listeDesClients[i].raisonsociale.toString()
                 });
                 break;
               }
@@ -3072,7 +3078,8 @@ export class DevisComponent implements OnInit {
     this.capitaldeces = this.capitaldeces.replace(/[^0-9]/g, '');
     if (/^[0-9]+$/.test(this.capitaldeces)) {
       // Call to display the PRICE :
-      this.computeAccidentPrice(parseInt(this.capitaldeces));
+      //this.computeAccidentPrice(parseInt(this.capitaldeces));
+      this.computeAccidentPrice();
     }
   }
 
@@ -3082,16 +3089,90 @@ export class DevisComponent implements OnInit {
   }
 
 
-  onKeyUpDeces(x) { // appending the updated value to the variable
-    let tpCapitaldeces = x.target.value.replace(/[^0-9]/g, '');
+  onKeyUpDeces() { // appending the updated value to the variable
+    /*let tpCapitaldeces = x.target.value.replace(/[^0-9]/g, '');
     if (/^[0-9]+$/.test(tpCapitaldeces)) {
       // Call to display the PRICE :
       this.computeAccidentPrice(parseInt(tpCapitaldeces));
-    }
+    }*/
+    this.computeAccidentPrice();
   }
 
+  onKeyUpInfirmite() { // appending the updated value to the variable
+    //alert("capitalinfirmite : "+this.capitalinfirmite);
+    this.computeAccidentPrice();
+  }
+
+
+  // Process FRAIS de TRAITEMENT : 125.000
+  processTraitement(classe : string) : number {
+    let ret = 0;
+    let lockButton = false;
+
+    if(classe === '01'){
+      if(this.fraisdetraitement == 10) ret = 4000; // 125.000
+      else if(this.fraisdetraitement == 11) ret = 6000; // 250.000
+      else if(this.fraisdetraitement == 12) ret = 9500; // 500.000
+      else if(this.fraisdetraitement == 13) ret = 12500; // 750.000
+      else if(this.fraisdetraitement == 14) ret = 15750; // 1.000.000
+      else ret = 0; // aucun
+    }
+    else if(classe === '02'){
+      if(this.fraisdetraitement == 10) ret = 6000; // 125.000
+      else if(this.fraisdetraitement == 11) ret = 10000; // 250.000
+      else if(this.fraisdetraitement == 12) ret = 15000; // 500.000
+      else if(this.fraisdetraitement == 13) ret = 18000; // 750.000
+      else if(this.fraisdetraitement == 14) ret = 21500; // 1.000.000
+      else ret = 0; // aucun
+    }
+    else if(classe === '03'){
+      if(this.fraisdetraitement == 10) ret = 8500; // 125.000
+      else if(this.fraisdetraitement == 11) ret = 12500; // 250.000
+      else if(this.fraisdetraitement == 12) ret = 18000; // 500.000
+      else if(this.fraisdetraitement == 13) ret = 23500; // 750.000
+      else if(this.fraisdetraitement == 14) ret = 32000; // 1.000.000
+      else ret = 0; // aucun
+    }
+    else if(classe === '04'){
+      if(this.fraisdetraitement == 10) ret = 11000; // 125.000
+      else if(this.fraisdetraitement == 11) ret = 16000; // 250.000
+      else if(this.fraisdetraitement == 12) ret = 23500; // 500.000
+      else if(this.fraisdetraitement == 13) ret = 30500; // 750.000
+      else if(this.fraisdetraitement == 14) ret = 40500; // 1.000.000
+      else ret = 0; // aucun
+    }
+    else if(classe === '05'){
+      if(this.fraisdetraitement == 10) ret = 14500; // 125.000
+      else if(this.fraisdetraitement == 11) ret = 19500; // 250.000
+      else if(this.fraisdetraitement == 12) ret = 27000; // 500.000
+      else if(this.fraisdetraitement == 13 || this.fraisdetraitement == 14){
+        // 750.000 - 1.000.000 
+        lockButton = true;
+      } 
+      else ret = 0; // aucun
+    }
+
+    if(lockButton) $("#btsaveaccident").prop("disabled", true); // DISABLE
+    else $("#btsaveaccident").prop("disabled", false); // ENABLE
+    return ret;
+  }
+
+
+
   // Compute the price :
-  computeAccidentPrice(capdeces: number) {
+  computeAccidentPrice() {
+
+    let tpDeces = this.capitaldeces.replace(/[^0-9]/g, '');
+    let capdeces = 0;
+    try{
+      if (/^[0-9]+$/.test(tpDeces)) {
+        // Call to display the PRICE :
+        capdeces = parseInt(tpDeces);
+      }
+    }
+    catch(e){}
+
+
     let codeClasse = '00';
     this.listeActiviteIa.forEach(
       d => {
@@ -3124,11 +3205,33 @@ export class DevisComponent implements OnInit {
       if (tauxClasse <= 2) tauxClasse = 2;
     }
 
-    // Prime nette :
-    let primeNette: Number = 0;
-    primeNette = (capdeces * (1 / 1000)) * tauxClasse * tauxAge;
+    // Prime nette based on CAPITAL DECES :
+    let primeNette = 0;
+    //primeNette = (capdeces * (1 / 1000)) * tauxClasse * tauxAge;
+
+    // Prime nette based on INFIRMITE PERMANENTE
+    let tpInfirmite = this.capitalinfirmite.replace(/[^0-9]/g, '');
+    let valeurInfirmite = 0;
+    let primeInfirmite = 0;
+    let primeDeces = 0;
+    try{
+      if (/^[0-9]+$/.test(tpInfirmite)) {
+        // Call to display the PRICE :
+        valeurInfirmite = parseInt(tpInfirmite);
+      }
+    }
+    catch(e){}
+
+    primeInfirmite = (valeurInfirmite * (1 / 1000)) * tauxClasse * tauxAge;
+    primeDeces = (capdeces * (1 / 1000)) * tauxClasse * tauxAge;
+    let montantTraitement = this.processTraitement(codeClasse);
+
+    primeNette = primeDeces + primeInfirmite + montantTraitement;
+    let taxe =  primeNette * 0.145 ;
+    let primeTTC = primeNette + taxe;
+
     // Afficher le 
-    this.cotationaccident = primeNette.toLocaleString();
+    this.cotationaccident = primeTTC.toLocaleString();
   }
 
 

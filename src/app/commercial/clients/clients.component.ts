@@ -76,15 +76,6 @@ export class ClientsComponent implements OnInit {
           let file = new Blob([resultat], { type: 'image/jpeg' });
           let fileUrl = window.URL.createObjectURL(file);
 
-          /*
-          const link = document.createElement('a');
-          link.href = fileUrl;
-          var filename = "fichecni_" + idcli.toString() + ".jpeg";
-          link.setAttribute('download', filename);
-          document.body.appendChild(link);
-          link.click();
-          */
-
           // Display :
           this.zoom = 0;
           if (this.largeurInitial > 0) {
@@ -114,7 +105,6 @@ export class ClientsComponent implements OnInit {
           //alert("Size : "+resultat.size);
           let file = new Blob([resultat], { type: 'image/jpeg' });
           let fileUrl = window.URL.createObjectURL(file);
-
           
           const link = document.createElement('a');
           link.href = fileUrl;
@@ -122,19 +112,6 @@ export class ClientsComponent implements OnInit {
           link.setAttribute('download', filename);
           document.body.appendChild(link);
           link.click();
-          
-
-          // Display :
-          /*this.zoom = 0;
-          if (this.largeurInitial > 0) {
-            // we reset if PICTURE has been already manipulated :
-            $('#cniid').css({ 'width': (this.largeurInitial.toString() + 'px'), 'height': (this.hauteurInitial.toString() + 'px') });
-          }
-
-          this.photocustom = this._sanitizer.bypassSecurityTrustResourceUrl(fileUrl);
-          $('#modalphotohard').modal();*/
-
-
         },
         (error) => {
         }

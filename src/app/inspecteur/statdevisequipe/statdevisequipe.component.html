@@ -273,7 +273,7 @@
                                                             <td class="text-center" >{{ donnee.secteur }}</td>
                                                             <td class="text-center" >{{ donnee.duree }}</td>
                                                             <td class="text-center" >{{ donnee.offre }}</td>
-                                                            <td class="text-center" >{{ donnee.cout }}</td>
+                                                            <td class="text-center" style="font-weight: bold; color: #2a2deb;" >{{ donnee.cout }}</td>
                                                             <td class="text-center" >{{ donnee.dates }}</td>
                                                             <td class="text-center">
 
@@ -306,7 +306,7 @@
                                                         <tr>
                                                             <th>Commercial</th>
                                                             <th>Client</th>
-                                                            <th class="text-center">Secteur</th>
+                                                            <th class="text-center">Cotation</th>
                                                             <th class="text-center">Destination</th>
                                                             <th class="text-center">Date retour</th>
                                                             <th class="text-center">Date de cr&eacute;ation</th>
@@ -317,7 +317,7 @@
                                                         <tr *ngFor="let donnee of listeAutoClientBeanComVoyage">
                                                             <td style="font-weight: bold;">{{ donnee.commercial }} </td>
                                                             <td style="font-weight: bold;">{{ donnee.client }} </td>
-                                                            <td class="text-center" >{{ donnee.secteur }}</td>
+                                                            <td class="text-center" style="font-weight: bold; color: #2a2deb;">{{ donnee.cout }}</td>
                                                             <td class="text-center" >{{ donnee.duree }}</td>
                                                             <td class="text-center" >{{ donnee.offre }}</td>
                                                             <td class="text-center" >{{ donnee.dates }}</td>
@@ -351,7 +351,7 @@
                                                             <th>Commercial</th>
                                                             <th>Client</th>
                                                             <th class="text-center">Secteur</th>
-                                                            <th class="text-center">Frais de traitement</th>
+                                                            <th class="text-center">Cotation</th>
                                                             <th class="text-center">Date de cr&eacute;ation</th>
                                                             <th class="disabled-sorting text-center">Actions</th>
                                                         </tr>
@@ -361,7 +361,7 @@
                                                             <td style="font-weight: bold;">{{ donnee.commercial }} </td>
                                                             <td style="font-weight: bold;">{{ donnee.client }} </td>
                                                             <td class="text-center" >{{ donnee.secteur }}</td>
-                                                            <td class="text-center" >{{ donnee.offre }}</td>
+                                                            <td class="text-center" style="font-weight: bold; color: #2a2deb;">{{ donnee.cout }}</td>
                                                             <td class="text-center" >{{ donnee.dates }}</td>
                                                             <td class="text-center">
 
@@ -442,7 +442,7 @@
                                                         <tr>
                                                             <th>Commercial</th>
                                                             <th>Client</th>
-                                                            <th class="text-center">Secteur</th>
+                                                            <th class="text-center">Cotation</th>
                                                             <th class="text-center">Formule</th>
                                                             <th class="text-center">Date de cr&eacute;ation</th>
                                                             <th class="disabled-sorting text-center">Actions</th>
@@ -452,7 +452,7 @@
                                                         <tr *ngFor="let donnee of listeSanteClientBeanCom">
                                                             <td style="font-weight: bold;">{{ donnee.commercial }} </td>
                                                             <td style="font-weight: bold;">{{ donnee.client }} </td>
-                                                            <td class="text-center" >{{ donnee.secteur }}</td>
+                                                            <td class="text-center" style="color: #2a2deb; font-weight: bold;">{{ donnee.secteur }}</td>
                                                             <td class="text-center" >{{ donnee.formule }}</td>
                                                             <td class="text-center" >{{ donnee.dates }}</td>
                                                             <td class="text-center">

@@ -87,6 +87,10 @@ import { Clientbeansantefamille } from "../mesbeans/clientbeansantefamille";
 import { Detailenfant } from "../mesbeans/detailenfant";
 import { Clientbeansanteadulte } from "../mesbeans/clientbeansanteadulte";
 import { Activiteia } from "../mesbeans/activiteia";
+import { Clientprofil } from "../mesbeans/clientprofil";
+import { BeanClientRdvStat } from "../mesbeans/beanclientrdvstat";
+import { RestClientFull } from "../mesbeans/restclientfull";
+import { ClientFullRest } from "../mesbeans/clentrestnew";
 
 @Injectable({
     providedIn: 'root'
@@ -96,11 +100,11 @@ import { Activiteia } from "../mesbeans/activiteia";
 export class MeswebservService {
 
     /* Attributes */
-    private webserviceUri: String = "http://localhost:8081/backend";
+    //private webserviceUri: String = "http://localhost:8081/backend";
     //private webserviceUri: String = "http://172.16.192.83:81/backend";
     //private webserviceUri : String = "https://217.160.247.10/backend";
     //private webserviceUri : String = "http://oceaneinter.com/backend";
-    //private webserviceUri : String = "https://jcom.nsiaassurances.ci/backend";
+    private webserviceUri : String = "https://jcom.nsiaassurances.ci/backend";
     private mtoken = "";
 
     constructor(private httpclient: HttpClient) { }
@@ -1557,9 +1561,9 @@ export class MeswebservService {
 
 
     // Liste des Clients du commercial :
-    getapilesclientsbyid(): Observable<RestClient[]> {
+    getapilesclientsbyid(): Observable<RestClientFull[]> {
         // 
-        return this.httpclient.get<RestClient[]>(this.webserviceUri.concat("/getapilesclientsbyid"), {});
+        return this.httpclient.get<RestClientFull[]>(this.webserviceUri.concat("/getapilesclientsbyid"), {});
     }
 
 
@@ -1570,6 +1574,19 @@ export class MeswebservService {
         let mesParams = new HttpParams();
         mesParams = mesParams.append('idclient', idclient.toString());
         return this.httpclient.get<RestPolice[]>(this.webserviceUri.concat("/getlespolicesbyclient"),
+            {
+                params: mesParams
+            });
+    }
+
+
+    //
+    getNewlespolicesbyclient(idclient: String, idcli: String): Observable<RestPolice[]> {
+        //  ApiNsiaController
+        let mesParams = new HttpParams();
+        mesParams = mesParams.append('idclient', idclient.toString());
+        mesParams = mesParams.append('idcli', idcli.toString());
+        return this.httpclient.get<RestPolice[]>(this.webserviceUri.concat("/getnewlespolicesbyclient"),
             {
                 params: mesParams
             });
@@ -2124,6 +2141,23 @@ export class MeswebservService {
         // 
         return this.httpclient.post<BeanPortfolioDevis[]>(this.webserviceUri.concat("/getStatsRdvRapportDevisForUser"),
             queteObjet, {});
+    }
+
+
+    // Profil:
+    getprofilclient(idcli : string): Observable<Clientprofil> {
+        // 
+        var queteObjet = new Quete();
+        queteObjet.code = idcli;
+        return this.httpclient.post<Clientprofil>(this.webserviceUri.concat("/getprofilclient"),queteObjet, {});
+    }
+
+    // RDV du client:
+    getprofilclientrdv(idcli : string): Observable<BeanClientRdvStat> {
+        // 
+        var queteObjet = new Quete();
+        queteObjet.code = idcli;
+        return this.httpclient.post<BeanClientRdvStat>(this.webserviceUri.concat("/getprofilclientrdv"),queteObjet, {});
     }
 
 

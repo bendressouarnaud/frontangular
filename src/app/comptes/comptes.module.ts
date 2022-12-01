@@ -36,10 +36,12 @@ import { StatdevisattenteComponent } from './statdevisattente/statdevisattente.c
 import { ActivitecommercialeComponent } from './activitecommerciale/activitecommerciale.component';
 import { ClientsComponent } from './clients/clients.component';
 import { UserdetailsComponent } from './userdetails/userdetails.component';
+import { SantefamilleComponent } from './santefamille/santefamille.component';
+import { SanteavantageComponent } from './santeavantage/santeavantage.component';
 
 
 @NgModule({
-  declarations: [GestioncompteComponent, GestioncommerceComponent, GestionrapportComponent, AccueilsupComponent, ConfigactiviteComponent, RdvsupComponent, AgendasupComponent, ReunionComponent, PerformanceComponent, HistoriqueComponent, AddresseComponent, ConfigequipeComponent, ConfigmotifComponent, NomenclatureComponent, DetailnomenclatureComponent, ParametresComponent, DevisComponent, StatdevisequipeComponent, StatdevisattenteComponent, ActivitecommercialeComponent, ClientsComponent, UserdetailsComponent],
+  declarations: [GestioncompteComponent, GestioncommerceComponent, GestionrapportComponent, AccueilsupComponent, ConfigactiviteComponent, RdvsupComponent, AgendasupComponent, ReunionComponent, PerformanceComponent, HistoriqueComponent, AddresseComponent, ConfigequipeComponent, ConfigmotifComponent, NomenclatureComponent, DetailnomenclatureComponent, ParametresComponent, DevisComponent, StatdevisequipeComponent, StatdevisattenteComponent, ActivitecommercialeComponent, ClientsComponent, UserdetailsComponent, SantefamilleComponent, SanteavantageComponent],
   imports: [
     CommonModule,
     ComptesRoutingModule,

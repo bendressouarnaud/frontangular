@@ -25,10 +25,11 @@ import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
 import { ClientsComponent } from './clients/clients.component';
 import { SantefamilleComponent } from './santefamille/santefamille.component';
 import { SanteavantageComponent } from './santeavantage/santeavantage.component';
+import { FicheclientComponent } from './ficheclient/ficheclient.component';
 
 
 @NgModule({
-  declarations: [TraderComponent, RdvComponent, RapportComponent, AgendaComponent, PerformanceComponent, ActiviteComponent, DevisComponent, ExamenComponent, ClientsComponent, SantefamilleComponent, SanteavantageComponent],
+  declarations: [TraderComponent, RdvComponent, RapportComponent, AgendaComponent, PerformanceComponent, ActiviteComponent, DevisComponent, ExamenComponent, ClientsComponent, SantefamilleComponent, SanteavantageComponent, FicheclientComponent],
   imports: [
     CommonModule,
     CommercialRoutingModule,

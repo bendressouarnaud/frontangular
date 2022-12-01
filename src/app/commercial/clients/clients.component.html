@@ -217,6 +217,11 @@
                                                             <td>{{ clt.typclient }}</td>
                                                             <td class="text-center">
 
+                                                                <a title="Fiche client" 
+                                                                    href="#/gcommercial/ficheclient/{{clt.idcli}}" 
+                                                                    class="btn btn-link btn-primary btn-just-icon edit"><i
+                                                                        class="material-icons">person</i></a>
+
                                                                 
                                                                 <a title="Afficher CNI"
                                                                     (click)="afficherCNI( clt.email, clt.idcli )"

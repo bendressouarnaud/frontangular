@@ -459,6 +459,7 @@ export class SidebarComponent implements OnInit {
             case "tresorier":
                 this.menuItems = routesTresorier.filter(menuItem => menuItem);
                 break;
+                
             
 
             default:

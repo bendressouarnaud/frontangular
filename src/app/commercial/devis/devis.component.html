@@ -3378,12 +3378,13 @@
                                             </mat-form-field>
                                         </div>
 
+                                        <!--  (keyup)="onKeyUpDeces($event)"  -->
                                         <div class="col-md-3">
                                             <mat-form-field class="example-full-width">
                                                 <input matInput [(ngModel)]="capitaldeces" name='capitaldeces' 
                                                    style="color: rgb(0, 0, 0); font-size: 18px; background-color: rgb(169, 187, 219);"
                                                     type="text" placeholder="Capital - D&eacute;c&egrave;s"
-                                                    maxlength="25" class="keymontant" (keyup)="onKeyUpDeces($event)">
+                                                    maxlength="25" class="keymontant" (keyup)="onKeyUpDeces()">
                                             </mat-form-field>
                                         </div>
 
@@ -3391,7 +3392,7 @@
                                             <mat-form-field class="example-full-width">
                                                 <input matInput [(ngModel)]="capitalinfirmite" name='capitalinfirmite'
                                                     type="text" placeholder="Capital – Infirmit&eacute; Permanente"
-                                                    maxlength="25" class="keymontant">
+                                                    maxlength="25" class="keymontant" (keyup)="onKeyUpInfirmite()">
                                             </mat-form-field>
                                         </div>
 
@@ -3408,7 +3409,8 @@
                                         <div class="col-lg-3 col-md-8 col-sm-4">
                                             <mat-form-field>
                                                 <mat-select placeholder="Frais de traitement"
-                                                    [(value)]="fraisdetraitement" name="fraisdetraitement">
+                                                    [(value)]="fraisdetraitement" name="fraisdetraitement" 
+                                                    (selectionChange)="callAccidentPrice()">
                                                     <mat-option *ngFor="let donnee of listeFraisTraitement"
                                                         [value]="donnee.idnmd">
                                                         {{ donnee.libelle }}
@@ -3426,7 +3428,7 @@
                                                     disabled matInput
                                                     [(ngModel)]="cotationaccident"
                                                     name='cotationaccident' type="text"
-                                                    placeholder="Prime nette"
+                                                    placeholder="Prime TTC"
                                                     maxlength="15">
                                             </mat-form-field>
                                         </div>
@@ -3540,7 +3542,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button mat-raised-button type="button" (click)="enregDevisAccident()"
+                        <button mat-raised-button type="button" id="btsaveaccident" (click)="enregDevisAccident()"
                             class="btn btn-info">Enregistrer</button> <!-- data-dismiss="modal"  -->
                     </div>
                 </div>

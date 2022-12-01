@@ -264,6 +264,11 @@
                                                             <td>{{ clt.typclient }}</td>
                                                             <td class="text-center">
 
+                                                                <a title="Afficher CNI"
+                                                                    (click)="afficherCNI( clt.email, clt.idcli )"
+                                                                    class="btn btn-link btn-info btn-just-icon edit"><i
+                                                                        class="material-icons">fit_screen</i></a>
+
                                                                 <a title="T&eacute;l&eacute;charger CNI"
                                                                     (click)="telechargerCNI( clt.email, clt.idcli )"
                                                                     class="btn btn-link btn-success btn-just-icon edit"><i
@@ -317,13 +322,6 @@
                                                             <td>{{ clt.contact }}</td>
                                                             <td>{{ clt.typclient }}</td>
                                                             <td class="text-center">
-
-                                                                <!--
-                                                                <a title="Afficher CNI"
-                                                                    (click)="afficherCNI( clt.email, clt.idcli )"
-                                                                    class="btn btn-link btn-info btn-just-icon edit"><i
-                                                                        class="material-icons">fit_screen</i></a>
-                                                                -->
 
                                                                 <a title="T&eacute;l&eacute;charger CNI"
                                                                     (click)="telechargerCNI( clt.email, clt.idcli )"

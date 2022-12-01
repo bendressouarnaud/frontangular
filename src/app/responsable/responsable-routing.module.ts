@@ -10,6 +10,8 @@ import { PerformanceComponent } from './performance/performance.component';
 import { RapportComponent } from './rapport/rapport.component';
 import { RdvComponent } from './rdv/rdv.component';
 import { ReunionComponent } from './reunion/reunion.component';
+import { SanteavantageComponent } from './santeavantage/santeavantage.component';
+import { SantefamilleComponent } from './santefamille/santefamille.component';
 import { StatdevisattenteComponent } from './statdevisattente/statdevisattente.component';
 import { StatdevisequipeComponent } from './statdevisequipe/statdevisequipe.component';
 import { UserdetailsComponent } from './userdetails/userdetails.component';
@@ -56,7 +58,15 @@ const routes: Routes = [
     path: 'clients',
     component: ClientsComponent
   },
-  { path: 'userdetails/:contact', component: UserdetailsComponent }
+  { path: 'userdetails/:contact', component: UserdetailsComponent },
+  {
+    path: 'santefamille/:idsan',
+    component: SantefamilleComponent
+  },
+  {
+    path: 'santeavantage/:idsan',
+    component: SanteavantageComponent
+  }
 ];
 
 @NgModule({

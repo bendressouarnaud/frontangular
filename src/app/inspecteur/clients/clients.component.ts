@@ -68,21 +68,23 @@ export class ClientsComponent implements OnInit {
     this.emailClient = email;
     this.idcli = idcli;
 
-    this.meswebservices.getcnipicture(this.idcli).toPromise()
+    //this.meswebservices.getcnipicture(this.idcli).toPromise()
+    this.meswebservices.getclientpicture(this.idcli).toPromise()
       .then(
         resultat => {
 
-          if (resultat.profil.length > 0) {
-            // Display :
-            this.zoom = 0;
-            this.customerPhoto = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,'
-              + resultat.profil.toString());
-            if (this.largeurInitial > 0) {
-              // we reset if PICTURE has been already manipulated :
-              $('#cniid').css({ 'width': (this.largeurInitial.toString() + 'px'), 'height': (this.hauteurInitial.toString() + 'px') });
-            }
-            $('#modalphoto').modal();
+          let file = new Blob([resultat], { type: 'image/jpeg' });
+          let fileUrl = window.URL.createObjectURL(file);
+
+          // Display :
+          this.zoom = 0;
+          if (this.largeurInitial > 0) {
+            // we reset if PICTURE has been already manipulated :
+            $('#cniid').css({ 'width': (this.largeurInitial.toString() + 'px'), 'height': (this.hauteurInitial.toString() + 'px') });
           }
+
+          this.photocustom = this._sanitizer.bypassSecurityTrustResourceUrl(fileUrl);
+          $('#modalphotohard').modal();
         },
         (error) => {
         }
@@ -104,26 +106,12 @@ export class ClientsComponent implements OnInit {
           let file = new Blob([resultat], { type: 'image/jpeg' });
           let fileUrl = window.URL.createObjectURL(file);
 
-          /*
           const link = document.createElement('a');
           link.href = fileUrl;
           var filename = "fichecni_" + idcli.toString() + ".jpeg";
           link.setAttribute('download', filename);
           document.body.appendChild(link);
           link.click();
-          */
-
-          // Display :
-          this.zoom = 0;
-          if (this.largeurInitial > 0) {
-            // we reset if PICTURE has been already manipulated :
-            $('#cniid').css({ 'width': (this.largeurInitial.toString() + 'px'), 'height': (this.hauteurInitial.toString() + 'px') });
-          }
-
-          this.photocustom = this._sanitizer.bypassSecurityTrustResourceUrl(fileUrl);
-          $('#modalphotohard').modal();
-
-
         },
         (error) => {
         }

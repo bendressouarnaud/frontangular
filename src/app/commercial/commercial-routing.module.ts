@@ -5,6 +5,7 @@ import { AgendaComponent } from './agenda/agenda.component';
 import { ClientsComponent } from './clients/clients.component';
 import { DevisComponent } from './devis/devis.component';
 import { ExamenComponent } from './examen/examen.component';
+import { FicheclientComponent } from './ficheclient/ficheclient.component';
 import { PerformanceComponent } from './performance/performance.component';
 import { RapportComponent } from './rapport/rapport.component';
 import { RdvComponent } from './rdv/rdv.component';
@@ -56,6 +57,10 @@ const routes: Routes = [
   {
     path: 'santeavantage/:idsan',
     component: SanteavantageComponent
+  },
+  {
+    path: 'ficheclient/:idcli',
+    component: FicheclientComponent
   }
 ];
 

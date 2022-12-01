@@ -198,6 +198,11 @@
                                         MRH
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#link8" role="tablist">
+                                        SANTE
+                                    </a>
+                                </li>
                             </ul>
                             <div class="tab-content tab-space">
                                 <div class="tab-pane active" id="link3">
@@ -229,7 +234,7 @@
                                                             <td class="text-center" >{{ donnee.secteur }}</td>
                                                             <td class="text-center" >{{ donnee.duree }}</td>
                                                             <td class="text-center" >{{ donnee.offre }}</td>
-                                                            <td class="text-center" >{{ donnee.cout }}</td>
+                                                            <td class="text-center" style="font-weight: bold; color: #2a2deb;" >{{ donnee.cout }}</td>
                                                             <td class="text-center" >{{ donnee.dates }}</td>
                                                             <td class="text-center">
 
@@ -262,7 +267,7 @@
                                                         <tr>
                                                             <th>Commercial</th>
                                                             <th>Client</th>
-                                                            <th class="text-center">Secteur</th>
+                                                            <th class="text-center">Cotation</th>
                                                             <th class="text-center">Destination</th>
                                                             <th class="text-center">Date retour</th>
                                                             <th class="text-center">Date de cr&eacute;ation</th>
@@ -273,7 +278,7 @@
                                                         <tr *ngFor="let donnee of listeAutoClientBeanComVoyage">
                                                             <td style="font-weight: bold;">{{ donnee.commercial }} </td>
                                                             <td style="font-weight: bold;">{{ donnee.client }} </td>
-                                                            <td class="text-center" >{{ donnee.secteur }}</td>
+                                                            <td class="text-center" style="font-weight: bold; color: #2a2deb;">{{ donnee.cout }}</td>
                                                             <td class="text-center" >{{ donnee.duree }}</td>
                                                             <td class="text-center" >{{ donnee.offre }}</td>
                                                             <td class="text-center" >{{ donnee.dates }}</td>
@@ -307,7 +312,7 @@
                                                             <th>Commercial</th>
                                                             <th>Client</th>
                                                             <th class="text-center">Secteur</th>
-                                                            <th class="text-center">Frais de traitement</th>
+                                                            <th class="text-center">Cotation</th>
                                                             <th class="text-center">Date de cr&eacute;ation</th>
                                                             <th class="disabled-sorting text-center">Actions</th>
                                                         </tr>
@@ -317,7 +322,7 @@
                                                             <td style="font-weight: bold;">{{ donnee.commercial }} </td>
                                                             <td style="font-weight: bold;">{{ donnee.client }} </td>
                                                             <td class="text-center" >{{ donnee.secteur }}</td>
-                                                            <td class="text-center" >{{ donnee.offre }}</td>
+                                                            <td class="text-center" style="font-weight: bold; color: #2a2deb;">{{ donnee.cout }}</td>
                                                             <td class="text-center" >{{ donnee.dates }}</td>
                                                             <td class="text-center">
 
@@ -366,6 +371,50 @@
                                                             <td class="text-center" style="color: #2a2deb; font-weight: bold;">
                                                                 {{ donnee.cout }}</td>
                                                             <td class="text-center" >{{ donnee.offre }}</td>
+                                                            <td class="text-center" >{{ donnee.dates }}</td>
+                                                            <td class="text-center">
+
+                                                                <a title="Cl&ocirc;turer DEVIS"
+                                                                    (click)="cloturerDevis( donnee.iddev, donnee.client )"
+                                                                    class="btn btn-link btn-danger btn-just-icon edit"><i
+                                                                        class="material-icons">delete_forever</i></a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!--  SANTE  -->
+                                <div class="tab-pane" id="link8">
+                                    <div class="card" style="border: 1px solid black;">
+                                        <div class="card-body">
+
+                                            <div class="material-datatables">
+                                                <table id="datatableSante"
+                                                    class="table table-striped table-no-bordered table-hover"
+                                                    cellspacing="0" width="100%" style="width:100%"
+                                                    >
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Commercial</th>
+                                                            <th>Client</th>
+                                                            <th class="text-center">Cotation</th>
+                                                            <th class="text-center">Formule</th>
+                                                            <th class="text-center">Date de cr&eacute;ation</th>
+                                                            <th class="disabled-sorting text-center">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody *ngIf="this.getSanteCommecial">
+                                                        <tr *ngFor="let donnee of listeSanteClientBeanCom">
+                                                            <td style="font-weight: bold;">{{ donnee.commercial }} </td>
+                                                            <td style="font-weight: bold;">{{ donnee.client }} </td>
+                                                            <td class="text-center" style="color: #2a2deb; font-weight: bold;">{{ donnee.secteur }}</td>
+                                                            <td class="text-center" >{{ donnee.formule }}</td>
                                                             <td class="text-center" >{{ donnee.dates }}</td>
                                                             <td class="text-center">
 
