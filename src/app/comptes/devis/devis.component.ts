@@ -710,7 +710,8 @@ export class DevisComponent implements OnInit {
   // Afficher les POLICES AUTO :
   getlespolicesbyclient(): void {
     this.getPoliceAccident = false;
-    this.meswebservices.getlespolicesbyclient(this.idCliendDone).toPromise()
+    //this.meswebservices.getlespolicesbyclient(this.idCliendDone).toPromise()
+    this.meswebservices.getNewlespolicesbyclient(this.idCliendDone, this.idClient.toString(), 3).toPromise()
       .then(
         resultat => {
           this.listePolices = resultat;
@@ -724,7 +725,7 @@ export class DevisComponent implements OnInit {
   getlespolicesaccidentbyclient(): void {
     this.getPoliceAccident = false;
     //this.meswebservices.getlespolicesbyclient(this.idCliendDone).toPromise()
-    this.meswebservices.getNewlespolicesbyclient(this.idCliendDone, this.idClient.toString()).toPromise()
+    this.meswebservices.getNewlespolicesbyclient(this.idCliendDone, this.idClient.toString(), 1).toPromise()
       .then(
         resultat => {
           if(resultat !== null){
@@ -740,7 +741,8 @@ export class DevisComponent implements OnInit {
 
   getlespolicesvoyagebyclient(): void {
     this.getPoliceVoyage = false;
-    this.meswebservices.getlespolicesbyclient(this.idCliendDone).toPromise()
+    //this.meswebservices.getlespolicesbyclient(this.idCliendDone).toPromise()
+    this.meswebservices.getNewlespolicesbyclient(this.idCliendDone, this.idClient.toString(), 2).toPromise()
       .then(
         resultat => {
           this.listePolices = resultat;
@@ -754,7 +756,8 @@ export class DevisComponent implements OnInit {
 
   getlespolicesmrhbyclient(): void {
     this.getPoliceMrh = false;
-    this.meswebservices.getlespolicesbyclient(this.idCliendDone).toPromise()
+    //this.meswebservices.getlespolicesbyclient(this.idCliendDone).toPromise()
+    this.meswebservices.getNewlespolicesbyclient(this.idCliendDone, this.idClient.toString(), 4).toPromise()
       .then(
         resultat => {
           this.listePolices = resultat;
@@ -769,7 +772,8 @@ export class DevisComponent implements OnInit {
   // Look for 'POLICE' devis SANTE:
   getlespolicessantebyclient(): void {
     this.getPoliceSante = false;
-    this.meswebservices.getlespolicesbyclient(this.idCliendDone).toPromise()
+    //this.meswebservices.getlespolicesbyclient(this.idCliendDone).toPromise()
+    this.meswebservices.getNewlespolicesbyclient(this.idCliendDone, this.idClient.toString(), 5).toPromise()
       .then(
         resultat => {
           this.listePolices = resultat;
@@ -3227,8 +3231,9 @@ export class DevisComponent implements OnInit {
     let montantTraitement = this.processTraitement(codeClasse);
 
     primeNette = primeDeces + primeInfirmite + montantTraitement;
-    let taxe =  primeNette * 0.145 ;
-    let primeTTC = primeNette + taxe;
+    let accessoires = this.computeAccessoire(primeNette);
+    let taxe =  (primeNette + accessoires) * 0.145 ;
+    let primeTTC = primeNette + taxe + accessoires;
 
     // Afficher le 
     this.cotationaccident = primeTTC.toLocaleString();
@@ -3236,7 +3241,19 @@ export class DevisComponent implements OnInit {
 
 
 
+  computeAccessoire(primeNette : number) : number {
+    let ret = 0;
 
+    if(primeNette <= 100000) ret = 5000;
+    else if(primeNette >= 100001 && primeNette <= 500000) ret = 7500;
+    else if(primeNette >= 500001 && primeNette <= 1000000) ret = 10000;
+    else if(primeNette >= 1000001 && primeNette <= 5000000) ret = 20000;
+    else if(primeNette >= 5000001 && primeNette <= 10000000) ret = 30000;
+    else if(primeNette >= 10000001 && primeNette <= 50000000) ret = 50000;
+    else if(primeNette >= 50000000) ret = 100000;
+
+    return ret;
+  }
 
 
 

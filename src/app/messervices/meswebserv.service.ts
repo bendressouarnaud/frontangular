@@ -101,10 +101,10 @@ export class MeswebservService {
 
     /* Attributes */
     //private webserviceUri: String = "http://localhost:8081/backend";
-    //private webserviceUri: String = "http://172.16.192.83:81/backend";
+    private webserviceUri: String = "http://172.16.192.83:81/backend";
     //private webserviceUri : String = "https://217.160.247.10/backend";
     //private webserviceUri : String = "http://oceaneinter.com/backend";
-    private webserviceUri : String = "https://jcom.nsiaassurances.ci/backend";
+    //private webserviceUri : String = "https://jcom.nsiaassurances.ci/backend";
     private mtoken = "";
 
     constructor(private httpclient: HttpClient) { }
@@ -1581,11 +1581,12 @@ export class MeswebservService {
 
 
     //
-    getNewlespolicesbyclient(idclient: String, idcli: String): Observable<RestPolice[]> {
+    getNewlespolicesbyclient(idclient: String, idcli: String, produit: number): Observable<RestPolice[]> {
         //  ApiNsiaController
         let mesParams = new HttpParams();
         mesParams = mesParams.append('idclient', idclient.toString());
         mesParams = mesParams.append('idcli', idcli.toString());
+        mesParams = mesParams.append('produit', produit.toString());
         return this.httpclient.get<RestPolice[]>(this.webserviceUri.concat("/getnewlespolicesbyclient"),
             {
                 params: mesParams

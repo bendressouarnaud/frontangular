@@ -489,8 +489,8 @@ export class SidebarComponent implements OnInit {
     deconnexion(): void {
         if (localStorage.length > 0) {
             localStorage.clear();
-            window.location.href = "/";
-            //window.location.href = "http://172.16.192.83:81/localcom";
+            //window.location.href = "/";
+            window.location.href = "http://172.16.192.83:81/localcom";
         }
     }
 }
