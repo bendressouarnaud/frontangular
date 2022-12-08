@@ -3236,7 +3236,7 @@ export class DevisComponent implements OnInit {
     let primeTTC = primeNette + taxe + accessoires;
 
     // Afficher le 
-    this.cotationaccident = primeTTC.toLocaleString();
+    this.cotationaccident = Math.round(primeTTC).toLocaleString();
   }
 
 

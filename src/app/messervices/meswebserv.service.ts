@@ -91,6 +91,7 @@ import { Clientprofil } from "../mesbeans/clientprofil";
 import { BeanClientRdvStat } from "../mesbeans/beanclientrdvstat";
 import { RestClientFull } from "../mesbeans/restclientfull";
 import { ClientFullRest } from "../mesbeans/clentrestnew";
+import { BeanStatsDevis } from "../mesbeans/beanstatsdevis";
 
 @Injectable({
     providedIn: 'root'
@@ -101,10 +102,10 @@ export class MeswebservService {
 
     /* Attributes */
     //private webserviceUri: String = "http://localhost:8081/backend";
-    private webserviceUri: String = "http://172.16.192.83:81/backend";
+    //private webserviceUri: String = "http://172.16.192.83:81/backend";
     //private webserviceUri : String = "https://217.160.247.10/backend";
     //private webserviceUri : String = "http://oceaneinter.com/backend";
-    //private webserviceUri : String = "https://jcom.nsiaassurances.ci/backend";
+    private webserviceUri : String = "https://jcom.nsiaassurances.ci/backend";
     private mtoken = "";
 
     constructor(private httpclient: HttpClient) { }
@@ -2252,6 +2253,66 @@ export class MeswebservService {
         // 
         return this.httpclient.post<Detailenfant[]>(this.webserviceUri.concat("/getAdulteHistorique"),
             queteObjet, {});
+    }
+
+    //   :
+    getHistoDevisForInspecteur(): Observable<BeanStatsDevis[]> {
+        // -> DevisController
+        return this.httpclient.get<BeanStatsDevis[]>(this.webserviceUri.concat("/getHistoDevisForInspecteur"), {});
+    }
+
+    //   :
+    getHistoDevisSupForInspecteur(): Observable<BeanStatsDevis[]> {
+        // -> DevisController
+        return this.httpclient.get<BeanStatsDevis[]>(this.webserviceUri.concat("/getHistoDevisSupForInspecteur"), {});
+    }
+
+    //   :
+    getHistoDevisCommVoyageInspecteur(): Observable<BeanStatsDevis[]> {
+        // -> DevisController
+        return this.httpclient.get<BeanStatsDevis[]>(this.webserviceUri.concat("/getHistoDevisCommVoyageInspecteur"), {});
+    }
+
+    //   :
+    getHistoDevisSupVoyageInspecteur(): Observable<BeanStatsDevis[]> {
+        // -> DevisController
+        return this.httpclient.get<BeanStatsDevis[]>(this.webserviceUri.concat("/getHistoDevisSupVoyageInspecteur"), {});
+    }
+
+    //   :
+    getHistoDevisCommAccidentInspecteur(): Observable<BeanStatsDevis[]> {
+        // -> DevisController
+        return this.httpclient.get<BeanStatsDevis[]>(this.webserviceUri.concat("/getHistoDevisCommAccidentInspecteur"), {});
+    }
+
+    //   :
+    getHistoDevisSupAccidentInspecteur(): Observable<BeanStatsDevis[]> {
+        // -> DevisController
+        return this.httpclient.get<BeanStatsDevis[]>(this.webserviceUri.concat("/getHistoDevisSupAccidentInspecteur"), {});
+    }
+
+    //   :
+    getHistoDevisComMrhInspecteur(): Observable<BeanStatsDevis[]> {
+        // -> DevisController
+        return this.httpclient.get<BeanStatsDevis[]>(this.webserviceUri.concat("/getHistoDevisComMrhInspecteur"), {});
+    }
+
+    //   :
+    getHistoDevisSupMrhInspecteur(): Observable<BeanStatsDevis[]> {
+        // -> DevisController
+        return this.httpclient.get<BeanStatsDevis[]>(this.webserviceUri.concat("/getHistoDevisSupMrhInspecteur"), {});
+    }
+
+    //   :
+    getHistoDevisComSanteInspecteur(): Observable<BeanStatsDevis[]> {
+        // -> DevisController
+        return this.httpclient.get<BeanStatsDevis[]>(this.webserviceUri.concat("/getHistoDevisComSanteInspecteur"), {});
+    }
+
+    //   :
+    getHistoDevisSupSanteInspecteur(): Observable<BeanStatsDevis[]> {
+        // -> DevisController
+        return this.httpclient.get<BeanStatsDevis[]>(this.webserviceUri.concat("/getHistoDevisSupSanteInspecteur"), {});
     }
 
 }

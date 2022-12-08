@@ -82,6 +82,7 @@ export const routesInspecteur: RouteInfo[] = [
             { path: 'devis', title: 'Gestion des Devis', ab: 'GD' },
             { path: 'devisequipe', title: 'Clôture des devis en attente', ab: 'GE' },
             { path: 'statsdevisequipe', title: 'Devis en attente de paie', ab: 'DP' },
+            { path: 'statistiquesdevis', title: 'Statistiques Devis', ab: 'SD' }, 
             { path: 'souscription', title: 'Gestion des Souscriptions', ab: 'GS' }
         ]
     }
@@ -458,9 +459,7 @@ export class SidebarComponent implements OnInit {
 
             case "tresorier":
                 this.menuItems = routesTresorier.filter(menuItem => menuItem);
-                break;
-                
-            
+                break;            
 
             default:
                 this.menuItems = ROUTES.filter(menuItem => menuItem);
@@ -489,8 +488,8 @@ export class SidebarComponent implements OnInit {
     deconnexion(): void {
         if (localStorage.length > 0) {
             localStorage.clear();
-            //window.location.href = "/";
-            window.location.href = "http://172.16.192.83:81/localcom";
+            window.location.href = "/";
+            //window.location.href = "http://172.16.192.83:81/localcom";
         }
     }
 }
