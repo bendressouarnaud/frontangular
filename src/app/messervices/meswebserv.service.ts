@@ -92,6 +92,7 @@ import { BeanClientRdvStat } from "../mesbeans/beanclientrdvstat";
 import { RestClientFull } from "../mesbeans/restclientfull";
 import { ClientFullRest } from "../mesbeans/clentrestnew";
 import { BeanStatsDevis } from "../mesbeans/beanstatsdevis";
+import { Marque } from "../mesbeans/marque";
 
 @Injectable({
     providedIn: 'root'
@@ -1644,6 +1645,13 @@ export class MeswebservService {
     getlesindemnitesauto(): Observable<Indemnitemax[]> {
         // 
         return this.httpclient.get<Indemnitemax[]>(this.webserviceUri.concat("/getlesindemnitesauto"), {});
+    }
+
+
+    // Get MARQUES (Devis AUTO)  :
+    getlesmarquesauto(): Observable<Marque[]> {
+        // 
+        return this.httpclient.get<Marque[]>(this.webserviceUri.concat("/getlesmarques"), {});
     }
 
 

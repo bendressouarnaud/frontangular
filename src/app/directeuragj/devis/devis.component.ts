@@ -9,6 +9,7 @@ import { ClientRest } from 'src/app/mesbeans/clientrest';
 import { Detailequipe } from 'src/app/mesbeans/detailequipe';
 import { Detailtable } from 'src/app/mesbeans/detailnomenclature';
 import { Indemnitemax } from 'src/app/mesbeans/indemnitemax';
+import { Marque } from 'src/app/mesbeans/marque';
 import { Motifpaiement } from 'src/app/mesbeans/motifpaiement';
 import { Paysdestination } from 'src/app/mesbeans/paysdestination';
 import { RestClient } from 'src/app/mesbeans/restclientcom';
@@ -81,7 +82,7 @@ export class DevisComponent implements OnInit {
   dropdownSettings = {};
   tempSelectedItems = [];
   listeClients: UtilisateurInfo[];
-  listeDesClients:RestClientFull[];// ClientFullRest[];
+  listeDesClients: RestClientFull[];// ClientFullRest[];
   membresId = [];
   clientRest = new ClientRest();
   //
@@ -209,6 +210,12 @@ export class DevisComponent implements OnInit {
 
   // AUTO 
   listeIdemniteAuto: Indemnitemax[];
+  listeMarque: Marque[];
+  immatriculationauto = "";
+  dateCirculation = new Date();
+  basicdatecirculation = "";
+  idmarque = 0;
+  presenceCertificat = false;
 
   // MRH 
   listeFormuleMrh: Detailtable[];
@@ -538,6 +545,7 @@ export class DevisComponent implements OnInit {
     this.getPuissanceVehicule();
     this.getNombrePlace();
     this.getlesindemnitesauto();
+    this.getlesmarquesauto();
 
     // Display DATA :
     this.getDevisAutoByTrader();
@@ -641,7 +649,7 @@ export class DevisComponent implements OnInit {
         }
 
         // From there, pick client 'idcli' :
-        this.idClient = customer.idcliloc.toString();   
+        this.idClient = customer.idcliloc.toString();
 
         // close doors : 
         break;
@@ -728,7 +736,7 @@ export class DevisComponent implements OnInit {
     this.meswebservices.getNewlespolicesbyclient(this.idCliendDone, this.idClient.toString(), 1).toPromise()
       .then(
         resultat => {
-          if(resultat !== null){
+          if (resultat !== null) {
             this.listePolices = resultat;
             // Pick first value of the list :
             if (this.setPolice.trim().length == 0) this.setPolice = resultat[0].Police.toString();
@@ -973,6 +981,19 @@ export class DevisComponent implements OnInit {
       .then(
         resultat => {
           this.listeIdemniteAuto = resultat;
+        }
+      )
+  }
+
+
+
+  // Get les MARQUES for 'DEVIS AUTO'
+  getlesmarquesauto(): void {
+    this.meswebservices.getlesmarquesauto().toPromise()
+      .then(
+        resultat => {
+          this.listeMarque = resultat;
+          this.idmarque = resultat[1].idmarque;
         }
       )
   }
@@ -1392,6 +1413,22 @@ export class DevisComponent implements OnInit {
     }
   }
 
+  // Certificat de visite technique
+  onCertificatSelected(event) {
+    const file: File = event.target.files[0];
+    if (file) {
+      if (this.formData.has("certificatvisite")) this.formData.delete("certificatvisite");
+      this.formData.append("certificatvisite", file);
+      this.presenceCertificat = true;
+    }
+    else {
+      if (this.formData.has("certificatvisite")) {
+        this.presenceCertificat = false;
+        this.formData.delete("certificatvisite");
+      }
+    }
+  }
+
 
   onPhotoChequeSelected(event) {
     const file: File = event.target.files[0];
@@ -1765,6 +1802,9 @@ export class DevisComponent implements OnInit {
     // set the date :
     let momentVariable = moment(this.customerBirthDate, 'MM-DD-YYYY');
     let dates = momentVariable.format('YYYY-MM-DD');
+    // Dat circulation :
+    let momentCirculation = moment(this.dateCirculation, 'MM-DD-YYYY');
+    let dateCirc = momentCirculation.format('YYYY-MM-DD');
 
     var diffYear = (this.getCurrentDate.getTime() - this.customerBirthDate.getTime()) / 1000;
     diffYear /= (60 * 60 * 24);
@@ -1832,6 +1872,10 @@ export class DevisComponent implements OnInit {
       this.formData.append("origine", this.clientRest.origine.toString());
       this.formData.append("observation", this.clientRest.observation.toString());
       this.formData.append("police", this.setPolice);
+      // New ONE :
+      this.formData.append("immatriculation", this.immatriculationauto.trim());
+      this.formData.append("idmarque", this.idmarque.toString());
+      this.formData.append("datecirculation", dateCirc);
 
       // Call :
       this.meswebservices.sendDevisAuto(this.formData).toPromise()
@@ -2483,16 +2527,15 @@ export class DevisComponent implements OnInit {
           this.clientRest.observation = resultat.observation;
 
           //
-          //let tDate = resultat.dates.toString().split("T");
-          //this.getDate = new Date(tDate[0] + 'T' + resultat.heure);
           this.customerBirthDate = new Date(resultat.dates.toString());
-          //alert("Dates : "+this.getDate);
+          this.dateCirculation = new Date(resultat.datecirculation.toString())
+          this.immatriculationauto = resultat.immatriculation.toString();
+          this.idmarque = resultat.idmarque;
 
           //this.membresId = [];
           //this.selectedItems = [];
           $('#modalAutomobile').modal();
           this.computePrice();
-          //alert("OK");
         },
         (error) => {
 
@@ -3109,54 +3152,54 @@ export class DevisComponent implements OnInit {
 
 
   // Process FRAIS de TRAITEMENT : 125.000
-  processTraitement(classe : string) : number {
+  processTraitement(classe: string): number {
     let ret = 0;
     let lockButton = false;
 
-    if(classe === '01'){
-      if(this.fraisdetraitement == 10) ret = 4000; // 125.000
-      else if(this.fraisdetraitement == 11) ret = 6000; // 250.000
-      else if(this.fraisdetraitement == 12) ret = 9500; // 500.000
-      else if(this.fraisdetraitement == 13) ret = 12500; // 750.000
-      else if(this.fraisdetraitement == 14) ret = 15750; // 1.000.000
+    if (classe === '01') {
+      if (this.fraisdetraitement == 10) ret = 4000; // 125.000
+      else if (this.fraisdetraitement == 11) ret = 6000; // 250.000
+      else if (this.fraisdetraitement == 12) ret = 9500; // 500.000
+      else if (this.fraisdetraitement == 13) ret = 12500; // 750.000
+      else if (this.fraisdetraitement == 14) ret = 15750; // 1.000.000
       else ret = 0; // aucun
     }
-    else if(classe === '02'){
-      if(this.fraisdetraitement == 10) ret = 6000; // 125.000
-      else if(this.fraisdetraitement == 11) ret = 10000; // 250.000
-      else if(this.fraisdetraitement == 12) ret = 15000; // 500.000
-      else if(this.fraisdetraitement == 13) ret = 18000; // 750.000
-      else if(this.fraisdetraitement == 14) ret = 21500; // 1.000.000
+    else if (classe === '02') {
+      if (this.fraisdetraitement == 10) ret = 6000; // 125.000
+      else if (this.fraisdetraitement == 11) ret = 10000; // 250.000
+      else if (this.fraisdetraitement == 12) ret = 15000; // 500.000
+      else if (this.fraisdetraitement == 13) ret = 18000; // 750.000
+      else if (this.fraisdetraitement == 14) ret = 21500; // 1.000.000
       else ret = 0; // aucun
     }
-    else if(classe === '03'){
-      if(this.fraisdetraitement == 10) ret = 8500; // 125.000
-      else if(this.fraisdetraitement == 11) ret = 12500; // 250.000
-      else if(this.fraisdetraitement == 12) ret = 18000; // 500.000
-      else if(this.fraisdetraitement == 13) ret = 23500; // 750.000
-      else if(this.fraisdetraitement == 14) ret = 32000; // 1.000.000
+    else if (classe === '03') {
+      if (this.fraisdetraitement == 10) ret = 8500; // 125.000
+      else if (this.fraisdetraitement == 11) ret = 12500; // 250.000
+      else if (this.fraisdetraitement == 12) ret = 18000; // 500.000
+      else if (this.fraisdetraitement == 13) ret = 23500; // 750.000
+      else if (this.fraisdetraitement == 14) ret = 32000; // 1.000.000
       else ret = 0; // aucun
     }
-    else if(classe === '04'){
-      if(this.fraisdetraitement == 10) ret = 11000; // 125.000
-      else if(this.fraisdetraitement == 11) ret = 16000; // 250.000
-      else if(this.fraisdetraitement == 12) ret = 23500; // 500.000
-      else if(this.fraisdetraitement == 13) ret = 30500; // 750.000
-      else if(this.fraisdetraitement == 14) ret = 40500; // 1.000.000
+    else if (classe === '04') {
+      if (this.fraisdetraitement == 10) ret = 11000; // 125.000
+      else if (this.fraisdetraitement == 11) ret = 16000; // 250.000
+      else if (this.fraisdetraitement == 12) ret = 23500; // 500.000
+      else if (this.fraisdetraitement == 13) ret = 30500; // 750.000
+      else if (this.fraisdetraitement == 14) ret = 40500; // 1.000.000
       else ret = 0; // aucun
     }
-    else if(classe === '05'){
-      if(this.fraisdetraitement == 10) ret = 14500; // 125.000
-      else if(this.fraisdetraitement == 11) ret = 19500; // 250.000
-      else if(this.fraisdetraitement == 12) ret = 27000; // 500.000
-      else if(this.fraisdetraitement == 13 || this.fraisdetraitement == 14){
+    else if (classe === '05') {
+      if (this.fraisdetraitement == 10) ret = 14500; // 125.000
+      else if (this.fraisdetraitement == 11) ret = 19500; // 250.000
+      else if (this.fraisdetraitement == 12) ret = 27000; // 500.000
+      else if (this.fraisdetraitement == 13 || this.fraisdetraitement == 14) {
         // 750.000 - 1.000.000 
         lockButton = true;
-      } 
+      }
       else ret = 0; // aucun
     }
 
-    if(lockButton) $("#btsaveaccident").prop("disabled", true); // DISABLE
+    if (lockButton) $("#btsaveaccident").prop("disabled", true); // DISABLE
     else $("#btsaveaccident").prop("disabled", false); // ENABLE
     return ret;
   }
@@ -3168,13 +3211,13 @@ export class DevisComponent implements OnInit {
 
     let tpDeces = this.capitaldeces.replace(/[^0-9]/g, '');
     let capdeces = 0;
-    try{
+    try {
       if (/^[0-9]+$/.test(tpDeces)) {
         // Call to display the PRICE :
         capdeces = parseInt(tpDeces);
       }
     }
-    catch(e){}
+    catch (e) { }
 
 
     let codeClasse = '00';
@@ -3218,13 +3261,13 @@ export class DevisComponent implements OnInit {
     let valeurInfirmite = 0;
     let primeInfirmite = 0;
     let primeDeces = 0;
-    try{
+    try {
       if (/^[0-9]+$/.test(tpInfirmite)) {
         // Call to display the PRICE :
         valeurInfirmite = parseInt(tpInfirmite);
       }
     }
-    catch(e){}
+    catch (e) { }
 
     primeInfirmite = (valeurInfirmite * (1 / 1000)) * tauxClasse * tauxAge;
     primeDeces = (capdeces * (1 / 1000)) * tauxClasse * tauxAge;
@@ -3232,7 +3275,7 @@ export class DevisComponent implements OnInit {
 
     primeNette = primeDeces + primeInfirmite + montantTraitement;
     let accessoires = this.computeAccessoire(primeNette);
-    let taxe =  (primeNette + accessoires) * 0.145 ;
+    let taxe = (primeNette + accessoires) * 0.145;
     let primeTTC = primeNette + taxe + accessoires;
 
     // Afficher le 
@@ -3241,16 +3284,16 @@ export class DevisComponent implements OnInit {
 
 
 
-  computeAccessoire(primeNette : number) : number {
+  computeAccessoire(primeNette: number): number {
     let ret = 0;
 
-    if(primeNette <= 100000) ret = 5000;
-    else if(primeNette >= 100001 && primeNette <= 500000) ret = 7500;
-    else if(primeNette >= 500001 && primeNette <= 1000000) ret = 10000;
-    else if(primeNette >= 1000001 && primeNette <= 5000000) ret = 20000;
-    else if(primeNette >= 5000001 && primeNette <= 10000000) ret = 30000;
-    else if(primeNette >= 10000001 && primeNette <= 50000000) ret = 50000;
-    else if(primeNette >= 50000000) ret = 100000;
+    if (primeNette <= 100000) ret = 5000;
+    else if (primeNette >= 100001 && primeNette <= 500000) ret = 7500;
+    else if (primeNette >= 500001 && primeNette <= 1000000) ret = 10000;
+    else if (primeNette >= 1000001 && primeNette <= 5000000) ret = 20000;
+    else if (primeNette >= 5000001 && primeNette <= 10000000) ret = 30000;
+    else if (primeNette >= 10000001 && primeNette <= 50000000) ret = 50000;
+    else if (primeNette >= 50000000) ret = 100000;
 
     return ret;
   }
@@ -4036,59 +4079,107 @@ export class DevisComponent implements OnInit {
   setBackVoyagePrice(age: number, duree: number): number {
 
     let retour = 0;
-    
+
     switch (this.zonedestination) {
       case 1:
       case 2:
       case 3:
         // ZONE 1 : europe- afrique- moyen orient
-        if(duree <= 7){
-          if(age <= 18) retour = 15401;  
-          else if(age > 18) retour = 19857;
-        } 
-        else if(duree <= 10){
-          if(age <= 18) retour = 18559;  
-          else if(age > 18) retour = 22017;
-        } 
-        else if(duree <= 15){
-          if(age <= 18) retour = 24083;  
-          else if(age > 18) retour = 25861;
-        } 
-        else if(duree <= 21){
-          if(age <= 18) retour = 29619;  
-          else if(age > 18) retour = 32345;
+        if (duree <= 7) {
+          if (age <= 18) retour = 15401;
+          else if (age > 18) retour = 19857;
         }
-        else if(duree <= 32){
-          if(age <= 18) retour = 31865;  
-          else if(age > 18) retour = 33306;
-        }  
-        else if(duree <= 45){
-          if(age <= 18) retour = 41472;  
-          else if(age > 18) retour = 54465;
-        }  
-        else if(duree <= 62){
-          if(age <= 18) retour = 44990;  
-          else if(age > 18) retour = 59365;
-        } 
-        else if(duree <= 93){ // 3 mois
-          if(age <= 18) retour = 53817;  
-          else if(age > 18) retour = 71975;
-        }   
-        else if(duree <= 186){ // 6 mois
-          if(age <= 18) retour = 67940;  
-          else if(age > 18) retour = 92149;
-        }   
-        else if(duree <= 365){ // 1 an
-          if(age <= 18) retour = 79420;  
-          else if(age > 18) retour = 108541;
-        }  
-        else if(duree <= 730){ // 2 an
-          if(age <= 18) retour = 166796;  
-          else if(age > 18) retour = 233373;
-        }  
+        else if (duree <= 10) {
+          if (age <= 18) retour = 18559;
+          else if (age > 18) retour = 22017;
+        }
+        else if (duree <= 15) {
+          if (age <= 18) retour = 24083;
+          else if (age > 18) retour = 25861;
+        }
+        else if (duree <= 21) {
+          if (age <= 18) retour = 29619;
+          else if (age > 18) retour = 32345;
+        }
+        else if (duree <= 32) {
+          if (age <= 18) retour = 31865;
+          else if (age > 18) retour = 33306;
+        }
+        else if (duree <= 45) {
+          if (age <= 18) retour = 41472;
+          else if (age > 18) retour = 54465;
+        }
+        else if (duree <= 62) {
+          if (age <= 18) retour = 44990;
+          else if (age > 18) retour = 59365;
+        }
+        else if (duree <= 93) { // 3 mois
+          if (age <= 18) retour = 53817;
+          else if (age > 18) retour = 71975;
+        }
+        else if (duree <= 186) { // 6 mois
+          if (age <= 18) retour = 67940;
+          else if (age > 18) retour = 92149;
+        }
+        else if (duree <= 365) { // 1 an
+          if (age <= 18) retour = 79420;
+          else if (age > 18) retour = 108541;
+        }
+        else if (duree <= 730) { // 2 an
+          if (age <= 18) retour = 166796;
+          else if (age > 18) retour = 233373;
+        }
+        break;
+
+      case 4:
+        // Zone 2 , monde entier :
+        if (duree <= 7) {
+          if (age <= 18) retour = 15798;
+          else if (age > 18) retour = 21057;
+        }
+        else if (duree <= 10) {
+          if (age <= 18) retour = 19268;
+          else if (age > 18) retour = 23039;
+        }
+        else if (duree <= 15) {
+          if (age <= 18) retour = 25356;
+          else if (age > 18) retour = 30183;
+        }
+        else if (duree <= 21) {
+          if (age <= 18) retour = 31433;
+          else if (age > 18) retour = 36188;
+        }
+        else if (duree <= 32) {
+          if (age <= 18) retour = 36645;
+          else if (age > 18) retour = 44234;
+        }
+        else if (duree <= 45) {
+          if (age <= 18) retour = 46203;
+          else if (age > 18) retour = 65693;
+        }
+        else if (duree <= 62) {
+          if (age <= 18) retour = 61767;
+          else if (age > 18) retour = 83323;
+        }
+        else if (duree <= 93) { // 3 mois
+          if (age <= 18) retour = 75001;
+          else if (age > 18) retour = 102236;
+        }
+        else if (duree <= 186) { // 6 mois
+          if (age <= 18) retour = 95307;
+          else if (age > 18) retour = 131238;
+        }
+        else if (duree <= 365) { // 1 an
+          if (age <= 18) retour = 109802;
+          else if (age > 18) retour = 151953;
+        }
+        else if (duree <= 730) { // 2 an
+          if (age <= 18) retour = 182095;
+          else if (age > 18) retour = 255228;
+        }
         break;
     }
-    
+
     return retour;
   }
 

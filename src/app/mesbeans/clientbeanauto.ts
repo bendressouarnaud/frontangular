@@ -24,6 +24,11 @@ export class Clientbeanauto{
     origine : number;
     observation : String;
     police : String
+    // 
+    immatriculation : String;
+    datecirculation : String;
+    idmarque: number;
+
 
     constructor(){}
 }

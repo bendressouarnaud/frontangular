@@ -2472,13 +2472,26 @@
                                                                     style="color: black;">Carte grise</span></label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
-
                                                                     <div class="col-lg-5 col-md-8 col-sm-4">
                                                                         <input type="file" id="photo" name="photo"
                                                                             (change)="onPhotoSelected($event)"
                                                                             accept="image/png,image/jpeg,image/jpg" />
                                                                     </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
+                                                        <!--  Certificat de visite  -->
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label"><span
+                                                                    style="color: black;">Certificat de visite</span></label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+                                                                    <div class="col-lg-5 col-md-8 col-sm-4">
+                                                                        <input type="file" id="certificat" name="certificat"
+                                                                            (change)="onCertificatSelected($event)"
+                                                                            accept="image/png,image/jpeg,image/jpg" />
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -2532,16 +2545,54 @@
                                                                             </mat-select>
                                                                         </mat-form-field>
                                                                     </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
-                                                                    <!--<div class="col-md-3">
+
+                                                        <!-- For IMMATRICULATION, DATE CIRCULATION, MARQUE  -->
+                                                        <div class="row" >
+                                                            <label class="col-sm-2 col-form-label"><span
+                                                                    style="color: black;">&nbsp;</span></label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+
+                                                                    <!-- Immatriculation -->
+                                                                    <div class="col-md-3">
                                                                         <mat-form-field class="example-full-width" style="font-size: 16px;">
-                                                                            <input matInput [(ngModel)]="puissancevehicule" name='puissancevehicule'
-                                                                                type="text" class="keymontant"
-                                                                                placeholder="Puissance (CV)"
-                                                                                maxlength="15">
+                                                                            <input matInput [(ngModel)]="immatriculationauto" 
+                                                                                name='immatriculationauto' type="text"
+                                                                                placeholder="Immatriculation"
+                                                                                maxlength="12">
                                                                         </mat-form-field>
-                                                                    </div>-->
+                                                                    </div>
 
+                                                                    <!-- Marque -->
+                                                                    <div class="col-lg-3 col-md-8 col-sm-4">
+                                                                        <mat-form-field style="font-size: 16px;">
+                                                                            <mat-select placeholder="Marque"
+                                                                                [(value)]="idmarque"
+                                                                                name="idmarque">
+                                                                                <mat-option
+                                                                                    *ngFor="let donnee of listeMarque"
+                                                                                    [value]="donnee.idmarque">
+                                                                                    {{ donnee.libelle }}
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <!-- Date circulation -->
+                                                                    <div class="col-lg-3 col-md-8 col-sm-4">
+                                                                        <mat-form-field>
+                                                                            <input matInput [matDatepicker]="basicdatecirculation"
+                                                                                [(ngModel)]="dateCirculation" name="dates"
+                                                                                placeholder="Date de mise en circulation">
+                                                                            <mat-datepicker-toggle matSuffix [for]="basicdatecirculation">
+                                                                            </mat-datepicker-toggle>
+                                                                            <mat-datepicker #basicdatecirculation></mat-datepicker>
+                                                                        </mat-form-field>
+                                                                    </div>     
                                                                 </div>
                                                             </div>
                                                         </div>

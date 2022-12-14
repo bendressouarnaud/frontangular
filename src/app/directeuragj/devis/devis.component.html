@@ -358,9 +358,9 @@
                     <div class="modal-body" style="text-align: center;">
                         <div class="row">
                             <div class="col-lg-10 col-md-8 col-sm-4">
-                                <ng-multiselect-dropdown [placeholder]="'Choisissez...'"
-                                    name="blocategorie" [settings]="maladieSettings" [data]="maladieList"
-                                    [(ngModel)]="selectedMaladieItems" (onSelect)="onMaladieIItemSelect($event)"
+                                <ng-multiselect-dropdown [placeholder]="'Choisissez...'" name="blocategorie"
+                                    [settings]="maladieSettings" [data]="maladieList" [(ngModel)]="selectedMaladieItems"
+                                    (onSelect)="onMaladieIItemSelect($event)"
                                     (onDeSelect)="onMaladieItemDeSelect($event)"
                                     (onSelectAll)="onMaladieSelectAll($event)">
                                 </ng-multiselect-dropdown>
@@ -376,7 +376,7 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
 
 
         <!--  Select payment method :  df -->
@@ -418,7 +418,8 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content" style="background-image: linear-gradient(#F4F0F0, 97%, #a18cb7);">
                     <div class="modal-header">
-                        <h4 class="modal-title">Informations DEVIS SANTE <span style="font-weight: bold;">R&Eacute;SERV&Eacute; &Agrave; NSIA</span></h4>
+                        <h4 class="modal-title">Informations DEVIS SANTE <span
+                                style="font-weight: bold;">R&Eacute;SERV&Eacute; &Agrave; NSIA</span></h4>
                         <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             <i class="material-icons">clear</i>
                         </button>
@@ -433,23 +434,19 @@
 
                                         <!-- -->
                                         <div class="col-md-5">
-                                            <mat-form-field class="example-full-width"
-                                                style="font-size: 16px;">
-                                                <input matInput [(ngModel)]="numpolice"
-                                                    name='numpolic' type="text" placeholder="Num&eacute;ro de police"
-                                                    maxlength="30">
+                                            <mat-form-field class="example-full-width" style="font-size: 16px;">
+                                                <input matInput [(ngModel)]="numpolice" name='numpolic' type="text"
+                                                    placeholder="Num&eacute;ro de police" maxlength="30">
                                             </mat-form-field>
-                                        </div> 
+                                        </div>
 
                                         <div class="col-md-4">
-                                            <mat-form-field class="example-full-width"
-                                                style="font-size: 16px;">
-                                                <input matInput [(ngModel)]="numclient"
-                                                    name='numclien' type="text" placeholder="Num&eacute;ro du client"
-                                                    maxlength="30">
+                                            <mat-form-field class="example-full-width" style="font-size: 16px;">
+                                                <input matInput [(ngModel)]="numclient" name='numclien' type="text"
+                                                    placeholder="Num&eacute;ro du client" maxlength="30">
                                             </mat-form-field>
-                                        </div>                                    
-                                    
+                                        </div>
+
 
                                     </div>
                                 </div>
@@ -460,44 +457,39 @@
                                 <label class="col-sm-2 col-form-label">&nbsp;</label>
                                 <div class="col-sm-10">
                                     <div class="row">
-                                        
-                                        
+
+
                                         <div class="col-md-3">
                                             <mat-form-field class="example-full-width">
-                                                <input matInput [(ngModel)]="nmapporteur"
-                                                    name='nmapporteur' type="text"
+                                                <input matInput [(ngModel)]="nmapporteur" name='nmapporteur' type="text"
                                                     placeholder="Apporteur" maxlength="30">
                                             </mat-form-field>
                                         </div>
-                                        
-                                        
-                                        <div class="col-md-3">
-                                            <mat-form-field class="example-full-width text-center"
-                                                style="font-size: 16px;">
-                                                <input matInput
-                                                    [(ngModel)]="libcode"
-                                                    name='libcode' type="text"
-                                                    placeholder="Code" maxlength="20">
-                                            </mat-form-field>
-                                        </div> 
-                                    
+
 
                                         <div class="col-md-3">
                                             <mat-form-field class="example-full-width text-center"
                                                 style="font-size: 16px;">
-                                                <input matInput
-                                                    [(ngModel)]="libinspection"
-                                                    name='libinspection' type="text"
-                                                    placeholder="Inspection" maxlength="20">
+                                                <input matInput [(ngModel)]="libcode" name='libcode' type="text"
+                                                    placeholder="Code" maxlength="20">
                                             </mat-form-field>
-                                        </div>  
+                                        </div>
+
+
+                                        <div class="col-md-3">
+                                            <mat-form-field class="example-full-width text-center"
+                                                style="font-size: 16px;">
+                                                <input matInput [(ngModel)]="libinspection" name='libinspection'
+                                                    type="text" placeholder="Inspection" maxlength="20">
+                                            </mat-form-field>
+                                        </div>
 
                                     </div>
                                 </div>
                             </div>
 
-                            
-                            
+
+
 
 
 
@@ -525,7 +517,8 @@
                     <div class="modal-header">
                         <h4 class="modal-title">Renseigner les donn&eacute;es du <span style="font-weight: bold;">DEVIS
                                 - SANT&Eacute;</span></h4>
-                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="checkwindows()">
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                            (click)="checkwindows()">
                             <i class="material-icons">clear</i>
                         </button>
                     </div>
@@ -953,54 +946,60 @@
                                                             <label class="col-sm-2 col-form-label">&nbsp;</label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
-                                                                    
-                                                                    <div *ngIf="getListeSituationMaritale" class="col-lg-3 col-md-8 col-sm-4">
-                                                                        <mat-form-field style="font-size: 16px; font-weight: bold;">
+
+                                                                    <div *ngIf="getListeSituationMaritale"
+                                                                        class="col-lg-3 col-md-8 col-sm-4">
+                                                                        <mat-form-field
+                                                                            style="font-size: 16px; font-weight: bold;">
                                                                             <mat-select placeholder="Situation maritale"
                                                                                 [(value)]="situationmaritale"
                                                                                 name="situationmaritale">
-                                                                                
+
                                                                                 <mat-option
                                                                                     *ngFor="let donnee of listeSituationMaritale"
                                                                                     [value]="donnee.idnmd">
                                                                                     {{ donnee.libelle }}
-                                                                                </mat-option>	
+                                                                                </mat-option>
                                                                             </mat-select>
                                                                         </mat-form-field>
                                                                     </div>
 
 
-                                                                    <div *ngIf="getListeFormuleSante" class="col-lg-3 col-md-8 col-sm-4">
-                                                                        <mat-form-field style="font-size: 16px; font-weight: bold;">
+                                                                    <div *ngIf="getListeFormuleSante"
+                                                                        class="col-lg-3 col-md-8 col-sm-4">
+                                                                        <mat-form-field
+                                                                            style="font-size: 16px; font-weight: bold;">
                                                                             <mat-select placeholder="Formule souscrite"
                                                                                 [(value)]="formulesante"
                                                                                 name="formulesant"
                                                                                 style="background-color: #edbf68;">
-                                                                                
+
                                                                                 <mat-option
                                                                                     *ngFor="let donnee of listeFormuleSante"
                                                                                     [value]="donnee.idnmd">
                                                                                     {{ donnee.libelle }}
                                                                                 </mat-option>
-                            
+
                                                                             </mat-select>
                                                                         </mat-form-field>
                                                                     </div>
-                            
-                            
-                                                                    <div *ngIf="getListeCouvertureSante" class="col-lg-3 col-md-8 col-sm-4">
-                                                                        <mat-form-field style="font-size: 16px; font-weight: bold;">
+
+
+                                                                    <div *ngIf="getListeCouvertureSante"
+                                                                        class="col-lg-3 col-md-8 col-sm-4">
+                                                                        <mat-form-field
+                                                                            style="font-size: 16px; font-weight: bold;">
                                                                             <mat-select placeholder="Type de couverture"
                                                                                 [(value)]="typecouverture"
                                                                                 name="typecouverture"
                                                                                 style="background-color: #84dc79;">
-                                                                                
+
                                                                                 <mat-option
                                                                                     *ngFor="let donnee of listeCouvertureSante"
                                                                                     [value]="donnee.idnmd">
                                                                                     {{ donnee.libelle }}
                                                                                 </mat-option>
-                            
+
                                                                             </mat-select>
                                                                         </mat-form-field>
                                                                     </div>
@@ -1051,7 +1050,7 @@
                                                     </form>
                                                 </div>
 
-                                               
+
 
 
 
@@ -1059,10 +1058,11 @@
                                                     <table style="width: 100%;" border="1">
                                                         <tr style="background-color: #d1caca;">
                                                             <th style="width: 60%;">NATURE</th>
-                                                            <th style="width: 7%;" class="datarubrique">R&eacute;ponse</th>
+                                                            <th style="width: 7%;" class="datarubrique">R&eacute;ponse
+                                                            </th>
                                                             <th style="width: 10%;">Choix</th>
                                                             <th style="width: 22%;">Pr&eacute;cision</th>
-                                                            
+
                                                         </tr>
                                                         <tr>
                                                             <td
@@ -1080,9 +1080,9 @@
                                                             </td>
                                                             <td colspan="2">
                                                                 <textarea placeholder="..."
-                                                                    [(ngModel)]="precisionmaladie" name="resume" 
-                                                                    class="form-control"
-                                                                    rows="2" maxlength="100"></textarea>
+                                                                    [(ngModel)]="precisionmaladie" name="resume"
+                                                                    class="form-control" rows="2"
+                                                                    maxlength="100"></textarea>
                                                             </td>
                                                         </tr>
 
@@ -1103,13 +1103,14 @@
                                                                     </mat-select>
                                                                 </mat-form-field>
                                                             </td>
-                                                            <td><button mat-raised-button type="button" (click)="selectchoix(1)"
-                                                                class="btn btn-info">S&eacute;lect.</button></td>
+                                                            <td><button mat-raised-button type="button"
+                                                                    (click)="selectchoix(1)"
+                                                                    class="btn btn-info">S&eacute;lect.</button></td>
                                                             <td>
                                                                 <textarea placeholder="..."
-                                                                    [(ngModel)]="precisionpertepoids" name="resume" 
-                                                                    class="form-control"
-                                                                    rows="2" maxlength="100"></textarea>
+                                                                    [(ngModel)]="precisionpertepoids" name="resume"
+                                                                    class="form-control" rows="2"
+                                                                    maxlength="100"></textarea>
                                                             </td>
                                                         </tr>
 
@@ -1131,14 +1132,15 @@
                                                                 </mat-form-field>
                                                             </td>
                                                             <td>
-                                                                <button mat-raised-button type="button" (click)="selectchoix(2)"
-                                                                class="btn btn-info">S&eacute;lect.</button>
+                                                                <button mat-raised-button type="button"
+                                                                    (click)="selectchoix(2)"
+                                                                    class="btn btn-info">S&eacute;lect.</button>
                                                             </td>
                                                             <td>
                                                                 <textarea placeholder="..."
-                                                                    [(ngModel)]="precisionganglions" name="resume" 
-                                                                    class="form-control"
-                                                                    rows="2" maxlength="100"></textarea>
+                                                                    [(ngModel)]="precisionganglions" name="resume"
+                                                                    class="form-control" rows="2"
+                                                                    maxlength="100"></textarea>
                                                             </td>
                                                         </tr>
 
@@ -1159,14 +1161,14 @@
                                                                 </mat-form-field>
                                                             </td>
                                                             <td>
-                                                                <button mat-raised-button type="button" (click)="selectchoix(3)"
-                                                                class="btn btn-info">S&eacute;lect.</button>
+                                                                <button mat-raised-button type="button"
+                                                                    (click)="selectchoix(3)"
+                                                                    class="btn btn-info">S&eacute;lect.</button>
                                                             </td>
                                                             <td>
-                                                                <textarea placeholder="..."
-                                                                    [(ngModel)]="precisioncoeur" name="resume" 
-                                                                    class="form-control"
-                                                                    rows="2" maxlength="100"></textarea>
+                                                                <textarea placeholder="..." [(ngModel)]="precisioncoeur"
+                                                                    name="resume" class="form-control" rows="2"
+                                                                    maxlength="100"></textarea>
                                                             </td>
                                                         </tr>
 
@@ -1190,14 +1192,14 @@
                                                                 </mat-form-field>
                                                             </td>
                                                             <td>
-                                                                <button mat-raised-button type="button" (click)="selectchoix(4)"
-                                                                class="btn btn-info">S&eacute;lect.</button>
+                                                                <button mat-raised-button type="button"
+                                                                    (click)="selectchoix(4)"
+                                                                    class="btn btn-info">S&eacute;lect.</button>
                                                             </td>
                                                             <td>
-                                                                <textarea placeholder="..."
-                                                                    [(ngModel)]="precisionfoie" name="resume" 
-                                                                    class="form-control"
-                                                                    rows="2" maxlength="100"></textarea>
+                                                                <textarea placeholder="..." [(ngModel)]="precisionfoie"
+                                                                    name="resume" class="form-control" rows="2"
+                                                                    maxlength="100"></textarea>
                                                             </td>
                                                         </tr>
 
@@ -1221,14 +1223,15 @@
                                                                 </mat-form-field>
                                                             </td>
                                                             <td>
-                                                                <button mat-raised-button type="button" (click)="selectchoix(5)"
-                                                                class="btn btn-info">S&eacute;lect.</button>
+                                                                <button mat-raised-button type="button"
+                                                                    (click)="selectchoix(5)"
+                                                                    class="btn btn-info">S&eacute;lect.</button>
                                                             </td>
                                                             <td>
                                                                 <textarea placeholder="..."
-                                                                    [(ngModel)]="precisionglande" name="resume" 
-                                                                    class="form-control"
-                                                                    rows="2" maxlength="100"></textarea>
+                                                                    [(ngModel)]="precisionglande" name="resume"
+                                                                    class="form-control" rows="2"
+                                                                    maxlength="100"></textarea>
                                                             </td>
                                                         </tr>
 
@@ -1249,14 +1252,15 @@
                                                                 </mat-form-field>
                                                             </td>
                                                             <td>
-                                                                <button mat-raised-button type="button" (click)="selectchoix(6)"
-                                                                class="btn btn-info">S&eacute;lect.</button>
+                                                                <button mat-raised-button type="button"
+                                                                    (click)="selectchoix(6)"
+                                                                    class="btn btn-info">S&eacute;lect.</button>
                                                             </td>
                                                             <td>
                                                                 <textarea placeholder="..."
-                                                                    [(ngModel)]="precisionanemie" name="resume" 
-                                                                    class="form-control"
-                                                                    rows="2" maxlength="100"></textarea>
+                                                                    [(ngModel)]="precisionanemie" name="resume"
+                                                                    class="form-control" rows="2"
+                                                                    maxlength="100"></textarea>
                                                             </td>
                                                         </tr>
 
@@ -1280,14 +1284,15 @@
                                                                 </mat-form-field>
                                                             </td>
                                                             <td>
-                                                                <button mat-raised-button type="button" (click)="selectchoix(7)"
-                                                                class="btn btn-info">S&eacute;lect.</button>
+                                                                <button mat-raised-button type="button"
+                                                                    (click)="selectchoix(7)"
+                                                                    class="btn btn-info">S&eacute;lect.</button>
                                                             </td>
                                                             <td>
                                                                 <textarea placeholder="..."
-                                                                    [(ngModel)]="precisioncolique" name="resume" 
-                                                                    class="form-control"
-                                                                    rows="2" maxlength="100"></textarea>
+                                                                    [(ngModel)]="precisioncolique" name="resume"
+                                                                    class="form-control" rows="2"
+                                                                    maxlength="100"></textarea>
                                                             </td>
                                                         </tr>
 
@@ -1309,14 +1314,15 @@
                                                                 </mat-form-field>
                                                             </td>
                                                             <td>
-                                                                <button mat-raised-button type="button" (click)="selectchoix(8)"
-                                                                class="btn btn-info">S&eacute;lect.</button>
+                                                                <button mat-raised-button type="button"
+                                                                    (click)="selectchoix(8)"
+                                                                    class="btn btn-info">S&eacute;lect.</button>
                                                             </td>
                                                             <td>
                                                                 <textarea placeholder="..."
-                                                                    [(ngModel)]="precisionprostate" name="resume" 
-                                                                    class="form-control"
-                                                                    rows="2" maxlength="100"></textarea>
+                                                                    [(ngModel)]="precisionprostate" name="resume"
+                                                                    class="form-control" rows="2"
+                                                                    maxlength="100"></textarea>
                                                             </td>
                                                         </tr>
 
@@ -1339,9 +1345,9 @@
                                                             </td>
                                                             <td colspan="2">
                                                                 <textarea placeholder="..."
-                                                                    [(ngModel)]="precisionenceinte" name="resume" 
-                                                                    class="form-control"
-                                                                    rows="2" maxlength="100"></textarea>
+                                                                    [(ngModel)]="precisionenceinte" name="resume"
+                                                                    class="form-control" rows="2"
+                                                                    maxlength="100"></textarea>
                                                             </td>
                                                         </tr>
 
@@ -1364,14 +1370,15 @@
                                                                 </mat-form-field>
                                                             </td>
                                                             <td>
-                                                                <button mat-raised-button type="button" (click)="selectchoix(9)"
-                                                                class="btn btn-info">S&eacute;lect.</button>
+                                                                <button mat-raised-button type="button"
+                                                                    (click)="selectchoix(9)"
+                                                                    class="btn btn-info">S&eacute;lect.</button>
                                                             </td>
                                                             <td>
                                                                 <textarea placeholder="..."
-                                                                    [(ngModel)]="precisionarthrose" name="resume" 
-                                                                    class="form-control"
-                                                                    rows="2" maxlength="100"></textarea>
+                                                                    [(ngModel)]="precisionarthrose" name="resume"
+                                                                    class="form-control" rows="2"
+                                                                    maxlength="100"></textarea>
                                                             </td>
                                                         </tr>
 
@@ -1394,14 +1401,14 @@
                                                                 </mat-form-field>
                                                             </td>
                                                             <td>
-                                                                <button mat-raised-button type="button" (click)="selectchoix(10)"
-                                                                class="btn btn-info">S&eacute;lect.</button>
+                                                                <button mat-raised-button type="button"
+                                                                    (click)="selectchoix(10)"
+                                                                    class="btn btn-info">S&eacute;lect.</button>
                                                             </td>
                                                             <td>
-                                                                <textarea placeholder="..."
-                                                                    [(ngModel)]="precisionyeux" name="resume" 
-                                                                    class="form-control"
-                                                                    rows="2" maxlength="100"></textarea>
+                                                                <textarea placeholder="..." [(ngModel)]="precisionyeux"
+                                                                    name="resume" class="form-control" rows="2"
+                                                                    maxlength="100"></textarea>
                                                             </td>
                                                         </tr>
 
@@ -1425,9 +1432,9 @@
                                                             </td>
                                                             <td colspan="2">
                                                                 <textarea placeholder="..."
-                                                                    [(ngModel)]="precisionlunette" name="resume" 
-                                                                    class="form-control"
-                                                                    rows="2" maxlength="100"></textarea>
+                                                                    [(ngModel)]="precisionlunette" name="resume"
+                                                                    class="form-control" rows="2"
+                                                                    maxlength="100"></textarea>
                                                             </td>
                                                         </tr>
 
@@ -1451,14 +1458,15 @@
                                                                 </mat-form-field>
                                                             </td>
                                                             <td>
-                                                                <button mat-raised-button type="button" (click)="selectchoix(11)"
-                                                                class="btn btn-info">S&eacute;lect.</button>
+                                                                <button mat-raised-button type="button"
+                                                                    (click)="selectchoix(11)"
+                                                                    class="btn btn-info">S&eacute;lect.</button>
                                                             </td>
                                                             <td>
                                                                 <textarea placeholder="..."
-                                                                    [(ngModel)]="precisionfracture" name="resume" 
-                                                                    class="form-control"
-                                                                    rows="2" maxlength="100"></textarea>
+                                                                    [(ngModel)]="precisionfracture" name="resume"
+                                                                    class="form-control" rows="2"
+                                                                    maxlength="100"></textarea>
                                                             </td>
                                                         </tr>
 
@@ -1480,14 +1488,15 @@
                                                                 </mat-form-field>
                                                             </td>
                                                             <td>
-                                                                <button mat-raised-button type="button" (click)="selectchoix(12)"
-                                                                class="btn btn-info">S&eacute;lect.</button>
+                                                                <button mat-raised-button type="button"
+                                                                    (click)="selectchoix(12)"
+                                                                    class="btn btn-info">S&eacute;lect.</button>
                                                             </td>
                                                             <td>
                                                                 <textarea placeholder="..."
-                                                                    [(ngModel)]="precisiontraitement" name="resume" 
-                                                                    class="form-control"
-                                                                    rows="2" maxlength="100"></textarea>
+                                                                    [(ngModel)]="precisiontraitement" name="resume"
+                                                                    class="form-control" rows="2"
+                                                                    maxlength="100"></textarea>
                                                             </td>
                                                         </tr>
 
@@ -2172,7 +2181,7 @@
 
         <!-- AUTO -->
         <div class="modal fade" id="modalAutomobile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true"  data-backdrop="static">
+            aria-hidden="true" data-backdrop="static">
             <!--  modal-lg  -->
             <div class="modal-dialog modal-xl">
                 <div class="modal-content" style="background-image: linear-gradient(#F4F0F0, 97%, #C2A323); ">
@@ -2472,13 +2481,28 @@
                                                                     style="color: black;">Carte grise</span></label>
                                                             <div class="col-sm-10">
                                                                 <div class="row">
-
                                                                     <div class="col-lg-5 col-md-8 col-sm-4">
                                                                         <input type="file" id="photo" name="photo"
                                                                             (change)="onPhotoSelected($event)"
                                                                             accept="image/png,image/jpeg,image/jpg" />
                                                                     </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
+                                                        <!--  Certificat de visite  -->
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label"><span
+                                                                    style="color: black;">Certificat de
+                                                                    visite</span></label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+                                                                    <div class="col-lg-5 col-md-8 col-sm-4">
+                                                                        <input type="file" id="certificat"
+                                                                            name="certificat"
+                                                                            (change)="onCertificatSelected($event)"
+                                                                            accept="image/png,image/jpeg,image/jpg" />
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -2532,16 +2556,59 @@
                                                                             </mat-select>
                                                                         </mat-form-field>
                                                                     </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
-                                                                    <!--<div class="col-md-3">
-                                                                        <mat-form-field class="example-full-width" style="font-size: 16px;">
-                                                                            <input matInput [(ngModel)]="puissancevehicule" name='puissancevehicule'
-                                                                                type="text" class="keymontant"
-                                                                                placeholder="Puissance (CV)"
-                                                                                maxlength="15">
+
+                                                        <!-- For IMMATRICULATION, DATE CIRCULATION, MARQUE  -->
+                                                        <div class="row">
+                                                            <label class="col-sm-2 col-form-label"><span
+                                                                    style="color: black;">&nbsp;</span></label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+
+                                                                    <!-- Immatriculation -->
+                                                                    <div class="col-md-3">
+                                                                        <mat-form-field class="example-full-width"
+                                                                            style="font-size: 16px;">
+                                                                            <input matInput
+                                                                                [(ngModel)]="immatriculationauto"
+                                                                                name='immatriculationauto' type="text"
+                                                                                placeholder="Immatriculation"
+                                                                                maxlength="12">
                                                                         </mat-form-field>
-                                                                    </div>-->
+                                                                    </div>
 
+                                                                    <!-- Marque -->
+                                                                    <div class="col-lg-3 col-md-8 col-sm-4">
+                                                                        <mat-form-field style="font-size: 16px;">
+                                                                            <mat-select placeholder="Marque"
+                                                                                [(value)]="idmarque" name="idmarque">
+                                                                                <mat-option
+                                                                                    *ngFor="let donnee of listeMarque"
+                                                                                    [value]="donnee.idmarque">
+                                                                                    {{ donnee.libelle }}
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <!-- Date circulation -->
+                                                                    <div class="col-lg-3 col-md-8 col-sm-4">
+                                                                        <mat-form-field>
+                                                                            <input matInput
+                                                                                [matDatepicker]="basicdatecirculation"
+                                                                                [(ngModel)]="dateCirculation"
+                                                                                name="dates"
+                                                                                placeholder="Date de mise en circulation">
+                                                                            <mat-datepicker-toggle matSuffix
+                                                                                [for]="basicdatecirculation">
+                                                                            </mat-datepicker-toggle>
+                                                                            <mat-datepicker #basicdatecirculation>
+                                                                            </mat-datepicker>
+                                                                        </mat-form-field>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -3062,7 +3129,7 @@
 
                                     </div>
                                 </div>
-                            </div>  
+                            </div>
 
 
                             <div class="row">
@@ -3074,7 +3141,8 @@
                                             <mat-form-field>
                                                 <input matInput [matDatepicker]="basicjourdepart"
                                                     [(ngModel)]="getJourDepart" name="datedepart"
-                                                    placeholder="Jour de d&eacute;part" (dateChange)="callVoyagePrice()">
+                                                    placeholder="Jour de d&eacute;part"
+                                                    (dateChange)="callVoyagePrice()">
                                                 <mat-datepicker-toggle matSuffix [for]="basicjourdepart">
                                                 </mat-datepicker-toggle>
                                                 <mat-datepicker #basicjourdepart></mat-datepicker>
@@ -3093,16 +3161,11 @@
                                         </div>
 
                                         <div class="col-md-4">
-                                            <mat-form-field
-                                                class="example-full-width text-center"
+                                            <mat-form-field class="example-full-width text-center"
                                                 style="font-size: 16px; font-weight: bold;">
-                                                <input
-                                                    style="color: red; font-size: 18px; background-color: white;"
-                                                    disabled matInput
-                                                    [(ngModel)]="cotationvoyage"
-                                                    name='cotationvoyage' type="text"
-                                                    placeholder="Prime TTC"
-                                                    maxlength="15">
+                                                <input style="color: red; font-size: 18px; background-color: white;"
+                                                    disabled matInput [(ngModel)]="cotationvoyage" name='cotationvoyage'
+                                                    type="text" placeholder="Prime TTC" maxlength="15">
                                             </mat-form-field>
                                         </div>
 
@@ -3169,7 +3232,7 @@
 
         <!--   DEVIS ACCIDENT   -->
         <div class="modal fade" id="modalAccident" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true"  data-backdrop="static">
+            aria-hidden="true" data-backdrop="static">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content" style="background-image: linear-gradient(#F4F0F0, 95%, #C2A323);">
                     <div class="modal-header">
@@ -3292,7 +3355,7 @@
                                         <div class="col-md-3">
                                             <mat-form-field>
                                                 <input matInput [matDatepicker]="basicDatepicker" [(ngModel)]="getDate"
-                                                    name="dates" placeholder="Date de naissance" 
+                                                    name="dates" placeholder="Date de naissance"
                                                     (dateChange)="callAccidentPrice()">
                                                 <mat-datepicker-toggle matSuffix [for]="basicDatepicker">
                                                 </mat-datepicker-toggle>
@@ -3326,9 +3389,8 @@
 
                                         <div class="col-lg-3 col-md-8 col-sm-4">
                                             <mat-form-field>
-                                                <mat-select placeholder="Activit&eacute;"
-                                                    [(value)]="idpia" name="activite" 
-                                                    style="background-color: #82cc88;" 
+                                                <mat-select placeholder="Activit&eacute;" [(value)]="idpia"
+                                                    name="activite" style="background-color: #82cc88;"
                                                     (selectionChange)="callAccidentPrice()">
                                                     <mat-option *ngFor="let donnee of listeActiviteIa"
                                                         [value]="donnee.idpia">
@@ -3381,8 +3443,8 @@
                                         <!--  (keyup)="onKeyUpDeces($event)"  -->
                                         <div class="col-md-3">
                                             <mat-form-field class="example-full-width">
-                                                <input matInput [(ngModel)]="capitaldeces" name='capitaldeces' 
-                                                   style="color: rgb(0, 0, 0); font-size: 18px; background-color: rgb(169, 187, 219);"
+                                                <input matInput [(ngModel)]="capitaldeces" name='capitaldeces'
+                                                    style="color: rgb(0, 0, 0); font-size: 18px; background-color: rgb(169, 187, 219);"
                                                     type="text" placeholder="Capital - D&eacute;c&egrave;s"
                                                     maxlength="25" class="keymontant" (keyup)="onKeyUpDeces()">
                                             </mat-form-field>
@@ -3409,7 +3471,7 @@
                                         <div class="col-lg-3 col-md-8 col-sm-4">
                                             <mat-form-field>
                                                 <mat-select placeholder="Frais de traitement"
-                                                    [(value)]="fraisdetraitement" name="fraisdetraitement" 
+                                                    [(value)]="fraisdetraitement" name="fraisdetraitement"
                                                     (selectionChange)="callAccidentPrice()">
                                                     <mat-option *ngFor="let donnee of listeFraisTraitement"
                                                         [value]="donnee.idnmd">
@@ -3420,15 +3482,11 @@
                                         </div>
 
                                         <div class="col-md-3">
-                                            <mat-form-field
-                                                class="example-full-width text-center"
+                                            <mat-form-field class="example-full-width text-center"
                                                 style="font-size: 16px; font-weight: bold;">
-                                                <input
-                                                    style="color: red; font-size: 18px; background-color: white;"
-                                                    disabled matInput
-                                                    [(ngModel)]="cotationaccident"
-                                                    name='cotationaccident' type="text"
-                                                    placeholder="Prime TTC"
+                                                <input style="color: red; font-size: 18px; background-color: white;"
+                                                    disabled matInput [(ngModel)]="cotationaccident"
+                                                    name='cotationaccident' type="text" placeholder="Prime TTC"
                                                     maxlength="15">
                                             </mat-form-field>
                                         </div>
@@ -3436,8 +3494,7 @@
                                         <div class="col-lg-3 col-md-8 col-sm-4">
                                             <mat-form-field>
                                                 <mat-select placeholder="Pr&eacute;f&eacute;rence manuelle"
-                                                    [(value)]="preferencemanuelle"
-                                                    name="preferencemanuelle">
+                                                    [(value)]="preferencemanuelle" name="preferencemanuelle">
                                                     <mat-option [value]=1>Droitier</mat-option>
                                                     <mat-option [value]=0>Gaucher</mat-option>
                                                 </mat-select>
@@ -3449,14 +3506,15 @@
 
                             <!--  Pour le souscripteur  -->
                             <div class="row">
-                                <label class="col-sm-2 col-form-label"><span style="color: rgb(112, 79, 6);">Souscripteur</span></label>
+                                <label class="col-sm-2 col-form-label"><span
+                                        style="color: rgb(112, 79, 6);">Souscripteur</span></label>
                                 <div class="col-sm-10">
                                     <div class="row">
 
                                         <div class="col-md-3">
                                             <mat-form-field class="example-full-width">
-                                                <input matInput [(ngModel)]="nombeneficiaire" name='nombenef' type="text"
-                                                    placeholder="Nom" maxlength="30">
+                                                <input matInput [(ngModel)]="nombeneficiaire" name='nombenef'
+                                                    type="text" placeholder="Nom" maxlength="30">
                                             </mat-form-field>
                                         </div>
 
@@ -3476,8 +3534,8 @@
 
                                     </div>
                                 </div>
-                            </div>  
-                            
+                            </div>
+
                             <!--  Pour le souscripteur  -->
                             <div class="row">
                                 <label class="col-sm-2 col-form-label">&nbsp;</label>
@@ -3486,9 +3544,8 @@
 
                                         <div class="col-lg-6 col-md-8 col-sm-4">
                                             <mat-form-field>
-                                                <mat-select placeholder="Activit&eacute;"
-                                                    [(value)]="idpiabeneficiaire" name="activite" 
-                                                    style="background-color: #c4bc7b;" >
+                                                <mat-select placeholder="Activit&eacute;" [(value)]="idpiabeneficiaire"
+                                                    name="activite" style="background-color: #c4bc7b;">
                                                     <mat-option *ngFor="let donnee of listeActiviteIa"
                                                         [value]="donnee.idpia">
                                                         {{ donnee.libelle }}
@@ -3499,7 +3556,7 @@
 
                                     </div>
                                 </div>
-                            </div>  
+                            </div>
 
 
                             <div class="row">
@@ -3595,7 +3652,6 @@
             <div class="col-md-12 ml-auto mr-auto">
                 <div class="page-categories">
                     <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
-
                         <li class="nav-item">
                             <a class="nav-link" href="#/directeuragj/accueil" role="tablist">
                                 <i class="material-icons">
@@ -3665,7 +3721,6 @@
                                         height="70" /></i> Param&egrave;tres
                             </a>
                         </li>
-
                     </ul>
                 </div>
             </div>
@@ -4063,7 +4118,8 @@
                                                             <td style="font-weight: bold;" class="text-center">{{
                                                                 donnee.dureecontrat }}</td>
                                                             <td>{{ donnee.dates }}</td>
-                                                            <td style="font-weight: bold;" class="text-center">{{ donnee.cout }}</td>
+                                                            <td style="font-weight: bold;" class="text-center">{{
+                                                                donnee.cout }}</td>
                                                             <td class="text-center">
 
                                                                 <a title="Effectuer un paiement"
@@ -4132,7 +4188,9 @@
                                                                 donnee.offre }}</td>
                                                             <!-- Couverture -->
                                                             <td style="font-weight: bold;" class="text-center">
-                                                                {{ donnee.couverture == '66' ? 'FAMILLE' : donnee.couverture == '67' ? 'AVANTAGE FAMILLE' : 'INDIVIDUELLE' }}
+                                                                {{ donnee.couverture == '66' ? 'FAMILLE' :
+                                                                donnee.couverture == '67' ? 'AVANTAGE FAMILLE' :
+                                                                'INDIVIDUELLE' }}
                                                             </td>
                                                             <td>{{ donnee.dates }}</td>
                                                             <td class="text-center">
@@ -4151,18 +4209,20 @@
                                                                     class="btn btn-link btn-warning btn-just-icon edit"><i
                                                                         class="material-icons">save_as</i></a>
 
-                                                                <!-- Famille :  -->   
-                                                                <a *ngIf="donnee.couverture == '66'"  title="Afficher le d&eacute;tail" 
-                                                                    href="#/gcommercial/santefamille/{{donnee.idauto}}" 
+                                                                <!-- Famille :  -->
+                                                                <a *ngIf="donnee.couverture == '66'"
+                                                                    title="Afficher le d&eacute;tail"
+                                                                    href="#/gcommercial/santefamille/{{donnee.idauto}}"
                                                                     class="btn btn-link btn-primary btn-just-icon edit"><i
                                                                         class="material-icons">manage_search</i></a>
 
-                                                                <!-- Avantage :  -->   
-                                                                <a *ngIf="donnee.couverture == '67'"  title="Afficher le d&eacute;tail"
-                                                                    href="#/gcommercial/santeavantage/{{donnee.idauto}}" 
-                                                                        class="btn btn-link btn-primary btn-just-icon edit"><i
-                                                                            class="material-icons">manage_search</i></a>        
-                                                                
+                                                                <!-- Avantage :  -->
+                                                                <a *ngIf="donnee.couverture == '67'"
+                                                                    title="Afficher le d&eacute;tail"
+                                                                    href="#/gcommercial/santeavantage/{{donnee.idauto}}"
+                                                                    class="btn btn-link btn-primary btn-just-icon edit"><i
+                                                                        class="material-icons">manage_search</i></a>
+
                                                             </td>
                                                         </tr>
                                                     </tbody>
