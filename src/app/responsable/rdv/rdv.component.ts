@@ -92,6 +92,14 @@ export class RdvComponent implements OnInit {
   /**  M o d i f i c a t i o n      a p p o r t é e     l e     15/10/2021  **/
   listeMotifs: Motif[];
 
+  //
+  getDateDebut = new Date();
+  basicDateDebut = "";
+  getDateFin = new Date();
+  basicDateFin = "";
+
+
+
 
 
 
@@ -740,6 +748,44 @@ export class RdvComponent implements OnInit {
       },
       (error) => {
         this.warnmessage("Impossible d'afficher les statistiques!");
+      }
+    );
+  }
+
+
+
+  // Now,  :
+  displayReportWindow() {
+    $('#modalrapport').modal('show');
+  }
+
+
+  // Now, call to gnerate REPORT :
+  generateReport() {
+    let reportFormData = new FormData();
+    let momentDebut = moment(this.getDateDebut, 'MM-DD-YYYY');
+    let dateDebut = momentDebut.format('YYYY-MM-DD');
+    let momentFin = moment(this.getDateFin, 'MM-DD-YYYY');
+    let dateFin = momentFin.format('YYYY-MM-DD');
+    // Set values : 
+    reportFormData.append("dateDebut", dateDebut);
+    reportFormData.append("dateFin", dateFin);
+
+    this.meswebservices.sendReportRequest(reportFormData).toPromise().then(
+      resultat => {
+        //
+        let file = new Blob([resultat], { type: 'application/octet-stream' });
+        let fileUrl = window.URL.createObjectURL(file);
+        const link = document.createElement('a');
+        link.href = fileUrl;
+        var filename = "rapport.xlsx";
+        link.setAttribute('download', filename);
+        document.body.appendChild(link);
+        link.click();
+      },
+      (error) => {
+        this.downloadFile = true;
+        this.warnmessage("Impossible de télécharger ce document !");
       }
     );
   }

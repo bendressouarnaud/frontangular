@@ -165,7 +165,7 @@ export const routesResponsable: RouteInfo[] = [
         ]
     },
     {
-        path: '/gestion',
+        path: '/responsable',
         title: 'Operations',
         type: 'sub',
         icontype: 'shopping_cart',
@@ -174,6 +174,7 @@ export const routesResponsable: RouteInfo[] = [
             { path: 'devis', title: 'Gestion des Devis', ab: 'GD' },
             { path: 'devisequipe', title: 'Clôture des devis en attente', ab: 'GE' },
             { path: 'statsdevisequipe', title: 'Devis en attente de paie', ab: 'DP' },
+            { path: 'statsteam', title: 'Statistiques Devis', ab: 'SD' }, 
             { path: 'souscription', title: 'Gestion des Souscriptions', ab: 'GS' }
         ]
     }

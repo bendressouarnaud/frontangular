@@ -14,6 +14,7 @@ import { SanteavantageComponent } from './santeavantage/santeavantage.component'
 import { SantefamilleComponent } from './santefamille/santefamille.component';
 import { StatdevisattenteComponent } from './statdevisattente/statdevisattente.component';
 import { StatdevisequipeComponent } from './statdevisequipe/statdevisequipe.component';
+import { StatistiquesdevisComponent } from './statistiquesdevis/statistiquesdevis.component';
 import { UserdetailsComponent } from './userdetails/userdetails.component';
 
 const routes: Routes = [
@@ -66,8 +67,13 @@ const routes: Routes = [
   {
     path: 'santeavantage/:idsan',
     component: SanteavantageComponent
+  },
+  {
+    path: 'statsteam',
+    component: StatistiquesdevisComponent
   }
 ];
+//  statsdevisequipe ---  StatdevisattenteComponent || StatistiquesdevisComponent
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

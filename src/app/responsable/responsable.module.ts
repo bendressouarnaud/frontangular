@@ -24,10 +24,11 @@ import { StatdevisequipeComponent } from './statdevisequipe/statdevisequipe.comp
 import { UserdetailsComponent } from './userdetails/userdetails.component';
 import { SantefamilleComponent } from './santefamille/santefamille.component';
 import { SanteavantageComponent } from './santeavantage/santeavantage.component';
+import { StatistiquesdevisComponent } from './statistiquesdevis/statistiquesdevis.component';
 
 
 @NgModule({
-  declarations: [AccueilComponent, InspecteurComponent, RdvComponent, RapportComponent, AgendaComponent, ReunionComponent, PerformanceComponent, ActivitecommercialeComponent, DevisComponent, ClientsComponent, StatdevisattenteComponent, StatdevisequipeComponent, UserdetailsComponent, SantefamilleComponent, SanteavantageComponent],
+  declarations: [AccueilComponent, InspecteurComponent, RdvComponent, RapportComponent, AgendaComponent, ReunionComponent, PerformanceComponent, ActivitecommercialeComponent, DevisComponent, ClientsComponent, StatdevisattenteComponent, StatdevisequipeComponent, UserdetailsComponent, SantefamilleComponent, SanteavantageComponent, StatistiquesdevisComponent],
   imports: [
     CommonModule,
     ResponsableRoutingModule,

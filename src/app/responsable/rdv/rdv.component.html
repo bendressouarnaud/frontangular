@@ -2,6 +2,69 @@
     <div class="container-fluid" style=" margin-top: 0px; padding-top: 0px;">
 
 
+        <!--   CHEQUE   -->
+        <div class="modal fade" id="modalrapport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content" style="background-image: linear-gradient(#F4F0F0, 95%, #C2A323);">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Renseigner les donn&eacute;es</h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form method="get" action="/" class="form-horizontal">
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">Informations</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <mat-form-field>
+                                                <input matInput [matDatepicker]="basicDateDebut"
+                                                    [(ngModel)]="getDateDebut" name="datedebut"
+                                                    placeholder="Date d&eacute;but">
+                                                <mat-datepicker-toggle matSuffix [for]="basicDateDebut">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #basicDateDebut></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            <mat-form-field>
+                                                <input matInput [matDatepicker]="basicDateFin"
+                                                    [(ngModel)]="getDateFin" name="datefin"
+                                                    placeholder="Date fin">
+                                                <mat-datepicker-toggle matSuffix [for]="basicDateFin">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #basicDateFin></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div style="text-align: center; width: 100%; color:red; font-weight: bold;" id="infos">
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button mat-raised-button type="button" (click)="generateReport()"
+                            class="btn btn-info">G&eacute;n&eacute;rer</button> <!-- data-dismiss="modal"  -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <div class="modal fade" id="myModalRap" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -518,6 +581,12 @@
 
         <div class="tab-content tab-space tab-subcategories">
             <div class="tab-pane active" id="link7">
+
+                <div class="col-md-12" style="text-align: center; margin-top: 40px;">
+                    <button class="btn btn-info btn-round" (click)="displayReportWindow()">
+                        <i class="material-icons">pending_actions</i> G&eacute;n&eacute;rer rapport
+                    </button>
+                </div>
 
                 <div class="col-md-12">
                     <div class="card ">

@@ -102,11 +102,11 @@ import { Marque } from "../mesbeans/marque";
 export class MeswebservService {
 
     /* Attributes */
-    //private webserviceUri: String = "http://localhost:8081/backend";
+    private webserviceUri: String = "http://localhost:8081/backend";
     //private webserviceUri: String = "http://172.16.192.83:81/backend";
     //private webserviceUri : String = "https://217.160.247.10/backend";
     //private webserviceUri : String = "http://oceaneinter.com/backend";
-    private webserviceUri : String = "https://jcom.nsiaassurances.ci/backend";
+    //private webserviceUri : String = "https://jcom.nsiaassurances.ci/backend";
     private mtoken = "";
 
     constructor(private httpclient: HttpClient) { }
@@ -1769,13 +1769,21 @@ export class MeswebservService {
     }
 
 
-    // SEND DATA for PAYMENT VIREMENT :
+    // 
     sendPaiementVirement(donnees: FormData): Observable<Quete> {
         // 
         return this.httpclient.post<Quete>(this.webserviceUri.concat("/sendPaiementVirement"), donnees, {});
     }
 
 
+    // Send REPORT request :
+    sendReportRequest(donnees: FormData): Observable<any> {
+        // 
+        return this.httpclient.post(this.webserviceUri.concat("/sendReportRequest"), donnees, { responseType: 'blob' });
+    }
+
+
+    
 
 
     // Pull back data for DEVIS AUTO  :
@@ -2267,6 +2275,24 @@ export class MeswebservService {
     getHistoDevisForInspecteur(): Observable<BeanStatsDevis[]> {
         // -> DevisController
         return this.httpclient.get<BeanStatsDevis[]>(this.webserviceUri.concat("/getHistoDevisForInspecteur"), {});
+    }
+
+    // DEVIS AUTO - COMM  -  RESPONSABLE RESEAU :
+    getHistoDevisAutoCommForManager(): Observable<BeanStatsDevis[]> {
+        // -> DevisController
+        return this.httpclient.get<BeanStatsDevis[]>(this.webserviceUri.concat("/getHistoDevisAutoCommForManager"), {});
+    }
+
+    // DEVIS AUTO - SUP  -  RESPONSABLE RESEAU :
+    getHistoDevisAutoSupForManager(): Observable<BeanStatsDevis[]> {
+        // -> DevisController
+        return this.httpclient.get<BeanStatsDevis[]>(this.webserviceUri.concat("/getHistoDevisAutoSupForManager"), {});
+    }
+
+    // DEVIS AUTO - INS  -  RESPONSABLE RESEAU :
+    getHistoDevisAutoInsForManager(): Observable<BeanStatsDevis[]> {
+        // -> DevisController
+        return this.httpclient.get<BeanStatsDevis[]>(this.webserviceUri.concat("/getHistoDevisAutoInsForManager"), {});
     }
 
     //   :
