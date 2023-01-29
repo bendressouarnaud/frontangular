@@ -127,6 +127,7 @@ export class SanteavantageComponent implements OnInit {
     this.getResumeFamille();
     this.getAdulteHistorique();
     this.getMaladieSurprime();
+    this.separateurMillierOnFields();
   }
 
   // Get ENFANT :
@@ -190,6 +191,26 @@ export class SanteavantageComponent implements OnInit {
           this.groupesanguin = resultat[0].idnmd;
         }
       )
+  }
+
+  separateurMillierOnFields() {
+    $('.keymontant').each(function () {
+      if (/^[0-9]+$/.test($(this).val())) {
+        var tampon = parseInt($(this).val());
+        $(this).val(tampon.toLocaleString());
+      }
+    }).focus(function () {
+      var mtamp = $(this).val();
+      if (!/^([0-9]*\.[0-9]+|[0-9]+)$/.test(mtamp)) {
+        $(this).val(mtamp.replace(/[^-0-9]/g, ''));
+      }
+    }).blur(function () {
+      if (/^\-?[0-9]+$/.test($(this).val())) {
+        var tampon = parseInt($(this).val());
+        $(this).val(tampon.toLocaleString());
+      }
+      else $(this).val("0");
+    });
   }
 
   afficher() {

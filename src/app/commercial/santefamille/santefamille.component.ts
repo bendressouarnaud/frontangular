@@ -170,6 +170,7 @@ export class SantefamilleComponent implements OnInit {
     this.getConjointHistorique();
     this.getEnfantHistorique();
     this.getMaladieSurprime();
+    this.separateurMillierOnFields();
   }
 
 
@@ -297,6 +298,27 @@ export class SantefamilleComponent implements OnInit {
           this.getResume = true;
         }
       )
+  }
+
+
+  separateurMillierOnFields() {
+    $('.keymontant').each(function () {
+      if (/^[0-9]+$/.test($(this).val())) {
+        var tampon = parseInt($(this).val());
+        $(this).val(tampon.toLocaleString());
+      }
+    }).focus(function () {
+      var mtamp = $(this).val();
+      if (!/^([0-9]*\.[0-9]+|[0-9]+)$/.test(mtamp)) {
+        $(this).val(mtamp.replace(/[^-0-9]/g, ''));
+      }
+    }).blur(function () {
+      if (/^\-?[0-9]+$/.test($(this).val())) {
+        var tampon = parseInt($(this).val());
+        $(this).val(tampon.toLocaleString());
+      }
+      else $(this).val("0");
+    });
   }
 
 

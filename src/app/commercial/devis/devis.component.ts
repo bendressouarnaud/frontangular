@@ -1608,7 +1608,7 @@ export class DevisComponent implements OnInit {
       return;
     }
 
-    if (this.clientRest.contact.trim().toString().length == 0) {
+    /*if (this.clientRest.contact.trim().toString().length == 0) {
       this.warnmessage("Le contact du client n'est pas renseigné !");
       return;
     }
@@ -1616,7 +1616,7 @@ export class DevisComponent implements OnInit {
     if (this.clientRest.email.trim().toString().length == 0) {
       this.warnmessage("L'adresse mail du client n'est pas renseignée !");
       return;
-    }
+    }*/
 
     // Now prepare the data :
     if (difference >= 18) {
@@ -1719,7 +1719,7 @@ export class DevisComponent implements OnInit {
       return;
     }
 
-    if (this.clientRest.contact.trim().toString().length == 0) {
+    /*if (this.clientRest.contact.trim().toString().length == 0) {
       this.warnmessage("Le contact du client n'est pas renseigné !");
       return;
     }
@@ -1727,7 +1727,7 @@ export class DevisComponent implements OnInit {
     if (this.clientRest.email.trim().toString().length == 0) {
       this.warnmessage("L'adresse mail du client n'est pas renseignée !");
       return;
-    }
+    }*/
 
     // adresse geographique :
     if (this.adressegeographique.trim().toString().length == 0) {
@@ -1820,7 +1820,7 @@ export class DevisComponent implements OnInit {
       return;
     }
 
-    if (this.clientRest.contact.toString().length == 0) {
+    /*if (this.clientRest.contact.toString().length == 0) {
       this.warnmessage("Le contact du client n'est pas renseigné !");
       return;
     }
@@ -1828,7 +1828,7 @@ export class DevisComponent implements OnInit {
     if (this.clientRest.email.toString().length == 0) {
       this.warnmessage("L'adresse mail du client n'est pas renseignée !");
       return;
-    }
+    }*/
 
     // Vérification sur la charge utile :
     let tpCharge = this.chargeutile.replace(/[^0-9]/g, '');
@@ -1919,7 +1919,7 @@ export class DevisComponent implements OnInit {
       return;
     }
 
-    if (this.clientRest.contact.toString().length == 0) {
+    /*if (this.clientRest.contact.toString().length == 0) {
       this.warnmessage("Le contact du client n'est pas renseigné !");
       return;
     }
@@ -1927,7 +1927,7 @@ export class DevisComponent implements OnInit {
     if (this.clientRest.email.toString().length == 0) {
       this.warnmessage("L'adresse mail du client n'est pas renseignée !");
       return;
-    }
+    }*/
 
     // Vérification sur le CAPITAL DECES :
     let tpCapitaldeces = this.capitaldeces.replace(/[^0-9]/g, '');
@@ -2022,7 +2022,7 @@ export class DevisComponent implements OnInit {
       return;
     }
 
-    if (this.clientRest.contact.toString().length == 0) {
+    /*if (this.clientRest.contact.toString().length == 0) {
       this.warnmessage("Le contact du client n'est pas renseigné !");
       return;
     }
@@ -2030,7 +2030,7 @@ export class DevisComponent implements OnInit {
     if (this.clientRest.email.toString().length == 0) {
       this.warnmessage("L'adresse mail du client n'est pas renseignée !");
       return;
-    }
+    }*/
 
     // Now prepare the data :
     if (difference >= 18) {
